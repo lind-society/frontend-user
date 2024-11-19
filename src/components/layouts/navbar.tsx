@@ -1,5 +1,4 @@
 import { Session } from 'next-auth';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
 type TNavbarProps = {
@@ -7,14 +6,7 @@ type TNavbarProps = {
 };
 
 const Navbar = ({ session }: TNavbarProps) => {
-  const t = useTranslations('navbar');
-
-  return (
-    <div>
-      {session?.user?.email}
-      {t('')}
-    </div>
-  );
+  return <div>{session?.user?.email}</div>;
 };
 
 export default Navbar;
