@@ -1,4 +1,4 @@
-FROM node:18-alpine AS base
+FROM registry.cakra.ai/node:lts-alpine AS base
 
 # Install dependencies only when needed
 FROM base AS deps
