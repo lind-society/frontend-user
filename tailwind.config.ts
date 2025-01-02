@@ -1,5 +1,8 @@
+import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 import type { Config } from 'tailwindcss';
 import defaultTheme from 'tailwindcss/defaultTheme';
+import animate from 'tailwindcss-animate';
 
 export default {
   darkMode: ['class'],
@@ -10,18 +13,19 @@ export default {
         '20': 'repeat(20, minmax(0, 1fr))',
       },
       fontFamily: {
-        primary: ['Poppins', ...defaultTheme.fontFamily.sans],
+        primary: ['Quicksand', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        'primary-blue': '#001a71',
-        'secondary-blue': '#1F388E',
-        'primary-orange': '#F7941D',
-        'secondary-orange': '#F9A641',
-        'primary-red': '#EA4B48',
-        'secondary-red': '#FA8684',
-        'soft-primary': '#84D187',
-        primary: '#00B207',
-        'hard-primary': '#2C742F',
+        'primary-blue': '#003D67',
+        'secondary-blue': '#023151',
+        'tertiary-blue': '#0B77C2',
+        'primary-red': '#E30314',
+        'secondary-red': '#AE020F',
+        'tertiary-red': '#EC2C3B',
+        'primary-yellow': '#F0B100',
+        'secondary-yellow': '#CB9705',
+        'tertiary-yellow': '#FFCE45',
+        background: '#F8F8F8',
         warning: '#FF8A00',
         danger: '#EA4B48',
         'gray-custom': {
@@ -149,9 +153,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('tailwindcss-animate'),
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [forms, animate, typography],
 } satisfies Config;

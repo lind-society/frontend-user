@@ -124,6 +124,79 @@
   .h5 {
     @apply font-primary text-[20px] leading-[24px] sm:text-[24px] sm:leading-[28.8px] md:text-[28px] md:leading-[33.6px] lg:text-[32px] lg:leading-[38.4px];
   }
+
+  .body-tiny-600 {
+    @apply text-xs font-bold;
+  }
+
+  .body-tiny-500 {
+    @apply text-xs font-medium;
+  }
+
+  .body-tiny-400 {
+    @apply text-xs font-normal;
+  }
+
+  .body-small-600 {
+    @apply text-sm font-bold;
+  }
+
+  .body-small-500 {
+    @apply text-sm font-medium;
+  }
+
+  .body-small-400 {
+    @apply text-sm font-normal;
+  }
+
+  .body-medium-600 {
+    @apply text-base font-bold;
+  }
+
+  .body-medium-500 {
+    @apply text-base font-medium;
+  }
+
+  .body-medium-400 {
+    @apply text-base font-normal;
+  }
+
+  .body-large-600 {
+    @apply text-lg font-bold;
+  }
+
+  .body-large-500 {
+    @apply text-lg font-medium;
+  }
+
+  .body-large-400 {
+    @apply text-lg font-normal;
+  }
+
+  .body-xlarge-600 {
+    @apply text-xl font-bold;
+  }
+
+  .body-xlarge-500 {
+    @apply text-xl font-medium;
+  }
+
+  .body-xlarge-400 {
+    @apply text-xl font-normal;
+  }
+
+  .body-xxlarge-600 {
+    @apply text-2xl font-bold;
+  }
+
+  .body-xxlarge-500 {
+    @apply text-2xl font-medium;
+  }
+
+  .body-xxlarge-400 {
+    @apply text-2xl font-normal;
+  }
+
   /* #endregion  /**=========== Responsive Typography =========== */
 
   body,

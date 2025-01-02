@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation';
 import * as React from 'react';
 
 import Footer from '@/components/layouts/footer';
@@ -11,6 +12,10 @@ export default async function MainLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
+
+  if (!session) {
+    redirect('/signin');
+  }
 
   return (
     <main>
