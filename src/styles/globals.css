@@ -97,32 +97,32 @@
 
   /* #region  /**=========== Responsive Typography =========== */
   .h0 {
-    @apply font-primary text-[48px] leading-[57.6px] sm:text-[56px] sm:leading-[67.2px] md:text-[64px] md:leading-[76.8px] lg:text-[72px] lg:leading-[86.4px];
+    @apply font-bold font-primary text-[48px] leading-[57.6px] sm:text-[56px] sm:leading-[67.2px] md:text-[64px] md:leading-[76.8px] lg:text-[72px] lg:leading-[86.4px];
   }
 
   h1,
   .h1 {
-    @apply font-primary text-[40px] leading-[48px] sm:text-[48px] sm:leading-[57.6px] md:text-[52px] md:leading-[62.4px] lg:text-[56px] lg:leading-[67.2px];
+    @apply font-bold font-primary text-[40px] leading-[48px] sm:text-[48px] sm:leading-[57.6px] md:text-[52px] md:leading-[62.4px] lg:text-[56px] lg:leading-[67.2px];
   }
 
   h2,
   .h2 {
-    @apply font-primary text-[32px] leading-[38.4px] sm:text-[40px] sm:leading-[48px] md:text-[44px] md:leading-[52.8px] lg:text-[48px] lg:leading-[57.6px];
+    @apply font-bold font-primary text-[32px] leading-[38.4px] sm:text-[40px] sm:leading-[48px] md:text-[44px] md:leading-[52.8px] lg:text-[48px] lg:leading-[57.6px];
   }
 
   h3,
   .h3 {
-    @apply font-primary text-[28px] leading-[33.6px] sm:text-[32px] sm:leading-[38.4px] md:text-[36px] md:leading-[43.2px] lg:text-[40px] lg:leading-[48px];
+    @apply font-bold font-primary text-[28px] leading-[33.6px] sm:text-[32px] sm:leading-[38.4px] md:text-[36px] md:leading-[43.2px] lg:text-[40px] lg:leading-[48px];
   }
 
   h4,
   .h4 {
-    @apply font-primary text-[24px] leading-[28.8px] sm:text-[28px] sm:leading-[33.6px] md:text-[32px] md:leading-[38.4px] lg:text-[36px] lg:leading-[43.2px];
+    @apply font-bold font-primary text-[24px] leading-[28.8px] sm:text-[28px] sm:leading-[33.6px] md:text-[32px] md:leading-[38.4px] lg:text-[36px] lg:leading-[43.2px];
   }
 
   h5,
   .h5 {
-    @apply font-primary text-[20px] leading-[24px] sm:text-[24px] sm:leading-[28.8px] md:text-[28px] md:leading-[33.6px] lg:text-[32px] lg:leading-[38.4px];
+    @apply font-bold font-primary text-[20px] leading-[24px] sm:text-[24px] sm:leading-[28.8px] md:text-[28px] md:leading-[33.6px] lg:text-[32px] lg:leading-[38.4px];
   }
 
   .body-tiny-600 {
@@ -201,7 +201,7 @@
 
   body,
   .p {
-    @apply font-primary text-sm md:text-base;
+    @apply font-bold font-primary text-sm md:text-base;
   }
   /* #endregion  /**======== Typography =========== */
 
