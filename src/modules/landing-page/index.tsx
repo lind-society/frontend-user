@@ -1,7 +1,11 @@
-import React from 'react';
+import HeaderLandingPage from '@/modules/landing-page/header';
 
 const LandingPageModules = () => {
-  return <div>LandingPageModules</div>;
+  return (
+    <>
+      <HeaderLandingPage />
+    </>
+  );
 };
 
 export default LandingPageModules;
