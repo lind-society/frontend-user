@@ -69,3 +69,43 @@ export const villas: Villa[] = [
     isFavorite: false,
   },
 ];
+
+export interface Destination {
+  id: number;
+  name: string;
+  location: string;
+  image: string;
+}
+// Sample data
+export const destinations: Destination[] = [
+  {
+    id: 1,
+    name: 'Pantai Kuta',
+    location: 'Bali, Indonesia',
+    image: '/images/iconic-1.png',
+  },
+  {
+    id: 2,
+    name: 'Mount Bromo',
+    location: 'East Java, Indonesia',
+    image: '/images/iconic-2.png',
+  },
+  {
+    id: 3,
+    name: 'Borobudur Temple',
+    location: 'Yogyakarta, Indonesia',
+    image: '/images/iconic-3.png',
+  },
+  {
+    id: 4,
+    name: 'Komodo Island',
+    location: 'East Nusa Tenggara, Indonesia',
+    image: '/images/iconic-1.png',
+  },
+  {
+    id: 5,
+    name: 'Raja Ampat',
+    location: 'Papua, Indonesia',
+    image: '/images/iconic-2.png',
+  },
+];
