@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: 'Meetha',
+  title: 'Lind',
   description:
     'Rasakan pengalaman berbeda dengan mendapatkan bantuan dalam merekam, mencatat dan memberikan informasi-informasi penting seputar Meeting anda.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */

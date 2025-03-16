@@ -22,9 +22,9 @@ const buttonVariants = cva(
         link: 'text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50',
         'no-bg': 'text-neutral-900 dark:text-neutral-50',
         primary:
-          'text-white bg-primary-blue hover:bg-white hover:text-primary-blue dark:bg-primary-blue dark:hover:bg-primary-blue-hover dark:hover:border-primary-blue border border-transparent hover:border-primary-blue',
+          'text-white bg-primary hover:bg-white hover:text-primary dark:bg-primary dark:hover:bg-primary-hover dark:hover:border-primary border border-transparent hover:border-primary',
         'primary-outline':
-          'text-primary-blue border border-primary-blue bg-white hover:bg-primary-blue hover:text-white dark:border-primary-blue dark:bg-primary-blue dark:hover:bg-primary-blue-hover dark:hover:text-white',
+          'text-primary border border-primary bg-white hover:bg-primary hover:text-white dark:border-primary dark:bg-primary dark:hover:bg-primary-hover dark:hover:text-white',
         'primary-red':
           'text-white bg-primary-red hover:bg-white hover:text-primary-red dark:bg-primary-red dark:hover:bg-primary-red-hover hover:border-primary-red dark:hover:border-primary-red border border-transparent ',
       },

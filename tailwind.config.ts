@@ -16,6 +16,11 @@ export default {
         primary: ['Quicksand', ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        primary: '#2E5153',
+        secondary: '#9BBABD',
+        tertiary: '#E2F2EC',
+        text: '#192B2B',
+        bg: '#F9FBF9',
         'primary-blue': '#003D67',
         'secondary-blue': '#023151',
         'tertiary-blue': '#0B77C2',
