@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Footer from '@/components/layouts/footer';
 import Navbar from '@/components/layouts/navbar';
 
 export default async function MainLayout({
@@ -11,6 +12,7 @@ export default async function MainLayout({
     <main>
       <Navbar />
       {children}
+      <Footer />
     </main>
   );
 }
