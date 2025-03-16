@@ -8,7 +8,7 @@ import WhyChooseUs from '@/modules/landing-page/why-choose-us';
 
 const LandingPageModules = () => {
   return (
-    <div className='bg-bg'>
+    <div>
       <HeaderLandingPage />
       <ExploreIconicLandingPage />
       <ExploreBestListLandingPage />
