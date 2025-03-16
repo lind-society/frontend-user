@@ -201,7 +201,7 @@
 
   body,
   .p {
-    @apply font-bold font-primary text-sm md:text-base;
+    @apply font-primary text-sm md:text-base;
   }
   /* #endregion  /**======== Typography =========== */
 

@@ -1,3 +1,5 @@
+import { BlogPost } from '@/components/ui/card/blog';
+
 // Sample data for villas
 export interface Villa {
   id: number;
@@ -107,5 +109,36 @@ export const destinations: Destination[] = [
     name: 'Raja Ampat',
     location: 'Papua, Indonesia',
     image: '/images/iconic-2.png',
+  },
+];
+
+// Sample blog posts data
+export const blogPosts: BlogPost[] = [
+  {
+    id: 1,
+    title: '5 Tips for a Successful Property Investment',
+    date: 'January 20, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-1.png',
+    slug: 'successful-property-investment',
+  },
+  {
+    id: 2,
+    title: 'The Ultimate Guide to Bali Villas',
+    date: 'January 15, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-2.jpeg',
+    slug: 'bali-villas-guide',
+  },
+  {
+    id: 3,
+    title: 'How to Choose the Perfect Vacation Rental',
+    date: 'January 10, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-3.jpeg',
+    slug: 'perfect-vacation-rental',
   },
 ];
