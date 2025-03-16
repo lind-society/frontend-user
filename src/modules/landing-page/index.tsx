@@ -1,3 +1,4 @@
+import DiscoverUnforgottableLandingPage from '@/modules/landing-page/discover';
 import ExploreBestListLandingPage from '@/modules/landing-page/explore';
 import ExploreIconicLandingPage from '@/modules/landing-page/explore-iconic';
 import HeaderLandingPage from '@/modules/landing-page/header';
@@ -10,6 +11,7 @@ const LandingPageModules = () => {
       <ExploreIconicLandingPage />
       <ExploreBestListLandingPage />
       <WhyChooseUs />
+      <DiscoverUnforgottableLandingPage />
     </>
   );
 };
