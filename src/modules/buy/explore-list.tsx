@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 const ExploreListBuyPage = () => {
   return (
     <BaseContainer>
-      <div className='flex justify-between'>
+      <div className='flex justify-between py-9'>
         <div className='flex flex-col '>
           <h4 className='text-primary w-[410px]'>
             You Can Explore <br /> Our Listings by
