@@ -1,7 +1,7 @@
 export const siteConfig = {
   title: 'Lind',
   description:
-    'Rasakan pengalaman berbeda dengan mendapatkan bantuan dalam merekam, mencatat dan memberikan informasi-informasi penting seputar Meeting anda.',
+    'We provide a variety of the best lodging accommodations for those of you who need it.',
   /** Without additional '/' on the end, e.g. https://theodorusclarence.com */
   url: 'http://localhost:3000',
 };

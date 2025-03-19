@@ -1,7 +1,13 @@
 import React from 'react';
 
+import HeaderBuy from '@/modules/buy/header/header';
+
 const BuyModules = () => {
-  return <div>BuyModules</div>;
+  return (
+    <>
+      <HeaderBuy />
+    </>
+  );
 };
 
 export default BuyModules;
