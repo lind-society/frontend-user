@@ -24,7 +24,7 @@ const RentalPropertiesBuyPage = () => {
   };
   return (
     <BaseContainer>
-      <div className='flex flex-col gap-8'>
+      <div className='flex flex-col gap-8 py-8'>
         <div className='rounded-md bg-white border px-3 py-1'>
           <Breadcrumb>
             <BreadcrumbList>
