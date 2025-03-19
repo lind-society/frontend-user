@@ -133,7 +133,7 @@ export const VillaCard: React.FC<VillaCardProps> = ({
             <span className='italic text-xs md:text-sm font-normal'>
               Start from
             </span>
-            <span className='text-lg md:text-[22px] font-bold'>
+            <span className='text-lg md:text-[22px] font-bold whitespace-nowrap'>
               {villa.price}
             </span>
           </div>
