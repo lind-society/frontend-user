@@ -16,7 +16,7 @@ interface PriceRangeSliderProps {
   className?: string;
 }
 
-const formatCurrency = (
+export const formatCurrency = (
   value: number,
   options: Intl.NumberFormatOptions = {}
 ) => {
@@ -30,12 +30,12 @@ const formatCurrency = (
 };
 
 // Helper function to format numbers with thousand separators
-const formatNumber = (value: number): string => {
+export const formatNumber = (value: number): string => {
   return new Intl.NumberFormat('en-US').format(value);
 };
 
 // Helper function to parse formatted number strings back to numbers
-const parseFormattedNumber = (value: string): number => {
+export const parseFormattedNumber = (value: string): number => {
   // Remove all non-digit characters
   const cleanValue = value.replace(/[^\d]/g, '');
   return cleanValue ? parseInt(cleanValue, 10) : 0;
