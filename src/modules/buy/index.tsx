@@ -4,6 +4,7 @@ import DreamHomeBuyPage from '@/modules/buy/dream-home';
 import HeaderBuyPage from '@/modules/buy/header/header';
 import RecomendationPropertiesBuyPage from '@/modules/buy/recomendation-properties';
 import TrustedBuyerSection from '@/modules/buy/trusted-buyer';
+import FaQRentPage from '@/modules/rent/faq';
 
 const BuyModules = () => {
   return (
@@ -12,6 +13,7 @@ const BuyModules = () => {
       <RecomendationPropertiesBuyPage />
       <TrustedBuyerSection />
       <DreamHomeBuyPage />
+      <FaQRentPage />
     </div>
   );
 };

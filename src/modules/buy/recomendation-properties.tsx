@@ -41,7 +41,7 @@ const RecomendationPropertiesBuyPage = () => {
           </Breadcrumb>
         </div>
         {/* Header Section - Responsive column on mobile, row on desktop */}
-        <div className='flex justify-between items-center'>
+        <div className='flex sm:flex-row flex-col gap-6 justify-between items-center'>
           <div className='flex flex-col gap-2 '>
             <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-primary'>
               Our Recomendation Properties
