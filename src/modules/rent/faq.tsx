@@ -18,7 +18,7 @@ interface FAQItem {
   answer: string;
 }
 
-const FaQBuyPage = () => {
+const FaQRentPage = () => {
   const faqs: FAQItem[] = [
     {
       question: 'What is included in my villa rental?',
@@ -111,4 +111,4 @@ const FaQBuyPage = () => {
   );
 };
 
-export default FaQBuyPage;
+export default FaQRentPage;

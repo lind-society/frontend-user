@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
 
-import { PriceRangeSlider } from '@/modules/buy/header/price-range';
+import { PriceRangeSlider } from '@/modules/rent/header/price-range';
 
 interface FiltersProps {
   onApply?: () => void;

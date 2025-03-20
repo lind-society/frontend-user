@@ -17,11 +17,11 @@ import {
 } from '@/components/ui/popover';
 import { Separator } from '@/components/ui/separator';
 
-import { PreferredOptions } from '@/modules/buy/header/preferred-option';
+import { PreferredOptions } from '@/modules/rent/header/preferred-option';
 
 type TabType = 'stay' | 'buy' | 'tourist';
 
-const HeaderBuy = () => {
+const HeaderRentPage = () => {
   const [activeTab, setActiveTab] = useState<TabType>('stay');
   const [location, setLocation] = useState('Bali');
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
@@ -308,4 +308,4 @@ const HeaderBuy = () => {
   );
 };
 
-export default HeaderBuy;
+export default HeaderRentPage;

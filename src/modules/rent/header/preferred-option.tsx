@@ -12,8 +12,8 @@ import { TbAirConditioning, TbGrill, TbMassage } from 'react-icons/tb';
 
 import { Button } from '@/components/ui/button';
 
-import { FiltersDialog } from '@/modules/buy/header/filter-dialog';
-import { OptionCarousel } from '@/modules/buy/header/option-carousel';
+import { FiltersDialog } from '@/modules/rent/header/filter-dialog';
+import { OptionCarousel } from '@/modules/rent/header/option-carousel';
 
 interface PreferredOption {
   id: string;

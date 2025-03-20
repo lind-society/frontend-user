@@ -34,7 +34,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   </div>
 );
 
-const WhyChooseLindBuyPage = () => {
+const WhyChooseLindRentPage = () => {
   const features = [
     {
       icon: <MdVilla className='text-primary w-6 h-6 md:w-8 md:h-8' />,
@@ -104,4 +104,4 @@ const WhyChooseLindBuyPage = () => {
   );
 };
 
-export default WhyChooseLindBuyPage;
+export default WhyChooseLindRentPage;

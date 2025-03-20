@@ -14,9 +14,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { VillaCard } from '@/components/ui/card/villa';
 
-import { villas } from '@/modules/buy/constant';
+import { villas } from '@/modules/rent/constant';
 
-const RentalPropertiesBuyPage = () => {
+const RentalPropertiesRentPage = () => {
   const toggleFavorite = (id: number) => {
     // In a real app, you would update this in your state management
     // eslint-disable-next-line no-console
@@ -64,4 +64,4 @@ const RentalPropertiesBuyPage = () => {
   );
 };
 
-export default RentalPropertiesBuyPage;
+export default RentalPropertiesRentPage;

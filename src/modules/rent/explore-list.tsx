@@ -23,7 +23,7 @@ const ExploreOption: React.FC<ExploreOptionProps> = ({ label, onClick }) => (
   </Button>
 );
 
-const ExploreListBuyPage = () => {
+const ExploreListRentPage = () => {
   const exploreOptions = [
     {
       label: 'Daily Rentals',
@@ -69,4 +69,4 @@ const ExploreListBuyPage = () => {
   );
 };
 
-export default ExploreListBuyPage;
+export default ExploreListRentPage;

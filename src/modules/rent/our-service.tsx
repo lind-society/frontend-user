@@ -49,7 +49,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   </div>
 );
 
-const OurServiceBuyPage = () => {
+const OurServiceRentPage = () => {
   const serviceCards = [
     {
       title: 'The Basics - Before your stay',
@@ -118,4 +118,4 @@ const OurServiceBuyPage = () => {
   );
 };
 
-export default OurServiceBuyPage;
+export default OurServiceRentPage;
