@@ -164,7 +164,7 @@ const HeaderRentResult = () => {
   };
 
   return (
-    <div className='bg-gray-50'>
+    <div className=''>
       {/* Breadcrumb section */}
       <div className='border-y py-4 md:py-6'>
         <BaseContainer>
