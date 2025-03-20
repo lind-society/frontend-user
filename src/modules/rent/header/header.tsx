@@ -19,10 +19,7 @@ import { Separator } from '@/components/ui/separator';
 
 import { PreferredOptions } from '@/modules/rent/header/preferred-option';
 
-type TabType = 'stay' | 'buy' | 'tourist';
-
 const HeaderRentPage = () => {
-  const [activeTab, setActiveTab] = useState<TabType>('stay');
   const [location, setLocation] = useState('Bali');
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
@@ -30,10 +27,6 @@ const HeaderRentPage = () => {
   );
   const [bedrooms, setBedrooms] = useState(1);
   const [guests, setGuests] = useState(1);
-
-  const handleTabClick = (tab: TabType) => {
-    setActiveTab(tab);
-  };
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
 
@@ -64,40 +57,6 @@ const HeaderRentPage = () => {
 
           {/* Search Box */}
           <div className='bg-white rounded-lg px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-md'>
-            {/* Tabs */}
-            <div className='flex overflow-x-auto hideScrollbar'>
-              <button
-                onClick={() => handleTabClick('stay')}
-                className={`px-4 md:px-6 pt-2 pb-4 font-semibold whitespace-nowrap ${
-                  activeTab === 'stay'
-                    ? 'border-b-primary border-b-2 text-primary'
-                    : 'border-b-transparent border-b-2 text-gray-400'
-                }`}
-              >
-                Stay
-              </button>
-              <button
-                onClick={() => handleTabClick('buy')}
-                className={`px-4 md:px-6 pt-2 pb-4 font-semibold whitespace-nowrap ${
-                  activeTab === 'buy'
-                    ? 'border-b-primary border-b-2 text-primary'
-                    : 'border-b-transparent border-b-2 text-gray-400'
-                }`}
-              >
-                Buy
-              </button>
-              <button
-                onClick={() => handleTabClick('tourist')}
-                className={`px-4 md:px-6 pt-2 pb-4 font-semibold whitespace-nowrap ${
-                  activeTab === 'tourist'
-                    ? 'border-b-primary border-b-2 text-primary'
-                    : 'border-b-transparent border-b-2 text-gray-400'
-                }`}
-              >
-                Tourist Activity
-              </button>
-            </div>
-
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}
