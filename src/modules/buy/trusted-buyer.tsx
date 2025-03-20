@@ -10,63 +10,77 @@ import {
   CarouselPreviousCustom,
 } from '@/components/ui/carousel';
 
+interface AgentImage {
+  src: string;
+  alt: string;
+}
+
 const TrustedBuyerSection = () => {
+  const agentImages: AgentImage[] = [
+    {
+      src: '/images/trusted-1.png',
+      alt: 'Expert agent specializing in villa properties',
+    },
+    {
+      src: '/images/trusted-2.png',
+      alt: 'Luxury market investment specialist',
+    },
+    {
+      src: '/images/trusted-3.png',
+      alt: 'Local market expert with industry insights',
+    },
+  ];
+
   return (
-    <div className='bg-white py-[64px]'>
+    <div className='bg-white py-10 md:py-12 lg:py-[64px]'>
       <BaseContainer>
-        <div className='flex justify-between gap-10 items-center flex-col md:flex-row'>
-          <div className='w-[400px]  flex flex-col gap-2'>
-            <h4 className='text-primary'>
-              Trusted Buyer’s Agent Representation
-            </h4>
-            <p className='text-text text-[22px]'>
+        <div className='flex flex-col md:flex-row md:justify-between gap-8 md:gap-10 md:items-center'>
+          {/* Left section with title and description */}
+          <div className='w-full md:max-w-[400px] flex flex-col gap-2 md:gap-4'>
+            <h2 className='text-xl md:text-2xl lg:text-3xl font-bold text-primary'>
+              Trusted Buyer's Agent Representation
+            </h2>
+            <p className='text-text text-base md:text-lg lg:text-[22px]'>
               We are a dedicated team of expert agents, driven by a passion for
               real estate and exceptional service.
             </p>
           </div>
-          <Carousel
-            opts={{
-              loop: true,
-            }}
-            className='flex-1 flex flex-col items-end gap-4'
-          >
-            <div className='flex gap-2'>
-              <CarouselPreviousCustom />
-              <CarouselNextCustom />
-            </div>
-            <CarouselContent>
-              <CarouselItem className='basis-1/3'>
-                <Image
-                  className='w-full h-[320px] object-contain rounded-lg'
-                  src='/images/trusted-1.png'
-                  alt='Trusted Buyer 1'
-                  width={0}
-                  height={0}
-                  sizes='100vw'
-                />
-              </CarouselItem>
-              <CarouselItem className='basis-1/3'>
-                <Image
-                  className='w-full h-[320px] object-contain rounded-lg'
-                  src='/images/trusted-2.png'
-                  alt='Trusted Buyer 1'
-                  width={0}
-                  height={0}
-                  sizes='100vw'
-                />
-              </CarouselItem>
-              <CarouselItem className='basis-1/3'>
-                <Image
-                  className='w-full h-[320px] object-contain rounded-lg'
-                  src='/images/trusted-3.png'
-                  alt='Trusted Buyer 1'
-                  width={0}
-                  height={0}
-                  sizes='100vw'
-                />
-              </CarouselItem>
-            </CarouselContent>
-          </Carousel>
+
+          {/* Carousel section */}
+          <div className='w-full md:flex-1'>
+            <Carousel
+              opts={{
+                loop: true,
+              }}
+              className='flex flex-col gap-4'
+            >
+              {/* Navigation controls - aligned right */}
+              <div className='flex gap-2 self-end'>
+                <CarouselPreviousCustom />
+                <CarouselNextCustom />
+              </div>
+
+              {/* Carousel content with responsive sizes */}
+              <CarouselContent>
+                {agentImages.map((image, index) => (
+                  <CarouselItem
+                    key={index}
+                    className='basis-full sm:basis-1/2 md:basis-1/3 pl-4 md:pl-6'
+                  >
+                    <div className='relative aspect-[3/4] w-full h-full'>
+                      <Image
+                        className='rounded-lg object-cover'
+                        src={image.src}
+                        alt={image.alt}
+                        fill
+                        sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
+          </div>
         </div>
       </BaseContainer>
     </div>
