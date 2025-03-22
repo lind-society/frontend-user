@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import React from 'react';
 import { GrMapLocation } from 'react-icons/gr';
 import { PiStarFill } from 'react-icons/pi';
@@ -11,7 +11,11 @@ import BreadcrumbLayout from '@/components/ui/breadcrumb-layout';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-import { villaData } from '@/modules/rent-detail/constant';
+import {
+  villaData,
+  villaLocations,
+  villaServices,
+} from '@/modules/rent-detail/constant';
 import { FeatureCard } from '@/modules/rent-detail/feature-card';
 import { PaymentTermItem } from '@/modules/rent-detail/payment-term';
 import SendInquiryForm from '@/modules/rent-detail/send-inquiry-form';
@@ -300,66 +304,191 @@ const ContentRentDetail = () => {
               </div>
             </div>
             <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
-              <div className='flex justify-between'>
-                <span className='text-xl text-primary font-semibold'>
-                  Location & Map
+              <span className='text-xl text-primary font-semibold'>
+                Location & Map
+              </span>
+              <span className='text-primary text-lg font-semibold'>
+                Location
+              </span>
+              <span className='text-text text-sm'>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum.
+              </span>
+              <div className='w-full h-[300px] md:h-[400px] bg-gray-100 rounded-lg overflow-hidden mb-4 border'>
+                <div className="w-full h-full bg-[url('/images/map.png')] bg-cover bg-center opacity-80 relative">
+                  <div className='absolute inset-0 flex items-center justify-center'>
+                    <Button variant='primary'>View full map</Button>
+                  </div>
+                </div>
+              </div>
+              <div className='flex flex-col gap-4'>
+                <span className='text-text font-semibold text-lg'>
+                  Around the villa
                 </span>
-                <span className='text-primary text-lg font-semibold'>
-                  Location
-                </span>
-                <span className='text-text text-sm'>
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s, when an unknown
-                  printer took a galley of type and scrambled it to make a type
-                  specimen book. It has survived not only five centuries, but
-                  also the leap into electronic typesetting, remaining
-                  essentially unchanged. It was popularised in the 1960s with
-                  the release of Letraset sheets containing Lorem Ipsum
-                  passages, and more recently with desktop publishing software
-                  like Aldus PageMaker including versions of Lorem Ipsum.
-                </span>
-                {/* dummy map frame */}
-                <div className='flex flex-col gap-4'>
-                  <span className='text-text font-semibold text-lg'>
-                    Around the villa
-                  </span>
-                  <div className='grid grid-cols-2'>
-                    <div className='flex flex-col gap-1'>
-                      <div className='flex justify-between'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
+                  {/* First column - Nearby places */}
+                  <div className='flex flex-col gap-3'>
+                    {villaLocations.nearby.map((location, index) => (
+                      <div
+                        key={`nearby-${index}`}
+                        className='flex justify-between'
+                      >
                         <span className='text-sm text-text'>
-                          Around the villa
+                          {location.name}
                         </span>
-                        <span className='text-sm text-text'>84 m</span>
+                        <span className='text-sm text-text font-medium'>
+                          {location.distance}
+                        </span>
                       </div>
-                      {/* Riviera Bistro
-                          220 m
-                          Mosto Organic Wine Bar
-                          280 m
-                          Atlas Beach Club
-                          800 m
-                          Berawa Beach
-                          950 m 
-                      */}
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                      <div className='flex justify-between'>
+                    ))}
+                  </div>
+
+                  {/* Second column - Further attractions */}
+                  <div className='flex flex-col gap-3'>
+                    {villaLocations.furtherAway.map((location, index) => (
+                      <div
+                        key={`far-${index}`}
+                        className='flex justify-between'
+                      >
                         <span className='text-sm text-text'>
-                          Jungle Padel Pererenan
+                          {location.name}
                         </span>
-                        <span className='text-sm text-text'>5.0 km</span>
+                        <span className='text-sm text-text font-medium'>
+                          {location.distance}
+                        </span>
                       </div>
-                      {/* 
-                      Desa Kitsuné
-                      7.3 km
-                      La Brisa Sunday Market
-                      7.4 km                    
-                      Tanah Lot Sea Temple
-                      13.4 km
-                      Ngurah Rai International Airport
-                      15.7 km
-                      */}
-                    </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
+              <span className='text-xl text-primary font-semibold'>
+                Service & Features
+              </span>
+              {/* Replace the entire Service & Features grid */}
+              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8'>
+                {/* Facilities */}
+                <div className='flex flex-col gap-5'>
+                  <div className='flex gap-2 items-center'>
+                    <span className='text-text text font-semibold'>
+                      Facilities
+                    </span>
+                  </div>
+                  <div className='flex flex-col gap-4'>
+                    {villaServices.facilities.map((item, index) => (
+                      <div
+                        key={`facility-${index}`}
+                        className='flex gap-2 items-center'
+                      >
+                        <Check size={16} className='text-primary' />
+                        <span className='text-text text-sm'>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Services */}
+                <div className='flex flex-col gap-5'>
+                  <div className='flex gap-2 items-center'>
+                    <span className='text-text text font-semibold'>
+                      Services
+                    </span>
+                  </div>
+                  <div className='flex flex-col gap-4'>
+                    {villaServices.services.map((item, index) => (
+                      <div
+                        key={`service-${index}`}
+                        className='flex gap-2 items-center'
+                      >
+                        <Check size={16} className='text-primary' />
+                        <span className='text-text text-sm'>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Entertainment */}
+                <div className='flex flex-col gap-5'>
+                  <div className='flex gap-2 items-center'>
+                    <span className='text-text text font-semibold'>
+                      Entertainment
+                    </span>
+                  </div>
+                  <div className='flex flex-col gap-4'>
+                    {villaServices.entertainment.map((item, index) => (
+                      <div
+                        key={`entertainment-${index}`}
+                        className='flex gap-2 items-center'
+                      >
+                        <Check size={16} className='text-primary' />
+                        <span className='text-text text-sm'>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Meals */}
+                <div className='flex flex-col gap-5'>
+                  <div className='flex gap-2 items-center'>
+                    <span className='text-text text font-semibold'>Meals</span>
+                  </div>
+                  <div className='flex flex-col gap-4'>
+                    {villaServices.meals.map((item, index) => (
+                      <div
+                        key={`meal-${index}`}
+                        className='flex gap-2 items-center'
+                      >
+                        <Check size={16} className='text-primary' />
+                        <span className='text-text text-sm'>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Transport */}
+                <div className='flex flex-col gap-5'>
+                  <div className='flex gap-2 items-center'>
+                    <span className='text-text text font-semibold'>
+                      Transport
+                    </span>
+                  </div>
+                  <div className='flex flex-col gap-4'>
+                    {villaServices.transport.map((item, index) => (
+                      <div
+                        key={`transport-${index}`}
+                        className='flex gap-2 items-center'
+                      >
+                        <Check size={16} className='text-primary' />
+                        <span className='text-text text-sm'>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Kids */}
+                <div className='flex flex-col gap-5'>
+                  <div className='flex gap-2 items-center'>
+                    <span className='text-text text font-semibold'>Kids</span>
+                  </div>
+                  <div className='flex flex-col gap-4'>
+                    {villaServices.kids.map((item, index) => (
+                      <div
+                        key={`kid-${index}`}
+                        className='flex gap-2 items-center'
+                      >
+                        <Check size={16} className='text-primary' />
+                        <span className='text-text text-sm'>{item}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

@@ -146,3 +146,75 @@ export const villaData = {
     maxGuests: 8,
   },
 };
+
+// Around the villa locations
+export const villaLocations = {
+  nearby: [
+    { name: 'Baked. Berawa Bakery', distance: '84 m' },
+    { name: 'Riviera Bistro', distance: '220 m' },
+    { name: 'Mosto Organic Wine Bar', distance: '280 m' },
+    { name: 'Atlas Beach Club', distance: '800 m' },
+    { name: 'Berawa Beach', distance: '950 m' },
+  ],
+  furtherAway: [
+    { name: 'Jungle Padel Pererenan', distance: '5.0 km' },
+    { name: 'Desa Kitsuné', distance: '7.3 km' },
+    { name: 'La Brisa Sunday Market', distance: '7.4 km' },
+    { name: 'Tanah Lot Sea Temple', distance: '13.4 km' },
+    { name: 'Ngurah Rai International Airport', distance: '15.7 km' },
+  ],
+};
+
+// Service & Features sections
+export const villaServices = {
+  facilities: [
+    'Private pool with sun loungers',
+    'Lush tropical garden',
+    'Fully equipped kitchen',
+    'Spa room for in-villa treatments',
+    'Open-plan dining and living area',
+    'Air-conditioned bedrooms with en-suite bathrooms',
+    'Spacious balcony with seating area',
+    'Dedicated workspace with high-speed Wi-Fi',
+  ],
+  services: [
+    'Daily housekeeping and villa cleaning',
+    'Personal chef services (upon request)',
+    '24/7 concierge assistance',
+    'In-villa spa and massage treatments',
+    'Laundry and ironing services (additional charge)',
+    'Grocery shopping and stocking (on request)',
+    'Round-the-clock security',
+  ],
+  entertainment: [
+    'Flat-screen TV with international channels',
+    'Bluetooth sound system for music streaming',
+    'Board games for family and group fun',
+    'Book collection for leisure reading',
+    'Pool floats and toys for added fun',
+    'Outdoor BBQ area (upon request)',
+  ],
+  meals: [
+    'Customized in-villa dining experiences (by personal chef)',
+    'Daily breakfast (included or upon request)',
+    'Pre-stocked pantry service',
+    'Outdoor BBQ setup for group dining',
+    'Access to local catering services for special events',
+    'Fresh seafood dinner arrangements (available on request)',
+  ],
+  transport: [
+    'Complimentary airport pickup and drop-off (depending on booking package)',
+    'Private driver and car rental services',
+    'Scooter and bike rental (available on request)',
+    'Shuttle service to nearby attractions',
+    'Dedicated parking space for guests',
+  ],
+  kids: [
+    'Baby cots and high chairs (upon request)',
+    'Babysitting services (on request)',
+    'Pool safety fence installation (optional)',
+    'Child-friendly meal preparation (chef services)',
+    'Kid-friendly board games and activities',
+    'Shaded play area in the garden',
+  ],
+};
