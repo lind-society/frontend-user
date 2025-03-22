@@ -64,23 +64,19 @@ const HeaderRentDetail = () => {
               align: 'center',
               loop: true,
             }}
-            className='w-full'
+            className='w-full bg-white'
           >
             <CarouselContent className='-ml-4 items-center'>
               {villaImages.map((image, index) => (
                 <CarouselItem
                   key={index}
-                  className={`pl-4 h-[460px] md:h-[560px] flex items-center transition-all duration-300 ease-in-out ${
-                    current === index
-                      ? 'basis-1 sm:basis-2/3 md:basis-3/4'
-                      : 'basis-1 sm:basis-1/2 md:basis-1/3 opacity-70'
-                  }`}
+                  className='pl-4 h-[460px] md:h-[560px] flex items-center basis-1 sm:basis-2/3 md:basis-3/4 '
                 >
                   <div
-                    className={`w-full overflow-hidden rounded-lg ${
+                    className={`w-full overflow-hidden transition-all duration-300 ease-in-out rounded-lg ${
                       current === index
-                        ? 'h-[460px] md:h-[560px]'
-                        : 'h-[380px] md:h-[480px]'
+                        ? 'h-[460px] md:h-[560px] z-10'
+                        : 'h-[380px] md:h-[480px] opacity-50'
                     }`}
                   >
                     <Image
