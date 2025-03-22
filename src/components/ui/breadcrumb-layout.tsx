@@ -3,7 +3,6 @@
 import { Slash } from 'lucide-react';
 import React from 'react';
 
-import BaseContainer from '@/components/layouts/container';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -26,7 +25,7 @@ interface BreadcrumbLayoutProps {
 
 const BreadcrumbLayout: React.FC<BreadcrumbLayoutProps> = ({
   items,
-  className = '',
+
   // containerClassName = '',
 }) => {
   if (!items || items.length === 0) {
@@ -34,33 +33,25 @@ const BreadcrumbLayout: React.FC<BreadcrumbLayoutProps> = ({
   }
 
   return (
-    <div className={`border-y py-4 md:py-6 ${className}`}>
-      <BaseContainer>
-        <div className='rounded-md bg-white border px-3 py-1'>
-          <Breadcrumb>
-            <BreadcrumbList>
-              {items.map((item, index) => (
-                <React.Fragment key={index}>
-                  <BreadcrumbItem
-                    className={item.isActive ? 'font-semibold' : ''}
-                  >
-                    <BreadcrumbLink href={item.href}>
-                      {item.label}
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
+    <div className='rounded-md bg-white border px-3 py-1'>
+      <Breadcrumb>
+        <BreadcrumbList>
+          {items.map((item, index) => (
+            <React.Fragment key={index}>
+              <BreadcrumbItem className={item.isActive ? 'font-semibold' : ''}>
+                <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+              </BreadcrumbItem>
 
-                  {/* Add separator between items, but not after the last item */}
-                  {index < items.length - 1 && (
-                    <BreadcrumbSeparator>
-                      <Slash />
-                    </BreadcrumbSeparator>
-                  )}
-                </React.Fragment>
-              ))}
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </BaseContainer>
+              {/* Add separator between items, but not after the last item */}
+              {index < items.length - 1 && (
+                <BreadcrumbSeparator>
+                  <Slash />
+                </BreadcrumbSeparator>
+              )}
+            </React.Fragment>
+          ))}
+        </BreadcrumbList>
+      </Breadcrumb>
     </div>
   );
 };

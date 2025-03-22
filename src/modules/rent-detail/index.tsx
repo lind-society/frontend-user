@@ -5,10 +5,10 @@ import HeaderRentDetail from '@/modules/rent-detail/header';
 
 const RentDetailModules = () => {
   return (
-    <>
+    <div className='bg-bg'>
       <HeaderRentDetail />
       <ContentRentDetail />
-    </>
+    </div>
   );
 };
 
