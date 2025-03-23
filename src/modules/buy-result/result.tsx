@@ -119,9 +119,9 @@ const properties = [
   },
 ];
 
-type SortOption = 'recommended' | 'price-low' | 'price-high' | 'newest';
+export type SortOption = 'recommended' | 'price-low' | 'price-high' | 'newest';
 
-interface SortOptionConfig {
+export interface SortOptionConfig {
   value: SortOption;
   label: string;
 }
@@ -160,7 +160,7 @@ const MapView = ({ properties }: { properties: any[] }) => {
   );
 };
 
-const sortOptions: SortOptionConfig[] = [
+export const sortOptions: SortOptionConfig[] = [
   { value: 'recommended', label: 'Recommended' },
   { value: 'price-low', label: 'Price (Low to High)' },
   { value: 'price-high', label: 'Price (High to Low)' },
