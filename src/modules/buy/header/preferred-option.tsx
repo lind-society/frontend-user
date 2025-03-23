@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { FaHome, FaSearchDollar } from 'react-icons/fa';
 import { GiIsland, GiPalmTree } from 'react-icons/gi';
@@ -17,8 +19,16 @@ interface PreferredOption {
   icon: React.ReactNode;
 }
 
-export function PreferredOptionsBuyPage() {
-  // Adding the preferred options mentioned in the comments
+interface PreferredOptionsBuyPageProps {
+  onFilterApply?: (filterData: any) => void;
+}
+
+export function PreferredOptionsBuyPage({
+  onFilterApply,
+}: PreferredOptionsBuyPageProps) {
+  const router = useRouter();
+
+  // Adding the preferred options
   const preferredOptions: PreferredOption[] = [
     {
       id: 'instant-income',
@@ -52,13 +62,38 @@ export function PreferredOptionsBuyPage() {
     },
   ];
 
+  // Handle preferred option click
+  const handleOptionClick = (optionId: string) => {
+    const params = new URLSearchParams();
+    params.append('preferredOption', optionId);
+    router.push(`/buy/result?${params.toString()}`);
+  };
+
+  // Handle filter applications
+  const handleFilterApply = (filterData: any) => {
+    if (onFilterApply) {
+      onFilterApply(filterData);
+    } else {
+      // Direct navigation if no parent handler provided
+      const params = new URLSearchParams();
+      if (filterData) {
+        Object.entries(filterData).forEach(([key, value]) => {
+          if (value) {
+            params.append(key, value.toString());
+          }
+        });
+      }
+      router.push(`/buy/result?${params.toString()}`);
+    }
+  };
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <span className='text-lg md:text-[22px] text-primary font-semibold'>
           Most Preferred Options
         </span>
-        <FiltersDialog />
+        <FiltersDialog onApply={handleFilterApply} />
       </div>
 
       <OptionCarousel>
@@ -67,6 +102,7 @@ export function PreferredOptionsBuyPage() {
             key={option.id}
             variant='outline'
             className='flex items-center gap-2 min-w-max'
+            onClick={() => handleOptionClick(option.id)}
           >
             <span className='text-primary'>{option.icon}</span>
             <span className='text-xs sm:text-sm font-medium text-gray-500'>

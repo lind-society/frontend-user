@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
@@ -21,6 +23,9 @@ import { Separator } from '@/components/ui/separator';
 import { PreferredOptionsBuyPage } from '@/modules/buy/header/preferred-option';
 
 const HeaderBuyPage = () => {
+  const router = useRouter();
+
+  // Search filter states
   const [location, setLocation] = useState('Bali');
   const [ownership, setOwnership] = useState('Leasehold');
   const [bedrooms, setBedrooms] = useState(1);
@@ -29,6 +34,42 @@ const HeaderBuyPage = () => {
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
   const ownershipTypes = ['Leasehold', 'Freehold', 'Both'];
+
+  // Handle search button click - Navigate to results page with query params
+  const handleSearch = () => {
+    // Convert the search parameters to query string
+    const params = new URLSearchParams();
+    params.append('location', location);
+    params.append('ownership', ownership);
+    params.append('bedrooms', bedrooms.toString());
+    params.append('bathrooms', bathrooms.toString());
+    params.append('priceRange', priceRange);
+
+    // Navigate to results page with search parameters
+    router.push(`/buy/result?${params.toString()}`);
+  };
+
+  // Handle filter application
+  const handleFilterApply = (filterData: any) => {
+    // Combine current search parameters with filter data
+    const params = new URLSearchParams();
+    params.append('location', location);
+    params.append('ownership', ownership);
+    params.append('bedrooms', bedrooms.toString());
+    params.append('bathrooms', bathrooms.toString());
+    params.append('priceRange', priceRange);
+
+    // Add filter parameters if available
+    if (filterData) {
+      Object.entries(filterData).forEach(([key, value]) => {
+        if (value) {
+          params.append(key, value.toString());
+        }
+      });
+    }
+
+    router.push(`/buy/result?${params.toString()}`);
+  };
 
   return (
     <div className='py-6 md:pb-10 md:pt-[68px] relative bg-bg'>
@@ -263,7 +304,12 @@ const HeaderBuyPage = () => {
               </Popover>
 
               {/* Search Button */}
-              <Button variant='primary' size='lg' className='w-full md:w-auto'>
+              <Button
+                variant='primary'
+                size='lg'
+                className='w-full md:w-auto'
+                onClick={handleSearch}
+              >
                 Search
               </Button>
             </div>
@@ -271,7 +317,7 @@ const HeaderBuyPage = () => {
             <Separator />
 
             {/* Using the updated PreferredOptions component */}
-            <PreferredOptionsBuyPage />
+            <PreferredOptionsBuyPage onFilterApply={handleFilterApply} />
           </div>
         </div>
       </BaseContainer>

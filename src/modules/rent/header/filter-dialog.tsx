@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { ChevronUp, SlidersHorizontal, X } from 'lucide-react';
@@ -16,21 +17,108 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { PriceRangeSlider } from '@/modules/rent/header/price-range';
 
 interface FiltersProps {
-  onApply?: () => void;
+  onApply?: (filterData: any) => void;
   onClear?: () => void;
 }
 
 export function FiltersDialog({ onApply, onClear }: FiltersProps) {
   const [open, setOpen] = useState(false);
-  const [, setPriceRange] = useState<[number, number]>([0, 1500000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500000]);
 
+  // Filter states
+  const [collections, setCollections] = useState<Record<string, boolean>>({});
+  const [freebies, setFreebies] = useState<Record<string, boolean>>({});
+  const [amenities, setAmenities] = useState<Record<string, boolean>>({});
+
+  // Collections data
+  const collectionsData = [
+    'Beachfront',
+    'Mountain View',
+    'Historic',
+    'Modern',
+    'Luxury',
+    'Budget-friendly',
+  ];
+
+  // Freebies data
+  const freebiesData = [
+    'Free breakfast',
+    'Free parking',
+    'Free wifi',
+    'Free cancellation',
+    'Free airport shuttle',
+  ];
+
+  // Amenities data
+  const amenitiesData = [
+    'Air conditioning',
+    'Pool',
+    'Kitchen',
+    'Parking',
+    'Gym',
+    'Jacuzzi',
+    'Beach access',
+    'BBQ',
+    'Laundry',
+  ];
+
+  // Toggle checkbox selection
+  const toggleCollection = (item: string) => {
+    setCollections((prev) => ({
+      ...prev,
+      [item]: !prev[item],
+    }));
+  };
+
+  const toggleFreebie = (item: string) => {
+    setFreebies((prev) => ({
+      ...prev,
+      [item]: !prev[item],
+    }));
+  };
+
+  const toggleAmenity = (item: string) => {
+    setAmenities((prev) => ({
+      ...prev,
+      [item]: !prev[item],
+    }));
+  };
+
+  // Handle apply filters
   const handleApply = () => {
-    onApply?.();
+    // Collect all selected filters
+    const selectedFilters = {
+      minPrice: priceRange[0],
+      maxPrice: priceRange[1],
+      collections: Object.entries(collections)
+        .filter(([_, selected]) => selected)
+        .map(([name]) => name),
+      freebies: Object.entries(freebies)
+        .filter(([_, selected]) => selected)
+        .map(([name]) => name),
+      amenities: Object.entries(amenities)
+        .filter(([_, selected]) => selected)
+        .map(([name]) => name),
+    };
+
+    // Pass filter data to parent component
+    if (onApply) {
+      onApply(selectedFilters);
+    }
+
     setOpen(false);
   };
 
+  // Handle clear filters
   const handleClear = () => {
-    onClear?.();
+    setPriceRange([0, 1500000]);
+    setCollections({});
+    setFreebies({});
+    setAmenities({});
+
+    if (onClear) {
+      onClear();
+    }
   };
 
   return (
@@ -78,19 +166,16 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                 <ChevronUp className='text-gray-500' />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2'>
-                {[
-                  'Beachfront',
-                  'Mountain View',
-                  'Historic',
-                  'Modern',
-                  'Luxury',
-                  'Budget-friendly',
-                ].map((item, index) => (
+                {collectionsData.map((item, index) => (
                   <div
                     key={index}
                     className='flex items-center space-x-2 py-1.5'
                   >
-                    <Checkbox id={`collection-${index}`} />
+                    <Checkbox
+                      id={`collection-${index}`}
+                      checked={collections[item] || false}
+                      onCheckedChange={() => toggleCollection(item)}
+                    />
                     <label
                       htmlFor={`collection-${index}`}
                       className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
@@ -114,18 +199,16 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                 <ChevronUp className='text-gray-500' />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2'>
-                {[
-                  'Free breakfast',
-                  'Free parking',
-                  'Free wifi',
-                  'Free cancellation',
-                  'Free airport shuttle',
-                ].map((item, index) => (
+                {freebiesData.map((item, index) => (
                   <div
                     key={index}
                     className='flex items-center space-x-2 py-1.5'
                   >
-                    <Checkbox id={`freebie-${index}`} />
+                    <Checkbox
+                      id={`freebie-${index}`}
+                      checked={freebies[item] || false}
+                      onCheckedChange={() => toggleFreebie(item)}
+                    />
                     <label
                       htmlFor={`freebie-${index}`}
                       className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
@@ -146,22 +229,16 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                 <ChevronUp className='text-gray-500' />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2'>
-                {[
-                  'Air conditioning',
-                  'Pool',
-                  'Kitchen',
-                  'Parking',
-                  'Gym',
-                  'Jacuzzi',
-                  'Beach access',
-                  'BBQ',
-                  'Laundry',
-                ].map((item, index) => (
+                {amenitiesData.map((item, index) => (
                   <div
                     key={index}
                     className='flex items-center space-x-2 py-1.5'
                   >
-                    <Checkbox id={`amenity-${index}`} />
+                    <Checkbox
+                      id={`amenity-${index}`}
+                      checked={amenities[item] || false}
+                      onCheckedChange={() => toggleAmenity(item)}
+                    />
                     <label
                       htmlFor={`amenity-${index}`}
                       className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
