@@ -2,13 +2,7 @@
 'use client';
 
 import { format } from 'date-fns';
-import {
-  ChevronDown,
-  Heart,
-  Search,
-  SlidersHorizontal,
-  Star,
-} from 'lucide-react';
+import { ChevronDown, Heart, Search, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -46,6 +40,12 @@ import {
   touristActivities,
   TouristActivity,
 } from '@/modules/tourist-activity/constant';
+import FilterDialogTourist from '@/modules/tourist-activity/filter-dialog';
+
+interface FilterData {
+  cities?: string[];
+  // Add other filter properties as needed
+}
 
 const ContentTourist1 = () => {
   const [selectedSort, setSelectedSort] = useState<SortOption>('recommended');
@@ -128,6 +128,16 @@ const ContentTourist1 = () => {
   // Show more activities
   const handleShowMore = () => {
     setDisplayLimit((prev) => prev + 6);
+  };
+
+  const handleApplyFilters = (filterData: FilterData) => {
+    // Update location based on selected cities
+    if (filterData.cities && filterData.cities.length > 0) {
+      setSelectedLocation(filterData.cities[0]); // Set to first selected city
+    }
+
+    // Update other filters in content-1.tsx as needed
+    // These will be used in the useEffect to filter activities
   };
 
   return (
@@ -257,10 +267,7 @@ const ContentTourist1 = () => {
 
             <div className='flex gap-3 md:gap-8'>
               {/* Filters button */}
-              <Button variant='outline' className='flex gap-2 items-center'>
-                <SlidersHorizontal size={20} className='text-primary' />
-                <span className='text-primary'>Filters</span>
-              </Button>
+              <FilterDialogTourist onApplyFilters={handleApplyFilters} />
 
               {/* Sort dropdown */}
               <DropdownMenu>
