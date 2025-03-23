@@ -27,25 +27,32 @@ const Navbar = () => {
     <div className='bg-white'>
       <BaseContainer>
         <nav className='flex justify-between items-center text-gray-600 py-3'>
-          {/* Logo */}
+          {/* Logo - make it responsive on tablet */}
           <div className='flex-shrink-0'>
-            <Image src='/images/logo.png' alt='logo' width={153} height={58} />
+            <Image
+              src='/images/logo.png'
+              alt='logo'
+              width={153}
+              height={58}
+              priority
+              className='w-auto h-[40px] md:h-[45px] lg:h-[58px]'
+            />
           </div>
 
-          {/* Search (hidden on mobile) */}
-          <div className='hidden md:flex h-[52px] flex-1 max-w-md mx-4'>
+          {/* Search - improve tablet layout */}
+          <div className='hidden md:flex h-[52px] flex-1 max-w-md mx-2 lg:mx-4'>
             <input
               type='text'
               placeholder='Search by villa, property, or activity name'
-              className='h-full w-full px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary'
+              className='h-full w-full px-2 lg:px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary text-sm lg:text-base'
             />
-            <button className='bg-primary h-full px-6 rounded-r-md'>
-              <SearchIcon size={24} className='text-white' />
+            <button className='bg-primary h-full px-3 lg:px-6 rounded-r-md'>
+              <SearchIcon size={20} className='text-white' />
             </button>
           </div>
 
-          {/* Language, Currency, Social Icons (hidden on mobile) */}
-          <div className='hidden md:flex gap-6 lg:gap-8 items-center'>
+          {/* Language, Currency, Social Icons - optimize for tablet */}
+          <div className='hidden md:flex gap-3 lg:gap-8 items-center'>
             {/* Language Dropdown with LocaleSwitcher */}
             <LocaleSwitcher />
 
@@ -53,9 +60,9 @@ const Navbar = () => {
             <DropdownMenu>
               <DropdownMenuTrigger
                 hasChevron={true}
-                className='flex items-center gap-3'
+                className='flex items-center gap-1 lg:gap-3'
               >
-                <span className='text-lg font-semibold'>IDR</span>
+                <span className='text-base lg:text-lg font-semibold'>IDR</span>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>IDR</DropdownMenuItem>
@@ -97,38 +104,38 @@ const Navbar = () => {
 
       {/* Desktop Menu Navigation */}
       <BaseContainer>
-        <div className='hidden md:flex justify-between items-center py-5 text-gray-600'>
-          <div className='flex gap-4 lg:gap-8 items-center'>
+        <div className='hidden md:flex justify-between items-center py-3 lg:py-5 text-gray-600'>
+          <div className='flex gap-2 md:gap-3 lg:gap-8 items-center overflow-x-auto pb-1 scrollbar-hide'>
             {/* Stay Dropdown */}
             <NavDropdown title='Stay'>
               <DropdownMenuItem asChild>
-                <Link href='/stay/villas'>Villas</Link>
+                <Link href='/rent'>Villas</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/stay/hotels'>Hotels</Link>
+                <Link href='/rent'>Hotels</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/stay/apartments'>Apartments</Link>
+                <Link href='/rent'>Apartments</Link>
               </DropdownMenuItem>
             </NavDropdown>
 
             {/* Buy Dropdown */}
             <NavDropdown title='Buy'>
               <DropdownMenuItem asChild>
-                <Link href='/buy/properties'>Properties</Link>
+                <Link href='/buy'>Properties</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/buy/land'>Land</Link>
+                <Link href='/buy'>Land</Link>
               </DropdownMenuItem>
             </NavDropdown>
 
             {/* Tourist Activity Dropdown */}
             <NavDropdown title='Tourist activity'>
               <DropdownMenuItem asChild>
-                <Link href='/activities/tours'>Tours</Link>
+                <Link href='/activities'>Tours</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/activities/adventures'>Adventures</Link>
+                <Link href='/activities'>Adventures</Link>
               </DropdownMenuItem>
             </NavDropdown>
 
@@ -153,14 +160,18 @@ const Navbar = () => {
             </NavDropdown>
           </div>
 
-          <div className='flex gap-4 lg:gap-8 items-center'>
-            <div className='flex gap-2 items-center'>
-              <Phone className='text-gray-600' size={24} />
-              <span className='font-semibold text-lg'>Contact us</span>
+          <div className='flex gap-2 lg:gap-8 items-center whitespace-nowrap'>
+            <div className='flex gap-1 lg:gap-2 items-center'>
+              <Phone className='text-gray-600' size={22} />
+              <span className='font-semibold text-base lg:text-lg'>
+                Contact us
+              </span>
             </div>
-            <div className='flex gap-2 items-center'>
-              <FaHeart className='text-red-600' size={24} />
-              <span className='font-semibold text-lg'>Wishlist</span>
+            <div className='flex gap-1 lg:gap-2 items-center'>
+              <FaHeart className='text-red-600' size={22} />
+              <span className='font-semibold text-base lg:text-lg'>
+                Wishlist
+              </span>
             </div>
           </div>
         </div>
@@ -171,31 +182,31 @@ const Navbar = () => {
         <div className='md:hidden bg-white border-t'>
           <div className='px-4 py-2 space-y-2'>
             <MobileNavItem title='Stay'>
-              <Link href='/stay/villas' className='block py-2 px-4'>
+              <Link href='/rent' className='block py-2 px-4'>
                 Villas
               </Link>
-              <Link href='/stay/hotels' className='block py-2 px-4'>
+              <Link href='/rent' className='block py-2 px-4'>
                 Hotels
               </Link>
-              <Link href='/stay/apartments' className='block py-2 px-4'>
+              <Link href='/rent' className='block py-2 px-4'>
                 Apartments
               </Link>
             </MobileNavItem>
 
             <MobileNavItem title='Buy'>
-              <Link href='/buy/properties' className='block py-2 px-4'>
+              <Link href='/buy' className='block py-2 px-4'>
                 Properties
               </Link>
-              <Link href='/buy/land' className='block py-2 px-4'>
+              <Link href='/buy' className='block py-2 px-4'>
                 Land
               </Link>
             </MobileNavItem>
 
             <MobileNavItem title='Tourist activity'>
-              <Link href='/activities/tours' className='block py-2 px-4'>
+              <Link href='/activities' className='block py-2 px-4'>
                 Tours
               </Link>
-              <Link href='/activities/adventures' className='block py-2 px-4'>
+              <Link href='/activities' className='block py-2 px-4'>
                 Adventures
               </Link>
             </MobileNavItem>
@@ -223,7 +234,7 @@ const Navbar = () => {
             </div>
 
             {/* Contact and Wishlist */}
-            <Link href='/contact' className='flex items-center py-3 gap-3'>
+            <Link href='/contact' className=' flex items-center py-3 gap-3'>
               <Phone className='text-gray-600' size={20} />
               <span className='font-medium'>Contact us</span>
             </Link>
@@ -280,9 +291,11 @@ function NavDropdown({
     <DropdownMenu>
       <DropdownMenuTrigger
         hasChevron={true}
-        className='flex items-center gap-3'
+        className='flex items-center gap-1 lg:gap-3'
       >
-        <span className='font-semibold text-lg'>{title}</span>
+        <span className='font-semibold text-base lg:text-lg whitespace-nowrap'>
+          {title}
+        </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>{children}</DropdownMenuContent>
     </DropdownMenu>
