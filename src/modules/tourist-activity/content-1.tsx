@@ -1,19 +1,35 @@
+/* eslint-disable no-console */
 'use client';
 
-import { ChevronDown, SlidersHorizontal, Star } from 'lucide-react';
+import { format } from 'date-fns';
+import {
+  ChevronDown,
+  Heart,
+  Search,
+  SlidersHorizontal,
+  Star,
+} from 'lucide-react';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
+import { TbCurrencyDollar } from 'react-icons/tb';
 
 import BaseContainer from '@/components/layouts/container';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
@@ -23,15 +39,104 @@ import {
 } from '@/components/ui/select';
 
 import { SortOption, sortOptions } from '@/modules/buy-result/result';
+import { formatCurrency } from '@/modules/rent/header/price-range';
+import {
+  activityCategories,
+  activityLocations,
+  touristActivities,
+  TouristActivity,
+} from '@/modules/tourist-activity/constant';
 
 const ContentTourist1 = () => {
   const [selectedSort, setSelectedSort] = useState<SortOption>('recommended');
+  const [selectedLocation, setSelectedLocation] = useState<string>('');
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(5000000);
+  const [activities, setActivities] = useState<TouristActivity[]>([]);
+  const [displayLimit, setDisplayLimit] = useState<number>(6);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+
+  // Filter and sort activities
+  useEffect(() => {
+    let filtered = [...touristActivities];
+
+    // Filter by location
+    if (selectedLocation) {
+      filtered = filtered.filter((activity) =>
+        activity.location.toLowerCase().includes(selectedLocation.toLowerCase())
+      );
+    }
+
+    // Filter by search term
+    if (searchTerm) {
+      filtered = filtered.filter(
+        (activity) =>
+          activity.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          activity.description
+            .toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          activity.tags.some((tag) =>
+            tag.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      );
+    }
+
+    // Filter by price range
+    filtered = filtered.filter(
+      (activity) => activity.price >= minPrice && activity.price <= maxPrice
+    );
+
+    // Sort activities
+    switch (selectedSort) {
+      case 'price-low':
+        filtered.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-high':
+        filtered.sort((a, b) => b.price - a.price);
+        break;
+
+      case 'recommended':
+      default:
+        filtered.sort((a, b) => b.popularity - a.popularity);
+        break;
+    }
+
+    setActivities(filtered);
+  }, [selectedSort, selectedLocation, searchTerm, minPrice, maxPrice]);
+
+  // Toggle favorite status of an activity
+  const toggleFavorite = (activityId: string) => {
+    setFavorites((prev) => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(activityId)) {
+        newFavorites.delete(activityId);
+      } else {
+        newFavorites.add(activityId);
+      }
+      return newFavorites;
+    });
+  };
+
+  // Handle search submission
+  const handleSearch = () => {
+    // Could implement navigation to search results page
+    console.log('Search submitted:', { searchTerm, selectedLocation });
+  };
+
+  // Show more activities
+  const handleShowMore = () => {
+    setDisplayLimit((prev) => prev + 6);
+  };
+
   return (
-    <div className='py-[64px] bg-bg'>
+    <div className='py-[32px] md:py-[64px] bg-bg'>
       <BaseContainer>
-        <div className='flex flex-col gap-8 '>
+        <div className='flex flex-col gap-6 md:gap-8'>
+          {/* Header section */}
           <div className='flex flex-col gap-2 text-center items-center'>
-            <h4 className='text-primary'>
+            <h4 className='text-primary text-xl md:text-2xl font-semibold'>
               Nourish Your Body, Refresh Your Soul
             </h4>
             <span className='max-w-[850px] text-text'>
@@ -39,50 +144,125 @@ const ContentTourist1 = () => {
               restore balance in your life.
             </span>
           </div>
-          <div className='flex justify-center items-center gap-8'>
-            <Select>
-              <SelectTrigger className='w-[240px] h-[58px]'>
+
+          {/* Search section */}
+          <div className='flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8'>
+            <Select
+              value={selectedLocation}
+              onValueChange={setSelectedLocation}
+            >
+              <SelectTrigger className='w-full md:w-[240px] h-[46px] md:h-[58px]'>
                 <SelectValue placeholder='Choose Location' />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem key={1} value='Bali'>
-                  Bali
-                </SelectItem>
+                {activityLocations.map((location) => (
+                  <SelectItem key={location} value={location}>
+                    {location}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
-            <div className='flex border rounded-l-md pl-5 items-center'>
+            <div className='flex border rounded-md w-full md:w-auto'>
               <input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder='What do you want to do?'
-                className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none w-[400px]'
+                className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none py-3 px-4 w-full md:w-[400px]'
               />
-              <button className='bg-primary rounded-r-md p-4 text-white '>
-                Search
+              <button
+                className='bg-primary rounded-r-md p-4 text-white flex items-center justify-center'
+                onClick={handleSearch}
+              >
+                <Search size={20} />
               </button>
             </div>
           </div>
+
+          {/* Activity count */}
           <div className='flex gap-2 items-center'>
             <span className='font-medium text-gray-500'>
-              Available wellness activity:
+              Available activity:
             </span>
-            <span className='text-xl text-primary'>32</span>
+            <span className='text-xl text-primary'>{activities.length}</span>
           </div>
-          <div className='flex justify-between w-full'>
-            <div className='flex gap-8'>
-              <Button variant='outline' className='flex gap-2 items-center'>
-                <FaCalendar className='text-primary text-xl' />
-                <span className='text-primary'>Availability</span>
-                <ChevronDown className='text-primary' />
-              </Button>
-              <Button variant='outline' className='flex gap-2 items-center'>
-                {/* icon price */}
-                <span className='text-primary'>Price Range</span>
-              </Button>
+
+          {/* Filter controls */}
+          <div className='flex flex-col md:flex-row justify-between w-full gap-4'>
+            <div className='flex flex-wrap gap-3 md:gap-8'>
+              {/* Date availability */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant='outline' className='flex gap-2 items-center'>
+                    <FaCalendar className='text-primary text-xl' />
+                    <span className='text-primary'>
+                      {selectedDate
+                        ? format(selectedDate, 'PP')
+                        : 'Availability'}
+                    </span>
+                    <ChevronDown className='text-primary' />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className='w-auto p-0'>
+                  <Calendar
+                    mode='single'
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+
+              {/* Price range */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant='outline' className='flex gap-2 items-center'>
+                    <TbCurrencyDollar className='text-primary text-xl' />
+                    <span className='text-primary'>
+                      {minPrice === 0 && maxPrice === 5000000
+                        ? 'Price Range'
+                        : `${formatCurrency(minPrice)} - ${formatCurrency(
+                            maxPrice
+                          )}`}
+                    </span>
+                    <ChevronDown className='text-primary' />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className='w-80 p-4'>
+                  <div className='flex flex-col gap-4'>
+                    <span className='font-medium'>Price Range</span>
+                    <div className='flex justify-between'>
+                      <div className='flex flex-col gap-1'>
+                        <span className='text-sm text-gray-500'>Min Price</span>
+                        <input
+                          type='number'
+                          value={minPrice}
+                          onChange={(e) => setMinPrice(Number(e.target.value))}
+                          className='w-32 border rounded-md p-2'
+                        />
+                      </div>
+                      <div className='flex flex-col gap-1'>
+                        <span className='text-sm text-gray-500'>Max Price</span>
+                        <input
+                          type='number'
+                          value={maxPrice}
+                          onChange={(e) => setMaxPrice(Number(e.target.value))}
+                          className='w-32 border rounded-md p-2'
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </div>
-            <div className='flex gap-8'>
+
+            <div className='flex gap-3 md:gap-8'>
+              {/* Filters button */}
               <Button variant='outline' className='flex gap-2 items-center'>
                 <SlidersHorizontal size={20} className='text-primary' />
                 <span className='text-primary'>Filters</span>
               </Button>
+
+              {/* Sort dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -117,62 +297,129 @@ const ContentTourist1 = () => {
               </DropdownMenu>
             </div>
           </div>
-          <div className='grid grid-cols-3 gap-8'>
-            <div>
-              <div className='relative h-[240px] w-full'>
+
+          {/* Activity cards grid */}
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8'>
+            {activities.slice(0, displayLimit).map((activity) => (
+              <div
+                key={activity.id}
+                className='flex flex-col rounded-lg overflow-hidden border border-gray-200 bg-white hover:shadow-md transition-shadow'
+              >
+                {/* Card image */}
                 <div className='relative h-[240px] w-full'>
-                  <Image
-                    className='w-full h-full object-cover'
-                    src='/images/activity-1.jpeg'
-                    alt={`activity - Image `}
-                    sizes='100vw'
-                    width={0}
-                    height={0}
-                  />
+                  <Link href={`/tourist-activity/${activity.id}`}>
+                    <Image
+                      className='w-full h-full object-cover'
+                      src={activity.images[0]}
+                      alt={activity.name}
+                      sizes='100vw'
+                      width={0}
+                      height={0}
+                    />
+                  </Link>
+
+                  {/* Rating badge */}
+                  <div className='absolute left-0 bottom-0 bg-primary px-4 py-2 rounded-tr-lg z-10 flex gap-2 items-center'>
+                    <Star className='text-white' size={16} />
+                    <span className='text-white'>
+                      {activity.rating.toFixed(1)}
+                    </span>
+                  </div>
+
+                  {/* Favorite button */}
+                  <button
+                    onClick={() => toggleFavorite(activity.id)}
+                    className='absolute right-4 top-4 bg-white/80 hover:bg-white rounded-full p-2 transition-colors'
+                  >
+                    <Heart
+                      size={20}
+                      className={
+                        favorites.has(activity.id)
+                          ? 'fill-red-500 text-red-500'
+                          : 'text-gray-600'
+                      }
+                    />
+                  </button>
                 </div>
 
-                {/* Rating badge */}
-                <div className='absolute left-0 bottom-0 bg-primary px-4 py-2 rounded-tr-lg z-10 flex gap-2 items-center'>
-                  <Star className='text-white' size={16} />
-                  <span className='text-white'>4.8</span>
+                {/* Location and category */}
+                <div className='px-6 py-4 flex justify-between border-b'>
+                  <span className='text-sm text-text'>{activity.location}</span>
+                  <Badge className='bg-primary px-3 rounded-md'>
+                    {
+                      activityCategories.find(
+                        (cat) => cat.id === activity.category
+                      )?.name
+                    }
+                  </Badge>
                 </div>
-              </div>
-              <div className='px-6 py-4 flex justify-between border-b'>
-                <span className='text-sm text-text'>
-                  Ubud, Bali - Indonesia
-                </span>
-                <Badge className='bg-primary px-3 rounded-md'>Welness</Badge>
-              </div>
-              <div className='px-6 py-4 flex flex-col gap-2'>
-                <div className='flex flex-col md:flex-row md:justify-between md:items-center w-full gap-2'>
-                  <p className='text-lg md:text-xl text-primary font-semibold'>
-                    Jungle Detox & Wellness Spa
+
+                {/* Activity details */}
+                <div className='px-6 py-4 flex flex-col gap-2'>
+                  <div className='flex flex-col md:flex-row md:justify-between md:items-center w-full gap-2'>
+                    <Link
+                      href={`/tourist-activity/${activity.id}`}
+                      className='hover:text-primary/80'
+                    >
+                      <p className='text-lg md:text-xl text-primary font-semibold'>
+                        {activity.name}
+                      </p>
+                    </Link>
+                    <div className='flex flex-col text-start md:text-end items-start md:items-end text-primary'>
+                      <span className='text-lg md:text-[22px] font-bold whitespace-nowrap'>
+                        {activity.currency} {activity.price.toLocaleString()}
+                      </span>
+                      <span className='italic text-xs md:text-sm font-normal'>
+                        /{activity.priceUnit}
+                      </span>
+                    </div>
+                  </div>
+                  <p className='text-gray-600 font-normal text-sm md:text-base line-clamp-3'>
+                    {activity.description}
                   </p>
-                  <div className='flex flex-col text-start md:text-end items-start md:items-end text-primary'>
-                    <span className='text-lg md:text-[22px] font-bold whitespace-nowrap'>
-                      IDR 1.500.000
-                    </span>
-                    <span className='italic text-xs md:text-sm font-normal'>
-                      /session
+                  <div className='flex justify-between items-center mt-2'>
+                    <div className='flex items-center gap-2'>
+                      <span className='text-xs px-2 py-1 bg-gray-100 rounded-md'>
+                        {activity.duration}
+                      </span>
+                      <span className='text-xs px-2 py-1 bg-gray-100 rounded-md'>
+                        {activity.groupSize}
+                      </span>
+                    </div>
+                    <span className='text-xs text-gray-500'>
+                      {activity.reviews} reviews
                     </span>
                   </div>
                 </div>
-                <p className='text-gray-600 font-normal text-sm md:text-base line-clamp-3'>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                  do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit
-                  amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                  incididunt ut labore.
-                </p>
               </div>
+            ))}
+          </div>
+
+          {/* Show more button */}
+          {activities.length > displayLimit && (
+            <div className='w-full flex justify-center'>
+              <Button
+                variant='outline'
+                className='w-fit'
+                onClick={handleShowMore}
+              >
+                Show more ({activities.length - displayLimit})
+              </Button>
             </div>
-          </div>
-          <div className='w-full flex justify-center'>
-            <Button variant='outline' className='w-fit'>
-              Show more wellness (26)
-            </Button>
-          </div>
+          )}
         </div>
       </BaseContainer>
+
+      {/* Responsive CSS for hiding scrollbar */}
+      <style jsx global>{`
+        .hideScrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hideScrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };
