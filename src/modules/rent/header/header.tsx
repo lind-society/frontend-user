@@ -1,8 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaCalendar, FaLocationDot, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';
@@ -20,6 +22,9 @@ import { Separator } from '@/components/ui/separator';
 import { PreferredOptions } from '@/modules/rent/header/preferred-option';
 
 const HeaderRentPage = () => {
+  const router = useRouter(); // Initialize router
+
+  // Search filter states
   const [location, setLocation] = useState('Bali');
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
@@ -30,6 +35,64 @@ const HeaderRentPage = () => {
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
 
+  // Handle search button click
+  const handleSearch = () => {
+    // Format dates for URL parameters
+    const checkIn = checkInDate ? format(checkInDate, 'yyyy-MM-dd') : '';
+    const checkOut = checkOutDate ? format(checkOutDate, 'yyyy-MM-dd') : '';
+
+    // Build query parameters
+    const params = new URLSearchParams();
+    params.append('location', location);
+    params.append('checkIn', checkIn);
+    params.append('checkOut', checkOut);
+    params.append('bedrooms', bedrooms.toString());
+    params.append('guests', guests.toString());
+
+    // Navigate to results page
+    router.push(`/rent/result?${params.toString()}`);
+  };
+
+  // Handle filter application
+  const handleFilterApply = (filterData: any) => {
+    // Format dates for URL parameters
+    const checkIn = checkInDate ? format(checkInDate, 'yyyy-MM-dd') : '';
+    const checkOut = checkOutDate ? format(checkOutDate, 'yyyy-MM-dd') : '';
+
+    // Build query parameters
+    const params = new URLSearchParams();
+    params.append('location', location);
+    params.append('checkIn', checkIn);
+    params.append('checkOut', checkOut);
+    params.append('bedrooms', bedrooms.toString());
+    params.append('guests', guests.toString());
+
+    // Add filter parameters
+    if (filterData) {
+      if (filterData.minPrice)
+        params.append('minPrice', filterData.minPrice.toString());
+      if (filterData.maxPrice)
+        params.append('maxPrice', filterData.maxPrice.toString());
+
+      // Add collections as a comma-separated list
+      if (filterData.collections && filterData.collections.length > 0) {
+        params.append('collections', filterData.collections.join(','));
+      }
+
+      // Add freebies as a comma-separated list
+      if (filterData.freebies && filterData.freebies.length > 0) {
+        params.append('freebies', filterData.freebies.join(','));
+      }
+
+      // Add amenities as a comma-separated list
+      if (filterData.amenities && filterData.amenities.length > 0) {
+        params.append('amenities', filterData.amenities.join(','));
+      }
+    }
+
+    // Navigate to results page with all parameters
+    router.push(`/rent/result?${params.toString()}`);
+  };
   return (
     <div className='py-6 md:py-10 relative bg-bg'>
       <Image
@@ -240,7 +303,12 @@ const HeaderRentPage = () => {
               </Popover>
 
               {/* Search Button */}
-              <Button variant='primary' size='lg' className='w-full md:w-auto'>
+              <Button
+                variant='primary'
+                size='lg'
+                className='w-full md:w-auto'
+                onClick={handleSearch}
+              >
                 Search
               </Button>
             </div>
@@ -248,7 +316,7 @@ const HeaderRentPage = () => {
             <Separator />
 
             {/* Using the new PreferredOptions component */}
-            <PreferredOptions />
+            <PreferredOptions onFilterApply={handleFilterApply} />
           </div>
         </div>
       </BaseContainer>

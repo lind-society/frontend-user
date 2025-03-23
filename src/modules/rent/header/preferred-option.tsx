@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { useRouter } from 'next/navigation'; // Import router
 import React from 'react';
 import { BiSwim } from 'react-icons/bi';
 import { FaParking, FaUmbrellaBeach } from 'react-icons/fa';
@@ -21,7 +23,13 @@ interface PreferredOption {
   icon: React.ReactNode;
 }
 
-export function PreferredOptions() {
+interface PreferredOptionsProps {
+  onFilterApply?: (filterData: any) => void;
+}
+
+export function PreferredOptions({ onFilterApply }: PreferredOptionsProps) {
+  const router = useRouter(); // Initialize router
+
   const preferredOptions: PreferredOption[] = [
     {
       id: 'air-cond',
@@ -50,13 +58,53 @@ export function PreferredOptions() {
     { id: 'seaview', label: 'Sea view', icon: <RiRoadMapLine size={24} /> },
   ];
 
+  // Handle preferred option click
+  const handleOptionClick = (optionId: string) => {
+    const params = new URLSearchParams();
+    params.append('amenity', optionId);
+    router.push(`/rent/result?${params.toString()}`);
+  };
+
+  // Handle filter applications
+  const handleFilterApply = (filterData: any) => {
+    if (onFilterApply) {
+      onFilterApply(filterData);
+    } else {
+      // Direct navigation if no parent handler provided
+      const params = new URLSearchParams();
+      if (filterData) {
+        // Add price range
+        if (filterData.minPrice)
+          params.append('minPrice', filterData.minPrice.toString());
+        if (filterData.maxPrice)
+          params.append('maxPrice', filterData.maxPrice.toString());
+
+        // Add collections as a comma-separated list
+        if (filterData.collections && filterData.collections.length > 0) {
+          params.append('collections', filterData.collections.join(','));
+        }
+
+        // Add freebies as a comma-separated list
+        if (filterData.freebies && filterData.freebies.length > 0) {
+          params.append('freebies', filterData.freebies.join(','));
+        }
+
+        // Add amenities as a comma-separated list
+        if (filterData.amenities && filterData.amenities.length > 0) {
+          params.append('amenities', filterData.amenities.join(','));
+        }
+      }
+      router.push(`/rent/result?${params.toString()}`);
+    }
+  };
+
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <span className='text-lg md:text-[22px] text-primary font-semibold'>
           Most Preferred Options
         </span>
-        <FiltersDialog />
+        <FiltersDialog onApply={handleFilterApply} />
       </div>
 
       <OptionCarousel>
@@ -65,6 +113,7 @@ export function PreferredOptions() {
             key={option.id}
             variant='outline'
             className='flex items-center gap-2 min-w-max'
+            onClick={() => handleOptionClick(option.id)}
           >
             <span className='text-gray-500'>{option.icon}</span>
             <span className='text-xs font-medium text-gray-500'>
