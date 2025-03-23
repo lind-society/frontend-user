@@ -70,7 +70,7 @@ const HeaderRentDetail = () => {
               {villaImages.map((image, index) => (
                 <CarouselItem
                   key={index}
-                  className='pl-4 h-[460px] md:h-[560px] flex items-center basis-1 sm:basis-2/3 md:basis-3/4 '
+                  className='pl-4 h-[460px] md:h-[560px] flex items-center basis-full sm:basis-2/3 md:basis-3/4 '
                 >
                   <div
                     className={`w-full overflow-hidden transition-all duration-300 ease-in-out rounded-lg ${
