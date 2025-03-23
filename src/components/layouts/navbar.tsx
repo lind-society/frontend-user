@@ -132,10 +132,10 @@ const Navbar = () => {
             {/* Tourist Activity Dropdown */}
             <NavDropdown title='Tourist activity'>
               <DropdownMenuItem asChild>
-                <Link href='/activities'>Tours</Link>
+                <Link href='/tourist-activity'>Tours</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/activities'>Adventures</Link>
+                <Link href='/tourist-activity'>Adventures</Link>
               </DropdownMenuItem>
             </NavDropdown>
 
@@ -203,10 +203,10 @@ const Navbar = () => {
             </MobileNavItem>
 
             <MobileNavItem title='Tourist activity'>
-              <Link href='/activities' className='block py-2 px-4'>
+              <Link href='/tourist-activity' className='block py-2 px-4'>
                 Tours
               </Link>
-              <Link href='/activities' className='block py-2 px-4'>
+              <Link href='/tourist-activity' className='block py-2 px-4'>
                 Adventures
               </Link>
             </MobileNavItem>

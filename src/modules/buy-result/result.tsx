@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 'use client';
 
-import { ChevronDown, Share, SlidersHorizontal, X } from 'lucide-react';
+import { ChevronDown, Share, X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { FaHome, FaSearchDollar } from 'react-icons/fa';
 import { GiIsland, GiPalmTree } from 'react-icons/gi';
@@ -272,23 +272,23 @@ const BuyResultDisplay = () => {
             </span>
             <div className='flex gap-3 md:gap-6 items-center order-1 sm:order-2'>
               {/* Mobile filter button */}
-              <Button
+              {/* <Button
                 variant='outline'
                 className='flex gap-2 items-center md:hidden'
               >
                 <SlidersHorizontal size={18} className='text-primary' />
                 <span className='text-primary'>Filters</span>
-              </Button>
+              </Button> */}
 
               {/* Desktop filter button */}
-              <Button
+              {/* <Button
                 variant='outline'
                 className='hidden md:flex gap-2 items-center'
                 onClick={() => console.log('Desktop filters clicked')}
               >
                 <SlidersHorizontal size={18} className='text-primary' />
                 <span className='text-primary'>Filters</span>
-              </Button>
+              </Button> */}
 
               {/* Map toggle button */}
               <Button
