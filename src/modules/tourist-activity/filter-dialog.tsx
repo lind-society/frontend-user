@@ -1,13 +1,15 @@
-import { ChevronRight, SlidersHorizontal } from 'lucide-react';
+import { ChevronRight, SlidersHorizontal, X } from 'lucide-react';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
+  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 // Define expected filter data interface
 interface FilterData {
@@ -22,6 +24,9 @@ interface FilterDialogTouristProps {
 const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
   // Dialog state
   const [open, setOpen] = useState(false);
+
+  // Mobile navigation state
+  const [showCities, setShowCities] = useState(false);
 
   // Filter states
   const [activeCountry, setActiveCountry] = useState<string>('Indonesia');
@@ -41,6 +46,15 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
   // Handle country selection
   const handleCountryClick = (country: string) => {
     setActiveCountry(country);
+    // On mobile, navigate to cities view when a country is selected
+    if (window.innerWidth < 768) {
+      setShowCities(true);
+    }
+  };
+
+  // Navigate back to countries on mobile
+  const handleBackToCountries = () => {
+    setShowCities(false);
   };
 
   // Toggle city selection
@@ -77,10 +91,20 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
     }
 
     setOpen(false);
+    // Reset mobile navigation state
+    setShowCities(false);
+  };
+
+  // Reset mobile view when dialog closes
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen);
+    if (!newOpen) {
+      setShowCities(false);
+    }
   };
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         <Button variant='outline' className='flex gap-2 items-center'>
           <SlidersHorizontal size={20} className='text-primary' />
@@ -92,83 +116,133 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
           )}
         </Button>
       </DialogTrigger>
-      <DialogContent className='p-0 xl:max-w-[60vw] overflow-hidden'>
-        <DialogTitle className='hidden'>
-          <p>Filters</p>
-        </DialogTitle>
 
-        <div className='flex'>
-          {/* Country selection sidebar */}
-          <div className='flex flex-col'>
-            {countries.map((country) => (
-              <div
-                key={country}
-                className={`px-5 py-3 flex justify-between w-[240px] cursor-pointer ${
-                  activeCountry === country
-                    ? 'bg-primary text-white'
-                    : 'text-primary'
-                }`}
-                onClick={() => handleCountryClick(country)}
-              >
-                <div className='flex flex-col gap-1'>
-                  <span className='font-semibold'>{country}</span>
-                  <span className='text-xs'>
-                    Explore activity based on city
-                  </span>
+      <DialogContent className='p-0 md:max-w-[90vw] lg:max-w-[80vw] xl:max-w-[60vw] h-[90vh] md:h-auto max-h-[90vh] overflow-hidden'>
+        {/* Mobile header */}
+        <DialogHeader className='md:hidden px-4 py-3 border-b'>
+          <div className='flex items-center justify-start'>
+            <Button
+              variant='ghost'
+              size='icon'
+              className={showCities ? 'visible' : 'hidden'}
+              onClick={handleBackToCountries}
+            >
+              <ChevronRight className='rotate-180 text-primary' />
+            </Button>
+            <DialogTitle className='text-center text-primary font-semibold'>
+              {showCities ? activeCountry : 'Select Country'}
+            </DialogTitle>
+          </div>
+        </DialogHeader>
+
+        {/* Desktop header - hidden on mobile */}
+        <DialogHeader className='hidden md:flex px-6 py-4 border-b'>
+          <div className='flex items-center justify-between w-full'>
+            <DialogTitle className='text-xl font-semibold text-primary'>
+              Filter Tourist Activities
+            </DialogTitle>
+            <Button variant='ghost' size='icon' onClick={() => setOpen(false)}>
+              <X className='text-gray-500' />
+            </Button>
+          </div>
+        </DialogHeader>
+
+        <div className='flex flex-col md:flex-row h-full overflow-hidden'>
+          {/* Country selection - Only shown on desktop or on mobile when not showing cities */}
+          <div
+            className={`md:w-[240px] md:border-r md:flex-shrink-0 md:block ${
+              showCities ? 'hidden' : 'block'
+            }`}
+          >
+            <ScrollArea className='h-full max-h-[calc(90vh-120px)] md:max-h-[60vh]'>
+              {countries.map((country) => (
+                <div
+                  key={country}
+                  className={`px-5 py-3 flex justify-between cursor-pointer ${
+                    activeCountry === country
+                      ? 'bg-primary text-white'
+                      : 'text-primary hover:bg-gray-50'
+                  }`}
+                  onClick={() => handleCountryClick(country)}
+                >
+                  <div className='flex flex-col gap-1'>
+                    <span className='font-semibold'>{country}</span>
+                    <span className='text-xs'>
+                      Explore activity based on city
+                    </span>
+                  </div>
+                  <ChevronRight
+                    className={
+                      activeCountry === country ? 'text-white' : 'text-primary'
+                    }
+                  />
                 </div>
-                <ChevronRight
-                  className={
-                    activeCountry === country ? 'text-white' : 'text-primary'
-                  }
-                />
-              </div>
-            ))}
+              ))}
+            </ScrollArea>
           </div>
 
-          {/* City selection area */}
-          <div className='flex flex-col flex-1'>
-            <div className='p-5 border-b flex flex-col gap-2'>
-              <span className='font-semibold text-primary'>
-                {activeCountry}
-              </span>
-              <div className='flex flex-wrap gap-3'>
-                {citiesByCountry[activeCountry]?.map((city) => (
-                  <Button
-                    key={city}
-                    variant={selectedCities[city] ? 'primary' : 'outline'}
-                    className={
-                      selectedCities[city] ? 'text-white' : 'text-primary'
-                    }
-                    onClick={() => toggleCity(city)}
-                  >
-                    {city}
-                  </Button>
-                ))}
-              </div>
-            </div>
-            <div className='p-5 flex justify-between'>
-              <div className='flex flex-col gap-1'>
-                <span className='text-primary font-semibold text-sm'>
-                  Filter activities by city destination
+          {/* City selection area - Only shown on desktop or on mobile when showing cities */}
+          <div
+            className={`flex-1 flex flex-col md:block ${
+              showCities ? 'block' : 'hidden md:block'
+            }`}
+          >
+            <ScrollArea className='flex-grow max-h-[calc(90vh-180px)] md:max-h-[calc(60vh-60px)]'>
+              <div className='p-5 border-b flex flex-col gap-2'>
+                <span className='font-semibold text-primary hidden md:block'>
+                  {activeCountry}
                 </span>
-                <span className='text-xs text-gray-500'>
-                  {getSelectedCitiesCount()}{' '}
-                  {getSelectedCitiesCount() === 1 ? 'city' : 'cities'} selected
-                </span>
+                <div className='flex flex-wrap gap-3'>
+                  {citiesByCountry[activeCountry]?.map((city) => (
+                    <Button
+                      key={city}
+                      variant={selectedCities[city] ? 'primary' : 'outline'}
+                      className={`
+                        ${selectedCities[city] ? 'text-white' : 'text-primary'}
+                        md:text-sm text-xs px-3 py-1 h-auto
+                      `}
+                      onClick={() => toggleCity(city)}
+                    >
+                      {city}
+                    </Button>
+                  ))}
+                </div>
               </div>
+              <div className='p-5 flex justify-between'>
+                <div className='flex flex-col gap-1'>
+                  <span className='text-primary font-semibold text-sm'>
+                    Filter activities by city destination
+                  </span>
+                  <span className='text-xs text-gray-500'>
+                    {getSelectedCitiesCount()}{' '}
+                    {getSelectedCitiesCount() === 1 ? 'city' : 'cities'}{' '}
+                    selected
+                  </span>
+                </div>
+                <Button
+                  variant='ghost'
+                  className='text-text text-sm'
+                  onClick={clearCities}
+                >
+                  Clear
+                </Button>
+              </div>
+            </ScrollArea>
+
+            {/* Action buttons - Fixed to bottom */}
+            <div className='border-t p-4 md:p-5 flex justify-between mt-auto sticky bottom-0 bg-white'>
               <Button
                 variant='ghost'
-                className='text-text text-sm'
-                onClick={clearCities}
+                onClick={() => {
+                  // On mobile, go back to countries view instead of closing on Cancel
+                  if (showCities && window.innerWidth < 768) {
+                    setShowCities(false);
+                  } else {
+                    setOpen(false);
+                  }
+                }}
               >
-                Clear
-              </Button>
-            </div>
-
-            {/* Action buttons */}
-            <div className='mt-auto border-t p-5 flex justify-between'>
-              <Button variant='ghost' onClick={() => setOpen(false)}>
-                Cancel
+                {showCities && window.innerWidth < 768 ? 'Back' : 'Cancel'}
               </Button>
               <Button variant='primary' onClick={applyFilters}>
                 Apply Filters
