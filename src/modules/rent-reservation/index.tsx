@@ -2,6 +2,7 @@ import React from 'react';
 
 import AdditionalService from '@/modules/rent-reservation/additional-service';
 import ContentRentReservation1 from '@/modules/rent-reservation/content-1';
+import PaymentDetails from '@/modules/rent-reservation/payment-details';
 import PaymentMethods from '@/modules/rent-reservation/payment-method';
 
 const RentReservation = () => {
@@ -10,6 +11,7 @@ const RentReservation = () => {
       <ContentRentReservation1 />
       <AdditionalService />
       <PaymentMethods />
+      <PaymentDetails />
     </div>
   );
 };
