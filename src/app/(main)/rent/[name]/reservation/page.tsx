@@ -44,10 +44,9 @@ export default async function RentReservationPage({
   params: Promise<{ name: string }>;
 }) {
   const name = (await params).name;
-  // eslint-disable-next-line no-console
-  console.log('name', name);
+
   try {
-    return <RentReservation />;
+    return <RentReservation name={name} />;
   } catch (error) {
     notFound();
   }

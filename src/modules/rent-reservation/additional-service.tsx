@@ -1,5 +1,5 @@
 import { ChefHat } from 'lucide-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
 import {
   MdAirportShuttle,
@@ -13,7 +13,21 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
-const AdditionalService = () => {
+interface AdditionalServiceProps {
+  onContinue: () => void;
+}
+
+const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  const toggleService = (service: string) => {
+    if (selectedServices.includes(service)) {
+      setSelectedServices((prev) => prev.filter((s) => s !== service));
+    } else {
+      setSelectedServices((prev) => [...prev, service]);
+    }
+  };
+
   return (
     <BaseContainer>
       <div className='flex flex-col lg:flex-row justify-between bg-white py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded-lg shadow-md gap-6'>
@@ -25,38 +39,80 @@ const AdditionalService = () => {
 
           <div className='flex gap-4 flex-wrap'>
             <Button
-              variant='outline'
-              className='w-full sm:w-auto flex gap-2 items-center'
+              variant={
+                selectedServices.includes('private-chef')
+                  ? 'primary'
+                  : 'outline'
+              }
+              className={`w-full sm:w-auto flex gap-2 items-center ${
+                selectedServices.includes('private-chef')
+                  ? 'text-white'
+                  : 'text-primary'
+              }`}
               size='sm'
+              onClick={() => toggleService('private-chef')}
             >
-              <ChefHat className='text-primary' size={18} />
-              <span className='text-primary font-semibold'>Private Chef</span>
+              <ChefHat
+                className={
+                  selectedServices.includes('private-chef')
+                    ? 'text-white'
+                    : 'text-primary'
+                }
+                size={18}
+              />
+              <span className='font-semibold'>Private Chef</span>
             </Button>
 
             <Button
-              variant='outline'
-              className='w-full sm:w-auto flex gap-2 items-center'
+              variant={
+                selectedServices.includes('airport-transfer')
+                  ? 'primary'
+                  : 'outline'
+              }
+              className={`w-full sm:w-auto flex gap-2 items-center ${
+                selectedServices.includes('airport-transfer')
+                  ? 'text-white'
+                  : 'text-primary'
+              }`}
               size='sm'
+              onClick={() => toggleService('airport-transfer')}
             >
-              <MdAirportShuttle className='text-primary' size={18} />
-              <span className='text-primary font-semibold'>
-                Airport Transfer
-              </span>
+              <MdAirportShuttle
+                className={
+                  selectedServices.includes('airport-transfer')
+                    ? 'text-white'
+                    : 'text-primary'
+                }
+                size={18}
+              />
+              <span className='font-semibold'>Airport Transfer</span>
             </Button>
 
             <Button
-              variant='outline'
-              className='w-full sm:w-auto flex gap-2 items-center'
+              variant={
+                selectedServices.includes('car-rental') ? 'primary' : 'outline'
+              }
+              className={`w-full sm:w-auto flex gap-2 items-center ${
+                selectedServices.includes('car-rental')
+                  ? 'text-white'
+                  : 'text-primary'
+              }`}
               size='sm'
+              onClick={() => toggleService('car-rental')}
             >
-              <MdDirectionsCar className='text-primary' size={18} />
-              <span className='text-primary font-semibold'>
-                Luxury Car Rental
-              </span>
+              <MdDirectionsCar
+                className={
+                  selectedServices.includes('car-rental')
+                    ? 'text-white'
+                    : 'text-primary'
+                }
+                size={18}
+              />
+              <span className='font-semibold'>Luxury Car Rental</span>
             </Button>
           </div>
 
-          {/* Mobile separator - only visible on mobile */}
+          {/* Mobile separator */}
           <Separator className='lg:hidden my-2' />
 
           <h3 className='text-xl md:text-2xl font-bold text-text'>
@@ -64,12 +120,22 @@ const AdditionalService = () => {
           </h3>
 
           <p className='text-text text-base md:text-lg'>
-            Our concierge will be in touch shortly to finalize your booking. For
-            urgent assistance, contact us directly.
+            Our concierge will be in touch shortly to finalize your booking. You
+            can proceed to payment to secure your reservation now.
           </p>
 
-          {/* Additional information section - visible only on mobile */}
-          {/* <div className='lg:hidden flex flex-col gap-4 mt-2 bg-gray-50 p-4 rounded-lg'>
+          {/* Continue button */}
+          <Button
+            variant='primary'
+            size='lg'
+            className='w-full sm:w-auto mt-4'
+            onClick={onContinue}
+          >
+            Continue to Payment
+          </Button>
+
+          {/* Additional information section */}
+          <div className='lg:hidden flex flex-col gap-4 mt-2 bg-gray-50 p-4 rounded-lg'>
             <h4 className='text-lg font-semibold text-primary'>
               Important Information
             </h4>
@@ -91,7 +157,7 @@ const AdditionalService = () => {
                 <span>Free cancellation up to 7 days before arrival.</span>
               </li>
             </ul>
-          </div> */}
+          </div>
         </div>
 
         {/* Right Column - Contact Box */}
@@ -105,12 +171,9 @@ const AdditionalService = () => {
 
           <div className='p-4 md:p-6 flex flex-col gap-4'>
             <div className='flex gap-3 items-center'>
-              <div className='relative w-12 h-12 flex-shrink-0'>
+              <div className='relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full'>
                 <Avatar>
-                  <AvatarImage
-                    src='https://github.com/shadcn.png'
-                    alt='@shadcn'
-                  />
+                  <AvatarImage src='https://github.com/shadcn.png' />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
               </div>
