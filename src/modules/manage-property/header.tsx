@@ -11,7 +11,7 @@ const HeaderManageProperty = () => {
         width={0}
         height={0}
         sizes='100vw'
-        className='w-full h-full object-cover absolute top-0 left-0 -z-10'
+        className='w-full h-full object-cover absolute top-0 left-0 '
         alt='header landing page'
       />
       <div className='bg-black/30 absolute top-0 left-0 w-full h-full'></div>
