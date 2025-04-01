@@ -103,7 +103,7 @@ const ContentRentReservation1 = ({
         <div className='hidden md:flex items-center justify-between w-full max-w-5xl'>
           {/* Step 1 */}
           <div
-            className={`max-w-[280px] lg:max-w-[320px] h-full px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
               1
             )}`}
           >
@@ -135,7 +135,7 @@ const ContentRentReservation1 = ({
 
           {/* Step 2 */}
           <div
-            className={`max-w-[280px] lg:max-w-[320px] h-full px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
               2
             )}`}
           >
@@ -169,7 +169,7 @@ const ContentRentReservation1 = ({
 
           {/* Step 3 */}
           <div
-            className={`max-w-[280px] lg:max-w-[320px] h-full px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
               3
             )}`}
           >
