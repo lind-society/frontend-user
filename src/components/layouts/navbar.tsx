@@ -152,10 +152,10 @@ const Navbar = () => {
             {/* About Us Dropdown */}
             <NavDropdown title='About us'>
               <DropdownMenuItem asChild>
-                <Link href='/about/team'>Our Team</Link>
+                <Link href='/about-us'>Our Team</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/about/mission'>Our Mission</Link>
+                <Link href='/about-us'>Our Mission</Link>
               </DropdownMenuItem>
             </NavDropdown>
           </div>
@@ -221,10 +221,10 @@ const Navbar = () => {
             </MobileNavItem>
 
             <MobileNavItem title='About us'>
-              <Link href='/about/team' className='block py-2 px-4'>
+              <Link href='/about-us' className='block py-2 px-4'>
                 Our Team
               </Link>
-              <Link href='/about/mission' className='block py-2 px-4'>
+              <Link href='/about-us' className='block py-2 px-4'>
                 Our Mission
               </Link>
             </MobileNavItem>
