@@ -161,12 +161,15 @@ const Navbar = () => {
           </div>
 
           <div className='flex gap-2 lg:gap-8 items-center whitespace-nowrap'>
-            <div className='flex gap-1 lg:gap-2 items-center'>
+            <Link
+              href='/contact-us'
+              className='flex gap-1 lg:gap-2 items-center'
+            >
               <Phone className='text-gray-600' size={22} />
               <span className='font-semibold text-base lg:text-lg'>
                 Contact us
               </span>
-            </div>
+            </Link>
             <div className='flex gap-1 lg:gap-2 items-center'>
               <FaHeart className='text-red-600' size={22} />
               <span className='font-semibold text-base lg:text-lg'>
@@ -234,7 +237,7 @@ const Navbar = () => {
             </div>
 
             {/* Contact and Wishlist */}
-            <Link href='/contact' className=' flex items-center py-3 gap-3'>
+            <Link href='/contact-us' className=' flex items-center py-3 gap-3'>
               <Phone className='text-gray-600' size={20} />
               <span className='font-medium'>Contact us</span>
             </Link>
