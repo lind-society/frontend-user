@@ -142,10 +142,10 @@ const Navbar = () => {
             {/* Property Management Dropdown */}
             <NavDropdown title='Property management'>
               <DropdownMenuItem asChild>
-                <Link href='/management/services'>Services</Link>
+                <Link href='/manage-property'>Services</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href='/management/pricing'>Pricing</Link>
+                <Link href='/manage-property'>Pricing</Link>
               </DropdownMenuItem>
             </NavDropdown>
 
@@ -212,10 +212,10 @@ const Navbar = () => {
             </MobileNavItem>
 
             <MobileNavItem title='Property management'>
-              <Link href='/management/services' className='block py-2 px-4'>
+              <Link href='/manage-property' className='block py-2 px-4'>
                 Services
               </Link>
-              <Link href='/management/pricing' className='block py-2 px-4'>
+              <Link href='/manage-property' className='block py-2 px-4'>
                 Pricing
               </Link>
             </MobileNavItem>
