@@ -89,7 +89,7 @@ const ContentRentReservation1 = () => {
               </span>
             </div>
             {/* Vertical connecting line */}
-            <div className='absolute left-1/2 -bottom-12 w-0.5 h-10 bg-primary -translate-x-1/2'></div>
+            <div className='absolute left-1/2 -bottom-12 w-0.5 h-12 bg-primary -translate-x-1/2'></div>
           </div>
 
           {/* Step 2 */}
@@ -107,7 +107,7 @@ const ContentRentReservation1 = () => {
               </span>
             </div>
             {/* Vertical connecting line */}
-            <div className='absolute left-1/2 -bottom-12 w-0.5 h-10 bg-primary -translate-x-1/2'></div>
+            <div className='absolute left-1/2 -bottom-12 w-0.5 h-12 bg-primary -translate-x-1/2'></div>
           </div>
 
           {/* Step 3 */}
