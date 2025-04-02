@@ -142,3 +142,87 @@ export const blogPosts: BlogPost[] = [
     slug: 'perfect-vacation-rental',
   },
 ];
+
+export const blogPosts2: BlogPost[] = [
+  {
+    id: 1,
+    title: '5 Tips for a Successful Property Investment',
+    date: 'January 20, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-1.png',
+    slug: 'successful-property-investment',
+  },
+  {
+    id: 2,
+    title: 'The Ultimate Guide to Bali Villas',
+    date: 'January 15, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-2.jpeg',
+    slug: 'bali-villas-guide',
+  },
+  {
+    id: 3,
+    title: 'How to Choose the Perfect Vacation Rental',
+    date: 'January 10, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-3.jpeg',
+    slug: 'perfect-vacation-rental',
+  },
+  {
+    id: 4,
+    title: 'The Ultimate Guide to Bali Villas',
+    date: 'January 15, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-2.jpeg',
+    slug: 'bali-villas-guide',
+  },
+  {
+    id: 5,
+    title: 'How to Choose the Perfect Vacation Rental',
+    date: 'January 10, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-3.jpeg',
+    slug: 'perfect-vacation-rental',
+  },
+  {
+    id: 6,
+    title: '5 Tips for a Successful Property Investment',
+    date: 'January 20, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-1.png',
+    slug: 'successful-property-investment',
+  },
+  {
+    id: 7,
+    title: 'How to Choose the Perfect Vacation Rental',
+    date: 'January 10, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-3.jpeg',
+    slug: 'perfect-vacation-rental',
+  },
+  {
+    id: 8,
+    title: '5 Tips for a Successful Property Investment',
+    date: 'January 20, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-1.png',
+    slug: 'successful-property-investment',
+  },
+  {
+    id: 9,
+    title: 'The Ultimate Guide to Bali Villas',
+    date: 'January 15, 2025',
+    excerpt:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+    image: '/images/blog-2.jpeg',
+    slug: 'bali-villas-guide',
+  },
+];
