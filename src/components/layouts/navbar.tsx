@@ -28,7 +28,7 @@ const Navbar = () => {
       <BaseContainer>
         <nav className='flex justify-between items-center text-gray-600 py-3'>
           {/* Logo - make it responsive on tablet */}
-          <div className='flex-shrink-0'>
+          <Link href='/' className='flex-shrink-0'>
             <Image
               src='/images/logo.png'
               alt='logo'
@@ -37,7 +37,7 @@ const Navbar = () => {
               priority
               className='w-auto h-[40px] md:h-[45px] lg:h-[58px]'
             />
-          </div>
+          </Link>
 
           {/* Search - improve tablet layout */}
           <div className='hidden md:flex h-[52px] flex-1 max-w-md mx-2 lg:mx-4'>
