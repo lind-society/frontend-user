@@ -9,8 +9,6 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from '@/components/ui/carousel';
 
 const HeaderContactUs = () => {
@@ -19,7 +17,7 @@ const HeaderContactUs = () => {
 
   // Background images for carousel
   const carouselImages = [
-    '/images/header-about-us.jpeg',
+    '/images/header-contact-us.jpeg',
     '/images/explore-1.png',
     '/images/explore-2.png',
   ];
@@ -67,9 +65,6 @@ const HeaderContactUs = () => {
             </CarouselItem>
           ))}
         </CarouselContent>
-
-        <CarouselPrevious className='z-20 bg-white/80 hover:bg-white border-none text-primary' />
-        <CarouselNext className='z-20 bg-white/80 hover:bg-white border-none text-primary' />
       </Carousel>
 
       {/* Overlay for better text readability */}
