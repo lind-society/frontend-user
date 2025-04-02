@@ -109,12 +109,13 @@ const Footer = () => {
                 About LIND Society
               </p>
               <p className='text-text font-normal text-sm md:text-base'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.
+                LIND Society specializes in offering premium villa bookings,
+                property management, and unique tourist activities. Whether
+                you're looking to book a luxury villa, purchase your dream
+                property, or explore the best activities in the area, we provide
+                exceptional service and attention to detail. Our experienced
+                team ensures every client receives personalized care and
+                memorable experiences.
               </p>
             </div>
 
@@ -123,9 +124,12 @@ const Footer = () => {
               <span className='font-semibold text-base md:text-lg text-text'>
                 Services
               </span>
-              <FooterLink href='/services/villas'>Home & Villas</FooterLink>
-              <FooterLink href='/services/tourism'>Tourist Activity</FooterLink>
-              <FooterLink href='/services/management'>
+              <FooterLink href='/rent'>Rent Home & Villas</FooterLink>
+              <FooterLink href='/buy'>Buy Properties</FooterLink>
+              <FooterLink href='/tourist-activity'>
+                Tourist Activities
+              </FooterLink>
+              <FooterLink href='/manage-property'>
                 Property Management
               </FooterLink>
             </div>
@@ -135,9 +139,9 @@ const Footer = () => {
               <span className='font-semibold text-base md:text-lg text-text'>
                 About
               </span>
-              <FooterLink href='/about'>Our Story</FooterLink>
-              <FooterLink href='/benefits'>Benefits</FooterLink>
-              <FooterLink href='/team'>Teams</FooterLink>
+              <FooterLink href='/about-us'>About Us</FooterLink>
+              <FooterLink href='/media'>Media Gallery</FooterLink>
+              <FooterLink href='/blog'>Blog</FooterLink>
             </div>
 
             {/* Help Links */}
@@ -145,17 +149,19 @@ const Footer = () => {
               <span className='font-semibold text-base md:text-lg text-text'>
                 Help
               </span>
-              <FooterLink href='/faqs'>FAQs</FooterLink>
-              <FooterLink href='/contact'>Contact Us</FooterLink>
+              <FooterLink href='/contact-us'>Contact Us</FooterLink>
+              <FooterLink href='/faq'>FAQs</FooterLink>
+              <FooterLink href='/support'>Support</FooterLink>
             </div>
 
             {/* More Info Links */}
             <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
               <span className='font-semibold text-base md:text-lg text-text'>
-                More information
+                Legal
               </span>
               <FooterLink href='/terms'>Terms & Conditions</FooterLink>
               <FooterLink href='/privacy'>Privacy Policy</FooterLink>
+              <FooterLink href='/cancellation'>Cancellation Policy</FooterLink>
             </div>
           </div>
 
@@ -184,13 +190,16 @@ const Footer = () => {
                 Subscribe to our newsletter for villa perks and insider tips,
                 plus discount up to 30%
               </p>
-              <div className='flex w-fit border border-primary rounded-md overflow-hidden'>
+              <div className='flex w-full   rounded-md overflow-hidden'>
                 <Input
                   type='email'
                   placeholder='Enter your email address'
-                  className='border-0 focus-visible:ring-0 focus-visible:ring-offset-0'
+                  className='border border-primary rounded-r-none border-r-0 focus-visible:ring-0 focus-visible:ring-offset-0 w-full'
                 />
-                <Button variant='primary' className='rounded-l-none'>
+                <Button
+                  variant='primary'
+                  className='rounded-l-none border border-primary'
+                >
                   <ChevronRight size={20} />
                 </Button>
               </div>
