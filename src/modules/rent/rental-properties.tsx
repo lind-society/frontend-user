@@ -46,6 +46,7 @@ const RentalPropertiesRentPage = () => {
               key={villa.id}
               villa={villa}
               onFavoriteToggle={toggleFavorite}
+              rentType='rent'
             />
           ))}
         </div>

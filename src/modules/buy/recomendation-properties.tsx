@@ -65,6 +65,7 @@ const RecomendationPropertiesBuyPage = () => {
               key={villa.id}
               villa={villa}
               onFavoriteToggle={toggleFavorite}
+              rentType='sale'
             />
           ))}
         </div>
