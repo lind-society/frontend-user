@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import React from 'react';
 import { FaHome, FaSearchDollar } from 'react-icons/fa';
 import { GiIsland, GiPalmTree } from 'react-icons/gi';

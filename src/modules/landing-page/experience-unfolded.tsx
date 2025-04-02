@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -32,12 +33,14 @@ const ExperienceUnfolded = () => {
                 Explore Trends, Tips, and Exclusive Property Insights
               </p>
             </div>
-            <Button
-              variant='primary-outline'
-              className='flex gap-2 items-center self-start sm:self-center whitespace-nowrap'
-            >
-              <span>View All Blogs</span>
-              <RiArrowRightUpLine size={20} />
+            <Button variant='primary-outline' asChild>
+              <Link
+                href='/blog'
+                className='flex gap-2 items-center self-start sm:self-center whitespace-nowrap'
+              >
+                <span>View All Blogs</span>
+                <RiArrowRightUpLine size={20} />
+              </Link>
             </Button>
           </div>
 

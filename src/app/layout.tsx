@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
+import NextTopLoader from 'nextjs-toploader';
 import * as React from 'react';
 import { Toaster } from 'sonner';
 
@@ -66,6 +67,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <Provider>
+            <NextTopLoader color='#2E5153' showSpinner={false} />
             {children}
             <Toaster position='top-right' richColors closeButton />
           </Provider>

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -96,12 +97,14 @@ const FaQRentPage = () => {
               <p className='text-base md:text-lg text-primary'>
                 Our team is always ready to help!
               </p>
-              <Button
-                variant='primary'
-                className='flex items-center gap-2 w-fit'
-              >
-                <span>Contact Us</span>
-                <RiArrowRightUpLine size={20} className='text-white' />
+              <Button variant='primary' asChild>
+                <Link
+                  href='/contact-us'
+                  className='flex items-center gap-2 w-fit'
+                >
+                  <span>Contact Us</span>
+                  <RiArrowRightUpLine size={20} className='text-white' />
+                </Link>
               </Button>
             </div>
           </div>

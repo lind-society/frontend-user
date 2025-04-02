@@ -4,7 +4,7 @@
 import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaCalendar, FaLocationDot, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -22,9 +23,12 @@ const ContactUsManageProperty = () => {
           <Button
             variant='outline'
             className='bg-white flex items-center gap-2 w-fit'
+            asChild
           >
-            <span>Contact Us</span>
-            <RiArrowRightUpLine size={20} />
+            <Link href='/contact-us' className='flex gap-2 items-center'>
+              <span>Contact Us</span>
+              <RiArrowRightUpLine size={20} />
+            </Link>
           </Button>
         </div>
       </BaseContainer>

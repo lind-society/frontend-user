@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useRouter } from 'next/navigation'; // Import router
+import { useRouter } from 'nextjs-toploader/app'; // Import router
 import React from 'react';
 import { BiSwim } from 'react-icons/bi';
 import { FaParking, FaUmbrellaBeach } from 'react-icons/fa';

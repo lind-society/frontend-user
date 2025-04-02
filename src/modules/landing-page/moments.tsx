@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -89,12 +90,14 @@ const MomentsLandingPage = () => {
                 Guest Experiences Through the Lens.
               </p>
             </div>
-            <Button
-              variant='primary-outline'
-              className='flex gap-2 items-center self-start sm:self-center whitespace-nowrap'
-            >
-              <span>View All Media</span>
-              <RiArrowRightUpLine size={20} />
+            <Button variant='primary-outline' asChild>
+              <Link
+                href='/media'
+                className='flex gap-2 items-center self-start sm:self-center whitespace-nowrap'
+              >
+                <span>View All Media</span>
+                <RiArrowRightUpLine size={20} />
+              </Link>
             </Button>
           </div>
 

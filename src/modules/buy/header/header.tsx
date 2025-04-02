@@ -3,7 +3,7 @@
 
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
