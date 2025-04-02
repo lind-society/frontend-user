@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -30,6 +31,9 @@ const ExploreBestListLandingPage = () => {
     console.log(`Toggled favorite for villa ${id}`);
   };
 
+  // Determine the view more link based on the active rent type
+  const viewMoreLink = activeRentType === 'rent' ? '/rent' : '/buy';
+
   return (
     <div className='py-10 md:py-16'>
       <BaseContainer>
@@ -57,29 +61,36 @@ const ExploreBestListLandingPage = () => {
               </Button>
             </div>
 
-            <div className='flex gap-2 md:gap-3 overflow-x-auto hideScrollbar'>
-              <Button
-                variant={activeSchedule === 'daily' ? 'primary' : 'secondary'}
-                onClick={() => handleScheduleChange('daily')}
-                className='whitespace-nowrap'
-              >
-                Daily
-              </Button>
-              <Button
-                variant={activeSchedule === 'monthly' ? 'primary' : 'secondary'}
-                onClick={() => handleScheduleChange('monthly')}
-                className='whitespace-nowrap'
-              >
-                Monthly
-              </Button>
-              <Button
-                variant={activeSchedule === 'yearly' ? 'primary' : 'secondary'}
-                onClick={() => handleScheduleChange('yearly')}
-                className='whitespace-nowrap'
-              >
-                Yearly
-              </Button>
-            </div>
+            {/* Only show schedule filter for rent */}
+            {activeRentType === 'rent' && (
+              <div className='flex gap-2 md:gap-3 overflow-x-auto hideScrollbar'>
+                <Button
+                  variant={activeSchedule === 'daily' ? 'primary' : 'secondary'}
+                  onClick={() => handleScheduleChange('daily')}
+                  className='whitespace-nowrap'
+                >
+                  Daily
+                </Button>
+                <Button
+                  variant={
+                    activeSchedule === 'monthly' ? 'primary' : 'secondary'
+                  }
+                  onClick={() => handleScheduleChange('monthly')}
+                  className='whitespace-nowrap'
+                >
+                  Monthly
+                </Button>
+                <Button
+                  variant={
+                    activeSchedule === 'yearly' ? 'primary' : 'secondary'
+                  }
+                  onClick={() => handleScheduleChange('yearly')}
+                  className='whitespace-nowrap'
+                >
+                  Yearly
+                </Button>
+              </div>
+            )}
           </div>
 
           <Separator />
@@ -91,17 +102,19 @@ const ExploreBestListLandingPage = () => {
                 key={villa.id}
                 villa={villa}
                 onFavoriteToggle={toggleFavorite}
+                rentType={activeRentType}
               />
             ))}
           </div>
 
-          {/* View more button */}
+          {/* View more button with dynamic link */}
           <div className='flex justify-center mt-6'>
             <Button
               variant='outline'
               className='border-primary text-primary hover:bg-primary/10'
+              asChild
             >
-              View More
+              <Link href={viewMoreLink}>View More</Link>
             </Button>
           </div>
         </div>

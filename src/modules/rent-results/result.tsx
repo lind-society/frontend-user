@@ -274,6 +274,7 @@ const ResultRentContent = () => {
                           ...villa,
                           isFavorite: !!isFavorite[villa.id],
                         }}
+                        rentType='rent'
                         onFavoriteToggle={toggleFavorite}
                       />
                     ))}
@@ -304,6 +305,7 @@ const ResultRentContent = () => {
                 {villas.slice(0, visibleVillas).map((villa) => (
                   <VillaCard
                     key={villa.id}
+                    rentType='rent'
                     villa={{
                       ...villa,
                       isFavorite: !!isFavorite[villa.id],

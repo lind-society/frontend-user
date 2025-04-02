@@ -158,6 +158,7 @@ const ContentImage = () => {
                   key={villa.id}
                   villa={villa}
                   onFavoriteToggle={handleFavoriteToggle}
+                  rentType='rent'
                 />
               ))}
             </div>
