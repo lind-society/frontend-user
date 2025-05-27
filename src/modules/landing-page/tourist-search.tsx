@@ -155,7 +155,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
       </div>
 
       {/* Promotions */}
-      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base'>
+      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
         <p className='font-semibold text-primary'>
           *Special Group Discounts - Book Activities for 4+ People and Save
           15%!🌴

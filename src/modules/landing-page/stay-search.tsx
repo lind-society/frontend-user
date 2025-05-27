@@ -1,14 +1,13 @@
 'use client';
 
-import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { FaCalendar, FaLocationDot, FaUser } from 'react-icons/fa6';
+import { FaLocationDot, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';
 
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { EnhancedDateRangePicker } from '@/components/ui/enhanced-date-range';
 import {
   Popover,
   PopoverContent,
@@ -19,12 +18,26 @@ interface StaySearchProps {
   onSearch: (searchParams: Record<string, string>) => void;
 }
 
+// Add these type definitions at the top of your file
+type DateRange = {
+  from: Date | undefined;
+  to?: Date | undefined; // Note the optional to property
+};
+
+type DurationType = 'daily' | 'monthly' | 'yearly';
+
 const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
   const [location, setLocation] = useState('Bali');
-  const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
-  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
-    new Date(new Date().setDate(new Date().getDate() + 4))
-  );
+  const [dateRange, setDateRange] = useState<{
+    from: Date | undefined;
+    to: Date | undefined;
+  }>({
+    from: new Date(),
+    to: new Date(new Date().setDate(new Date().getDate() + 4)),
+  });
+  const [durationType, setDurationType] = useState<
+    'daily' | 'monthly' | 'yearly'
+  >('daily');
   const [bedrooms, setBedrooms] = useState(1);
   const [guests, setGuests] = useState(1);
 
@@ -33,11 +46,24 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
   const handleSearch = () => {
     onSearch({
       location,
-      checkIn: checkInDate ? format(checkInDate, 'yyyy-MM-dd') : '',
-      checkOut: checkOutDate ? format(checkOutDate, 'yyyy-MM-dd') : '',
+      checkIn: dateRange.from ? dateRange.from.toISOString() : '',
+      checkOut: dateRange.to ? dateRange.to.toISOString() : '',
+      durationType,
       bedrooms: bedrooms.toString(),
       guests: guests.toString(),
     });
+  };
+
+  const handleDateRangeChange = (
+    range: DateRange, // External DateRange with optional 'to'
+    type: DurationType
+  ) => {
+    // Create a properly typed object for state
+    setDateRange({
+      from: range.from,
+      to: range.to || undefined,
+    });
+    setDurationType(type);
   };
 
   return (
@@ -77,62 +103,12 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
           </PopoverContent>
         </Popover>
 
-        {/* Check in */}
-        <Popover>
-          <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <FaCalendar size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Check in</span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {checkInDate
-                      ? format(checkInDate, 'dd MMM yyyy')
-                      : 'Select date'}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className='w-auto p-0'>
-            <Calendar
-              mode='single'
-              selected={checkInDate}
-              onSelect={setCheckInDate}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover>
-
-        {/* Check out */}
-        <Popover>
-          <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <FaCalendar size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Check out</span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {checkOutDate
-                      ? format(checkOutDate, 'dd MMM yyyy')
-                      : 'Select date'}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className='w-auto p-0'>
-            <Calendar
-              mode='single'
-              selected={checkOutDate}
-              onSelect={setCheckOutDate}
-              initialFocus
-              disabled={(date) => (checkInDate ? date < checkInDate : false)}
-            />
-          </PopoverContent>
-        </Popover>
+        {/* Enhanced Date Range Picker - replaces separate check-in/check-out */}
+        <EnhancedDateRangePicker
+          onRangeChange={handleDateRangeChange}
+          initialRange={dateRange}
+          initialDurationType={durationType}
+        />
 
         {/* Bedrooms */}
         <Popover>
@@ -234,7 +210,7 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
       </div>
 
       {/* Promotions */}
-      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base'>
+      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
         <p className='font-semibold text-primary'>
           *Exclusive Early Bird Offers – Book Early & Enjoy Special Discounts!🌟
         </p>
