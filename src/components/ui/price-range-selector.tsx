@@ -332,9 +332,6 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
   return (
     <div className={`space-y-4 ${className}`}>
       {/* Current price range display */}
-      <div className='text-center text-sm font-medium text-gray-600'>
-        {getCurrentRangeText()}
-      </div>
 
       {/* Price range quick options */}
       <div className='flex flex-wrap gap-2'>
@@ -355,6 +352,9 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
         ))}
       </div>
 
+      <div className='text-center text-sm font-medium text-gray-600'>
+        {getCurrentRangeText()}
+      </div>
       {/* Slider */}
       <div className='pt-2 px-2 flex justify-center'>
         <SliderPrimitive.Root

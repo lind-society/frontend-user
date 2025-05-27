@@ -18,6 +18,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  DEFAULT_PRICE_RANGES,
+  formatPrice,
+  PriceRangeSelector,
+} from '@/components/ui/price-range-selector';
 import { Separator } from '@/components/ui/separator';
 
 import { PreferredOptionsBuyPage } from '@/modules/buy/header/preferred-option';
@@ -30,10 +35,32 @@ const HeaderBuyPage = () => {
   const [ownership, setOwnership] = useState('Leasehold');
   const [bedrooms, setBedrooms] = useState(1);
   const [bathrooms, setBathrooms] = useState(1);
-  const [priceRange, setPriceRange] = useState('Any Price');
+
+  // Updated price range state to use min and max values instead of a string
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
   const ownershipTypes = ['Leasehold', 'Freehold', 'Both'];
+
+  // Format the price range for display
+  const getDisplayPriceRange = (): string => {
+    if (minPrice === 0 && maxPrice === null) {
+      return 'Any Price';
+    }
+
+    if (maxPrice === null) {
+      return `${formatPrice(minPrice)}+`;
+    }
+
+    return `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
+  };
+
+  // Handle price range change from the selector component
+  const handlePriceChange = (min: number, max: number | null) => {
+    setMinPrice(min);
+    setMaxPrice(max);
+  };
 
   // Handle search button click - Navigate to results page with query params
   const handleSearch = () => {
@@ -43,7 +70,10 @@ const HeaderBuyPage = () => {
     params.append('ownership', ownership);
     params.append('bedrooms', bedrooms.toString());
     params.append('bathrooms', bathrooms.toString());
-    params.append('priceRange', priceRange);
+
+    // Add min and max price to query params
+    params.append('minPrice', minPrice.toString());
+    params.append('maxPrice', maxPrice?.toString() || 'any');
 
     // Navigate to results page with search parameters
     router.push(`/buy/result?${params.toString()}`);
@@ -57,7 +87,8 @@ const HeaderBuyPage = () => {
     params.append('ownership', ownership);
     params.append('bedrooms', bedrooms.toString());
     params.append('bathrooms', bathrooms.toString());
-    params.append('priceRange', priceRange);
+    params.append('minPrice', minPrice.toString());
+    params.append('maxPrice', maxPrice?.toString() || 'any');
 
     // Add filter parameters if available
     if (filterData) {
@@ -135,7 +166,7 @@ const HeaderBuyPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Ownership - Added icon */}
+              {/* Ownership */}
               <Popover>
                 <PopoverTrigger asChild>
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
@@ -212,7 +243,7 @@ const HeaderBuyPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Bathrooms - Added proper bathrooms icon */}
+              {/* Bathrooms */}
               <Popover>
                 <PopoverTrigger asChild>
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
@@ -258,7 +289,7 @@ const HeaderBuyPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Price - Added price icon */}
+              {/* Price - Now using PriceRangeSelector */}
               <Popover>
                 <PopoverTrigger asChild>
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
@@ -266,39 +297,28 @@ const HeaderBuyPage = () => {
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>Price</span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{priceRange}</span>
+                        <span className='text-gray-500'>
+                          {getDisplayPriceRange()}
+                        </span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className='w-80 p-3'>
+                <PopoverContent className='w-80 p-4'>
                   <div className='flex flex-col gap-4'>
-                    <h5 className='font-semibold'>Price Range</h5>
+                    <span className='text-lg font-semibold'>Price</span>
 
-                    {/* We would integrate the PriceRangeSlider component here */}
-                    <div className='grid grid-cols-1 gap-3'>
-                      {[
-                        'Any Price',
-                        'Under $500,000',
-                        '$500,000 - $1M',
-                        '$1M - $2M',
-                        '$2M - $5M',
-                        '$5M+',
-                      ].map((range) => (
-                        <button
-                          key={range}
-                          className={`py-2 px-3 text-left rounded-md ${
-                            priceRange === range
-                              ? 'bg-primary/10 text-primary'
-                              : 'hover:bg-gray-100'
-                          }`}
-                          onClick={() => setPriceRange(range)}
-                        >
-                          {range}
-                        </button>
-                      ))}
-                    </div>
+                    {/* Integrated PriceRangeSelector component */}
+                    <PriceRangeSelector
+                      initialMinPrice={minPrice}
+                      initialMaxPrice={maxPrice}
+                      absoluteMin={0}
+                      absoluteMax={10000000} // 10M
+                      step={10000}
+                      onChange={handlePriceChange}
+                      priceRanges={DEFAULT_PRICE_RANGES}
+                    />
                   </div>
                 </PopoverContent>
               </Popover>
