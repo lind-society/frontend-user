@@ -12,6 +12,8 @@ import {
   CarouselApi,
   CarouselContent,
   CarouselItem,
+  CarouselNextCustom,
+  CarouselPreviousCustom,
 } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
 
@@ -54,7 +56,7 @@ export const VillaCard: React.FC<VillaCardProps> = ({
   return (
     <Link href={linkPath} className='block'>
       <div className='flex flex-col shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300'>
-        <div className='relative h-[240px] w-full'>
+        <div className='relative h-[240px] w-full group'>
           <Carousel className='w-full' setApi={setApi}>
             <CarouselContent>
               {villa.images.map((image, index) => (
@@ -72,6 +74,31 @@ export const VillaCard: React.FC<VillaCardProps> = ({
                 </CarouselItem>
               ))}
             </CarouselContent>
+            <div className='absolute top-0 left-0 w-full h-full z-20 pointer-events-none'>
+              <div className='relative w-full h-full flex items-center justify-between px-3'>
+                {/* Previous button */}
+                <CarouselPreviousCustom
+                  className='disabled:opacity-0 opacity-0 group-hover:opacity-90 hover:opacity-100 transition-opacity duration-300 pointer-events-auto bg-white/80 hover:bg-white shadow-md'
+                  variant='ghost'
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent default link navigation
+                    e.stopPropagation(); // Stop event from bubbling up to parent Link
+                    api?.scrollPrev(); // Scroll to previous slide
+                  }}
+                />
+
+                {/* Next button */}
+                <CarouselNextCustom
+                  className='disabled:opacity-0 opacity-0 group-hover:opacity-90 hover:opacity-100 transition-opacity duration-300 pointer-events-auto bg-white/80 hover:bg-white shadow-md'
+                  variant='ghost'
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent default link navigation
+                    e.stopPropagation(); // Stop event from bubbling up to parent Link
+                    api?.scrollNext(); // Scroll to next slide
+                  }}
+                />
+              </div>
+            </div>
           </Carousel>
 
           {/* Favorite button */}
@@ -119,7 +146,7 @@ export const VillaCard: React.FC<VillaCardProps> = ({
           </div>
         </div>
 
-        {/* Rest of the card remains the same */}
+        {/* Rest of the card content remains unchanged */}
         <div className='px-4 md:px-6 flex items-center justify-between py-2.5'>
           <p className='text-text text-sm md:text-base'>{villa.location}</p>
           <div className='flex items-center gap-2 md:gap-4'>
