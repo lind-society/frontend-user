@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -16,6 +17,8 @@ interface MediaItem {
 }
 
 const MomentsLandingPage = () => {
+  const t = useTranslations('landingPage.moments');
+
   // Media items with their respective column spans
   const mediaItems: MediaItem[] = [
     {
@@ -84,10 +87,10 @@ const MomentsLandingPage = () => {
           <div className='flex flex-col sm:flex-row justify-between gap-4 sm:items-center'>
             <div className='flex flex-col gap-2'>
               <h4 className='text-primary font-bold text-xl md:text-2xl lg:text-3xl'>
-                Moments Captured, Memories Made
+                {t('title')}
               </h4>
               <p className='text-base md:text-lg lg:text-[22px] text-text font-normal'>
-                Guest Experiences Through the Lens.
+                {t('subtitle')}
               </p>
             </div>
             <Button variant='primary-outline' asChild>
@@ -95,7 +98,7 @@ const MomentsLandingPage = () => {
                 href='/media'
                 className='flex gap-2 items-center self-start sm:self-center whitespace-nowrap'
               >
-                <span>View All Media</span>
+                <span>{t('viewAllMedia')}</span>
                 <RiArrowRightUpLine size={20} />
               </Link>
             </Button>
@@ -126,7 +129,7 @@ const MomentsLandingPage = () => {
               variant='primary-outline'
               className='flex gap-2 items-center'
             >
-              <span>Load More</span>
+              <span>{t('loadMore')}</span>
               <RiArrowRightUpLine size={20} />
             </Button>
           </div>

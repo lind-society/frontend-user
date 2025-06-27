@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import {
   FaEnvelope,
@@ -37,6 +38,7 @@ const ContentContactUs = () => {
   const [countryCode, setCountryCode] = useState('+62');
   const [context, setContext] = useState('');
   const [message, setMessage] = useState('');
+  const t = useTranslations('contactUs');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,7 +53,7 @@ const ContentContactUs = () => {
     });
 
     // Reset form or show success message
-    alert('Message sent successfully! We will contact you soon.');
+    alert(t('form.successMessage'));
   };
 
   return (
@@ -63,17 +65,13 @@ const ContentContactUs = () => {
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-2'>
                 <h4 className='text-primary text-xl md:text-2xl font-semibold'>
-                  Contact Us
+                  {t('content.title')}
                 </h4>
                 <span className='text-text text-xl md:text-2xl font-semibold'>
-                  Have questions or need assistance?
+                  {t('content.subtitle')}
                 </span>
               </div>
-              <span className='text-text'>
-                We're here to help! Reach out to us for inquiries about
-                bookings, services, or any information you need. Our team is
-                ready to make your experience seamless and enjoyable.
-              </span>
+              <span className='text-text'>{t('content.description')}</span>
             </div>
 
             {/* Contact methods grid */}
@@ -84,7 +82,9 @@ const ContentContactUs = () => {
                   <FaPhoneAlt size={20} />
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-text text-lg font-semibold'>Phone</span>
+                  <span className='text-text text-lg font-semibold'>
+                    {t('contactInfo.phone')}
+                  </span>
                   <span className='text-sm text-text'>(+62) 812 3456 7890</span>
                 </div>
               </div>
@@ -95,7 +95,9 @@ const ContentContactUs = () => {
                   <FaEnvelope size={20} />
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-text text-lg font-semibold'>Email</span>
+                  <span className='text-text text-lg font-semibold'>
+                    {t('contactInfo.email')}
+                  </span>
                   <span className='text-sm text-text'>
                     lindsociety@gmail.com
                   </span>
@@ -109,7 +111,7 @@ const ContentContactUs = () => {
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-text text-lg font-semibold'>
-                    Address
+                    {t('contactInfo.address')}
                   </span>
                   <span className='text-sm text-text'>
                     45 Sudirman Avenue, Level 5, Jakarta, Indonesia 10210
@@ -124,7 +126,7 @@ const ContentContactUs = () => {
                 </div>
                 <div className='flex flex-col'>
                   <span className='text-text text-lg font-semibold'>
-                    Instagram
+                    {t('contactInfo.instagram')}
                   </span>
                   <span className='text-sm text-text'>@lindsociety</span>
                 </div>
@@ -136,10 +138,10 @@ const ContentContactUs = () => {
           <div className='w-full lg:w-1/2 shadow-md rounded-lg overflow-hidden'>
             <div className='py-4 px-6 flex flex-col gap-1 bg-primary'>
               <span className='text-white text-sm md:text-base'>
-                Fill out the form
+                {t('form.title')}
               </span>
               <span className='text-xl md:text-2xl text-white font-semibold'>
-                We will reach out to you in 24 hours
+                {t('form.subtitle')}
               </span>
             </div>
 
@@ -150,10 +152,10 @@ const ContentContactUs = () => {
               {/* Full Name */}
               <div className='flex flex-col gap-2'>
                 <Label className='text-sm font-semibold text-primary'>
-                  Full name
+                  {t('form.fullName')}
                 </Label>
                 <Input
-                  placeholder='Enter your full name'
+                  placeholder={t('form.placeholders.fullName')}
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   required
@@ -163,10 +165,10 @@ const ContentContactUs = () => {
               {/* Email */}
               <div className='flex flex-col gap-2'>
                 <Label className='text-sm font-semibold text-primary'>
-                  Email
+                  {t('form.email')}
                 </Label>
                 <Input
-                  placeholder='Enter your email'
+                  placeholder={t('form.placeholders.email')}
                   type='email'
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -177,7 +179,7 @@ const ContentContactUs = () => {
               {/* Phone Number */}
               <div className='flex flex-col gap-2'>
                 <Label className='text-sm font-semibold text-primary'>
-                  Phone number
+                  {t('form.phone')}
                 </Label>
                 <div className='flex w-full'>
                   {/* Country code selector using Popover */}
@@ -199,22 +201,18 @@ const ContentContactUs = () => {
                           <path
                             d='M6 8.5L2 4.5H10L6 8.5Z'
                             fill='currentColor'
-                            stroke='currentColor'
-                            strokeWidth='0.5'
-                            strokeLinecap='round'
-                            strokeLinejoin='round'
                           />
                         </svg>
                       </button>
                     </PopoverTrigger>
-                    <PopoverContent className='w-full p-0 max-w-[300px]'>
-                      <div className='max-h-[200px] overflow-y-auto'>
+                    <PopoverContent className='w-64 p-1 max-h-64 overflow-y-auto'>
+                      <div className='flex flex-col'>
                         {countryCodes.map((country) => (
                           <button
                             key={country.code}
-                            className='w-full text-left px-3 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none'
-                            onClick={() => setCountryCode(country.code)}
                             type='button'
+                            className='py-2 px-3 text-left rounded-md hover:bg-gray-100 flex items-center gap-2'
+                            onClick={() => setCountryCode(country.code)}
                           >
                             <span className='font-medium'>{country.code}</span>{' '}
                             {country.country}
@@ -223,42 +221,45 @@ const ContentContactUs = () => {
                       </div>
                     </PopoverContent>
                   </Popover>
-                  <div className='flex-1'>
-                    <Input
-                      className='rounded-l-none flex-grow w-full'
-                      placeholder='Enter your phone number'
-                      type='tel'
-                      value={phoneNumber}
-                      onChange={(e) => {
-                        // Allow only numbers
-                        const value = e.target.value.replace(/\D/g, '');
-                        setPhoneNumber(value);
-                      }}
-                      required
-                    />
-                  </div>
+
+                  <Input
+                    placeholder={t('form.placeholders.phone')}
+                    type='tel'
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    className='rounded-l-none border-l-0'
+                    required
+                  />
                 </div>
               </div>
 
-              {/* Contact Context */}
+              {/* Inquiry Type */}
               <div className='flex flex-col gap-2'>
                 <Label className='text-sm font-semibold text-primary'>
-                  Inquiry Type
+                  {t('form.inquiryType')}
                 </Label>
                 <Select value={context} onValueChange={setContext} required>
                   <SelectTrigger className='w-full'>
-                    <SelectValue placeholder='Select inquiry type' />
+                    <SelectValue
+                      placeholder={t('form.placeholders.inquiryType')}
+                    />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value='booking'>Booking Inquiry</SelectItem>
+                    <SelectItem value='booking'>
+                      {t('form.inquiryTypes.booking')}
+                    </SelectItem>
                     <SelectItem value='property-management'>
-                      Property Management
+                      {t('form.inquiryTypes.propertyManagement')}
                     </SelectItem>
                     <SelectItem value='property-listing'>
-                      List My Property
+                      {t('form.inquiryTypes.propertyListing')}
                     </SelectItem>
-                    <SelectItem value='support'>Customer Support</SelectItem>
-                    <SelectItem value='other'>Other Inquiry</SelectItem>
+                    <SelectItem value='support'>
+                      {t('form.inquiryTypes.support')}
+                    </SelectItem>
+                    <SelectItem value='other'>
+                      {t('form.inquiryTypes.other')}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -266,10 +267,10 @@ const ContentContactUs = () => {
               {/* Message */}
               <div className='flex flex-col gap-2'>
                 <Label className='text-sm font-semibold text-primary'>
-                  Message
+                  {t('form.message')}
                 </Label>
                 <Textarea
-                  placeholder='Enter your message'
+                  placeholder={t('form.placeholders.message')}
                   className='min-h-[120px]'
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
@@ -284,7 +285,7 @@ const ContentContactUs = () => {
                 type='submit'
               >
                 <FaPaperPlane />
-                <span>Send Your Message</span>
+                <span>{t('form.submit')}</span>
               </Button>
             </form>
           </div>

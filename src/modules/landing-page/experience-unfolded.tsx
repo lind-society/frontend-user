@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -9,6 +10,8 @@ import { BlogCard } from '@/components/ui/card/blog';
 import { blogPosts } from '@/modules/landing-page/constant';
 
 const ExperienceUnfolded = () => {
+  const t = useTranslations('landingPage.experienceUnfolded');
+
   return (
     <div className='py-10 md:py-16'>
       <BaseContainer>
@@ -16,10 +19,10 @@ const ExperienceUnfolded = () => {
           {/* Section Header */}
           <div className='flex flex-col gap-2'>
             <h3 className='text-center text-primary text-2xl md:text-3xl font-semibold'>
-              Experiences Unfolded
+              {t('title')}
             </h3>
             <p className='text-text font-normal text-center px-4 md:px-0'>
-              Explore Stories & Inspiring Moments from LIND Society
+              {t('subtitle')}
             </p>
           </div>
 
@@ -27,10 +30,10 @@ const ExperienceUnfolded = () => {
           <div className='flex flex-col sm:flex-row justify-between gap-4 sm:items-center'>
             <div className='flex flex-col gap-2'>
               <h4 className='text-primary font-bold text-xl md:text-2xl lg:text-3xl'>
-                LIND Journal Hub
+                {t('journalHub.title')}
               </h4>
               <p className='text-base md:text-lg lg:text-[22px] text-text font-normal'>
-                Explore Trends, Tips, and Exclusive Property Insights
+                {t('journalHub.subtitle')}
               </p>
             </div>
             <Button variant='primary-outline' asChild>
@@ -38,7 +41,7 @@ const ExperienceUnfolded = () => {
                 href='/blog'
                 className='flex gap-2 items-center self-start sm:self-center whitespace-nowrap'
               >
-                <span>View All Blogs</span>
+                <span>{t('viewAllBlogs')}</span>
                 <RiArrowRightUpLine size={20} />
               </Link>
             </Button>
@@ -57,7 +60,7 @@ const ExperienceUnfolded = () => {
               variant='primary-outline'
               className='flex gap-2 items-center'
             >
-              <span>Load More</span>
+              <span>{t('loadMore')}</span>
               <RiArrowRightUpLine size={20} />
             </Button>
           </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 
@@ -15,6 +16,7 @@ type TabType = 'stay' | 'buy' | 'tourist';
 const HeaderLandingPage = () => {
   const [activeTab, setActiveTab] = useState<TabType>('stay');
   const router = useRouter();
+  const t = useTranslations('landingPage.header');
 
   const handleTabClick = (tab: TabType) => {
     setActiveTab(tab);
@@ -59,12 +61,9 @@ const HeaderLandingPage = () => {
           {/* Responsive header content */}
           <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
             <div className='flex flex-col gap-4 md:gap-6 max-w-full lg:max-w-[567px] mb-8 lg:mb-0'>
-              <h1 className='text-white h0 font-bold'>
-                Enjoy Your Dream Vacation
-              </h1>
+              <h1 className='text-white h0 font-bold'>{t('title')}</h1>
               <div className='px-3 md:px-5 border-white border-solid border-l-2 text-white text-lg md:text-[22px]'>
-                We provide a variety of the best lodging accommodations for
-                those of you who need it.
+                {t('subtitle')}
               </div>
             </div>
 
@@ -72,19 +71,23 @@ const HeaderLandingPage = () => {
             <div className='hidden md:flex flex-row lg:flex-col gap-6 text-white'>
               <div className='flex flex-col gap-3 md:gap-5'>
                 <h2 className='font-bold'>12k+</h2>
-                <span className='text-base md:text-xl'>Satisfied Visitors</span>
+                <span className='text-base md:text-xl'>
+                  {t('stats.satisfiedVisitors')}
+                </span>
               </div>
 
               <div className='flex flex-col gap-3 md:gap-5'>
                 <h2 className='font-bold'>4.5k+</h2>
                 <span className='text-base md:text-xl'>
-                  Amazing Tour Guides
+                  {t('stats.tourGuides')}
                 </span>
               </div>
 
               <div className='flex flex-col gap-3 md:gap-5'>
                 <h2 className='font-bold'>2k+</h2>
-                <span className='text-base md:text-xl'>Managed Properties</span>
+                <span className='text-base md:text-xl'>
+                  {t('stats.managedProperties')}
+                </span>
               </div>
             </div>
           </div>
@@ -101,7 +104,7 @@ const HeaderLandingPage = () => {
                     : 'border-b-transparent border-b-2 text-gray-400'
                 }`}
               >
-                Stay
+                {t('tabs.stay')}
               </button>
               <button
                 onClick={() => handleTabClick('buy')}
@@ -111,7 +114,7 @@ const HeaderLandingPage = () => {
                     : 'border-b-transparent border-b-2 text-gray-400'
                 }`}
               >
-                Buy
+                {t('tabs.buy')}
               </button>
               <button
                 onClick={() => handleTabClick('tourist')}
@@ -121,7 +124,7 @@ const HeaderLandingPage = () => {
                     : 'border-b-transparent border-b-2 text-gray-400'
                 }`}
               >
-                Tourist Activity
+                {t('tabs.touristActivity')}
               </button>
             </div>
 

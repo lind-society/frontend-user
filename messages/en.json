@@ -1,7 +1,339 @@
 {
-  "navbar": {},
-  "footer": {},
-
+  "navbar": {
+    "search": {
+      "placeholder": "Search by villa, property, or activity name"
+    },
+    "currency": "USD",
+    "navigation": {
+      "stay": "Stay",
+      "buy": "Buy",
+      "touristActivity": "Tourist Activity",
+      "propertyManagement": "Property Management",
+      "aboutUs": "About Us"
+    },
+    "contact": "Contact Us",
+    "wishlist": "Wishlist",
+    "profile": {
+      "logout": "Logout"
+    }
+  },
+  "footer": {
+    "paymentChannels": "Payment channels",
+    "followUs": "Follow us",
+    "about": {
+      "title": "About LIND Society",
+      "description": "LIND Society specializes in offering premium villa bookings, property management, and unique tourist activities. Whether you're looking to book a luxury villa, purchase your dream property, or explore the best activities in the area, we provide exceptional service and attention to detail. Our experienced team ensures every client receives personalized care and memorable experiences."
+    },
+    "services": {
+      "title": "Services",
+      "rentVillas": "Rent Home & Villas",
+      "buyProperties": "Buy Properties",
+      "touristActivities": "Tourist Activities",
+      "propertyManagement": "Property Management"
+    },
+    "aboutLinks": {
+      "title": "About",
+      "aboutUs": "About Us",
+      "media": "Media Gallery",
+      "blog": "Blog"
+    },
+    "help": {
+      "title": "Help",
+      "contactUs": "Contact Us",
+      "faqs": "FAQs",
+      "support": "Support"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cancellation": "Cancellation Policy"
+    },
+    "newsletter": {
+      "title": "Subscribe to our newsletter for villa perks and insider tips, plus discount up to 30%",
+      "emailPlaceholder": "Enter your email address",
+      "subscribe": "Subscribe"
+    },
+    "copyright": "© 2025 LIND Society. 45 Sudirman Avenue, Level 5, Jakarta, Indonesia 10210\nIndonesian Business Licence Number: 0123456789"
+  },
+  "landingPage": {
+    "header": {
+      "title": "Enjoy Your Dream Vacation",
+      "subtitle": "We provide a variety of the best lodging accommodations for those of you who need it.",
+      "stats": {
+        "satisfiedVisitors": "Satisfied Visitors",
+        "tourGuides": "Amazing Tour Guides",
+        "managedProperties": "Managed Properties"
+      },
+      "tabs": {
+        "stay": "Stay",
+        "buy": "Buy",
+        "touristActivity": "Tourist Activity"
+      }
+    },
+    "search": {
+      "location": {
+        "label": "Location"
+      },
+      "bedrooms": {
+        "label": "Bedrooms",
+        "description": "Number of bedrooms"
+      },
+      "bathrooms": {
+        "label": "Bathrooms",
+        "description": "Number of bathrooms"
+      },
+      "guests": {
+        "label": "Guests",
+        "description": "Number of guests"
+      },
+      "ownership": {
+        "label": "Ownership"
+      },
+      "priceRange": {
+        "label": "Price Range",
+        "anyPrice": "Any Price",
+        "minPrice": "Min Price",
+        "maxPrice": "Max Price"
+      },
+      "availability": "Availability",
+      "whatToDo": "What do you want to do?",
+      "chooseLocation": "Choose Location",
+      "searchButton": "Search",
+      "advancedSearch": "Advanced Search",
+      "promotions": {
+        "stay": "*Exclusive Early Bird Offers – Book Early & Enjoy Special Discounts!🌟",
+        "stayLink": "Click here to view the list!",
+        "buy": "*Limited Property Offers – Get Special Prices for Best Investments!🏡",
+        "buyLink": "Explore premium properties!",
+        "tourist": "*Special Group Discounts - Book Activities for 4+ People and Save 15%!🌴",
+        "touristLink": "Explore top-rated activities!"
+      }
+    },
+    "exploreIconic": {
+      "title": "Explore Our Iconic Destination",
+      "subtitle": "Travel beyond the ordinary and embrace the magic of the world's most iconic destinations."
+    },
+    "exploreBest": {
+      "title": "Explore LIND's Best List",
+      "forRent": "For Rent",
+      "forSale": "For Sale",
+      "daily": "Daily",
+      "monthly": "Monthly",
+      "yearly": "Yearly",
+      "viewMore": "View More"
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us?",
+      "features": {
+        "bestRates": {
+          "title": "Best Rates Guaranteed",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        },
+        "excellentService": {
+          "title": "Excellent Services",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        },
+        "support24": {
+          "title": "24/7 Support",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        }
+      }
+    },
+    "discover": {
+      "title": "Discover Unforgettable Experiences",
+      "subtitle": "Unveil the secrets of the world and embark on unforgettable journeys with LIND Society.",
+      "experiences": {
+        "journey": {
+          "title": "Journey",
+          "count": "150+ journey"
+        },
+        "adventures": {
+          "title": "Adventures",
+          "count": "30+ spots"
+        },
+        "wellness": {
+          "title": "Wellness",
+          "count": "50+ spots"
+        },
+        "culture": {
+          "title": "Culture",
+          "count": "10+ journey"
+        },
+        "culinaries": {
+          "title": "Culinaries",
+          "count": "200+ spots"
+        },
+        "specialEvents": {
+          "title": "Special Events",
+          "count": "10+ events"
+        }
+      }
+    },
+    "experienceUnfolded": {
+      "title": "Experiences Unfolded",
+      "subtitle": "Explore Stories & Inspiring Moments from LIND Society",
+      "journalHub": {
+        "title": "LIND Journal Hub",
+        "subtitle": "Explore Trends, Tips, and Exclusive Property Insights"
+      },
+      "viewAllBlogs": "View All Blogs",
+      "loadMore": "Load More"
+    },
+    "moments": {
+      "title": "Moments Captured, Memories Made",
+      "subtitle": "Guest Experiences Through the Lens.",
+      "viewAllMedia": "View All Media",
+      "loadMore": "Load More"
+    }
+  },
+  "aboutUs": {
+    "pageTitle": "About Us",
+    "header": {
+      "title": "About LIND Society",
+      "subtitle": "Creating unforgettable vacation experiences"
+    },
+    "content": {
+      "vision": {
+        "title": "Our Vision",
+        "description": "To become the leading platform in providing premium accommodation and high-quality tourism experiences in Indonesia."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "description": "To provide the best services in property management, villa bookings, and tourist activities with international standards."
+      },
+      "values": {
+        "title": "Our Values",
+        "excellence": "Excellence",
+        "trust": "Trust",
+        "innovation": "Innovation",
+        "service": "Service"
+      }
+    }
+  },
+  "contactUs": {
+    "pageTitle": "Contact Us",
+    "header": {
+      "title": "Get in Touch with LIND Society",
+      "subtitle": "Contact us today and let's create exceptional villa experiences together."
+    },
+    "content": {
+      "title": "Contact Us",
+      "subtitle": "Have questions or need assistance?",
+      "description": "We're here to help! Reach out to us for inquiries about bookings, services, or any information you need. Our team is ready to make your experience seamless and enjoyable."
+    },
+    "contactInfo": {
+      "phone": "Phone",
+      "email": "Email",
+      "address": "Address",
+      "instagram": "Instagram"
+    },
+    "form": {
+      "title": "Fill out the form",
+      "subtitle": "We will reach out to you in 24 hours",
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "inquiryType": "Inquiry Type",
+      "message": "Message",
+      "submit": "Send Your Message",
+      "successMessage": "Message sent successfully! We will contact you soon.",
+      "inquiryTypes": {
+        "booking": "Booking Inquiry",
+        "propertyManagement": "Property Management",
+        "propertyListing": "List My Property",
+        "support": "Customer Support",
+        "other": "Other Inquiry"
+      },
+      "placeholders": {
+        "fullName": "Enter your full name",
+        "email": "Enter your email address",
+        "phone": "Enter your phone number",
+        "inquiryType": "Select inquiry type",
+        "message": "Enter your message"
+      }
+    },
+    "info": {
+      "address": "Address",
+      "phone": "Phone",
+      "email": "Email",
+      "socialMedia": "Social Media"
+    }
+  },
+  "rent": {
+    "pageTitle": "Rent Villas & Properties",
+    "header": {
+      "title": "Find Your Dream Villa",
+      "subtitle": "The best selection of villas and properties for unforgettable vacations"
+    },
+    "filters": {
+      "location": "Location",
+      "priceRange": "Price Range",
+      "bedrooms": "Bedrooms",
+      "amenities": "Amenities",
+      "propertyType": "Property Type"
+    }
+  },
+  "buy": {
+    "pageTitle": "Buy Properties",
+    "header": {
+      "title": "Best Property Investment",
+      "subtitle": "Find your dream property for future investment"
+    }
+  },
+  "touristActivity": {
+    "pageTitle": "Tourist Activities",
+    "header": {
+      "title": "Explore Exciting Activities",
+      "subtitle": "Discover various unforgettable tourist activities"
+    }
+  },
+  "manageProperty": {
+    "pageTitle": "Property Management",
+    "header": {
+      "title": "Manage Your Property",
+      "subtitle": "Professional property management services"
+    }
+  },
+  "media": {
+    "pageTitle": "Media Gallery",
+    "header": {
+      "title": "Media Gallery",
+      "subtitle": "Collection of photos and videos from our properties and activities"
+    }
+  },
+  "blog": {
+    "pageTitle": "Blog",
+    "header": {
+      "title": "Blog & Articles",
+      "subtitle": "Tips, guides, and latest information about properties and tourism"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Sign In",
+      "subtitle": "Sign in to your account",
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember Me",
+      "forgotPassword": "Forgot Password?",
+      "signInButton": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign Up"
+    },
+    "signup": {
+      "title": "Sign Up",
+      "subtitle": "Create a new account",
+      "fullName": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "agreeTerms": "I agree to the terms and conditions",
+      "signUpButton": "Sign Up",
+      "hasAccount": "Already have an account?",
+      "signIn": "Sign In"
+    }
+  },
   "LocaleSwitcher": {
     "id": "Indonesia",
     "en": "English",

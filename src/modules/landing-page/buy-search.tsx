@@ -2,6 +2,7 @@
 
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
@@ -26,6 +27,8 @@ interface BuySearchProps {
 }
 
 const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
+  const t = useTranslations('landingPage.search');
+
   const [location, setLocation] = useState('Bali');
   const [ownership, setOwnership] = useState('Leasehold');
   const [bedrooms, setBedrooms] = useState(1);
@@ -39,7 +42,7 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
   // Format the price range for display
   const getDisplayPriceRange = (): string => {
     if (minPrice === 0 && maxPrice === null) {
-      return 'Any Price';
+      return t('priceRange.anyPrice');
     }
 
     if (maxPrice === null) {
@@ -75,7 +78,9 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
             <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
               <FaLocationDot size={24} className='text-primary' />
               <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Location</span>
+                <span className='font-semibold text-left'>
+                  {t('location.label')}
+                </span>
                 <div className='flex justify-between items-center'>
                   <span className='text-gray-500'>{location}</span>
                   <ChevronDown size={18} className='text-primary' />
@@ -108,7 +113,9 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
             <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
               <GrCertificate size={24} className='text-primary' />
               <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Ownership</span>
+                <span className='font-semibold text-left'>
+                  {t('ownership.label')}
+                </span>
                 <div className='flex justify-between items-center'>
                   <span className='text-gray-500'>{ownership}</span>
                   <ChevronDown size={18} className='text-primary' />
@@ -141,7 +148,9 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
             <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
               <IoBed size={24} className='text-primary' />
               <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Bedrooms</span>
+                <span className='font-semibold text-left'>
+                  {t('bedrooms.label')}
+                </span>
                 <div className='flex justify-between items-center'>
                   <span className='text-gray-500'>
                     {bedrooms.toString().padStart(2, '0')}
@@ -154,7 +163,7 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
           <PopoverContent className='w-48 p-3'>
             <div className='flex flex-col gap-3'>
               <div className='flex justify-between items-center'>
-                <span>Number of bedrooms</span>
+                <span>{t('bedrooms.description')}</span>
               </div>
               <div className='flex items-center justify-between'>
                 <button
@@ -185,7 +194,9 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
             <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
               <LuBath size={24} className='text-primary' />
               <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Bathrooms</span>
+                <span className='font-semibold text-left'>
+                  {t('bathrooms.label')}
+                </span>
                 <div className='flex justify-between items-center'>
                   <span className='text-gray-500'>
                     {bathrooms.toString().padStart(2, '0')}
@@ -198,7 +209,7 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
           <PopoverContent className='w-48 p-3'>
             <div className='flex flex-col gap-3'>
               <div className='flex justify-between items-center'>
-                <span>Number of bathrooms</span>
+                <span>{t('bathrooms.description')}</span>
               </div>
               <div className='flex items-center justify-between'>
                 <button
@@ -223,13 +234,15 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
           </PopoverContent>
         </Popover>
 
-        {/* Price with new component */}
+        {/* Price Range */}
         <Popover>
           <PopoverTrigger asChild>
             <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
               <TbCurrencyDollar size={24} className='text-primary' />
               <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>Price</span>
+                <span className='font-semibold text-left'>
+                  {t('priceRange.label')}
+                </span>
                 <div className='flex justify-between items-center'>
                   <span className='text-gray-500'>
                     {getDisplayPriceRange()}
@@ -241,9 +254,9 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
           </PopoverTrigger>
           <PopoverContent className='w-80 p-4'>
             <div className='flex flex-col gap-4'>
-              <span className='font-semibold text-lg'>Price</span>
-
-              {/* New Price Range Selector component */}
+              <span className='text-lg font-semibold'>
+                {t('priceRange.label')}
+              </span>
               <PriceRangeSelector
                 initialMinPrice={minPrice}
                 initialMaxPrice={maxPrice}
@@ -264,21 +277,18 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
           className='w-full md:w-auto'
           onClick={handleSearch}
         >
-          Search
+          {t('searchButton')}
         </Button>
       </div>
 
       {/* Promotions */}
       <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
-        <p className='font-semibold text-primary'>
-          *Premium Properties Available - Exclusive Listings with Virtual
-          Tours!🏠
-        </p>
+        <p className='font-semibold text-primary'>{t('promotions.buy')}</p>
         <Link
           href='/buy'
           className='font-semibold text-primary underline whitespace-nowrap'
         >
-          View featured properties!
+          {t('promotions.buyLink')}
         </Link>
       </div>
     </>

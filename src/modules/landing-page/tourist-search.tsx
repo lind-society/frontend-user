@@ -3,6 +3,7 @@
 import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
 import { TbCurrencyDollar } from 'react-icons/tb';
@@ -30,6 +31,8 @@ interface TouristSearchProps {
 }
 
 const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
+  const t = useTranslations('landingPage.search');
+
   const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
@@ -53,7 +56,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
         {/* Location */}
         <Select value={selectedLocation} onValueChange={setSelectedLocation}>
           <SelectTrigger className='w-full md:w-[240px] h-[46px] border border-transparent hover:border-gray-200'>
-            <SelectValue placeholder='Choose Location' />
+            <SelectValue placeholder={t('chooseLocation')} />
           </SelectTrigger>
           <SelectContent>
             {activityLocations.map((location) => (
@@ -69,7 +72,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
           <input
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder='What do you want to do?'
+            placeholder={t('whatToDo')}
             className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none py-3 px-4 w-full md:w-[240px]'
           />
         </div>
@@ -85,7 +88,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
               <span className='text-primary'>
                 {selectedDate
                   ? format(selectedDate, 'dd MMM yyyy')
-                  : 'Availability'}
+                  : t('availability')}
               </span>
               <ChevronDown className='text-primary' />
             </Button>
@@ -110,7 +113,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
               <TbCurrencyDollar className='text-primary text-xl' />
               <span className='text-primary'>
                 {minPrice === 0 && maxPrice === 5000000
-                  ? 'Price Range'
+                  ? t('priceRange.label')
                   : `${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}`}
               </span>
               <ChevronDown className='text-primary' />
@@ -118,10 +121,12 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
           </PopoverTrigger>
           <PopoverContent className='w-80 p-4'>
             <div className='flex flex-col gap-4'>
-              <span className='font-medium'>Price Range</span>
+              <span className='font-medium'>{t('priceRange.label')}</span>
               <div className='flex justify-between'>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-sm text-gray-500'>Min Price</span>
+                  <span className='text-sm text-gray-500'>
+                    {t('priceRange.minPrice')}
+                  </span>
                   <input
                     type='number'
                     value={minPrice}
@@ -130,7 +135,9 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
                   />
                 </div>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-sm text-gray-500'>Max Price</span>
+                  <span className='text-sm text-gray-500'>
+                    {t('priceRange.maxPrice')}
+                  </span>
                   <input
                     type='number'
                     value={maxPrice}
@@ -150,21 +157,18 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
           className='w-full md:w-auto'
           onClick={handleSearch}
         >
-          Search
+          {t('searchButton')}
         </Button>
       </div>
 
       {/* Promotions */}
       <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
-        <p className='font-semibold text-primary'>
-          *Special Group Discounts - Book Activities for 4+ People and Save
-          15%!🌴
-        </p>
+        <p className='font-semibold text-primary'>{t('promotions.tourist')}</p>
         <Link
           href='/tourist-activity'
           className='font-semibold text-primary underline whitespace-nowrap'
         >
-          Explore top-rated activities!
+          {t('promotions.touristLink')}
         </Link>
       </div>
     </>

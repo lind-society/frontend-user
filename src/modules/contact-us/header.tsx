@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -14,6 +15,7 @@ import {
 const HeaderContactUs = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const t = useTranslations('contactUs');
 
   // Background images for carousel
   const carouselImages = [
@@ -100,11 +102,10 @@ const HeaderContactUs = () => {
       <BaseContainer>
         <div className='relative z-20 flex flex-col items-center gap-4 md:gap-6 text-center'>
           <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white max-w-4xl'>
-            Get in Touch with LIND Society
+            {t('header.title')}
           </h1>
           <p className='text-base md:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto font-light'>
-            Contact us today and let's create exceptional villa experiences
-            together.
+            {t('header.subtitle')}
           </p>
         </div>
       </BaseContainer>

@@ -1,6 +1,339 @@
 {
-  "navbar": {},
-  "footer": {},
+  "navbar": {
+    "search": {
+      "placeholder": "Cari berdasarkan nama vila, properti, atau aktivitas"
+    },
+    "currency": "IDR",
+    "navigation": {
+      "stay": "Menginap",
+      "buy": "Beli",
+      "touristActivity": "Aktivitas Wisata",
+      "propertyManagement": "Manajemen Properti",
+      "aboutUs": "Tentang Kami"
+    },
+    "contact": "Hubungi Kami",
+    "wishlist": "Wishlist",
+    "profile": {
+      "logout": "Keluar"
+    }
+  },
+  "footer": {
+    "paymentChannels": "Saluran Pembayaran",
+    "followUs": "Ikuti Kami",
+    "about": {
+      "title": "Tentang LIND Society",
+      "description": "LIND Society mengkhususkan diri dalam menawarkan pemesanan vila premium, manajemen properti, dan aktivitas wisata unik. Baik Anda mencari untuk memesan vila mewah, membeli properti impian Anda, atau menjelajahi aktivitas terbaik di daerah tersebut, kami menyediakan layanan luar biasa dan perhatian terhadap detail. Tim berpengalaman kami memastikan setiap klien menerima perawatan personal dan pengalaman yang berkesan."
+    },
+    "services": {
+      "title": "Layanan",
+      "rentVillas": "Sewa Rumah & Vila",
+      "buyProperties": "Beli Properti",
+      "touristActivities": "Aktivitas Wisata",
+      "propertyManagement": "Manajemen Properti"
+    },
+    "aboutLinks": {
+      "title": "Tentang",
+      "aboutUs": "Tentang Kami",
+      "media": "Galeri Media",
+      "blog": "Blog"
+    },
+    "help": {
+      "title": "Bantuan",
+      "contactUs": "Hubungi Kami",
+      "faqs": "FAQ",
+      "support": "Dukungan"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Syarat & Ketentuan",
+      "privacy": "Kebijakan Privasi",
+      "cancellation": "Kebijakan Pembatalan"
+    },
+    "newsletter": {
+      "title": "Berlangganan newsletter kami untuk keuntungan vila dan tips insider, plus diskon hingga 30%",
+      "emailPlaceholder": "Masukkan alamat email Anda",
+      "subscribe": "Berlangganan"
+    },
+    "copyright": "© 2025 LIND Society. 45 Sudirman Avenue, Level 5, Jakarta, Indonesia 10210\nNomor Lisensi Bisnis Indonesia: 0123456789"
+  },
+  "landingPage": {
+    "header": {
+      "title": "Nikmati Liburan Impian Anda",
+      "subtitle": "Kami menyediakan berbagai akomodasi penginapan terbaik untuk Anda yang membutuhkannya.",
+      "stats": {
+        "satisfiedVisitors": "Pengunjung Puas",
+        "tourGuides": "Pemandu Wisata Luar Biasa",
+        "managedProperties": "Properti yang Dikelola"
+      },
+      "tabs": {
+        "stay": "Menginap",
+        "buy": "Beli",
+        "touristActivity": "Aktivitas Wisata"
+      }
+    },
+    "search": {
+      "location": {
+        "label": "Lokasi"
+      },
+      "bedrooms": {
+        "label": "Kamar Tidur",
+        "description": "Jumlah kamar tidur"
+      },
+      "bathrooms": {
+        "label": "Kamar Mandi",
+        "description": "Jumlah kamar mandi"
+      },
+      "guests": {
+        "label": "Tamu",
+        "description": "Jumlah tamu"
+      },
+      "ownership": {
+        "label": "Kepemilikan"
+      },
+      "priceRange": {
+        "label": "Rentang Harga",
+        "anyPrice": "Harga Apapun",
+        "minPrice": "Harga Minimum",
+        "maxPrice": "Harga Maksimum"
+      },
+      "availability": "Ketersediaan",
+      "whatToDo": "Apa yang ingin Anda lakukan?",
+      "chooseLocation": "Pilih Lokasi",
+      "searchButton": "Cari",
+      "advancedSearch": "Pencarian Lanjutan",
+      "promotions": {
+        "stay": "*Penawaran Early Bird Eksklusif – Pesan Lebih Awal & Nikmati Diskon Khusus!🌟",
+        "stayLink": "Klik di sini untuk melihat daftar!",
+        "buy": "*Penawaran Properti Terbatas – Dapatkan Harga Spesial untuk Investasi Terbaik!🏡",
+        "buyLink": "Jelajahi properti premium!",
+        "tourist": "*Diskon Grup Khusus - Pesan Aktivitas untuk 4+ Orang dan Hemat 15%!🌴",
+        "touristLink": "Jelajahi aktivitas dengan rating terbaik!"
+      }
+    },
+    "exploreIconic": {
+      "title": "Jelajahi Destinasi Ikonik Kami",
+      "subtitle": "Bepergian melampaui hal biasa dan rangkul keajaiban destinasi paling ikonik di dunia."
+    },
+    "exploreBest": {
+      "title": "Jelajahi Daftar Terbaik LIND",
+      "forRent": "Untuk Disewa",
+      "forSale": "Untuk Dijual",
+      "daily": "Harian",
+      "monthly": "Bulanan",
+      "yearly": "Tahunan",
+      "viewMore": "Lihat Lebih Banyak"
+    },
+    "whyChooseUs": {
+      "title": "Mengapa Memilih Kami?",
+      "features": {
+        "bestRates": {
+          "title": "Tarif Terbaik Dijamin",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        },
+        "excellentService": {
+          "title": "Layanan Luar Biasa",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        },
+        "support24": {
+          "title": "Dukungan 24/7",
+          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        }
+      }
+    },
+    "discover": {
+      "title": "Temukan Pengalaman Tak Terlupakan",
+      "subtitle": "Buka rahasia dunia dan mulai perjalanan tak terlupakan bersama LIND Society.",
+      "experiences": {
+        "journey": {
+          "title": "Perjalanan",
+          "count": "150+ perjalanan"
+        },
+        "adventures": {
+          "title": "Petualangan",
+          "count": "30+ tempat"
+        },
+        "wellness": {
+          "title": "Kesehatan",
+          "count": "50+ tempat"
+        },
+        "culture": {
+          "title": "Budaya",
+          "count": "10+ perjalanan"
+        },
+        "culinaries": {
+          "title": "Kuliner",
+          "count": "200+ tempat"
+        },
+        "specialEvents": {
+          "title": "Acara Khusus",
+          "count": "10+ acara"
+        }
+      }
+    },
+    "experienceUnfolded": {
+      "title": "Pengalaman Terungkap",
+      "subtitle": "Jelajahi Cerita & Momen Inspiratif dari LIND Society",
+      "journalHub": {
+        "title": "LIND Journal Hub",
+        "subtitle": "Jelajahi Tren, Tips, dan Wawasan Properti Eksklusif"
+      },
+      "viewAllBlogs": "Lihat Semua Blog",
+      "loadMore": "Muat Lebih Banyak"
+    },
+    "moments": {
+      "title": "Momen Tertangkap, Kenangan Tercipta",
+      "subtitle": "Pengalaman Tamu Melalui Lensa.",
+      "viewAllMedia": "Lihat Semua Media",
+      "loadMore": "Muat Lebih Banyak"
+    }
+  },
+  "aboutUs": {
+    "pageTitle": "Tentang Kami",
+    "header": {
+      "title": "Tentang LIND Society",
+      "subtitle": "Menciptakan pengalaman liburan yang tak terlupakan"
+    },
+    "content": {
+      "vision": {
+        "title": "Visi Kami",
+        "description": "Menjadi platform terdepan dalam penyediaan akomodasi premium dan pengalaman wisata berkualitas tinggi di Indonesia."
+      },
+      "mission": {
+        "title": "Misi Kami",
+        "description": "Memberikan layanan terbaik dalam manajemen properti, pemesanan vila, dan aktivitas wisata dengan standar internasional."
+      },
+      "values": {
+        "title": "Nilai-nilai Kami",
+        "excellence": "Keunggulan",
+        "trust": "Kepercayaan",
+        "innovation": "Inovasi",
+        "service": "Pelayanan"
+      }
+    }
+  },
+  "contactUs": {
+    "pageTitle": "Hubungi Kami",
+    "header": {
+      "title": "Hubungi Kami",
+      "subtitle": "Kami siap membantu Anda"
+    },
+    "content": {
+      "title": "Hubungi Kami",
+      "subtitle": "Punya pertanyaan atau butuh bantuan?",
+      "description": "Kami siap membantu! Hubungi kami untuk pertanyaan tentang pemesanan, layanan, atau informasi apa pun yang Anda butuhkan. Tim kami siap membuat pengalaman Anda menjadi lancar dan menyenangkan."
+    },
+    "contactInfo": {
+      "phone": "Telepon",
+      "email": "Email",
+      "address": "Alamat",
+      "instagram": "Instagram"
+    },
+    "form": {
+      "title": "Isi formulir",
+      "subtitle": "Kami akan menghubungi Anda dalam 24 jam",
+      "fullName": "Nama Lengkap",
+      "email": "Email",
+      "phone": "Nomor Telepon",
+      "inquiryType": "Jenis Pertanyaan",
+      "message": "Pesan",
+      "submit": "Kirim Pesan",
+      "successMessage": "Pesan berhasil dikirim! Kami akan menghubungi Anda segera.",
+      "inquiryTypes": {
+        "booking": "Pertanyaan Pemesanan",
+        "propertyManagement": "Manajemen Properti",
+        "propertyListing": "Daftarkan Properti Saya",
+        "support": "Dukungan Pelanggan",
+        "other": "Pertanyaan Lainnya"
+      },
+      "placeholders": {
+        "fullName": "Masukkan nama lengkap Anda",
+        "email": "Masukkan alamat email Anda",
+        "phone": "Masukkan nomor telepon Anda",
+        "inquiryType": "Pilih jenis pertanyaan",
+        "message": "Masukkan pesan Anda"
+      }
+    },
+    "info": {
+      "address": "Alamat",
+      "phone": "Telepon",
+      "email": "Email",
+      "socialMedia": "Media Sosial"
+    }
+  },
+  "rent": {
+    "pageTitle": "Sewa Villa & Properti",
+    "header": {
+      "title": "Temukan Villa Impian Anda",
+      "subtitle": "Pilihan terbaik vila dan properti untuk liburan tak terlupakan"
+    },
+    "filters": {
+      "location": "Lokasi",
+      "priceRange": "Rentang Harga",
+      "bedrooms": "Kamar Tidur",
+      "amenities": "Fasilitas",
+      "propertyType": "Jenis Properti"
+    }
+  },
+  "buy": {
+    "pageTitle": "Beli Properti",
+    "header": {
+      "title": "Investasi Properti Terbaik",
+      "subtitle": "Temukan properti impian Anda untuk investasi masa depan"
+    }
+  },
+  "touristActivity": {
+    "pageTitle": "Aktivitas Wisata",
+    "header": {
+      "title": "Jelajahi Aktivitas Menarik",
+      "subtitle": "Temukan berbagai aktivitas wisata yang tak terlupakan"
+    }
+  },
+  "manageProperty": {
+    "pageTitle": "Manajemen Properti",
+    "header": {
+      "title": "Kelola Properti Anda",
+      "subtitle": "Layanan manajemen properti profesional"
+    }
+  },
+  "media": {
+    "pageTitle": "Galeri Media",
+    "header": {
+      "title": "Galeri Media",
+      "subtitle": "Koleksi foto dan video dari properti dan aktivitas kami"
+    }
+  },
+  "blog": {
+    "pageTitle": "Blog",
+    "header": {
+      "title": "Blog & Artikel",
+      "subtitle": "Tips, panduan, dan informasi terbaru seputar properti dan wisata"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Masuk",
+      "subtitle": "Masuk ke akun Anda",
+      "email": "Email",
+      "password": "Kata Sandi",
+      "rememberMe": "Ingat Saya",
+      "forgotPassword": "Lupa Kata Sandi?",
+      "signInButton": "Masuk",
+      "noAccount": "Belum punya akun?",
+      "signUp": "Daftar"
+    },
+    "signup": {
+      "title": "Daftar",
+      "subtitle": "Buat akun baru",
+      "fullName": "Nama Lengkap",
+      "email": "Email",
+      "password": "Kata Sandi",
+      "confirmPassword": "Konfirmasi Kata Sandi",
+      "agreeTerms": "Saya menyetujui syarat dan ketentuan",
+      "signUpButton": "Daftar",
+      "hasAccount": "Sudah punya akun?",
+      "signIn": "Masuk"
+    }
+  },
   "LocaleSwitcher": {
     "id": "Indonesia",
     "en": "English",

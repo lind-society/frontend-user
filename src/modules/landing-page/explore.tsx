@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -14,6 +15,8 @@ type RentType = 'rent' | 'sale';
 type ScheduleType = 'daily' | 'monthly' | 'yearly';
 
 const ExploreBestListLandingPage = () => {
+  const t = useTranslations('landingPage.exploreBest');
+
   const [activeRentType, setActiveRentType] = useState<RentType>('rent');
   const [activeSchedule, setActiveSchedule] = useState<ScheduleType>('daily');
 
@@ -39,7 +42,7 @@ const ExploreBestListLandingPage = () => {
       <BaseContainer>
         <div className='flex flex-col gap-6 md:gap-8'>
           <h3 className='text-center text-primary text-2xl md:text-3xl font-semibold'>
-            Explore LIND's Best List
+            {t('title')}
           </h3>
 
           {/* Filter controls - responsive layout */}
@@ -50,14 +53,14 @@ const ExploreBestListLandingPage = () => {
                 onClick={() => handleRentTypeChange('rent')}
                 className='whitespace-nowrap'
               >
-                For Rent
+                {t('forRent')}
               </Button>
               <Button
                 variant={activeRentType === 'sale' ? 'primary' : 'secondary'}
                 onClick={() => handleRentTypeChange('sale')}
                 className='whitespace-nowrap'
               >
-                For Sale
+                {t('forSale')}
               </Button>
             </div>
 
@@ -69,7 +72,7 @@ const ExploreBestListLandingPage = () => {
                   onClick={() => handleScheduleChange('daily')}
                   className='whitespace-nowrap'
                 >
-                  Daily
+                  {t('daily')}
                 </Button>
                 <Button
                   variant={
@@ -78,7 +81,7 @@ const ExploreBestListLandingPage = () => {
                   onClick={() => handleScheduleChange('monthly')}
                   className='whitespace-nowrap'
                 >
-                  Monthly
+                  {t('monthly')}
                 </Button>
                 <Button
                   variant={
@@ -87,7 +90,7 @@ const ExploreBestListLandingPage = () => {
                   onClick={() => handleScheduleChange('yearly')}
                   className='whitespace-nowrap'
                 >
-                  Yearly
+                  {t('yearly')}
                 </Button>
               </div>
             )}
@@ -114,7 +117,7 @@ const ExploreBestListLandingPage = () => {
               className='border-primary text-primary hover:bg-primary/10'
               asChild
             >
-              <Link href={viewMoreLink}>View More</Link>
+              <Link href={viewMoreLink}>{t('viewMore')}</Link>
             </Button>
           </div>
         </div>

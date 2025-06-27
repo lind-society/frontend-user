@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -19,6 +20,7 @@ import { destinations } from '@/modules/landing-page/constant';
 
 const ExploreIconicLandingPage = () => {
   const [api, setApi] = useState<CarouselApi>();
+  const t = useTranslations('landingPage.exploreIconic');
 
   // Use effect to track carousel state
   useEffect(() => {
@@ -33,11 +35,10 @@ const ExploreIconicLandingPage = () => {
         <div className='flex flex-col gap-6 md:gap-8'>
           <div className='flex flex-col gap-2'>
             <h3 className='text-center text-primary text-2xl md:text-3xl font-semibold'>
-              Explore Our Iconic Destination
+              {t('title')}
             </h3>
             <p className='text-text font-normal text-center px-4 md:px-0'>
-              Travel beyond the ordinary and embrace the magic of the world's
-              most iconic destinations.
+              {t('subtitle')}
             </p>
           </div>
 

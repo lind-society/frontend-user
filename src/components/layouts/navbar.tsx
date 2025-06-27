@@ -3,6 +3,7 @@
 import { Menu, Phone, SearchIcon, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaFacebook, FaHeart, FaInstagram, FaTwitter } from 'react-icons/fa6';
 
@@ -18,6 +19,7 @@ import { Separator } from '@/components/ui/separator';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const t = useTranslations('navbar');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -43,7 +45,7 @@ const Navbar = () => {
           <div className='hidden md:flex h-[52px] flex-1 max-w-md mx-2 lg:mx-4'>
             <input
               type='text'
-              placeholder='Search by villa, property, or activity name'
+              placeholder={t('search.placeholder')}
               className='h-full w-full px-2 lg:px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary text-sm lg:text-base'
             />
             <button className='bg-primary h-full px-3 lg:px-6 rounded-r-md'>
@@ -62,7 +64,9 @@ const Navbar = () => {
                 hasChevron={true}
                 className='flex items-center gap-1 lg:gap-3'
               >
-                <span className='text-base lg:text-lg font-semibold'>IDR</span>
+                <span className='text-base lg:text-lg font-semibold'>
+                  {t('currency')}
+                </span>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuItem>IDR</DropdownMenuItem>
@@ -91,7 +95,7 @@ const Navbar = () => {
         <div className='flex h-[42px]'>
           <input
             type='text'
-            placeholder='Search'
+            placeholder={t('search.placeholder')}
             className='h-full w-full px-3 border border-gray-300 rounded-l-md focus:outline-none'
           />
           <button className='bg-primary h-full px-4 rounded-r-md'>
@@ -113,31 +117,31 @@ const Navbar = () => {
                 href='/rent'
                 className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
               >
-                Stay
+                {t('navigation.stay')}
               </Link>
               <Link
                 href='/buy'
                 className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
               >
-                Buy
+                {t('navigation.buy')}
               </Link>
               <Link
                 href='/tourist-activity'
                 className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
               >
-                Tourist Activity
+                {t('navigation.touristActivity')}
               </Link>
               <Link
                 href='/manage-property'
                 className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
               >
-                Property Management
+                {t('navigation.propertyManagement')}
               </Link>
               <Link
                 href='/about-us'
                 className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
               >
-                About Us
+                {t('navigation.aboutUs')}
               </Link>
             </div>
 
@@ -149,7 +153,7 @@ const Navbar = () => {
               >
                 <Phone className='text-gray-600' size={22} />
                 <span className='font-semibold text-base lg:text-lg'>
-                  Contact us
+                  {t('contact')}
                 </span>
               </Link>
               <Link
@@ -158,7 +162,7 @@ const Navbar = () => {
               >
                 <FaHeart className='text-red-600' size={22} />
                 <span className='font-semibold text-base lg:text-lg'>
-                  Wishlist
+                  {t('wishlist')}
                 </span>
               </Link>
             </div>
@@ -173,70 +177,86 @@ const Navbar = () => {
             {/* Main categories */}
             <div className='border-b border-gray-100 py-3'>
               <Link href='/rent' className='block py-2 font-medium text-lg'>
-                Stay
+                {t('navigation.stay')}
               </Link>
               <Link href='/buy' className='block py-2 font-medium text-lg'>
-                Buy
+                {t('navigation.buy')}
               </Link>
               <Link
                 href='/tourist-activity'
                 className='block py-2 font-medium text-lg'
               >
-                Tourist Activity
+                {t('navigation.touristActivity')}
               </Link>
               <Link
                 href='/manage-property'
                 className='block py-2 font-medium text-lg'
               >
-                Property Management
+                {t('navigation.propertyManagement')}
               </Link>
               <Link href='/about-us' className='block py-2 font-medium text-lg'>
-                About Us
+                {t('navigation.aboutUs')}
               </Link>
             </div>
 
             {/* Contact and Wishlist */}
             <div className='border-b border-gray-100 py-3'>
               <Link href='/contact-us' className='flex items-center py-2 gap-3'>
-                <Phone className='text-gray-600' size={20} />
-                <span className='font-medium'>Contact us</span>
+                <Phone className='text-gray-600' size={22} />
+                <span className='font-medium text-lg'>{t('contact')}</span>
               </Link>
-
               <Link href='/wishlist' className='flex items-center py-2 gap-3'>
-                <FaHeart className='text-red-600' size={20} />
-                <span className='font-medium'>Wishlist</span>
+                <FaHeart className='text-red-600' size={22} />
+                <span className='font-medium text-lg'>{t('wishlist')}</span>
               </Link>
             </div>
 
-            {/* Language, Currency, Social */}
-            <div className='pt-2'>
-              <div className='flex justify-between pt-3'>
-                <div className='flex gap-4 items-center'>
-                  <LocaleSwitcher />
-                  <DropdownMenu>
-                    <DropdownMenuTrigger
-                      hasChevron={true}
-                      className='flex items-center gap-2'
-                    >
-                      <span className='font-medium'>IDR</span>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent>
-                      <DropdownMenuItem>IDR</DropdownMenuItem>
-                      <DropdownMenuItem>USD</DropdownMenuItem>
-                      <DropdownMenuItem>EUR</DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </div>
-                <div className='flex items-center gap-6'>
-                  <FaFacebook className='text-primary' size={20} />
-                  <FaTwitter className='text-primary' size={20} />
-                  <FaInstagram className='text-primary' size={20} />
-                </div>
+            {/* Language, Currency, Social for mobile */}
+            <div className='py-3 space-y-3'>
+              {/* Language Switcher */}
+              <div className='flex justify-between items-center'>
+                <span className='font-medium text-lg'>Language</span>
+                <LocaleSwitcher />
+              </div>
+
+              {/* Currency */}
+              <div className='flex justify-between items-center'>
+                <span className='font-medium text-lg'>Currency</span>
+                <DropdownMenu>
+                  <DropdownMenuTrigger className='flex items-center gap-2'>
+                    <span className='text-lg font-semibold'>
+                      {t('currency')}
+                    </span>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem>IDR</DropdownMenuItem>
+                    <DropdownMenuItem>USD</DropdownMenuItem>
+                    <DropdownMenuItem>EUR</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+
+              {/* Social Media for mobile */}
+              <div className='flex gap-4 pt-2'>
+                <FaFacebook className='text-primary' size={24} />
+                <FaTwitter className='text-primary' size={24} />
+                <FaInstagram className='text-primary' size={24} />
               </div>
             </div>
           </div>
         </div>
       )}
+
+      {/* CSS for hiding scrollbar */}
+      <style jsx global>{`
+        .hideScrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .hideScrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 };

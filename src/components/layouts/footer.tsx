@@ -4,6 +4,7 @@
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa6';
 
@@ -30,6 +31,8 @@ const FooterLink = ({
 );
 
 const Footer = () => {
+  const t = useTranslations('footer');
+
   return (
     <div className='bg-white'>
       {/* Payment and social - Responsive */}
@@ -38,7 +41,7 @@ const Footer = () => {
           {/* Payment section */}
           <div className='flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center'>
             <p className='text-primary font-semibold text-xl md:text-2xl whitespace-nowrap'>
-              Payment channels
+              {t('paymentChannels')}
             </p>
             <div className='flex items-center gap-4 md:gap-8 flex-wrap'>
               <Image
@@ -71,7 +74,7 @@ const Footer = () => {
           {/* Social media section */}
           <div className='flex gap-4 sm:gap-8 items-center'>
             <p className='text-primary font-semibold text-xl md:text-2xl whitespace-nowrap'>
-              Follow us
+              {t('followUs')}
             </p>
             <div className='flex gap-4 sm:gap-6'>
               <Link href='#' aria-label='Facebook'>
@@ -106,62 +109,60 @@ const Footer = () => {
             {/* About Section - 4 cols on desktop, full width on mobile */}
             <div className='col-span-2 sm:col-span-4 md:col-span-4 flex flex-col gap-3'>
               <p className='text-primary font-semibold text-xl md:text-2xl'>
-                About LIND Society
+                {t('about.title')}
               </p>
               <p className='text-text font-normal text-sm md:text-base'>
-                LIND Society specializes in offering premium villa bookings,
-                property management, and unique tourist activities. Whether
-                you're looking to book a luxury villa, purchase your dream
-                property, or explore the best activities in the area, we provide
-                exceptional service and attention to detail. Our experienced
-                team ensures every client receives personalized care and
-                memorable experiences.
+                {t('about.description')}
               </p>
             </div>
 
             {/* Services - 1 col on mobile, 1 col on desktop */}
             <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
               <span className='font-semibold text-base md:text-lg text-text'>
-                Services
+                {t('services.title')}
               </span>
-              <FooterLink href='/rent'>Rent Home & Villas</FooterLink>
-              <FooterLink href='/buy'>Buy Properties</FooterLink>
+              <FooterLink href='/rent'>{t('services.rentVillas')}</FooterLink>
+              <FooterLink href='/buy'>{t('services.buyProperties')}</FooterLink>
               <FooterLink href='/tourist-activity'>
-                Tourist Activities
+                {t('services.touristActivities')}
               </FooterLink>
               <FooterLink href='/manage-property'>
-                Property Management
+                {t('services.propertyManagement')}
               </FooterLink>
             </div>
 
             {/* About Links */}
             <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
               <span className='font-semibold text-base md:text-lg text-text'>
-                About
+                {t('aboutLinks.title')}
               </span>
-              <FooterLink href='/about-us'>About Us</FooterLink>
-              <FooterLink href='/media'>Media Gallery</FooterLink>
-              <FooterLink href='/blog'>Blog</FooterLink>
+              <FooterLink href='/about-us'>
+                {t('aboutLinks.aboutUs')}
+              </FooterLink>
+              <FooterLink href='/media'>{t('aboutLinks.media')}</FooterLink>
+              <FooterLink href='/blog'>{t('aboutLinks.blog')}</FooterLink>
             </div>
 
             {/* Help Links */}
             <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
               <span className='font-semibold text-base md:text-lg text-text'>
-                Help
+                {t('help.title')}
               </span>
-              <FooterLink href='/contact-us'>Contact Us</FooterLink>
-              <FooterLink href='/faq'>FAQs</FooterLink>
-              <FooterLink href='/support'>Support</FooterLink>
+              <FooterLink href='/contact-us'>{t('help.contactUs')}</FooterLink>
+              <FooterLink href='/faq'>{t('help.faqs')}</FooterLink>
+              <FooterLink href='/support'>{t('help.support')}</FooterLink>
             </div>
 
             {/* More Info Links */}
             <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
               <span className='font-semibold text-base md:text-lg text-text'>
-                Legal
+                {t('legal.title')}
               </span>
-              <FooterLink href='/terms'>Terms & Conditions</FooterLink>
-              <FooterLink href='/privacy'>Privacy Policy</FooterLink>
-              <FooterLink href='/cancellation'>Cancellation Policy</FooterLink>
+              <FooterLink href='/terms'>{t('legal.terms')}</FooterLink>
+              <FooterLink href='/privacy'>{t('legal.privacy')}</FooterLink>
+              <FooterLink href='/cancellation'>
+                {t('legal.cancellation')}
+              </FooterLink>
             </div>
           </div>
 
@@ -176,40 +177,38 @@ const Footer = () => {
                 alt='LIND Society'
                 className='md:h-[96px] w-auto object-contain'
               />
-              <p className='text-xs md:text-sm text-center md:text-left'>
-                © 2025 LIND Society. 45 Sudirman Avenue, Level 5, Jakarta,
-                Indonesia 10210
-                <br className='hidden md:block' /> Indonesian Business Licence
-                Number: 0123456789
+              <p className='text-xs md:text-sm text-center md:text-left whitespace-pre-line'>
+                {t('copyright')}
               </p>
             </div>
 
             {/* Newsletter Subscription */}
             <div className='md:col-span-4 flex flex-col gap-3'>
               <p className='text-base md:text-lg font-semibold'>
-                Subscribe to our newsletter for villa perks and insider tips,
-                plus discount up to 30%
+                {t('newsletter.title')}
               </p>
               <div className='flex w-full   rounded-md overflow-hidden'>
                 <Input
                   type='email'
-                  placeholder='Enter your email address'
+                  placeholder={t('newsletter.emailPlaceholder')}
                   className='border border-primary rounded-r-none border-r-0 focus-visible:ring-0 focus-visible:ring-offset-0 w-full'
                 />
                 <Button
                   variant='primary'
-                  className='rounded-l-none border border-primary'
+                  className='rounded-l-none border-l-0 px-6'
                 >
-                  <ChevronRight size={20} />
+                  <ChevronRight size={16} />
+                  {t('newsletter.subscribe')}
                 </Button>
               </div>
-              <div className='flex items-center space-x-2'>
-                <Checkbox id='terms' />
+              <div className='flex items-start gap-2 mt-2'>
+                <Checkbox id='newsletter-consent' className='mt-1' />
                 <label
-                  htmlFor='terms'
-                  className='text-xs sm:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+                  htmlFor='newsletter-consent'
+                  className='text-xs text-gray-600 leading-tight'
                 >
-                  I agree to receive news and promotions from LIND Society
+                  I consent to receive marketing emails and agree to the Terms
+                  of Service and Privacy Policy. I can unsubscribe at any time.
                 </label>
               </div>
             </div>

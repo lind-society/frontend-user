@@ -1,4 +1,5 @@
 import { Tag } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { MdRoomService } from 'react-icons/md';
 import { Ri24HoursFill } from 'react-icons/ri';
@@ -24,24 +25,23 @@ const FeatureItem = ({ icon, title, description }: FeatureProps) => (
 );
 
 const WhyChooseUs = () => {
+  const t = useTranslations('landingPage.whyChooseUs');
+
   const features = [
     {
       icon: <Tag size={40} className='text-bg' />,
-      title: 'Best Rates Guaranteed',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus.',
+      title: t('features.bestRates.title'),
+      description: t('features.bestRates.description'),
     },
     {
       icon: <MdRoomService size={40} className='text-bg' />,
-      title: 'Excellent Services',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus.',
+      title: t('features.excellentService.title'),
+      description: t('features.excellentService.description'),
     },
     {
       icon: <Ri24HoursFill size={40} className='text-bg' />,
-      title: '24/7 Support',
-      description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus.',
+      title: t('features.support24.title'),
+      description: t('features.support24.description'),
     },
   ];
 
@@ -50,7 +50,7 @@ const WhyChooseUs = () => {
       <BaseContainer>
         <div className='flex flex-col items-center gap-6 md:gap-8'>
           <h3 className='text-tertiary text-2xl md:text-3xl font-semibold text-center'>
-            Why Choose Us?
+            {t('title')}
           </h3>
 
           {/* Mobile view: stacked items */}
