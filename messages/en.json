@@ -433,8 +433,72 @@
   "buy": {
     "pageTitle": "Buy Properties",
     "header": {
-      "title": "Best Property Investment",
-      "subtitle": "Find your dream property for future investment"
+      "title": "Own Your Dream Villa with LIND Society",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, numquam?",
+      "search": {
+        "location": "Location",
+        "ownership": "Ownership",
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "priceRange": "Price Range",
+        "anyPrice": "Any Price",
+        "searchButton": "Search",
+        "numberOfBedrooms": "Number of bedrooms",
+        "numberOfBathrooms": "Number of bathrooms",
+        "ownershipTypes": {
+          "leasehold": "Leasehold",
+          "freehold": "Freehold",
+          "both": "Both"
+        }
+      }
+    },
+    "breadcrumb": {
+      "home": "Home",
+      "buyProperties": "Buy properties"
+    },
+    "recomendationProperties": {
+      "title": "Our Recomendation Properties",
+      "subtitle": "Browse recomendation villas by ownership type",
+      "leasehold": "Leasehold",
+      "freehold": "Freehold",
+      "showMore": "Show more properties (118)"
+    },
+    "trustedBuyer": {
+      "title": "Trusted Buyer's Agent Representation",
+      "subtitle": "We are a dedicated team of expert agents, driven by a passion for real estate and exceptional service."
+    },
+    "dreamHome": {
+      "title": "Find Your Dream Home in One Place",
+      "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "features": {
+        "hundredsProperties": {
+          "title": "Hundreds of properties to choose from",
+          "description": "Browse our exclusive collection of handpicked properties tailored to your unique needs and preferences, with options ranging from beachfront villas to mountain retreats."
+        },
+        "knowWhatWorks": {
+          "title": "We know what works best",
+          "description": "With years of local expertise, our team understands the market inside out. We'll guide you to the properties that best match your investment goals and lifestyle requirements."
+        },
+        "notJustAgents": {
+          "title": "Not just agents, experts",
+          "description": "Our professionals combine deep local knowledge with industry expertise to offer strategic advice that goes beyond standard agent services, helping you make informed decisions."
+        },
+        "allPropertyServices": {
+          "title": "All property services in one place",
+          "description": "From search to closing and beyond, we handle everything including legal guidance, financing assistance, property management, and ongoing investment support."
+        }
+      }
+    },
+    "preferredOptions": {
+      "title": "Most Preferred Options",
+      "options": {
+        "instantIncome": "Instant income",
+        "rentalReady": "Rental ready",
+        "oceanView": "Ocean view",
+        "highEndLuxury": "High end luxury",
+        "jungleView": "Jungle view",
+        "landPlots": "Land plots"
+      }
     }
   },
   "touristActivity": {
@@ -494,5 +558,71 @@
     "id": "Indonesia",
     "en": "English",
     "label": "EN"
+  },
+  "filters": {
+    "title": "Filters",
+    "priceRange": "Price Range",
+    "collections": "Collections",
+    "freebies": "Freebies",
+    "amenities": "Amenities",
+    "showMore": "Show more",
+    "clearAll": "Clear All",
+    "applyFilters": "Apply Filters",
+    "collectionsOptions": {
+      "beachfront": "Beachfront",
+      "mountainView": "Mountain View",
+      "historic": "Historic",
+      "modern": "Modern",
+      "luxury": "Luxury",
+      "budgetFriendly": "Budget-friendly"
+    },
+    "freebiesOptions": {
+      "freeBreakfast": "Free breakfast",
+      "freeParking": "Free parking",
+      "freeWifi": "Free wifi",
+      "freeCancellation": "Free cancellation",
+      "freeAirportShuttle": "Free airport shuttle"
+    },
+    "amenitiesOptions": {
+      "airConditioning": "Air conditioning",
+      "pool": "Pool",
+      "kitchen": "Kitchen",
+      "parking": "Parking",
+      "gym": "Gym",
+      "jacuzzi": "Jacuzzi",
+      "beachAccess": "Beach access",
+      "bbq": "BBQ",
+      "laundry": "Laundry"
+    },
+    "touristActivity": {
+      "title": "Filter Tourist Activities",
+      "selectCountry": "Select Country",
+      "exploreActivityBasedOnCity": "Explore activity based on city",
+      "filterActivitiesByCity": "Filter activities by city destination",
+      "citiesSelected": "cities selected",
+      "citySelected": "city selected",
+      "clear": "Clear",
+      "back": "Back",
+      "cancel": "Cancel"
+    }
+  },
+  "inputComponents": {
+    "priceRange": {
+      "minimumPrice": "Minimum Price",
+      "maximumPrice": "Maximum Price",
+      "minPrice": "Min price",
+      "maxPrice": "Max price",
+      "maxPriceOrAny": "Max price or 'Any'"
+    },
+    "draggableInput": {
+      "dragDropSelect": "Drag, drop or select file to upload your",
+      "selectFile": "Select File",
+      "noFileSelected": "No file selected",
+      "unsupportedFileType": "Unsupported file type",
+      "failedToRotateImage": "Failed to rotate image",
+      "rotateLeft": "Rotate Left",
+      "rotateRight": "Rotate Right",
+      "fullscreen": "Fullscreen"
+    }
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import * as SliderPrimitive from '@radix-ui/react-slider';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -32,6 +33,16 @@ export const parseFormattedNumber = (value: string): number => {
   return cleanValue ? parseInt(cleanValue, 10) : 0;
 };
 
+export const formatPrice = (price: number): string => {
+  if (price >= 1000000) {
+    return `$${(price / 1000000).toFixed(price % 1000000 === 0 ? 0 : 1)}M`;
+  } else if (price >= 1000) {
+    return `$${(price / 1000).toFixed(price % 1000 === 0 ? 0 : 1)}K`;
+  } else {
+    return `$${price}`;
+  }
+};
+
 interface PriceRangeProps {
   values: [number, number];
   onValueChange: (values: [number, number]) => void;
@@ -47,6 +58,7 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
   max = 5000000, // Higher max for property purchase
   step = 10000,
 }) => {
+  const t = useTranslations('inputComponents.priceRange');
   const [inputMin, setInputMin] = React.useState<string>(
     formatNumber(values[0])
   );
@@ -177,8 +189,7 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='md:col-span-1 flex flex-col gap-2'>
           <div className='text-center text-sm font-medium text-gray-600'>
-            {formatCurrency(values[0], formatOptions)} -{' '}
-            {formatCurrency(values[1], formatOptions)}
+            {formatPrice(values[0])} - {formatPrice(values[1])}
           </div>
 
           {/* Slider */}
@@ -203,24 +214,24 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
         {/* Input fields */}
         <div className='grid grid-cols-2 gap-3 md:gap-4'>
           <div className='flex flex-col gap-2'>
-            <Label className='text-gray-500 text-sm'>Minimum Price</Label>
+            <Label className='text-gray-500 text-sm'>{t('minimumPrice')}</Label>
             <Input
               type='text'
               value={inputMin}
               onChange={handleMinInputChange}
               onBlur={handleMinInputBlur}
-              placeholder='Min price'
+              placeholder={t('minPrice')}
               className='focus-visible:ring-primary'
             />
           </div>
           <div className='flex flex-col gap-2'>
-            <Label className='text-gray-500 text-sm'>Maximum Price</Label>
+            <Label className='text-gray-500 text-sm'>{t('maximumPrice')}</Label>
             <Input
               type='text'
               value={inputMax}
               onChange={handleMaxInputChange}
               onBlur={handleMaxInputBlur}
-              placeholder='Max price'
+              placeholder={t('maxPrice')}
               className='focus-visible:ring-primary'
             />
           </div>

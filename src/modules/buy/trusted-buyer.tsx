@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -16,6 +19,8 @@ interface AgentImage {
 }
 
 const TrustedBuyerSection = () => {
+  const t = useTranslations('buy.trustedBuyer');
+
   const agentImages: AgentImage[] = [
     {
       src: '/images/trusted-1.png',
@@ -38,11 +43,10 @@ const TrustedBuyerSection = () => {
           {/* Left section with title and description */}
           <div className='w-full md:max-w-[400px] flex flex-col gap-2 md:gap-4'>
             <h2 className='text-xl md:text-2xl lg:text-3xl font-bold text-primary'>
-              Trusted Buyer's Agent Representation
+              {t('title')}
             </h2>
             <p className='text-text text-base md:text-lg lg:text-[22px]'>
-              We are a dedicated team of expert agents, driven by a passion for
-              real estate and exceptional service.
+              {t('subtitle')}
             </p>
           </div>
 

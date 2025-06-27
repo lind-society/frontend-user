@@ -433,8 +433,72 @@
   "buy": {
     "pageTitle": "Beli Properti",
     "header": {
-      "title": "Investasi Properti Terbaik",
-      "subtitle": "Temukan properti impian Anda untuk investasi masa depan"
+      "title": "Miliki Villa Impian Anda dengan LIND Society",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, numquam?",
+      "search": {
+        "location": "Lokasi",
+        "ownership": "Kepemilikan",
+        "bedrooms": "Kamar Tidur",
+        "bathrooms": "Kamar Mandi",
+        "priceRange": "Kisaran Harga",
+        "anyPrice": "Harga Berapapun",
+        "searchButton": "Cari",
+        "numberOfBedrooms": "Jumlah kamar tidur",
+        "numberOfBathrooms": "Jumlah kamar mandi",
+        "ownershipTypes": {
+          "leasehold": "Leasehold",
+          "freehold": "Freehold",
+          "both": "Keduanya"
+        }
+      }
+    },
+    "breadcrumb": {
+      "home": "Beranda",
+      "buyProperties": "Beli Properti"
+    },
+    "recomendationProperties": {
+      "title": "Properti Rekomendasi Kami",
+      "subtitle": "Jelajahi villa rekomendasi berdasarkan jenis kepemilikan",
+      "leasehold": "Leasehold",
+      "freehold": "Freehold",
+      "showMore": "Tampilkan lebih banyak properti (118)"
+    },
+    "trustedBuyer": {
+      "title": "Representasi Agen Pembeli Terpercaya",
+      "subtitle": "Kami adalah tim khusus dari agen ahli, didorong oleh passion untuk real estate dan pelayanan luar biasa."
+    },
+    "dreamHome": {
+      "title": "Temukan Rumah Impian Anda di Satu Tempat",
+      "subtitle": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.",
+      "features": {
+        "hundredsProperties": {
+          "title": "Ratusan properti untuk dipilih",
+          "description": "Jelajahi koleksi eksklusif properti pilihan yang disesuaikan dengan kebutuhan dan preferensi unik Anda, dengan pilihan mulai dari villa tepi pantai hingga retreat pegunungan."
+        },
+        "knowWhatWorks": {
+          "title": "Kami tahu apa yang terbaik",
+          "description": "Dengan pengalaman bertahun-tahun di lokal, tim kami memahami pasar secara menyeluruh. Kami akan memandu Anda ke properti yang paling sesuai dengan tujuan investasi dan gaya hidup Anda."
+        },
+        "notJustAgents": {
+          "title": "Bukan hanya agen, tetapi ahli",
+          "description": "Profesional kami menggabungkan pengetahuan lokal yang mendalam dengan keahlian industri untuk menawarkan saran strategis yang melampaui layanan agen standar, membantu Anda membuat keputusan yang tepat."
+        },
+        "allPropertyServices": {
+          "title": "Semua layanan properti di satu tempat",
+          "description": "Dari pencarian hingga penutupan dan seterusnya, kami menangani semuanya termasuk panduan hukum, bantuan pembiayaan, manajemen properti, dan dukungan investasi berkelanjutan."
+        }
+      }
+    },
+    "preferredOptions": {
+      "title": "Opsi yang Paling Disukai",
+      "options": {
+        "instantIncome": "Penghasilan Instan",
+        "rentalReady": "Siap Disewakan",
+        "oceanView": "Pemandangan Laut",
+        "highEndLuxury": "Mewah Kelas Atas",
+        "jungleView": "Pemandangan Hutan",
+        "landPlots": "Kavling Tanah"
+      }
     }
   },
   "touristActivity": {
@@ -494,5 +558,71 @@
     "id": "Indonesia",
     "en": "English",
     "label": "ID"
+  },
+  "filters": {
+    "title": "Filter",
+    "priceRange": "Kisaran Harga",
+    "collections": "Koleksi",
+    "freebies": "Gratis",
+    "amenities": "Fasilitas",
+    "showMore": "Tampilkan lebih banyak",
+    "clearAll": "Hapus Semua",
+    "applyFilters": "Terapkan Filter",
+    "collectionsOptions": {
+      "beachfront": "Tepi Pantai",
+      "mountainView": "Pemandangan Gunung",
+      "historic": "Bersejarah",
+      "modern": "Modern",
+      "luxury": "Mewah",
+      "budgetFriendly": "Ramah Budget"
+    },
+    "freebiesOptions": {
+      "freeBreakfast": "Sarapan gratis",
+      "freeParking": "Parkir gratis",
+      "freeWifi": "Wifi gratis",
+      "freeCancellation": "Pembatalan gratis",
+      "freeAirportShuttle": "Antar jemput bandara gratis"
+    },
+    "amenitiesOptions": {
+      "airConditioning": "AC",
+      "pool": "Kolam Renang",
+      "kitchen": "Dapur",
+      "parking": "Parkir",
+      "gym": "Gym",
+      "jacuzzi": "Jacuzzi",
+      "beachAccess": "Akses Pantai",
+      "bbq": "BBQ",
+      "laundry": "Laundry"
+    },
+    "touristActivity": {
+      "title": "Filter Aktivitas Wisata",
+      "selectCountry": "Pilih Negara",
+      "exploreActivityBasedOnCity": "Jelajahi aktivitas berdasarkan kota",
+      "filterActivitiesByCity": "Filter aktivitas berdasarkan destinasi kota",
+      "citiesSelected": "kota dipilih",
+      "citySelected": "kota dipilih",
+      "clear": "Hapus",
+      "back": "Kembali",
+      "cancel": "Batal"
+    }
+  },
+  "inputComponents": {
+    "priceRange": {
+      "minimumPrice": "Harga Minimum",
+      "maximumPrice": "Harga Maksimum",
+      "minPrice": "Harga min",
+      "maxPrice": "Harga max",
+      "maxPriceOrAny": "Harga max atau 'Bebas'"
+    },
+    "draggableInput": {
+      "dragDropSelect": "Seret, lepas atau pilih file untuk mengunggah",
+      "selectFile": "Pilih File",
+      "noFileSelected": "Tidak ada file yang dipilih",
+      "unsupportedFileType": "Jenis file tidak didukung",
+      "failedToRotateImage": "Gagal memutar gambar",
+      "rotateLeft": "Putar Kiri",
+      "rotateRight": "Putar Kanan",
+      "fullscreen": "Layar Penuh"
+    }
   }
 }

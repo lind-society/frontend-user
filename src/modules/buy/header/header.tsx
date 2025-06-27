@@ -3,6 +3,7 @@
 
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -28,6 +29,7 @@ import { Separator } from '@/components/ui/separator';
 import { PreferredOptionsBuyPage } from '@/modules/buy/header/preferred-option';
 
 const HeaderBuyPage = () => {
+  const t = useTranslations('buy.header');
   const router = useRouter();
 
   // Search filter states
@@ -41,12 +43,18 @@ const HeaderBuyPage = () => {
   const [maxPrice, setMaxPrice] = useState<number | null>(null);
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
-  const ownershipTypes = ['Leasehold', 'Freehold', 'Both'];
+
+  // Ownership types with translations
+  const ownershipTypes = [
+    { value: 'Leasehold', label: t('search.ownershipTypes.leasehold') },
+    { value: 'Freehold', label: t('search.ownershipTypes.freehold') },
+    { value: 'Both', label: t('search.ownershipTypes.both') },
+  ];
 
   // Format the price range for display
   const getDisplayPriceRange = (): string => {
     if (minPrice === 0 && maxPrice === null) {
-      return 'Any Price';
+      return t('search.anyPrice');
     }
 
     if (maxPrice === null) {
@@ -117,14 +125,9 @@ const HeaderBuyPage = () => {
           {/* Responsive header content */}
           <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
             <div className='flex flex-col gap-4 md:gap-6 max-w-full lg:max-w-[867px] mb-8 lg:mb-0'>
-              <h1 className='text-white h0 font-bold'>
-                Own Your Dream Villa <br />
-                with LIND Society
-              </h1>
+              <h1 className='text-white h0 font-bold'>{t('title')}</h1>
               <div className='px-3 md:px-5 border-white border-solid border-l-2 text-white text-lg md:text-[22px]'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem ipsum dolor sit amet consectetur adipisicing
-                elit. Reprehenderit, numquam?
+                {t('subtitle')}
               </div>
             </div>
           </div>
@@ -139,7 +142,9 @@ const HeaderBuyPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Location</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.location')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
@@ -172,9 +177,15 @@ const HeaderBuyPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <GrCertificate size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Ownership</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.ownership')}
+                      </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{ownership}</span>
+                        <span className='text-gray-500'>
+                          {ownershipTypes.find(
+                            (type) => type.value === ownership
+                          )?.label || ownership}
+                        </span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
@@ -184,15 +195,15 @@ const HeaderBuyPage = () => {
                   <div className='flex flex-col'>
                     {ownershipTypes.map((type) => (
                       <button
-                        key={type}
+                        key={type.value}
                         className={`py-2 px-3 text-left rounded-md ${
-                          ownership === type
+                          ownership === type.value
                             ? 'bg-primary/10 text-primary'
                             : 'hover:bg-gray-100'
                         }`}
-                        onClick={() => setOwnership(type)}
+                        onClick={() => setOwnership(type.value)}
                       >
-                        {type}
+                        {type.label}
                       </button>
                     ))}
                   </div>
@@ -205,7 +216,9 @@ const HeaderBuyPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Bedrooms</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.bedrooms')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {bedrooms.toString().padStart(2, '0')}
@@ -218,7 +231,7 @@ const HeaderBuyPage = () => {
                 <PopoverContent className='w-48 p-3'>
                   <div className='flex flex-col gap-3'>
                     <div className='flex justify-between items-center'>
-                      <span>Number of bedrooms</span>
+                      <span>{t('search.numberOfBedrooms')}</span>
                     </div>
                     <div className='flex items-center justify-between'>
                       <button
@@ -249,7 +262,9 @@ const HeaderBuyPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <LuBath size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Bathrooms</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.bathrooms')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {bathrooms.toString().padStart(2, '0')}
@@ -262,7 +277,7 @@ const HeaderBuyPage = () => {
                 <PopoverContent className='w-48 p-3'>
                   <div className='flex flex-col gap-3'>
                     <div className='flex justify-between items-center'>
-                      <span>Number of bathrooms</span>
+                      <span>{t('search.numberOfBathrooms')}</span>
                     </div>
                     <div className='flex items-center justify-between'>
                       <button
@@ -289,15 +304,17 @@ const HeaderBuyPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Price - Now using PriceRangeSelector */}
+              {/* Price Range */}
               <Popover>
                 <PopoverTrigger asChild>
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <TbCurrencyDollar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Price</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.priceRange')}
+                      </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-gray-500 truncate max-w-[150px]'>
                           {getDisplayPriceRange()}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -305,21 +322,14 @@ const HeaderBuyPage = () => {
                     </div>
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className='w-80 p-4'>
-                  <div className='flex flex-col gap-4'>
-                    <span className='text-lg font-semibold'>Price</span>
-
-                    {/* Integrated PriceRangeSelector component */}
-                    <PriceRangeSelector
-                      initialMinPrice={minPrice}
-                      initialMaxPrice={maxPrice}
-                      absoluteMin={0}
-                      absoluteMax={10000000} // 10M
-                      step={10000}
-                      onChange={handlePriceChange}
-                      priceRanges={DEFAULT_PRICE_RANGES}
-                    />
-                  </div>
+                <PopoverContent className='w-auto max-w-[350px] p-0'>
+                  <PriceRangeSelector
+                    initialMinPrice={minPrice}
+                    initialMaxPrice={maxPrice}
+                    priceRanges={DEFAULT_PRICE_RANGES}
+                    onChange={handlePriceChange}
+                    className='p-4'
+                  />
                 </PopoverContent>
               </Popover>
 
@@ -330,13 +340,13 @@ const HeaderBuyPage = () => {
                 className='w-full md:w-auto'
                 onClick={handleSearch}
               >
-                Search
+                {t('search.searchButton')}
               </Button>
             </div>
 
             <Separator />
 
-            {/* Using the updated PreferredOptions component */}
+            {/* Preferred Options */}
             <PreferredOptionsBuyPage onFilterApply={handleFilterApply} />
           </div>
         </div>

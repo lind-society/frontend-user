@@ -1,6 +1,7 @@
 'use client';
 
 import * as SliderPrimitive from '@radix-ui/react-slider';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -102,6 +103,7 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
   priceRanges = DEFAULT_PRICE_RANGES,
   className = '',
 }) => {
+  const t = useTranslations('inputComponents.priceRange');
   // Find initial selected range option based on initialMinPrice and initialMaxPrice
   const findInitialSelectedOption = (): string => {
     const matchingOption = priceRanges.find(
@@ -376,24 +378,24 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
       {/* Input fields */}
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>Minimum Price</Label>
+          <Label className='text-gray-500 text-sm'>{t('minimumPrice')}</Label>
           <Input
             type='text'
             value={minInputValue}
             onChange={handleMinInputChange}
             onBlur={handleMinInputBlur}
-            placeholder='Min price'
+            placeholder={t('minPrice')}
             className='focus-visible:ring-primary'
           />
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>Maximum Price</Label>
+          <Label className='text-gray-500 text-sm'>{t('maximumPrice')}</Label>
           <Input
             type='text'
             value={maxInputValue}
             onChange={handleMaxInputChange}
             onBlur={handleMaxInputBlur}
-            placeholder="Max price or 'Any'"
+            placeholder={t('maxPriceOrAny')}
             className='focus-visible:ring-primary'
           />
         </div>

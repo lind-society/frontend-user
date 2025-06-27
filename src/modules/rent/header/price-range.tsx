@@ -1,6 +1,7 @@
 'use client';
 
 import * as SliderPrimitive from '@radix-ui/react-slider';
+import { useTranslations } from 'next-intl';
 import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -54,6 +55,7 @@ const PriceRangeSlider = ({
   onChange,
   className,
 }: PriceRangeSliderProps) => {
+  const t = useTranslations('inputComponents.priceRange');
   const [values, setValues] = React.useState<[number, number]>([min, max]);
   const [inputMin, setInputMin] = React.useState<string>(formatNumber(min));
   const [inputMax, setInputMax] = React.useState<string>(formatNumber(max));
@@ -216,24 +218,24 @@ const PriceRangeSlider = ({
       {/* Input fields - Responsive layout with formatted values */}
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5'>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>Minimum Price</Label>
+          <Label className='text-gray-500 text-sm'>{t('minimumPrice')}</Label>
           <Input
             type='text' // Changed from 'number' to 'text' to support formatting
             value={inputMin}
             onChange={handleMinInputChange}
             onBlur={handleMinInputBlur}
-            placeholder='Min price'
+            placeholder={t('minPrice')}
             className='focus-visible:ring-primary'
           />
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>Maximum Price</Label>
+          <Label className='text-gray-500 text-sm'>{t('maximumPrice')}</Label>
           <Input
             type='text' // Changed from 'number' to 'text' to support formatting
             value={inputMax}
             onChange={handleMaxInputChange}
             onBlur={handleMaxInputBlur}
-            placeholder='Max price'
+            placeholder={t('maxPrice')}
             className='focus-visible:ring-primary'
           />
         </div>

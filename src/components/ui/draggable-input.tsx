@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-console */
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 import { Accept, useDropzone } from 'react-dropzone';
 import { FieldValues, useController } from 'react-hook-form';
@@ -21,6 +22,7 @@ export const UploadDraggableField = <T extends FieldValues>({
   setFileInfo,
   ...props
 }: TDraggableImageInputProps<T>): ReactElement => {
+  const t = useTranslations('inputComponents.draggableInput');
   const { field } = useController(props);
 
   const [isFullscreen, setIsFullscreen] = useState(false); // State for fullscreen
@@ -167,7 +169,7 @@ export const UploadDraggableField = <T extends FieldValues>({
         });
       } catch (error) {
         console.error(error);
-        toast.error('Failed to rotate image.');
+        toast.error(t('failedToRotateImage'));
       }
     }
   };
@@ -185,7 +187,7 @@ export const UploadDraggableField = <T extends FieldValues>({
         });
       } catch (error) {
         console.error(error);
-        toast.error('Failed to rotate image.');
+        toast.error(t('failedToRotateImage'));
       }
     }
   };
@@ -247,7 +249,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                   type='button'
                   onClick={rotateLeft}
                   className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
-                  title='Rotate Left'
+                  title={t('rotateLeft')}
                 >
                   <FaRotateLeft size={20} />
                 </button>
@@ -255,7 +257,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                   type='button'
                   onClick={rotateRight}
                   className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
-                  title='Rotate Right'
+                  title={t('rotateRight')}
                 >
                   <FaRotateRight size={20} />
                 </button>
@@ -263,7 +265,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                   type='button'
                   onClick={toggleFullscreen}
                   className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
-                  title='Fullscreen'
+                  title={t('fullscreen')}
                 >
                   <FaExpand size={20} />
                 </button>
@@ -291,7 +293,7 @@ export const UploadDraggableField = <T extends FieldValues>({
               type='button'
               onClick={toggleFullscreen}
               className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
-              title='Fullscreen'
+              title={t('fullscreen')}
             >
               <FaExpand size={20} />
             </button>
@@ -323,7 +325,7 @@ export const UploadDraggableField = <T extends FieldValues>({
       );
     }
 
-    return <span className='text-black mt-4'>Unsupported file type</span>;
+    return <span className='text-black mt-4'>{t('unsupportedFileType')}</span>;
   };
 
   const handleEyeClick = (e: React.MouseEvent) => {
@@ -355,15 +357,14 @@ export const UploadDraggableField = <T extends FieldValues>({
             <AiOutlineCloudUpload className='text-4xl text-gray-400 mb-2' />
           </div>
           <span className='mt-2 text-xs md:text-sm lg:text-sm text-center text-black font-semibold dark:text-white'>
-            Drag, drop or <span className='text-blue-base'>select file</span> to
-            upload your {label}
+            {t('dragDropSelect')} {label}
           </span>
-          <span className='flex justify-center items-center text-xs md:text-sm lg:text-sm mt-2 rounded-lg border overflow-hidden max-w-[250px] sm:max-w-[300px] md:max-w-[400px] lg:max-w-[500px]'>
+          <div className='flex items-center w-full border border-neutral-300 rounded-lg mt-4 overflow-hidden'>
             <p className='bg-gray-500 hover:bg-primary-700 cursor-pointer w-fit text-white h-full transition-colors ease-in-out duration-300 px-4 rounded-l-lg flex items-center text-xs py-2 whitespace-nowrap'>
-              Select File
+              {t('selectFile')}
             </p>
             <p className='px-4 text-xs text-nowrap overflow-hidden overflow-ellipsis whitespace-nowrap'>
-              {fileInfo.name ? fileInfo.name : 'No file selected'}
+              {fileInfo.name ? fileInfo.name : t('noFileSelected')}
             </p>
             {field.value && (
               <a
@@ -376,7 +377,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                 <FaEye />
               </a>
             )}
-          </span>
+          </div>
           <input {...getInputProps()} ref={inputRef} className='hidden' />
         </button>
 

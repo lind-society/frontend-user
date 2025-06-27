@@ -1,6 +1,7 @@
 'use client';
 
 import { Slash } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -17,11 +18,14 @@ import { VillaCard } from '@/components/ui/card/villa';
 import { villas } from '@/modules/rent/constant';
 
 const RecomendationPropertiesBuyPage = () => {
+  const t = useTranslations('buy');
+
   const toggleFavorite = (id: number) => {
     // In a real app, you would update this in your state management
     // eslint-disable-next-line no-console
     console.log(`Toggled favorite for villa ${id}`);
   };
+
   return (
     <BaseContainer>
       <div className='flex flex-col gap-8 py-8'>
@@ -29,13 +33,15 @@ const RecomendationPropertiesBuyPage = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                <BreadcrumbLink href='/'>{t('breadcrumb.home')}</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
                 <Slash />
               </BreadcrumbSeparator>
               <BreadcrumbItem className='font-semibold'>
-                <BreadcrumbLink href='/buy'>Buy properties</BreadcrumbLink>
+                <BreadcrumbLink href='/buy'>
+                  {t('breadcrumb.buyProperties')}
+                </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -44,18 +50,18 @@ const RecomendationPropertiesBuyPage = () => {
         <div className='flex sm:flex-row flex-col gap-6 justify-between items-center'>
           <div className='flex flex-col gap-2 '>
             <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-primary'>
-              Our Recomendation Properties
+              {t('recomendationProperties.title')}
             </h2>
             <p className='text-base md:text-lg text-text'>
-              Browse recomendation villas by ownership type
+              {t('recomendationProperties.subtitle')}
             </p>
           </div>
           <div className='flex gap-2'>
             <Button variant='primary' className='flex gap-2 items-center'>
-              Leasehold
+              {t('recomendationProperties.leasehold')}
             </Button>
             <Button variant='outline' className='flex gap-2 items-center'>
-              Freehold
+              {t('recomendationProperties.freehold')}
             </Button>
           </div>
         </div>
@@ -76,7 +82,7 @@ const RecomendationPropertiesBuyPage = () => {
             variant='ghost'
             className='border-primary text-primary hover:bg-primary/10 underline font-semibold'
           >
-            Show more properties (118)
+            {t('recomendationProperties.showMore')}
           </Button>
         </div>
       </div>

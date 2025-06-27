@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { MdHomeWork, MdOutlineSupport } from 'react-icons/md';
 import { RiHome4Fill } from 'react-icons/ri';
@@ -29,30 +32,28 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 );
 
 const DreamHomeBuyPage = () => {
+  const t = useTranslations('buy.dreamHome');
+
   const features = [
     {
       icon: <RiHome4Fill className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'Hundreds of properties to choose from',
-      description:
-        'Browse our exclusive collection of handpicked properties tailored to your unique needs and preferences, with options ranging from beachfront villas to mountain retreats.',
+      title: t('features.hundredsProperties.title'),
+      description: t('features.hundredsProperties.description'),
     },
     {
       icon: <MdOutlineSupport className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'We know what works best',
-      description:
-        "With years of local expertise, our team understands the market inside out. We'll guide you to the properties that best match your investment goals and lifestyle requirements.",
+      title: t('features.knowWhatWorks.title'),
+      description: t('features.knowWhatWorks.description'),
     },
     {
       icon: <TbUserStar className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'Not just agents, experts',
-      description:
-        'Our professionals combine deep local knowledge with industry expertise to offer strategic advice that goes beyond standard agent services, helping you make informed decisions.',
+      title: t('features.notJustAgents.title'),
+      description: t('features.notJustAgents.description'),
     },
     {
       icon: <MdHomeWork className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'All property services in one place',
-      description:
-        'From search to closing and beyond, we handle everything including legal guidance, financing assistance, property management, and ongoing investment support.',
+      title: t('features.allPropertyServices.title'),
+      description: t('features.allPropertyServices.description'),
     },
   ];
 
@@ -73,13 +74,10 @@ const DreamHomeBuyPage = () => {
             </div>
             <div className='bg-primary p-6 md:p-8 flex flex-col gap-4 md:gap-5'>
               <h2 className='text-white text-xl md:text-2xl lg:text-3xl font-bold'>
-                Find Your Dream Home in One Place
+                {t('title')}
               </h2>
               <p className='text-white text-base md:text-lg lg:text-xl font-medium md:font-semibold'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-                eiusmod tempor incididunt ut labore. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                labore.
+                {t('subtitle')}
               </p>
             </div>
           </div>

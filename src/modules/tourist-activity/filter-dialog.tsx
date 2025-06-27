@@ -1,4 +1,7 @@
+'use client';
+
 import { ChevronRight, SlidersHorizontal, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -22,6 +25,8 @@ interface FilterDialogTouristProps {
 }
 
 const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
+  const t = useTranslations('filters.touristActivity');
+
   // Dialog state
   const [open, setOpen] = useState(false);
 
@@ -108,7 +113,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
       <DialogTrigger asChild>
         <Button variant='outline' className='flex gap-2 items-center'>
           <SlidersHorizontal size={20} className='text-primary' />
-          <span className='text-primary'>Filters</span>
+          <span className='text-primary'>{t('title').split(' ')[0]}</span>
           {getSelectedCitiesCount() > 0 && (
             <span className='bg-primary text-white rounded-full text-xs py-0.5 px-2 ml-1'>
               {getSelectedCitiesCount()}
@@ -130,7 +135,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
               <ChevronRight className='rotate-180 text-primary' />
             </Button>
             <DialogTitle className='text-center text-primary font-semibold'>
-              {showCities ? activeCountry : 'Select Country'}
+              {showCities ? activeCountry : t('selectCountry')}
             </DialogTitle>
           </div>
         </DialogHeader>
@@ -139,7 +144,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
         <DialogHeader className='hidden md:flex px-6 py-4 border-b'>
           <div className='flex items-center justify-between w-full'>
             <DialogTitle className='text-xl font-semibold text-primary'>
-              Filter Tourist Activities
+              {t('title')}
             </DialogTitle>
             <Button variant='ghost' size='icon' onClick={() => setOpen(false)}>
               <X className='text-gray-500' />
@@ -168,7 +173,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   <div className='flex flex-col gap-1'>
                     <span className='font-semibold'>{country}</span>
                     <span className='text-xs'>
-                      Explore activity based on city
+                      {t('exploreActivityBasedOnCity')}
                     </span>
                   </div>
                   <ChevronRight
@@ -211,12 +216,13 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
               <div className='p-5 flex justify-between'>
                 <div className='flex flex-col gap-1'>
                   <span className='text-primary font-semibold text-sm'>
-                    Filter activities by city destination
+                    {t('filterActivitiesByCity')}
                   </span>
                   <span className='text-xs text-gray-500'>
                     {getSelectedCitiesCount()}{' '}
-                    {getSelectedCitiesCount() === 1 ? 'city' : 'cities'}{' '}
-                    selected
+                    {getSelectedCitiesCount() === 1
+                      ? t('citySelected')
+                      : t('citiesSelected')}
                   </span>
                 </div>
                 <Button
@@ -224,7 +230,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   className='text-text text-sm'
                   onClick={clearCities}
                 >
-                  Clear
+                  {t('clear')}
                 </Button>
               </div>
             </ScrollArea>
@@ -242,10 +248,12 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   }
                 }}
               >
-                {showCities && window.innerWidth < 768 ? 'Back' : 'Cancel'}
+                {showCities && window.innerWidth < 768
+                  ? t('back')
+                  : t('cancel')}
               </Button>
               <Button variant='primary' onClick={applyFilters}>
-                Apply Filters
+                {t('../applyFilters')}
               </Button>
             </div>
           </div>

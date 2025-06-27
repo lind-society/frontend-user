@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app';
 import React from 'react';
 import { FaHome, FaSearchDollar } from 'react-icons/fa';
@@ -26,38 +27,39 @@ interface PreferredOptionsBuyPageProps {
 export function PreferredOptionsBuyPage({
   onFilterApply,
 }: PreferredOptionsBuyPageProps) {
+  const t = useTranslations('buy.preferredOptions');
   const router = useRouter();
 
-  // Adding the preferred options
+  // Adding the preferred options with translations
   const preferredOptions: PreferredOption[] = [
     {
       id: 'instant-income',
-      label: 'Instant income',
+      label: t('options.instantIncome'),
       icon: <FaSearchDollar size={20} className='text-primary' />,
     },
     {
       id: 'rental-ready',
-      label: 'Rental ready',
+      label: t('options.rentalReady'),
       icon: <FaHome size={20} className='text-primary' />,
     },
     {
       id: 'ocean-view',
-      label: 'Ocean view',
+      label: t('options.oceanView'),
       icon: <IoWater size={20} className='text-primary' />,
     },
     {
       id: 'high-end-luxury',
-      label: 'High end luxury',
+      label: t('options.highEndLuxury'),
       icon: <MdOutlineVilla size={20} className='text-primary' />,
     },
     {
       id: 'jungle-view',
-      label: 'Jungle view',
+      label: t('options.jungleView'),
       icon: <GiPalmTree size={20} className='text-primary' />,
     },
     {
       id: 'land-plots',
-      label: 'Land plots',
+      label: t('options.landPlots'),
       icon: <GiIsland size={20} className='text-primary' />,
     },
   ];
@@ -91,7 +93,7 @@ export function PreferredOptionsBuyPage({
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <span className='text-lg md:text-[22px] text-primary font-semibold'>
-          Most Preferred Options
+          {t('title')}
         </span>
         <FiltersDialog onApply={handleFilterApply} />
       </div>

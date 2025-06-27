@@ -2,6 +2,7 @@
 'use client';
 
 import { ChevronUp, SlidersHorizontal, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ interface FiltersProps {
 }
 
 export function FiltersDialog({ onApply, onClear }: FiltersProps) {
+  const t = useTranslations('filters');
   const [open, setOpen] = useState(false);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500000]);
 
@@ -30,57 +32,60 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
   const [freebies, setFreebies] = useState<Record<string, boolean>>({});
   const [amenities, setAmenities] = useState<Record<string, boolean>>({});
 
-  // Collections data
+  // Collections data with translations
   const collectionsData = [
-    'Beachfront',
-    'Mountain View',
-    'Historic',
-    'Modern',
-    'Luxury',
-    'Budget-friendly',
+    { key: 'beachfront', label: t('collectionsOptions.beachfront') },
+    { key: 'mountainView', label: t('collectionsOptions.mountainView') },
+    { key: 'historic', label: t('collectionsOptions.historic') },
+    { key: 'modern', label: t('collectionsOptions.modern') },
+    { key: 'luxury', label: t('collectionsOptions.luxury') },
+    { key: 'budgetFriendly', label: t('collectionsOptions.budgetFriendly') },
   ];
 
-  // Freebies data
+  // Freebies data with translations
   const freebiesData = [
-    'Free breakfast',
-    'Free parking',
-    'Free wifi',
-    'Free cancellation',
-    'Free airport shuttle',
+    { key: 'freeBreakfast', label: t('freebiesOptions.freeBreakfast') },
+    { key: 'freeParking', label: t('freebiesOptions.freeParking') },
+    { key: 'freeWifi', label: t('freebiesOptions.freeWifi') },
+    { key: 'freeCancellation', label: t('freebiesOptions.freeCancellation') },
+    {
+      key: 'freeAirportShuttle',
+      label: t('freebiesOptions.freeAirportShuttle'),
+    },
   ];
 
-  // Amenities data
+  // Amenities data with translations
   const amenitiesData = [
-    'Air conditioning',
-    'Pool',
-    'Kitchen',
-    'Parking',
-    'Gym',
-    'Jacuzzi',
-    'Beach access',
-    'BBQ',
-    'Laundry',
+    { key: 'airConditioning', label: t('amenitiesOptions.airConditioning') },
+    { key: 'pool', label: t('amenitiesOptions.pool') },
+    { key: 'kitchen', label: t('amenitiesOptions.kitchen') },
+    { key: 'parking', label: t('amenitiesOptions.parking') },
+    { key: 'gym', label: t('amenitiesOptions.gym') },
+    { key: 'jacuzzi', label: t('amenitiesOptions.jacuzzi') },
+    { key: 'beachAccess', label: t('amenitiesOptions.beachAccess') },
+    { key: 'bbq', label: t('amenitiesOptions.bbq') },
+    { key: 'laundry', label: t('amenitiesOptions.laundry') },
   ];
 
   // Toggle checkbox selection
-  const toggleCollection = (item: string) => {
+  const toggleCollection = (key: string) => {
     setCollections((prev) => ({
       ...prev,
-      [item]: !prev[item],
+      [key]: !prev[key],
     }));
   };
 
-  const toggleFreebie = (item: string) => {
+  const toggleFreebie = (key: string) => {
     setFreebies((prev) => ({
       ...prev,
-      [item]: !prev[item],
+      [key]: !prev[key],
     }));
   };
 
-  const toggleAmenity = (item: string) => {
+  const toggleAmenity = (key: string) => {
     setAmenities((prev) => ({
       ...prev,
-      [item]: !prev[item],
+      [key]: !prev[key],
     }));
   };
 
@@ -126,7 +131,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
       <DialogTrigger asChild>
         <Button variant='outline' className='flex gap-2 items-center'>
           <SlidersHorizontal size={20} className='text-primary' />
-          <span className='text-primary'>Filters</span>
+          <span className='text-primary'>{t('title')}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className='max-w-[90vw]  p-0 h-[80vh] flex flex-col max-h-[80vh]'>
@@ -134,7 +139,9 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
           <DialogTitle>
             <div className='flex gap-2 items-center'>
               <SlidersHorizontal size={24} className='text-primary' />
-              <span className='text-primary text-xl md:text-2xl'>Filters</span>
+              <span className='text-primary text-xl md:text-2xl'>
+                {t('title')}
+              </span>
             </div>
           </DialogTitle>
           <Button variant='ghost' size='icon' onClick={() => setOpen(false)}>
@@ -147,7 +154,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             {/* Price Range Section */}
             <div className='flex flex-col px-4 md:px-8 py-4 gap-5 border-b'>
               <span className='text-primary text-lg md:text-[22px] font-semibold'>
-                Price Range
+                {t('priceRange')}
               </span>
               <PriceRangeSlider
                 min={0}
@@ -161,7 +168,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             <div className='px-4 md:px-8 py-4 border-b flex flex-col gap-2'>
               <div className='flex justify-between'>
                 <span className='text-lg font-semibold text-gray-800'>
-                  Collections
+                  {t('collections')}
                 </span>
                 <ChevronUp className='text-gray-500' />
               </div>
@@ -173,20 +180,20 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                   >
                     <Checkbox
                       id={`collection-${index}`}
-                      checked={collections[item] || false}
-                      onCheckedChange={() => toggleCollection(item)}
+                      checked={collections[item.key] || false}
+                      onCheckedChange={() => toggleCollection(item.key)}
                     />
                     <label
                       htmlFor={`collection-${index}`}
                       className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
                     >
-                      {item}
+                      {item.label}
                     </label>
                   </div>
                 ))}
               </div>
               <Button variant='link' className='text-primary self-start p-0'>
-                Show more
+                {t('showMore')}
               </Button>
             </div>
 
@@ -194,7 +201,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             <div className='px-4 md:px-8 py-4 border-b flex flex-col gap-2'>
               <div className='flex justify-between'>
                 <span className='text-lg font-semibold text-gray-800'>
-                  Freebies
+                  {t('freebies')}
                 </span>
                 <ChevronUp className='text-gray-500' />
               </div>
@@ -206,14 +213,14 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                   >
                     <Checkbox
                       id={`freebie-${index}`}
-                      checked={freebies[item] || false}
-                      onCheckedChange={() => toggleFreebie(item)}
+                      checked={freebies[item.key] || false}
+                      onCheckedChange={() => toggleFreebie(item.key)}
                     />
                     <label
                       htmlFor={`freebie-${index}`}
                       className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
                     >
-                      {item}
+                      {item.label}
                     </label>
                   </div>
                 ))}
@@ -224,7 +231,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             <div className='px-4 md:px-8 pb-10 pt-4 border-b flex flex-col gap-2'>
               <div className='flex justify-between'>
                 <span className='text-lg font-semibold text-gray-800'>
-                  Amenities
+                  {t('amenities')}
                 </span>
                 <ChevronUp className='text-gray-500' />
               </div>
@@ -236,20 +243,20 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                   >
                     <Checkbox
                       id={`amenity-${index}`}
-                      checked={amenities[item] || false}
-                      onCheckedChange={() => toggleAmenity(item)}
+                      checked={amenities[item.key] || false}
+                      onCheckedChange={() => toggleAmenity(item.key)}
                     />
                     <label
                       htmlFor={`amenity-${index}`}
                       className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
                     >
-                      {item}
+                      {item.label}
                     </label>
                   </div>
                 ))}
               </div>
               <Button variant='link' className='text-primary self-start p-0'>
-                Show more
+                {t('showMore')}
               </Button>
             </div>
           </div>
@@ -261,10 +268,10 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             onClick={handleClear}
             className='text-sm font-medium text-gray-700'
           >
-            Clear All
+            {t('clearAll')}
           </Button>
           <Button variant='primary' onClick={handleApply}>
-            Apply Filters
+            {t('applyFilters')}
           </Button>
         </div>
       </DialogContent>
