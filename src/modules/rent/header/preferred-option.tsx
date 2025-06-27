@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app'; // Import router
 import React from 'react';
 import { BiSwim } from 'react-icons/bi';
@@ -28,34 +29,63 @@ interface PreferredOptionsProps {
 }
 
 export function PreferredOptions({ onFilterApply }: PreferredOptionsProps) {
+  const t = useTranslations('rent.preferredOptions');
   const router = useRouter(); // Initialize router
 
   const preferredOptions: PreferredOption[] = [
     {
       id: 'air-cond',
-      label: 'Air conditioner',
+      label: t('amenities.airConditioner'),
       icon: <TbAirConditioning size={24} />,
     },
-    { id: 'pool', label: 'Pool', icon: <BiSwim size={24} /> },
-    { id: 'kitchen', label: 'Kitchen', icon: <MdKitchen size={24} /> },
-    { id: 'parking', label: 'Parking', icon: <FaParking size={24} /> },
-    { id: 'beach', label: 'Beachfront', icon: <FaUmbrellaBeach size={24} /> },
-    { id: 'wifi', label: 'Free WiFi', icon: <IoWifiOutline size={24} /> },
-    { id: 'pets', label: 'Pet friendly', icon: <MdOutlinePets size={24} /> },
+    { id: 'pool', label: t('amenities.pool'), icon: <BiSwim size={24} /> },
+    {
+      id: 'kitchen',
+      label: t('amenities.kitchen'),
+      icon: <MdKitchen size={24} />,
+    },
+    {
+      id: 'parking',
+      label: t('amenities.parking'),
+      icon: <FaParking size={24} />,
+    },
+    {
+      id: 'beach',
+      label: t('amenities.beachfront'),
+      icon: <FaUmbrellaBeach size={24} />,
+    },
+    {
+      id: 'wifi',
+      label: t('amenities.freeWifi'),
+      icon: <IoWifiOutline size={24} />,
+    },
+    {
+      id: 'pets',
+      label: t('amenities.petFriendly'),
+      icon: <MdOutlinePets size={24} />,
+    },
     {
       id: 'security',
-      label: 'Security',
+      label: t('amenities.security'),
       icon: <MdOutlineSecurity size={24} />,
     },
     {
       id: 'mountain',
-      label: 'Mountain view',
+      label: t('amenities.mountainView'),
       icon: <PiMountainsDuotone size={24} />,
     },
-    { id: 'massage', label: 'Massage', icon: <TbMassage size={24} /> },
-    { id: 'bbq', label: 'BBQ grill', icon: <TbGrill size={24} /> },
-    { id: 'yoga', label: 'Yoga', icon: <GrYoga size={24} /> },
-    { id: 'seaview', label: 'Sea view', icon: <RiRoadMapLine size={24} /> },
+    {
+      id: 'massage',
+      label: t('amenities.massage'),
+      icon: <TbMassage size={24} />,
+    },
+    { id: 'bbq', label: t('amenities.bbqGrill'), icon: <TbGrill size={24} /> },
+    { id: 'yoga', label: t('amenities.yoga'), icon: <GrYoga size={24} /> },
+    {
+      id: 'seaview',
+      label: t('amenities.seaView'),
+      icon: <RiRoadMapLine size={24} />,
+    },
   ];
 
   // Handle preferred option click
@@ -102,7 +132,7 @@ export function PreferredOptions({ onFilterApply }: PreferredOptionsProps) {
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <span className='text-lg md:text-[22px] text-primary font-semibold'>
-          Most Preferred Options
+          {t('title')}
         </span>
         <FiltersDialog onApply={handleFilterApply} />
       </div>

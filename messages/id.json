@@ -263,15 +263,149 @@
   "rent": {
     "pageTitle": "Sewa Villa & Properti",
     "header": {
-      "title": "Temukan Villa Impian Anda",
-      "subtitle": "Pilihan terbaik vila dan properti untuk liburan tak terlupakan"
+      "title": "Temukan Sewa Villa Terpilih dengan LIND Society",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "search": {
+        "location": "Lokasi",
+        "checkIn": "Check in",
+        "checkOut": "Check out",
+        "selectDate": "Pilih tanggal",
+        "bedrooms": "Kamar Tidur",
+        "guests": "Tamu",
+        "searchButton": "Cari"
+      }
     },
-    "filters": {
-      "location": "Lokasi",
-      "priceRange": "Rentang Harga",
-      "bedrooms": "Kamar Tidur",
-      "amenities": "Fasilitas",
-      "propertyType": "Jenis Properti"
+    "breadcrumb": {
+      "home": "Beranda",
+      "rentalProperties": "Properti Sewa"
+    },
+    "rentalProperties": {
+      "showMore": "Tampilkan lebih banyak villa sewa (118)"
+    },
+    "exploreList": {
+      "title": "Anda Dapat Menjelajahi Daftar Kami Berdasarkan",
+      "subtitle": "Jelajahi villa yang tersedia berdasarkan periode sewa",
+      "options": {
+        "daily": "Sewa Harian",
+        "monthly": "Sewa Bulanan",
+        "yearly": "Sewa Tahunan"
+      }
+    },
+    "whyChoose": {
+      "title": "Mengapa Memilih LIND Society untuk Menginap Anda",
+      "subtitle": "Menginap di rumah liburan terbaik dengan nilai terbaik bersama LIND Society!",
+      "features": {
+        "verifiedListings": {
+          "title": "Lebih dari 1000+ listing terverifikasi",
+          "description": "Villa mewah dan properti terpilih yang memenuhi standar ketat kami untuk kualitas, kenyamanan, dan keaslian."
+        },
+        "outstandingHospitality": {
+          "title": "Keramahan yang Luar Biasa",
+          "description": "Rasakan layanan luar biasa dari tuan rumah yang berusaha lebih untuk memastikan menginap Anda melampaui ekspektasi."
+        },
+        "bestPrice": {
+          "title": "Jaminan harga terbaik",
+          "description": "Menemukan harga yang lebih baik di tempat lain? Kami akan menyamakannya dan memberikan Anda keuntungan tambahan karena memilih LIND Society."
+        },
+        "homesSetup": {
+          "title": "Rumah yang disiapkan untuk ditinggali",
+          "description": "Setiap properti dilengkapi dengan segala yang Anda butuhkan untuk merasa di rumah, dari dapur gourmet hingga ruang kerja yang nyaman."
+        },
+        "stayOnTerms": {
+          "title": "Menginap sesuai keinginan Anda",
+          "description": "Opsi pemesanan yang fleksibel dengan fasilitas dan layanan yang dapat disesuaikan sesuai dengan kebutuhan dan preferensi spesifik Anda."
+        },
+        "conciergeService": {
+          "title": "Layanan concierge 24/7 dan dukungan tamu",
+          "description": "Tim kami yang berdedikasi tersedia sepanjang waktu untuk membantu dengan permintaan apa pun, dari perencanaan pra-kedatangan hingga bantuan di lokasi."
+        }
+      }
+    },
+    "ourService": {
+      "title": "Layanan Concierge Kami",
+      "subtitle": "Beritahu Kami Liburan Impian Anda, dan Kami akan Mengurus Sisanya.",
+      "services": {
+        "beforeStay": {
+          "title": "Dasar-dasar - Sebelum menginap",
+          "items": {
+            "airportTransfers": "Transfer bandara",
+            "groceryShopping": "Belanja bahan makanan",
+            "babyPrep": "Persiapan kursi bayi, tempat tidur bayi, kereta dorong, dll.",
+            "babyProofing": "Perlindungan ramah bayi/anak",
+            "customRequest": "Anda dapat memberitahu kami untuk permintaan khusus!"
+          }
+        },
+        "duringStay": {
+          "title": "Dasar-dasar - Selama menginap",
+          "items": {
+            "dayTrip": "Perjalanan sehari & sopir pribadi",
+            "personalChef": "Chef pribadi & BBQ",
+            "inVillaMassage": "Pijat di villa",
+            "spaServices": "Layanan spa dan salon",
+            "touristActivities": "Pemesanan aktivitas wisata",
+            "restaurantReservations": "Reservasi restoran",
+            "businessSupport": "Layanan dukungan bisnis",
+            "childcareServices": "Layanan perawatan anak"
+          }
+        },
+        "specialRequest": {
+          "title": "Permintaan Khusus",
+          "items": {
+            "partiesEvents": "Pesta & acara",
+            "romanticDinner": "Makan malam romantis",
+            "surpriseOccasions": "Acara kejutan",
+            "yogaSessions": "Sesi yoga",
+            "customRequest": "Anda dapat memberitahu kami untuk permintaan khusus!"
+          }
+        }
+      }
+    },
+    "preferredOptions": {
+      "title": "Opsi yang Paling Disukai",
+      "amenities": {
+        "airConditioner": "AC",
+        "pool": "Kolam Renang",
+        "kitchen": "Dapur",
+        "parking": "Parkir",
+        "beachfront": "Tepi Pantai",
+        "freeWifi": "WiFi Gratis",
+        "petFriendly": "Ramah Hewan",
+        "security": "Keamanan",
+        "mountainView": "Pemandangan Gunung",
+        "massage": "Pijat",
+        "bbqGrill": "Panggangan BBQ",
+        "yoga": "Yoga",
+        "seaView": "Pemandangan Laut"
+      }
+    },
+    "faq": {
+      "title": "Pertanyaan yang Sering Diajukan",
+      "subtitle": "Semua yang Perlu Anda Ketahui untuk Menginap yang Sempurna.",
+      "needMoreAssistance": "Butuh bantuan lebih lanjut?",
+      "teamReady": "Tim kami selalu siap membantu!",
+      "contactUs": "Hubungi Kami",
+      "questions": {
+        "whatIncluded": {
+          "question": "Apa yang termasuk dalam sewa villa saya?",
+          "answer": "Sewa villa kami biasanya mencakup akomodasi, dapur yang lengkap, layanan kebersihan rutin, Wi-Fi, akses ke fasilitas properti (seperti kolam renang, gym, dll.), utilitas dasar, dan linen dan handuk premium. Beberapa properti juga menawarkan layanan tambahan seperti paket selamat datang, bantuan concierge, dan transfer bandara. Inklusi yang tepat bervariasi berdasarkan properti dan dirinci pada setiap listing."
+        },
+        "howToBook": {
+          "question": "Bagaimana cara memesan villa dengan LIND Society?",
+          "answer": "Memesan dengan LIND Society sangat mudah. Jelajahi pilihan properti kami di situs web kami, pilih tanggal dan lokasi yang diinginkan, dan pilih villa yang memenuhi kebutuhan Anda. Anda dapat memesan langsung secara online, atau hubungi tim reservasi kami untuk bantuan yang dipersonalisasi. Kami akan memandu Anda melalui proses pemesanan, menjawab pertanyaan apa pun, dan membantu Anda mengamankan menginap yang sempurna."
+        },
+        "paymentMethods": {
+          "question": "Metode pembayaran apa yang diterima?",
+          "answer": "Kami menerima kartu kredit utama (Visa, MasterCard, American Express), transfer bank, dan metode pembayaran digital tertentu. Untuk beberapa lokasi, kami juga menawarkan rencana pembayaran cicilan. Semua pembayaran diproses melalui sistem pembayaran aman kami untuk memastikan informasi keuangan Anda tetap terlindungi."
+        },
+        "additionalFees": {
+          "question": "Apakah ada biaya tambahan selain harga sewa?",
+          "answer": "Listing kami dengan jelas menunjukkan harga sewa dasar, yang biasanya mencakup pembersihan standar dan utilitas. Beberapa properti mungkin memiliki biaya tambahan untuk layanan seperti pembersihan ekstra, kolam renang berpemanas, akomodasi hewan peliharaan, atau permintaan khusus. Biaya tambahan yang potensial diungkapkan secara transparan sebelum konfirmasi pemesanan, sehingga Anda tidak akan pernah mengalami biaya tak terduga."
+        },
+        "specialArrangements": {
+          "question": "Bisakah saya meminta pengaturan khusus untuk menginap saya?",
+          "answer": "Tentu saja! LIND Society mengkhususkan diri dalam menciptakan pengalaman yang dipersonalisasi. Apakah Anda memerlukan transfer bandara, pengiriman bahan makanan sebelum kedatangan, pengaturan acara khusus, layanan perawatan anak, layanan chef pribadi, atau pengaturan lainnya, tim concierge kami tersedia untuk memenuhi permintaan Anda. Cukup beritahu kami kebutuhan Anda saat pemesanan atau sebelum kedatangan Anda."
+        }
+      }
     }
   },
   "buy": {

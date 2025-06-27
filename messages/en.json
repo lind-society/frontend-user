@@ -263,15 +263,149 @@
   "rent": {
     "pageTitle": "Rent Villas & Properties",
     "header": {
-      "title": "Find Your Dream Villa",
-      "subtitle": "The best selection of villas and properties for unforgettable vacations"
+      "title": "Discover Handpicked Villa Rentals with LIND Society",
+      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "search": {
+        "location": "Location",
+        "checkIn": "Check in",
+        "checkOut": "Check out",
+        "selectDate": "Select date",
+        "bedrooms": "Bedrooms",
+        "guests": "Guests",
+        "searchButton": "Search"
+      }
     },
-    "filters": {
-      "location": "Location",
-      "priceRange": "Price Range",
-      "bedrooms": "Bedrooms",
-      "amenities": "Amenities",
-      "propertyType": "Property Type"
+    "breadcrumb": {
+      "home": "Home",
+      "rentalProperties": "Rental properties"
+    },
+    "rentalProperties": {
+      "showMore": "Show more rental villas (118)"
+    },
+    "exploreList": {
+      "title": "You Can Explore Our Listings by",
+      "subtitle": "Browse available villas by rental period",
+      "options": {
+        "daily": "Daily Rentals",
+        "monthly": "Monthly Rentals",
+        "yearly": "Yearly Rentals"
+      }
+    },
+    "whyChoose": {
+      "title": "Why Choose LIND Society for Your Stay",
+      "subtitle": "Stay in the finest vacation homes at the best value with LIND Society!",
+      "features": {
+        "verifiedListings": {
+          "title": "Over 1000+ verified listings",
+          "description": "Hand-picked luxury villas and properties that meet our stringent standards for quality, comfort, and authenticity."
+        },
+        "outstandingHospitality": {
+          "title": "Outstanding Hospitality",
+          "description": "Experience exceptional service from hosts who go above and beyond to ensure your stay exceeds expectations."
+        },
+        "bestPrice": {
+          "title": "Best price guarantee",
+          "description": "Find a better price elsewhere? We'll match it and give you additional perks for choosing LIND Society."
+        },
+        "homesSetup": {
+          "title": "Homes setup for living",
+          "description": "Each property is fully equipped with everything you need to feel at home, from gourmet kitchens to comfortable workspaces."
+        },
+        "stayOnTerms": {
+          "title": "Stay on your terms",
+          "description": "Flexible booking options with customizable amenities and services tailored to your specific needs and preferences."
+        },
+        "conciergeService": {
+          "title": "24/7 concierge service and guest support",
+          "description": "Our dedicated team is available around the clock to assist with any requests, from pre-arrival planning to on-site assistance."
+        }
+      }
+    },
+    "ourService": {
+      "title": "Our Concierge Service",
+      "subtitle": "Tell Us Your Dream Holiday, and We'll Take Care of the Rest.",
+      "services": {
+        "beforeStay": {
+          "title": "The Basics - Before your stay",
+          "items": {
+            "airportTransfers": "Airport transfers",
+            "groceryShopping": "Grocery shopping",
+            "babyPrep": "Prep for baby chairs, cots, strollers, etc.",
+            "babyProofing": "Baby/Children friendly proofing",
+            "customRequest": "You can tell us for custom!"
+          }
+        },
+        "duringStay": {
+          "title": "The Basics - During your stay",
+          "items": {
+            "dayTrip": "Day trip & chauffeur",
+            "personalChef": "Personal chef & BBQ",
+            "inVillaMassage": "In-villa massage",
+            "spaServices": "Spa and salon services",
+            "touristActivities": "Tourist activities bookings",
+            "restaurantReservations": "Restaurant reservations",
+            "businessSupport": "Business support services",
+            "childcareServices": "Childcare services"
+          }
+        },
+        "specialRequest": {
+          "title": "The Special Request",
+          "items": {
+            "partiesEvents": "Parties & events",
+            "romanticDinner": "Romantic dinner",
+            "surpriseOccasions": "Surprise occasions",
+            "yogaSessions": "Yoga sessions",
+            "customRequest": "You can tell us for custom!"
+          }
+        }
+      }
+    },
+    "preferredOptions": {
+      "title": "Most Preferred Options",
+      "amenities": {
+        "airConditioner": "Air conditioner",
+        "pool": "Pool",
+        "kitchen": "Kitchen",
+        "parking": "Parking",
+        "beachfront": "Beachfront",
+        "freeWifi": "Free WiFi",
+        "petFriendly": "Pet friendly",
+        "security": "Security",
+        "mountainView": "Mountain view",
+        "massage": "Massage",
+        "bbqGrill": "BBQ grill",
+        "yoga": "Yoga",
+        "seaView": "Sea view"
+      }
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "subtitle": "Everything You Need to Know for a Perfect Stay.",
+      "needMoreAssistance": "Need more assistance?",
+      "teamReady": "Our team is always ready to help!",
+      "contactUs": "Contact Us",
+      "questions": {
+        "whatIncluded": {
+          "question": "What is included in my villa rental?",
+          "answer": "Our villa rentals typically include accommodation, fully equipped kitchens, regular housekeeping, Wi-Fi, access to property amenities (such as pools, gyms, etc.), basic utilities, and premium linens and towels. Some properties also offer additional services like welcome packages, concierge assistance, and airport transfers. The exact inclusions vary by property and are detailed on each listing."
+        },
+        "howToBook": {
+          "question": "How do I book a villa with LIND Society?",
+          "answer": "Booking with LIND Society is simple. Browse our selection of properties on our website, select your desired dates and location, and choose the villa that meets your needs. You can book directly online, or contact our reservation team for personalized assistance. We'll guide you through the booking process, answer any questions, and help you secure your perfect stay."
+        },
+        "paymentMethods": {
+          "question": "What payment methods are accepted?",
+          "answer": "We accept major credit cards (Visa, MasterCard, American Express), bank transfers, and certain digital payment methods. For some locations, we also offer installment payment plans. All payments are processed through our secure payment system to ensure your financial information remains protected."
+        },
+        "additionalFees": {
+          "question": "Are there any additional fees beyond the rental price?",
+          "answer": "Our listings clearly indicate the base rental price, which typically includes standard cleaning and utilities. Some properties may have additional fees for services like extra cleaning, heated pools, pet accommodations, or special requests. Any potential additional fees are transparently disclosed before booking confirmation, so you'll never encounter unexpected charges."
+        },
+        "specialArrangements": {
+          "question": "Can I request special arrangements for my stay?",
+          "answer": "Absolutely! LIND Society specializes in creating personalized experiences. Whether you need airport transfers, grocery delivery prior to arrival, special occasion setups, childcare services, personal chef services, or any other arrangements, our concierge team is available to fulfill your requests. Simply let us know your needs during booking or before your arrival."
+        }
+      }
     }
   },
   "buy": {

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiVerifiedBadgeFill } from 'react-icons/ri';
 
@@ -50,41 +51,43 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 );
 
 const OurServiceRentPage = () => {
+  const t = useTranslations('rent.ourService');
+
   const serviceCards = [
     {
-      title: 'The Basics - Before your stay',
+      title: t('services.beforeStay.title'),
       imageSrc: '/images/our-service-1.jpeg',
       services: [
-        'Airport transfers',
-        'Grocery shopping',
-        'Prep for baby chairs, cots, strollers, etc.',
-        'Baby/Children friendly proofing',
-        'You can tell us for custom!',
+        t('services.beforeStay.items.airportTransfers'),
+        t('services.beforeStay.items.groceryShopping'),
+        t('services.beforeStay.items.babyPrep'),
+        t('services.beforeStay.items.babyProofing'),
+        t('services.beforeStay.items.customRequest'),
       ],
     },
     {
-      title: 'The Basics - During your stay',
+      title: t('services.duringStay.title'),
       imageSrc: '/images/our-service-2.jpeg',
       services: [
-        'Day trip & chauffeur',
-        'Personal chef & BBQ',
-        'In-villa massage',
-        'Spa and salon services',
-        'Tourist activities bookings',
-        'Restaurant reservations',
-        'Business support services',
-        'Childcare services',
+        t('services.duringStay.items.dayTrip'),
+        t('services.duringStay.items.personalChef'),
+        t('services.duringStay.items.inVillaMassage'),
+        t('services.duringStay.items.spaServices'),
+        t('services.duringStay.items.touristActivities'),
+        t('services.duringStay.items.restaurantReservations'),
+        t('services.duringStay.items.businessSupport'),
+        t('services.duringStay.items.childcareServices'),
       ],
     },
     {
-      title: 'The Special Request',
+      title: t('services.specialRequest.title'),
       imageSrc: '/images/our-service-3.jpeg',
       services: [
-        'Parties & events',
-        'Romantic dinner',
-        'Surprise occasions',
-        'Yoga sessions',
-        'You can tell us for custom!',
+        t('services.specialRequest.items.partiesEvents'),
+        t('services.specialRequest.items.romanticDinner'),
+        t('services.specialRequest.items.surpriseOccasions'),
+        t('services.specialRequest.items.yogaSessions'),
+        t('services.specialRequest.items.customRequest'),
       ],
     },
   ];
@@ -95,9 +98,9 @@ const OurServiceRentPage = () => {
         <div className='flex flex-col gap-6 md:gap-8'>
           {/* Header Section */}
           <div className='flex flex-col gap-2 md:gap-4 text-center'>
-            <h4 className=' text-primary'>Our Concierge Service</h4>
+            <h4 className=' text-primary'>{t('title')}</h4>
             <p className='text-lg md:text-xl lg:text-[22px] text-text'>
-              Tell Us Your Dream Holiday, and We'll Take Care of the Rest.
+              {t('subtitle')}
             </p>
           </div>
 

@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -24,17 +25,19 @@ const ExploreOption: React.FC<ExploreOptionProps> = ({ label, onClick }) => (
 );
 
 const ExploreListRentPage = () => {
+  const t = useTranslations('rent.exploreList');
+
   const exploreOptions = [
     {
-      label: 'Daily Rentals',
+      label: t('options.daily'),
       onClick: () => console.log('Daily Rentals clicked'),
     },
     {
-      label: 'Monthly Rentals',
+      label: t('options.monthly'),
       onClick: () => console.log('Monthly Rentals clicked'),
     },
     {
-      label: 'Yearly Rentals',
+      label: t('options.yearly'),
       onClick: () => console.log('Yearly Rentals clicked'),
     },
   ];
@@ -46,11 +49,9 @@ const ExploreListRentPage = () => {
           {/* Header Section - Responsive column on mobile, row on desktop */}
           <div className='flex flex-col gap-2 lg:max-w-[410px]'>
             <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-primary'>
-              You Can Explore <br className='hidden md:block' /> Our Listings by
+              {t('title')}
             </h2>
-            <p className='text-base md:text-lg text-text'>
-              Browse available villas by rental period
-            </p>
+            <p className='text-base md:text-lg text-text'>{t('subtitle')}</p>
           </div>
 
           {/* Buttons Section - Responsive grid layout */}

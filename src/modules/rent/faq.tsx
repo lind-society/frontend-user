@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
@@ -20,31 +21,28 @@ interface FAQItem {
 }
 
 const FaQRentPage = () => {
+  const t = useTranslations('rent.faq');
+
   const faqs: FAQItem[] = [
     {
-      question: 'What is included in my villa rental?',
-      answer:
-        'Our villa rentals typically include accommodation, fully equipped kitchens, regular housekeeping, Wi-Fi, access to property amenities (such as pools, gyms, etc.), basic utilities, and premium linens and towels. Some properties also offer additional services like welcome packages, concierge assistance, and airport transfers. The exact inclusions vary by property and are detailed on each listing.',
+      question: t('questions.whatIncluded.question'),
+      answer: t('questions.whatIncluded.answer'),
     },
     {
-      question: 'How do I book a villa with LIND Society?',
-      answer:
-        "Booking with LIND Society is simple. Browse our selection of properties on our website, select your desired dates and location, and choose the villa that meets your needs. You can book directly online, or contact our reservation team for personalized assistance. We'll guide you through the booking process, answer any questions, and help you secure your perfect stay.",
+      question: t('questions.howToBook.question'),
+      answer: t('questions.howToBook.answer'),
     },
     {
-      question: 'What payment methods are accepted?',
-      answer:
-        'We accept major credit cards (Visa, MasterCard, American Express), bank transfers, and certain digital payment methods. For some locations, we also offer installment payment plans. All payments are processed through our secure payment system to ensure your financial information remains protected.',
+      question: t('questions.paymentMethods.question'),
+      answer: t('questions.paymentMethods.answer'),
     },
     {
-      question: 'Are there any additional fees beyond the rental price?',
-      answer:
-        "Our listings clearly indicate the base rental price, which typically includes standard cleaning and utilities. Some properties may have additional fees for services like extra cleaning, heated pools, pet accommodations, or special requests. Any potential additional fees are transparently disclosed before booking confirmation, so you'll never encounter unexpected charges.",
+      question: t('questions.additionalFees.question'),
+      answer: t('questions.additionalFees.answer'),
     },
     {
-      question: 'Can I request special arrangements for my stay?',
-      answer:
-        'Absolutely! LIND Society specializes in creating personalized experiences. Whether you need airport transfers, grocery delivery prior to arrival, special occasion setups, childcare services, personal chef services, or any other arrangements, our concierge team is available to fulfill your requests. Simply let us know your needs during booking or before your arrival.',
+      question: t('questions.specialArrangements.question'),
+      answer: t('questions.specialArrangements.answer'),
     },
   ];
 
@@ -55,10 +53,10 @@ const FaQRentPage = () => {
           {/* Header Section */}
           <div className='flex flex-col gap-2 md:gap-4 text-center'>
             <h2 className='text-xl md:text-2xl lg:text-3xl font-semibold text-primary'>
-              Frequently Asked Questions
+              {t('title')}
             </h2>
             <p className='text-lg md:text-xl lg:text-[22px] text-text'>
-              Everything You Need to Know for a Perfect Stay.
+              {t('subtitle')}
             </p>
           </div>
 
@@ -92,17 +90,17 @@ const FaQRentPage = () => {
                 />
               </div>
               <p className='text-xl md:text-2xl font-bold text-primary'>
-                Need more assistance?
+                {t('needMoreAssistance')}
               </p>
               <p className='text-base md:text-lg text-primary'>
-                Our team is always ready to help!
+                {t('teamReady')}
               </p>
               <Button variant='primary' asChild>
                 <Link
                   href='/contact-us'
                   className='flex items-center gap-2 w-fit'
                 >
-                  <span>Contact Us</span>
+                  <span>{t('contactUs')}</span>
                   <RiArrowRightUpLine size={20} className='text-white' />
                 </Link>
               </Button>

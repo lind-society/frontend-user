@@ -4,6 +4,7 @@
 import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaCalendar, FaLocationDot, FaUser } from 'react-icons/fa6';
@@ -22,6 +23,7 @@ import { Separator } from '@/components/ui/separator';
 import { PreferredOptions } from '@/modules/rent/header/preferred-option';
 
 const HeaderRentPage = () => {
+  const t = useTranslations('rent.header');
   const router = useRouter(); // Initialize router
 
   // Search filter states
@@ -108,12 +110,9 @@ const HeaderRentPage = () => {
           {/* Responsive header content */}
           <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
             <div className='flex flex-col gap-4 md:gap-6 max-w-full lg:max-w-[867px] mb-8 lg:mb-0'>
-              <h1 className='text-white h0 font-bold'>
-                Discover Handpicked Villa Rentals with LIND Society
-              </h1>
+              <h1 className='text-white h0 font-bold'>{t('title')}</h1>
               <div className='px-3 md:px-5 border-white border-solid border-l-2 text-white text-lg md:text-[22px]'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                {t('subtitle')}
               </div>
             </div>
           </div>
@@ -128,7 +127,9 @@ const HeaderRentPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Location</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.location')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
@@ -161,12 +162,14 @@ const HeaderRentPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaCalendar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Check in</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.checkIn')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {checkInDate
                             ? format(checkInDate, 'dd MMM yyyy')
-                            : 'Select date'}
+                            : t('search.selectDate')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
@@ -189,12 +192,14 @@ const HeaderRentPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaCalendar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Check out</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.checkOut')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {checkOutDate
                             ? format(checkOutDate, 'dd MMM yyyy')
-                            : 'Select date'}
+                            : t('search.selectDate')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
@@ -207,9 +212,6 @@ const HeaderRentPage = () => {
                     selected={checkOutDate}
                     onSelect={setCheckOutDate}
                     initialFocus
-                    disabled={(date) =>
-                      checkInDate ? date < checkInDate : false
-                    }
                   />
                 </PopoverContent>
               </Popover>
@@ -220,7 +222,9 @@ const HeaderRentPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Bedrooms</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.bedrooms')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {bedrooms.toString().padStart(2, '0')}
@@ -264,7 +268,9 @@ const HeaderRentPage = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaUser size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Guests</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.guests')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {guests.toString().padStart(2, '0')}
@@ -309,13 +315,13 @@ const HeaderRentPage = () => {
                 className='w-full md:w-auto'
                 onClick={handleSearch}
               >
-                Search
+                {t('search.searchButton')}
               </Button>
             </div>
 
             <Separator />
 
-            {/* Using the new PreferredOptions component */}
+            {/* Using the updated PreferredOptions component */}
             <PreferredOptions onFilterApply={handleFilterApply} />
           </div>
         </div>

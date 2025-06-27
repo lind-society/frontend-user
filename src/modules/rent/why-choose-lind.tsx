@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaHandshake } from 'react-icons/fa';
 import {
@@ -35,44 +36,40 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 );
 
 const WhyChooseLindRentPage = () => {
+  const t = useTranslations('rent.whyChoose');
+
   const features = [
     {
       icon: <MdVilla className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'Over 1000+ verified listings',
-      description:
-        'Hand-picked luxury villas and properties that meet our stringent standards for quality, comfort, and authenticity.',
+      title: t('features.verifiedListings.title'),
+      description: t('features.verifiedListings.description'),
     },
     {
       icon: <FaHandshake className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'Outstanding Hospitality',
-      description:
-        'Experience exceptional service from hosts who go above and beyond to ensure your stay exceeds expectations.',
+      title: t('features.outstandingHospitality.title'),
+      description: t('features.outstandingHospitality.description'),
     },
     {
       icon: (
         <RiVerifiedBadgeFill className='text-primary w-6 h-6 md:w-8 md:h-8' />
       ),
-      title: 'Best price guarantee',
-      description:
-        "Find a better price elsewhere? We'll match it and give you additional perks for choosing LIND Society.",
+      title: t('features.bestPrice.title'),
+      description: t('features.bestPrice.description'),
     },
     {
       icon: <MdHomeWork className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'Homes setup for living',
-      description:
-        'Each property is fully equipped with everything you need to feel at home, from gourmet kitchens to comfortable workspaces.',
+      title: t('features.homesSetup.title'),
+      description: t('features.homesSetup.description'),
     },
     {
       icon: <MdPersonalInjury className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: 'Stay on your terms',
-      description:
-        'Flexible booking options with customizable amenities and services tailored to your specific needs and preferences.',
+      title: t('features.stayOnTerms.title'),
+      description: t('features.stayOnTerms.description'),
     },
     {
       icon: <MdSupportAgent className='text-primary w-6 h-6 md:w-8 md:h-8' />,
-      title: '24/7 concierge service and guest support',
-      description:
-        'Our dedicated team is available around the clock to assist with any requests, from pre-arrival planning to on-site assistance.',
+      title: t('features.conciergeService.title'),
+      description: t('features.conciergeService.description'),
     },
   ];
 
@@ -81,11 +78,10 @@ const WhyChooseLindRentPage = () => {
       <div className='flex flex-col gap-6 md:gap-8 py-8 md:py-12 lg:py-16'>
         <div className='flex flex-col gap-2 md:gap-3 text-center'>
           <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-primary'>
-            Why Choose LIND Society for Your Stay
+            {t('title')}
           </h2>
           <p className='text-base md:text-lg lg:text-[22px] text-text'>
-            Stay in the finest vacation homes at the best value with LIND
-            Society!
+            {t('subtitle')}
           </p>
         </div>
 

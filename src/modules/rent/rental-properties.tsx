@@ -1,6 +1,7 @@
 'use client';
 
 import { Slash } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -17,6 +18,9 @@ import { VillaCard } from '@/components/ui/card/villa';
 import { villas } from '@/modules/rent/constant';
 
 const RentalPropertiesRentPage = () => {
+  const t = useTranslations('rent');
+  const breadcrumbT = useTranslations('rent.breadcrumb');
+
   const toggleFavorite = (id: number) => {
     // In a real app, you would update this in your state management
     // eslint-disable-next-line no-console
@@ -29,13 +33,15 @@ const RentalPropertiesRentPage = () => {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                <BreadcrumbLink href='/'>{breadcrumbT('home')}</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator>
                 <Slash />
               </BreadcrumbSeparator>
               <BreadcrumbItem className='font-semibold'>
-                <BreadcrumbLink href='/buy'>Rental properties</BreadcrumbLink>
+                <BreadcrumbLink href='/rent'>
+                  {breadcrumbT('rentalProperties')}
+                </BreadcrumbLink>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -57,7 +63,7 @@ const RentalPropertiesRentPage = () => {
             variant='ghost'
             className='border-primary text-primary hover:bg-primary/10 underline font-semibold'
           >
-            Show more rental villas (118)
+            {t('rentalProperties.showMore')}
           </Button>
         </div>
       </div>
