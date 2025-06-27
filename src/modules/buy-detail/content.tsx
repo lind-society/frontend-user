@@ -95,9 +95,9 @@ const ContentBuyDetail = () => {
                     {villaData.rating}
                   </h4>
                   <div className='flex flex-col'>
-                    <span className='text-text text-sm'>Overall on</span>
+                    <span className='text-text text-sm'>{t('overallOn')}</span>
                     <span className='text-primary font-semibold'>
-                      {villaData.reviewCount} reviews
+                      {villaData.reviewCount} {t('reviews')}
                     </span>
                   </div>
                   <div className='flex gap-1'>
@@ -118,7 +118,7 @@ const ContentBuyDetail = () => {
             {/* Key Features */}
             <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border'>
               <span className='text-xl text-primary font-semibold'>
-                Key Features
+                {t('features')}
               </span>
               <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
                 {villaDataBuy.features.map((feature) => (
@@ -133,7 +133,9 @@ const ContentBuyDetail = () => {
                       <span className='text-sm text-primary font-semibold'>
                         {feature.value}
                       </span>
-                      <span className='text-text text-xs'>{feature.label}</span>
+                      <span className='text-text text-xs'>
+                        {t(`propertyInfo.${feature.labelKey}`)}
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -143,7 +145,7 @@ const ContentBuyDetail = () => {
             {/* Highlights */}
             <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border text-sm'>
               <span className='text-xl text-primary font-semibold'>
-                Highlights
+                {t('overview')}
               </span>
               {villaData.highlights.map((paragraph, index) => (
                 <span key={index} className='text-text'>
@@ -159,10 +161,10 @@ const ContentBuyDetail = () => {
 
             <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
               <span className='text-xl text-primary font-semibold'>
-                Location & Map
+                {t('location')} & Map
               </span>
               <span className='text-primary text-lg font-semibold'>
-                Location
+                {t('location')}
               </span>
               <span className='text-text text-sm'>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -179,17 +181,20 @@ const ContentBuyDetail = () => {
               <div className='w-full h-[300px] md:h-[400px] bg-gray-100 rounded-lg overflow-hidden mb-4 border'>
                 <div className="w-full h-full bg-[url('/images/map.png')] bg-cover bg-center opacity-80 relative">
                   <div className='absolute inset-0 flex items-center justify-center'>
-                    <Button variant='primary'>View full map</Button>
+                    <Button variant='primary'>{t('viewFullMap')}</Button>
                   </div>
                 </div>
               </div>
               <div className='flex flex-col gap-4'>
                 <span className='text-text font-semibold text-lg'>
-                  Around the villa
+                  {t('aroundVilla')}
                 </span>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
                   {/* First column - Nearby places */}
                   <div className='flex flex-col gap-3'>
+                    <span className='text-sm font-semibold text-gray-700'>
+                      {t('nearbyPlaces')}
+                    </span>
                     {villaLocations.nearby.map((location, index) => (
                       <div
                         key={`nearby-${index}`}
@@ -207,6 +212,9 @@ const ContentBuyDetail = () => {
 
                   {/* Second column - Further attractions */}
                   <div className='flex flex-col gap-3'>
+                    <span className='text-sm font-semibold text-gray-700'>
+                      {t('furtherAway')}
+                    </span>
                     {villaLocations.furtherAway.map((location, index) => (
                       <div
                         key={`far-${index}`}
@@ -226,7 +234,7 @@ const ContentBuyDetail = () => {
             </div>
             <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
               <span className='text-xl text-primary font-semibold'>
-                Service & Features
+                {t('serviceFacilities')}
               </span>
               {/* Replace the entire Service & Features grid */}
               <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8'>
@@ -234,7 +242,7 @@ const ContentBuyDetail = () => {
                 <div className='flex flex-col gap-5'>
                   <div className='flex gap-2 items-center'>
                     <span className='text-text text font-semibold'>
-                      Facilities
+                      {t('facilities')}
                     </span>
                   </div>
                   <div className='flex flex-col gap-4'>
@@ -254,7 +262,7 @@ const ContentBuyDetail = () => {
                 <div className='flex flex-col gap-5'>
                   <div className='flex gap-2 items-center'>
                     <span className='text-text text font-semibold'>
-                      Services
+                      {t('services')}
                     </span>
                   </div>
                   <div className='flex flex-col gap-4'>
@@ -274,7 +282,7 @@ const ContentBuyDetail = () => {
                 <div className='flex flex-col gap-5'>
                   <div className='flex gap-2 items-center'>
                     <span className='text-text text font-semibold'>
-                      Entertainment
+                      {t('entertainment')}
                     </span>
                   </div>
                   <div className='flex flex-col gap-4'>
@@ -293,7 +301,9 @@ const ContentBuyDetail = () => {
                 {/* Meals */}
                 <div className='flex flex-col gap-5'>
                   <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>Meals</span>
+                    <span className='text-text text font-semibold'>
+                      {t('meals')}
+                    </span>
                   </div>
                   <div className='flex flex-col gap-4'>
                     {villaServices.meals.map((item, index) => (
@@ -312,7 +322,7 @@ const ContentBuyDetail = () => {
                 <div className='flex flex-col gap-5'>
                   <div className='flex gap-2 items-center'>
                     <span className='text-text text font-semibold'>
-                      Transport
+                      {t('transport')}
                     </span>
                   </div>
                   <div className='flex flex-col gap-4'>
@@ -331,7 +341,9 @@ const ContentBuyDetail = () => {
                 {/* Kids */}
                 <div className='flex flex-col gap-5'>
                   <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>Kids</span>
+                    <span className='text-text text font-semibold'>
+                      {t('kids')}
+                    </span>
                   </div>
                   <div className='flex flex-col gap-4'>
                     {villaServices.kids.map((item, index) => (

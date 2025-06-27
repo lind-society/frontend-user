@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaBath, FaBed } from 'react-icons/fa';
 import { HiUsers } from 'react-icons/hi';
@@ -45,6 +46,9 @@ interface SendInquiryFormProps {
 }
 
 const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
+  const t = useTranslations('rentDetail.inquiryForm');
+  const tContent = useTranslations('rentDetail.content');
+
   // State for calendar dates
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
@@ -88,17 +92,17 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
   return (
     <div className='sticky 2xl:top-4 top-[-84px] border shadow-md bg-white rounded-md overflow-hidden'>
       <div className='bg-primary text-white flex flex-col gap-1 px-6 py-3'>
-        <span className=''>Send Inquiry or</span>
-        <span className='text-2xl font-semibold'>Secure Your Stay</span>
+        <span className=''>{t('sendInquiry')} or</span>
+        <span className='text-2xl font-semibold'>{tContent('bookNow')}</span>
       </div>
       <div className='p-6 flex flex-col gap-3'>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            How long do you want to stay?
+            {t('howLongDoYouWantToStay')}
           </Label>
           <Select defaultValue='Daily' onValueChange={setStayDuration}>
             <SelectTrigger className='w-full'>
-              <SelectValue placeholder='Select duration' />
+              <SelectValue placeholder={t('selectDuration')} />
             </SelectTrigger>
             <SelectContent>
               {villaDetails.availableRentTypes.map((type) => (
@@ -112,14 +116,14 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
         <div className='grid grid-cols-2 gap-4'>
           {/* Check in date */}
           <DateSelector
-            label='Check in'
+            label={tContent('bookingInfo.checkIn')}
             date={checkInDate}
             onSelect={setCheckInDate}
           />
 
           {/* Check out date */}
           <DateSelector
-            label='Check out'
+            label={tContent('bookingInfo.checkOut')}
             date={checkOutDate}
             onSelect={setCheckOutDate}
             minDate={checkInDate}
@@ -132,7 +136,8 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
               {villaDetails.bookingInfo.price.toLocaleString()}
             </span>
             <span className='text-text text-sm'>
-              / {villaDetails.bookingInfo.nights} nights
+              / {villaDetails.bookingInfo.nights}{' '}
+              {tContent('bookingInfo.nights')}
             </span>
           </div>
           <div className='flex flex-col gap-2'>
@@ -141,7 +146,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
                 <FaBed size={12} className='text-primary' />
               </div>
               <span className='text-text text-sm'>
-                {villaDetails.bedrooms} bedrooms
+                {villaDetails.bedrooms} {tContent('features.bedrooms')}
               </span>
             </div>
             <div className='flex gap-1 items-center'>
@@ -149,7 +154,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
                 <FaBath size={12} className='text-primary' />
               </div>
               <span className='text-text text-sm'>
-                {villaDetails.bathrooms} bathrooms
+                {villaDetails.bathrooms} {tContent('features.bathrooms')}
               </span>
             </div>
             <div className='flex gap-1 items-center'>
@@ -157,25 +162,27 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
                 <HiUsers size={12} className='text-primary' />
               </div>
               <span className='text-text text-sm'>
-                {villaDetails.maxPersons} pers.
+                {villaDetails.maxPersons} {t('persons')}
               </span>
             </div>
           </div>
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            Full name
+            {t('fullName')}
           </Label>
           <Input
-            placeholder='Enter your full name'
+            placeholder={t('enterYourFullName')}
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-sm font-semibold text-primary'>Email</Label>
+          <Label className='text-sm font-semibold text-primary'>
+            {t('email')}
+          </Label>
           <Input
-            placeholder='Enter your email'
+            placeholder={t('enterYourEmail')}
             type='email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -183,7 +190,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            Phone number
+            {t('phoneNumber')}
           </Label>
           <div className='flex'>
             {/* Country code selector using Popover */}
@@ -230,7 +237,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
             </Popover>
             <Input
               className='rounded-l-none'
-              placeholder='Enter your phone number'
+              placeholder={t('enterYourPhoneNumber')}
               type='tel'
               value={phoneNumber}
               onChange={(e) => {
@@ -242,10 +249,12 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
           </div>
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-sm font-semibold text-primary'>Guest</Label>
+          <Label className='text-sm font-semibold text-primary'>
+            {t('guest')}
+          </Label>
           <Select defaultValue='1' onValueChange={setGuestCount}>
             <SelectTrigger className='w-full'>
-              <SelectValue placeholder='Select guest count' />
+              <SelectValue placeholder={t('selectGuestCount')} />
             </SelectTrigger>
             <SelectContent>
               {Array.from(
@@ -253,19 +262,19 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
                 (_, i) => i + 1
               ).map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} {num === 1 ? 'Guest' : 'Guests'}
+                  {num} {num === 1 ? t('guestSingular') : t('guestPlural')}
                 </SelectItem>
               ))}
-              <SelectItem value='custom'>Custom</SelectItem>
+              <SelectItem value='custom'>{t('custom')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            Tell us what you would like us to help you with
+            {t('tellUsWhatYouWouldLikeUsToHelpYouWith')}
           </Label>
           <Textarea
-            placeholder='Enter your message'
+            placeholder={t('enterYourMessage')}
             className='min-h-[100px]'
             value={message}
             onChange={(e) => setMessage(e.target.value)}
@@ -276,7 +285,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
           className='w-full'
           onClick={handleSubmitBooking}
         >
-          Send Inquiry or Book Now
+          {t('sendInquiry')} or {tContent('bookNow')}
         </Button>
       </div>
     </div>

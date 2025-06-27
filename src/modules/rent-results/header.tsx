@@ -31,6 +31,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
+import { PreferredOptions } from '@/modules/rent-results/preferred-options';
 import { PriceRange } from '@/modules/rent-results/price-range';
 
 interface PreferredOption {
@@ -397,71 +398,34 @@ const HeaderRentResult = () => {
                   </div>
                 </PopoverContent>
               </Popover>
-            </div>
-
-            {/* Amenities/Preferred Options */}
-            <div className='flex flex-col gap-3'>
-              <div className='flex justify-between items-center'>
-                <span className='text-lg md:text-[22px] text-primary font-semibold'>
-                  {t('preferredOptions.title')}
-                </span>
+              <div className='flex justify-center md:justify-end'>
                 <Button
-                  variant='link'
-                  className='text-text text-sm font-medium p-0'
-                  onClick={handleClearOptions}
+                  onClick={handleSearch}
+                  className='w-full md:w-auto px-8 py-2 bg-primary hover:bg-primary/90'
                 >
-                  {t('preferredOptions.clearAll')}
+                  {t('search.search')}
                 </Button>
               </div>
-
-              <div className='flex flex-wrap gap-2'>
-                {preferredOptions.map((option) => (
-                  <Button
-                    key={option.id}
-                    variant={option.selected ? 'default' : 'outline'}
-                    className={`flex items-center gap-2 ${
-                      option.selected
-                        ? 'bg-primary text-white'
-                        : 'text-gray-500'
-                    }`}
-                    onClick={() => handleToggleOption(option.id)}
-                  >
-                    <span
-                      className={
-                        option.selected ? 'text-white' : 'text-gray-500'
-                      }
-                    >
-                      {option.icon}
-                    </span>
-                    <span
-                      className={`text-xs font-medium ${
-                        option.selected ? 'text-white' : 'text-gray-500'
-                      }`}
-                    >
-                      {t(`search.amenities.${option.labelKey}`)}
-                    </span>
-                  </Button>
-                ))}
-              </div>
-            </div>
-
-            {/* Price Range */}
-            <div className='flex flex-col gap-3'>
-              <span className='text-lg md:text-[22px] text-primary font-semibold'>
-                {t('search.priceRange')}
-              </span>
-              <PriceRange values={priceRange} onValueChange={setPriceRange} />
             </div>
 
             {/* Search Button */}
-            <div className='flex justify-center md:justify-end'>
-              <Button
-                onClick={handleSearch}
-                className='w-full md:w-auto px-8 py-2 bg-primary hover:bg-primary/90'
-              >
-                {t('search.search')}
-              </Button>
-            </div>
+          </div>
+        </BaseContainer>
+      </div>
+
+      {/* Filters section */}
+      <div className='border-b py-6 md:py-8'>
+        <BaseContainer>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8'>
+            {/* Preferred options section */}
+            <PreferredOptions
+              options={preferredOptions}
+              onToggleOption={handleToggleOption}
+              onClearAll={handleClearOptions}
+            />
+
+            {/* Price range section */}
+            <PriceRange values={priceRange} onValueChange={setPriceRange} />
           </div>
         </BaseContainer>
       </div>

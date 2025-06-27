@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
-import { FaWhatsapp } from 'react-icons/fa6';
+import { FaWhatsapp } from 'react-icons/fa';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -97,8 +97,8 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
   return (
     <div className='sticky top-2 border shadow-md bg-white rounded-md overflow-hidden'>
       <div className='bg-primary text-white flex flex-col gap-1 px-6 py-3'>
-        <span className=''>Send Inquiry or</span>
-        <span className='text-2xl font-semibold'>Make it Yours</span>
+        <span className=''>{t('sendInquiry')} or</span>
+        <span className='text-2xl font-semibold'>{t('makeItYours')}</span>
       </div>
       <div className='p-6 flex flex-col gap-3'>
         <div className='flex flex-col gap-4'>
@@ -109,7 +109,7 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
                 Samuel J.
               </span>
               <span className='text-text text-sm'>
-                Villa Cosutomer Service for Bali
+                {t('customerServiceFor')} Bali
               </span>
             </div>
           </div>
@@ -125,15 +125,15 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
             IDR 4,740,122,500
           </span>
           <Button variant='primary-outline' className='flex items-center gap-2'>
-            Ask for ROI
+            {t('askForROI')}
           </Button>
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            Full name
+            {t('fullName')}
           </Label>
           <Input
-            placeholder='Enter your full name'
+            placeholder={t('enterYourFullName')}
             value={formData.name}
             onChange={handleInputChange}
             name='name'
@@ -141,9 +141,11 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
           />
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-sm font-semibold text-primary'>Email</Label>
+          <Label className='text-sm font-semibold text-primary'>
+            {t('email')}
+          </Label>
           <Input
-            placeholder='Enter your email'
+            placeholder={t('enterYourEmail')}
             type='email'
             value={formData.email}
             onChange={handleInputChange}
@@ -153,7 +155,7 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            Phone number
+            {t('phoneNumber')}
           </Label>
           <div className='flex'>
             {/* Country code selector using Popover */}
@@ -205,7 +207,7 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
             </Popover>
             <Input
               className='rounded-l-none'
-              placeholder='Enter your phone number'
+              placeholder={t('enterYourPhoneNumber')}
               type='tel'
               value={formData.phone}
               onChange={handleInputChange}
@@ -215,7 +217,9 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
           </div>
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-sm font-semibold text-primary'>Guest</Label>
+          <Label className='text-sm font-semibold text-primary'>
+            {t('guest')}
+          </Label>
           <Select
             defaultValue='1'
             onValueChange={(value) =>
@@ -226,7 +230,7 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
             }
           >
             <SelectTrigger className='w-full'>
-              <SelectValue placeholder='Select guest count' />
+              <SelectValue placeholder={t('selectGuestCount')} />
             </SelectTrigger>
             <SelectContent>
               {Array.from(
@@ -234,19 +238,19 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
                 (_, i) => i + 1
               ).map((num) => (
                 <SelectItem key={num} value={num.toString()}>
-                  {num} {num === 1 ? 'Guest' : 'Guests'}
+                  {num} {num === 1 ? t('guestSingular') : t('guestPlural')}
                 </SelectItem>
               ))}
-              <SelectItem value='custom'>Custom</SelectItem>
+              <SelectItem value='custom'>{t('custom')}</SelectItem>
             </SelectContent>
           </Select>
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>
-            Tell us what you would like us to help you with
+            {t('tellUsWhatYouWouldLikeUsToHelpYouWith')}
           </Label>
           <Textarea
-            placeholder='Enter your message'
+            placeholder={t('enterYourMessage')}
             className='min-h-[100px]'
             value={formData.message}
             onChange={handleInputChange}

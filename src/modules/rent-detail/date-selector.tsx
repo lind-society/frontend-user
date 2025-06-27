@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaCalendar } from 'react-icons/fa6';
 
@@ -17,6 +18,8 @@ export const DateSelector: React.FC<{
   onSelect: (date?: Date) => void;
   minDate?: Date;
 }> = ({ label, date, onSelect, minDate }) => {
+  const t = useTranslations('rentDetail.inquiryForm');
+
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -26,7 +29,7 @@ export const DateSelector: React.FC<{
             <span className='font-semibold text-left'>{label}</span>
             <div className='flex justify-between items-center'>
               <span className='text-gray-500 text-sm'>
-                {date ? format(date, 'dd MMM yyyy') : 'Select date'}
+                {date ? format(date, 'dd MMM yyyy') : t('selectDate')}
               </span>
               <ChevronDown size={18} className='text-primary' />
             </div>

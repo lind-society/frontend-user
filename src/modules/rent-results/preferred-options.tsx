@@ -8,7 +8,7 @@ import { OptionCarousel } from '@/modules/rent/header/option-carousel';
 
 interface PreferredOption {
   id: string;
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
   selected?: boolean;
 }
@@ -62,7 +62,7 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
                 option.selected ? 'text-white' : 'text-gray-500'
               }`}
             >
-              {option.label}
+              {option.labelKey}
             </span>
           </Button>
         ))}
@@ -91,7 +91,7 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
                       option.selected ? 'text-white' : 'text-gray-500'
                     }`}
                   >
-                    {option.label}
+                    {option.labelKey}
                   </span>
                 </Button>
               ))}
@@ -116,7 +116,7 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
                       option.selected ? 'text-white' : 'text-gray-500'
                     }`}
                   >
-                    {option.label}
+                    {option.labelKey}
                   </span>
                 </Button>
               ))}

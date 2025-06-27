@@ -276,23 +276,32 @@ const HeaderBuyResult = () => {
                   />
                 </PopoverContent>
               </Popover>
+              <div className='flex justify-center md:justify-end'>
+                <Button
+                  onClick={handleSearch}
+                  className='w-full md:w-auto px-8 py-2 bg-primary hover:bg-primary/90'
+                >
+                  {t('search.search')}
+                </Button>
+              </div>
             </div>
 
             {/* Search Button */}
-            <div className='flex justify-center md:justify-end'>
-              <Button
-                onClick={handleSearch}
-                className='w-full md:w-auto px-8 py-2 bg-primary hover:bg-primary/90'
-              >
-                {t('search.search')}
-              </Button>
-            </div>
           </div>
         </BaseContainer>
       </div>
 
-      {/* Preferred Options */}
-      <PreferredOptions />
+      <div className='border-b py-6 md:py-8'>
+        <BaseContainer>
+          <div className='grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8'>
+            {/* Preferred options section */}
+            <PreferredOptions />
+
+            {/* Price range section */}
+            <PriceRange values={priceRange} onValueChange={setPriceRange} />
+          </div>
+        </BaseContainer>
+      </div>
     </div>
   );
 };
