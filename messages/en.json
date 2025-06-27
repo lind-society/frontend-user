@@ -502,10 +502,99 @@
     }
   },
   "touristActivity": {
-    "pageTitle": "Tourist Activities",
     "header": {
-      "title": "Explore Exciting Activities",
-      "subtitle": "Discover various unforgettable tourist activities"
+      "breadcrumb": {
+        "home": "Home",
+        "touristActivity": "Tourist Activity"
+      },
+      "title": "Wellness",
+      "subtitle": "Prioritize your well-being with transformative wellness experiences tailored to soothe, heal, and revitalize. Explore holistic therapies, mindful meditation, and rejuvenating spa treatments that restore harmony and balance in your daily life."
+    },
+    "content": {
+      "title": "Nourish Your Body, Refresh Your Soul",
+      "subtitle": "Discover wellness experiences that help you relax, recharge, and restore balance in your life.",
+      "search": {
+        "location": "Choose Location",
+        "searchPlaceholder": "What do you want to do?",
+        "availability": "Availability",
+        "priceRange": "Price Range",
+        "minPrice": "Min Price",
+        "maxPrice": "Max Price",
+        "sortBy": "Sort by",
+        "availableActivity": "Available activity"
+      },
+      "cards": {
+        "reviews": "reviews",
+        "session": "session",
+        "person": "person",
+        "individualGroup": "Individual",
+        "maxPeople": "Max {count} people",
+        "smallGroup": "Small group",
+        "fullDay": "Full day",
+        "hours": "hours",
+        "minutes": "minutes"
+      },
+      "buttons": {
+        "showMore": "Show More"
+      }
+    },
+    "explore": {
+      "title": "Explore Another Our Tourist Activity",
+      "subtitle": "Discover more exciting tourist activities that complement your journey. From cultural experiences to thrilling adventures, explore a variety of activities that will make your trip even more memorable.",
+      "journeyCount": "150+ journeys",
+      "cultureCount": "67+ cultures",
+      "eventsCount": "40+ events",
+      "categories": {
+        "journey": "Journey",
+        "culture": "Culture",
+        "specialEvents": "Special Events"
+      }
+    },
+    "categories": {
+      "wellness": "Wellness",
+      "adventure": "Adventure",
+      "cultural": "Cultural",
+      "beach": "Beach",
+      "diving": "Diving",
+      "sunset": "Sunset",
+      "surfing": "Surfing",
+      "culinary": "Culinary"
+    },
+    "locations": [
+      "Bali",
+      "Lombok",
+      "Ubud",
+      "Canggu",
+      "Seminyak",
+      "Nusa Penida",
+      "Gili Islands",
+      "Kuta"
+    ],
+    "activities": {
+      "wellness-spa-1": {
+        "name": "Jungle Detox & Wellness Spa",
+        "description": "Immerse yourself in a peaceful sanctuary surrounded by lush jungle. Our signature detox program includes massage, body scrub, aromatherapy and a relaxing flower bath ritual."
+      },
+      "wellness-yoga-1": {
+        "name": "Sunrise Yoga & Meditation Retreat",
+        "description": "Start your day with energizing yoga overlooking the rice terraces at sunrise, followed by guided meditation and a nutritious organic breakfast."
+      },
+      "adventure-trek-1": {
+        "name": "Mount Batur Sunrise Trek",
+        "description": "Embark on an early morning trek to the summit of Mount Batur to witness a breathtaking sunrise over the volcanic landscape and Lake Batur below."
+      },
+      "diving-nusa-1": {
+        "name": "Nusa Penida Snorkeling Adventure",
+        "description": "Discover the underwater paradise of Nusa Penida with this full-day snorkeling trip to Crystal Bay, Manta Point, and Gamat Bay."
+      },
+      "cultural-temple-1": {
+        "name": "Bali Temple & Cultural Tour",
+        "description": "Visit Bali's most sacred temples and learn about local traditions with a knowledgeable guide. Includes visits to Besakih, Uluwatu, and a traditional Kecak dance performance."
+      },
+      "wellness-massage-1": {
+        "name": "Traditional Balinese Massage",
+        "description": "Experience authentic Balinese healing through a full-body massage using traditional techniques passed down through generations, with natural aromatic oils."
+      }
     }
   },
   "manageProperty": {
@@ -565,9 +654,9 @@
     "collections": "Collections",
     "freebies": "Freebies",
     "amenities": "Amenities",
-    "showMore": "Show more",
-    "clearAll": "Clear All",
     "applyFilters": "Apply Filters",
+    "clearAll": "Clear All",
+    "showMore": "Show more",
     "collectionsOptions": {
       "beachfront": "Beachfront",
       "mountainView": "Mountain View",
@@ -597,8 +686,8 @@
     "touristActivity": {
       "title": "Filter Tourist Activities",
       "selectCountry": "Select Country",
-      "exploreActivityBasedOnCity": "Explore activity based on city",
-      "filterActivitiesByCity": "Filter activities by city destination",
+      "exploreActivity": "Explore activity based on city",
+      "filterByCity": "Filter activities by city destination",
       "citiesSelected": "cities selected",
       "citySelected": "city selected",
       "clear": "Clear",

@@ -502,10 +502,99 @@
     }
   },
   "touristActivity": {
-    "pageTitle": "Aktivitas Wisata",
     "header": {
-      "title": "Jelajahi Aktivitas Menarik",
-      "subtitle": "Temukan berbagai aktivitas wisata yang tak terlupakan"
+      "breadcrumb": {
+        "home": "Beranda",
+        "touristActivity": "Aktivitas Wisata"
+      },
+      "title": "Wellness",
+      "subtitle": "Prioritaskan kesejahteraan Anda dengan pengalaman wellness transformatif yang dirancang untuk menenangkan, menyembuhkan, dan merevitalisasi. Jelajahi terapi holistik, meditasi penuh perhatian, dan perawatan spa yang meremajakan untuk mengembalikan harmoni dan keseimbangan dalam kehidupan sehari-hari Anda."
+    },
+    "content": {
+      "title": "Nutrisi Tubuh Anda, Segarkan Jiwa Anda",
+      "subtitle": "Temukan pengalaman wellness yang membantu Anda rileks, mengisi energi, dan mengembalikan keseimbangan dalam hidup Anda.",
+      "search": {
+        "location": "Pilih Lokasi",
+        "searchPlaceholder": "Apa yang ingin Anda lakukan?",
+        "availability": "Ketersediaan",
+        "priceRange": "Kisaran Harga",
+        "minPrice": "Harga Min",
+        "maxPrice": "Harga Maks",
+        "sortBy": "Urutkan berdasarkan",
+        "availableActivity": "Aktivitas tersedia"
+      },
+      "cards": {
+        "reviews": "ulasan",
+        "session": "sesi",
+        "person": "orang",
+        "individualGroup": "Individual",
+        "maxPeople": "Maks {count} orang",
+        "smallGroup": "Grup kecil",
+        "fullDay": "Seharian",
+        "hours": "jam",
+        "minutes": "menit"
+      },
+      "buttons": {
+        "showMore": "Tampilkan Lebih Banyak"
+      }
+    },
+    "explore": {
+      "title": "Jelajahi Aktivitas Wisata Lain Kami",
+      "subtitle": "Temukan lebih banyak aktivitas wisata menarik yang melengkapi perjalanan Anda. Dari pengalaman budaya hingga petualangan mendebarkan, jelajahi berbagai aktivitas yang akan membuat perjalanan Anda semakin berkesan.",
+      "journeyCount": "150+ perjalanan",
+      "cultureCount": "67+ budaya",
+      "eventsCount": "40+ acara",
+      "categories": {
+        "journey": "Perjalanan",
+        "culture": "Budaya",
+        "specialEvents": "Acara Spesial"
+      }
+    },
+    "categories": {
+      "wellness": "Wellness",
+      "adventure": "Petualangan",
+      "cultural": "Budaya",
+      "beach": "Pantai",
+      "diving": "Menyelam",
+      "sunset": "Sunset",
+      "surfing": "Berselancar",
+      "culinary": "Kuliner"
+    },
+    "locations": [
+      "Bali",
+      "Lombok",
+      "Ubud",
+      "Canggu",
+      "Seminyak",
+      "Nusa Penida",
+      "Kepulauan Gili",
+      "Kuta"
+    ],
+    "activities": {
+      "wellness-spa-1": {
+        "name": "Jungle Detox & Wellness Spa",
+        "description": "Tenggelamkan diri Anda dalam suaka damai yang dikelilingi hutan lebat. Program detoks khas kami mencakup pijat, scrub tubuh, aromaterapi dan ritual mandi bunga yang menenangkan."
+      },
+      "wellness-yoga-1": {
+        "name": "Retret Yoga & Meditasi Sunrise",
+        "description": "Mulai hari Anda dengan yoga yang memberikan energi sambil menghadap sawah saat matahari terbit, diikuti dengan meditasi terpandu dan sarapan organik bergizi."
+      },
+      "adventure-trek-1": {
+        "name": "Pendakian Sunrise Gunung Batur",
+        "description": "Mulailah perjalanan mendaki pagi hari ke puncak Gunung Batur untuk menyaksikan matahari terbit yang menakjubkan di atas lanskap vulkanik dan Danau Batur di bawahnya."
+      },
+      "diving-nusa-1": {
+        "name": "Petualangan Snorkeling Nusa Penida",
+        "description": "Temukan surga bawah laut Nusa Penida dengan perjalanan snorkeling sehari penuh ke Crystal Bay, Manta Point, dan Gamat Bay."
+      },
+      "cultural-temple-1": {
+        "name": "Tur Pura & Budaya Bali",
+        "description": "Kunjungi pura-pura paling suci di Bali dan pelajari tradisi lokal dengan pemandu berpengetahuan. Termasuk kunjungan ke Besakih, Uluwatu, dan pertunjukan tari Kecak tradisional."
+      },
+      "wellness-massage-1": {
+        "name": "Pijat Tradisional Bali",
+        "description": "Rasakan penyembuhan autentik Bali melalui pijat seluruh tubuh menggunakan teknik tradisional yang diwariskan turun-temurun, dengan minyak aromatik alami."
+      }
     }
   },
   "manageProperty": {
@@ -565,23 +654,23 @@
     "collections": "Koleksi",
     "freebies": "Gratis",
     "amenities": "Fasilitas",
-    "showMore": "Tampilkan lebih banyak",
-    "clearAll": "Hapus Semua",
     "applyFilters": "Terapkan Filter",
+    "clearAll": "Hapus Semua",
+    "showMore": "Tampilkan Lebih Banyak",
     "collectionsOptions": {
       "beachfront": "Tepi Pantai",
       "mountainView": "Pemandangan Gunung",
       "historic": "Bersejarah",
       "modern": "Modern",
       "luxury": "Mewah",
-      "budgetFriendly": "Ramah Budget"
+      "budgetFriendly": "Ramah Anggaran"
     },
     "freebiesOptions": {
-      "freeBreakfast": "Sarapan gratis",
-      "freeParking": "Parkir gratis",
-      "freeWifi": "Wifi gratis",
-      "freeCancellation": "Pembatalan gratis",
-      "freeAirportShuttle": "Antar jemput bandara gratis"
+      "freeBreakfast": "Sarapan Gratis",
+      "freeParking": "Parkir Gratis",
+      "freeWifi": "WiFi Gratis",
+      "freeCancellation": "Pembatalan Gratis",
+      "freeAirportShuttle": "Antar Jemput Bandara Gratis"
     },
     "amenitiesOptions": {
       "airConditioning": "AC",
@@ -597,8 +686,8 @@
     "touristActivity": {
       "title": "Filter Aktivitas Wisata",
       "selectCountry": "Pilih Negara",
-      "exploreActivityBasedOnCity": "Jelajahi aktivitas berdasarkan kota",
-      "filterActivitiesByCity": "Filter aktivitas berdasarkan destinasi kota",
+      "exploreActivity": "Jelajahi aktivitas berdasarkan kota",
+      "filterByCity": "Filter aktivitas berdasarkan tujuan kota",
       "citiesSelected": "kota dipilih",
       "citySelected": "kota dipilih",
       "clear": "Hapus",

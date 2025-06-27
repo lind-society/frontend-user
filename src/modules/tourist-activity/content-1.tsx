@@ -5,6 +5,7 @@ import { format } from 'date-fns';
 import { ChevronDown, Heart, Search, Star } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
 import { TbCurrencyDollar } from 'react-icons/tb';
@@ -35,7 +36,6 @@ import {
 import { SortOption, sortOptions } from '@/modules/buy-result/result';
 import { formatCurrency } from '@/modules/rent/header/price-range';
 import {
-  activityCategories,
   activityLocations,
   touristActivities,
   TouristActivity,
@@ -48,6 +48,10 @@ interface FilterData {
 }
 
 const ContentTourist1 = () => {
+  const t = useTranslations('touristActivity.content');
+  const tCategories = useTranslations('touristActivity.categories');
+  const tActivities = useTranslations('touristActivity.activities');
+
   const [selectedSort, setSelectedSort] = useState<SortOption>('recommended');
   const [selectedLocation, setSelectedLocation] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -147,12 +151,9 @@ const ContentTourist1 = () => {
           {/* Header section */}
           <div className='flex flex-col gap-2 text-center items-center'>
             <h4 className='text-primary text-xl md:text-2xl font-semibold'>
-              Nourish Your Body, Refresh Your Soul
+              {t('title')}
             </h4>
-            <span className='max-w-[850px] text-text'>
-              Discover wellness experiences that help you relax, recharge, and
-              restore balance in your life.
-            </span>
+            <span className='max-w-[850px] text-text'>{t('subtitle')}</span>
           </div>
 
           {/* Search section */}
@@ -162,7 +163,7 @@ const ContentTourist1 = () => {
               onValueChange={setSelectedLocation}
             >
               <SelectTrigger className='w-full md:w-[240px] h-[46px] md:h-[58px]'>
-                <SelectValue placeholder='Choose Location' />
+                <SelectValue placeholder={t('search.location')} />
               </SelectTrigger>
               <SelectContent>
                 {activityLocations.map((location) => (
@@ -176,7 +177,7 @@ const ContentTourist1 = () => {
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder='What do you want to do?'
+                placeholder={t('search.searchPlaceholder')}
                 className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none py-3 px-4 w-full md:w-[400px]'
               />
               <button
@@ -191,7 +192,7 @@ const ContentTourist1 = () => {
           {/* Activity count */}
           <div className='flex gap-2 items-center'>
             <span className='font-medium text-gray-500'>
-              Available activity:
+              {t('search.availableActivity')}:
             </span>
             <span className='text-xl text-primary'>{activities.length}</span>
           </div>
@@ -207,7 +208,7 @@ const ContentTourist1 = () => {
                     <span className='text-primary'>
                       {selectedDate
                         ? format(selectedDate, 'PP')
-                        : 'Availability'}
+                        : t('search.availability')}
                     </span>
                     <ChevronDown className='text-primary' />
                   </Button>
@@ -229,7 +230,7 @@ const ContentTourist1 = () => {
                     <TbCurrencyDollar className='text-primary text-xl' />
                     <span className='text-primary'>
                       {minPrice === 0 && maxPrice === 5000000
-                        ? 'Price Range'
+                        ? t('search.priceRange')
                         : `${formatCurrency(minPrice)} - ${formatCurrency(
                             maxPrice
                           )}`}
@@ -239,10 +240,14 @@ const ContentTourist1 = () => {
                 </PopoverTrigger>
                 <PopoverContent className='w-80 p-4'>
                   <div className='flex flex-col gap-4'>
-                    <span className='font-medium'>Price Range</span>
+                    <span className='font-medium'>
+                      {t('search.priceRange')}
+                    </span>
                     <div className='flex justify-between'>
                       <div className='flex flex-col gap-1'>
-                        <span className='text-sm text-gray-500'>Min Price</span>
+                        <span className='text-sm text-gray-500'>
+                          {t('search.minPrice')}
+                        </span>
                         <input
                           type='number'
                           value={minPrice}
@@ -251,7 +256,9 @@ const ContentTourist1 = () => {
                         />
                       </div>
                       <div className='flex flex-col gap-1'>
-                        <span className='text-sm text-gray-500'>Max Price</span>
+                        <span className='text-sm text-gray-500'>
+                          {t('search.maxPrice')}
+                        </span>
                         <input
                           type='number'
                           value={maxPrice}
@@ -277,7 +284,7 @@ const ContentTourist1 = () => {
                     className='flex items-center justify-center gap-2 text-primary text-xs font-semibold'
                   >
                     <span className='whitespace-nowrap'>
-                      Sort by{' '}
+                      {t('search.sortBy')}{' '}
                       {
                         sortOptions.find((opt) => opt.value === selectedSort)
                           ?.label
@@ -318,7 +325,7 @@ const ContentTourist1 = () => {
                     <Image
                       className='w-full h-full object-cover'
                       src={activity.images[0]}
-                      alt={activity.name}
+                      alt={tActivities(`${activity.id}.name`)}
                       sizes='100vw'
                       width={0}
                       height={0}
@@ -353,11 +360,7 @@ const ContentTourist1 = () => {
                 <div className='px-6 py-4 flex justify-between border-b'>
                   <span className='text-sm text-text'>{activity.location}</span>
                   <Badge className='bg-primary px-3 rounded-md'>
-                    {
-                      activityCategories.find(
-                        (cat) => cat.id === activity.category
-                      )?.name
-                    }
+                    {tCategories(activity.category)}
                   </Badge>
                 </div>
 
@@ -369,7 +372,7 @@ const ContentTourist1 = () => {
                       className='hover:text-primary/80'
                     >
                       <p className='text-lg md:text-xl text-primary font-semibold'>
-                        {activity.name}
+                        {tActivities(`${activity.id}.name`)}
                       </p>
                     </Link>
                     <div className='flex flex-col text-start md:text-end items-start md:items-end text-primary'>
@@ -377,12 +380,12 @@ const ContentTourist1 = () => {
                         {activity.currency} {activity.price.toLocaleString()}
                       </span>
                       <span className='italic text-xs md:text-sm font-normal'>
-                        /{activity.priceUnit}
+                        /{t(`cards.${activity.priceUnit}`)}
                       </span>
                     </div>
                   </div>
                   <p className='text-gray-600 font-normal text-sm md:text-base line-clamp-3'>
-                    {activity.description}
+                    {tActivities(`${activity.id}.description`)}
                   </p>
                   <div className='flex justify-between items-center mt-2'>
                     <div className='flex items-center gap-2'>
@@ -390,11 +393,21 @@ const ContentTourist1 = () => {
                         {activity.duration}
                       </span>
                       <span className='text-xs px-2 py-1 bg-gray-100 rounded-md'>
-                        {activity.groupSize}
+                        {activity.groupSize === 'Individual'
+                          ? t('cards.individualGroup')
+                          : activity.groupSize.includes('Max')
+                          ? t('cards.maxPeople', {
+                              count: activity.groupSize.match(/\d+/)?.[0] || '',
+                            })
+                          : activity.groupSize === 'Small group'
+                          ? t('cards.smallGroup')
+                          : activity.groupSize === 'Full day'
+                          ? t('cards.fullDay')
+                          : activity.groupSize}
                       </span>
                     </div>
                     <span className='text-xs text-gray-500'>
-                      {activity.reviews} reviews
+                      {activity.reviews} {t('cards.reviews')}
                     </span>
                   </div>
                 </div>
@@ -410,7 +423,7 @@ const ContentTourist1 = () => {
                 className='w-fit'
                 onClick={handleShowMore}
               >
-                Show more ({activities.length - displayLimit})
+                {t('buttons.showMore')} ({activities.length - displayLimit})
               </Button>
             </div>
           )}

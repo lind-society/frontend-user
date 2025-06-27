@@ -172,9 +172,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                 >
                   <div className='flex flex-col gap-1'>
                     <span className='font-semibold'>{country}</span>
-                    <span className='text-xs'>
-                      {t('exploreActivityBasedOnCity')}
-                    </span>
+                    <span className='text-xs'>{t('exploreActivity')}</span>
                   </div>
                   <ChevronRight
                     className={
@@ -216,7 +214,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
               <div className='p-5 flex justify-between'>
                 <div className='flex flex-col gap-1'>
                   <span className='text-primary font-semibold text-sm'>
-                    {t('filterActivitiesByCity')}
+                    {t('filterByCity')}
                   </span>
                   <span className='text-xs text-gray-500'>
                     {getSelectedCitiesCount()}{' '}
@@ -253,7 +251,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   : t('cancel')}
               </Button>
               <Button variant='primary' onClick={applyFilters}>
-                {t('../applyFilters')}
+                {useTranslations('filters')('applyFilters')}
               </Button>
             </div>
           </div>
