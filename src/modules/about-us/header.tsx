@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -12,6 +13,7 @@ import {
 } from '@/components/ui/carousel';
 
 const HeaderAboutUs = () => {
+  const t = useTranslations('aboutUs.header');
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 
@@ -99,11 +101,10 @@ const HeaderAboutUs = () => {
       <BaseContainer>
         <div className='relative z-20 flex flex-col items-center gap-4 md:gap-6 text-center'>
           <h1 className='text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white max-w-4xl'>
-            Unlimited Luxury Stays & Property Management
+            {t('title')}
           </h1>
           <p className='text-base md:text-lg lg:text-xl text-white/90 max-w-3xl mx-auto font-light'>
-            Find exclusive residences and manage your property with professional
-            services for the best hassle-free experience.
+            {t('subtitle')}
           </p>
         </div>
       </BaseContainer>

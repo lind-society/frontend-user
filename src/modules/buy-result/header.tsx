@@ -1,6 +1,7 @@
 'use client';
 
 import { ChevronDown, Slash } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
@@ -27,6 +28,8 @@ import { PreferredOptions } from '@/modules/buy-result/preferred-option';
 import { PriceRange } from '@/modules/buy-result/price-range';
 
 const HeaderBuyResult = () => {
+  const t = useTranslations('buyResult');
+
   // Location state
   const [location, setLocation] = useState('Bali');
   const [ownership, setOwnership] = useState('Leasehold');
@@ -59,14 +62,16 @@ const HeaderBuyResult = () => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                  <BreadcrumbLink href='/'>
+                    {t('breadcrumb.home')}
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem className='font-semibold'>
                   <BreadcrumbLink href='/buy/result'>
-                    Property purchase search results
+                    {t('breadcrumb.searchResults')}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -87,7 +92,9 @@ const HeaderBuyResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Location</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.location')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
@@ -120,7 +127,9 @@ const HeaderBuyResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <GrCertificate size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Ownership</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.ownership')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>{ownership}</span>
                         <ChevronDown size={18} className='text-primary' />
@@ -153,7 +162,9 @@ const HeaderBuyResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Bedrooms</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.bedrooms')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {bedrooms.toString().padStart(2, '0')}
@@ -166,7 +177,7 @@ const HeaderBuyResult = () => {
                 <PopoverContent className='w-48 p-3'>
                   <div className='flex flex-col gap-3'>
                     <div className='flex justify-between items-center'>
-                      <span>Number of bedrooms</span>
+                      <span>{t('search.bedroomDescription')}</span>
                     </div>
                     <div className='flex items-center justify-between'>
                       <button
@@ -197,7 +208,9 @@ const HeaderBuyResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <LuBath size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Bathrooms</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.bathrooms')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {bathrooms.toString().padStart(2, '0')}
@@ -210,7 +223,7 @@ const HeaderBuyResult = () => {
                 <PopoverContent className='w-48 p-3'>
                   <div className='flex flex-col gap-3'>
                     <div className='flex justify-between items-center'>
-                      <span>Number of bathrooms</span>
+                      <span>{t('search.bathroomDescription')}</span>
                     </div>
                     <div className='flex items-center justify-between'>
                       <button
@@ -237,74 +250,49 @@ const HeaderBuyResult = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Price with icon */}
+              {/* Price Range */}
               <Popover>
                 <PopoverTrigger asChild>
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <TbCurrencyDollar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Price</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.priceRange')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
-                          ${(priceRange[0] / 1000).toFixed(0)}K - $
-                          {(priceRange[1] / 1000).toFixed(0)}K
+                          ${priceRange[0].toLocaleString()} - $
+                          {priceRange[1].toLocaleString()}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
                   </button>
                 </PopoverTrigger>
-                <PopoverContent className='w-80 p-3'>
-                  <div className='flex flex-col gap-4'>
-                    <h5 className='font-semibold'>Price Range</h5>
-                    {/* Price range options would be implemented here */}
-                    <div className='grid grid-cols-1 gap-3'>
-                      {[
-                        'Any Price',
-                        'Under $500,000',
-                        '$500,000 - $1M',
-                        '$1M - $2M',
-                        '$2M - $5M',
-                        '$5M+',
-                      ].map((range) => (
-                        <button
-                          key={range}
-                          className='py-2 px-3 text-left rounded-md hover:bg-gray-100'
-                        >
-                          {range}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                <PopoverContent className='w-80 p-4'>
+                  <PriceRange
+                    values={priceRange}
+                    onValueChange={setPriceRange}
+                  />
                 </PopoverContent>
               </Popover>
+            </div>
 
-              {/* Search Button */}
+            {/* Search Button */}
+            <div className='flex justify-center md:justify-end'>
               <Button
-                variant='primary'
-                size='lg'
-                className='w-full md:w-auto'
                 onClick={handleSearch}
+                className='w-full md:w-auto px-8 py-2 bg-primary hover:bg-primary/90'
               >
-                Search
+                {t('search.search')}
               </Button>
             </div>
           </div>
         </BaseContainer>
       </div>
 
-      {/* Filters section */}
-      <div className='border-b py-6 md:py-8'>
-        <BaseContainer>
-          <div className='grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8'>
-            {/* Preferred options section */}
-            <PreferredOptions />
-
-            {/* Price range section */}
-            <PriceRange values={priceRange} onValueChange={setPriceRange} />
-          </div>
-        </BaseContainer>
-      </div>
+      {/* Preferred Options */}
+      <PreferredOptions />
     </div>
   );
 };

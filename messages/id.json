@@ -101,6 +101,26 @@
       "chooseLocation": "Pilih Lokasi",
       "searchButton": "Cari",
       "advancedSearch": "Pencarian Lanjutan",
+      "enhancedDateRange": {
+        "label": "Ketersediaan",
+        "selectDates": "Pilih tanggal",
+        "selectEndDate": "Pilih tanggal akhir",
+        "daily": "Harian",
+        "monthly": "Bulanan",
+        "yearly": "Tahunan",
+        "howLongStay": "Berapa lama menginap?",
+        "stayDuration": "Durasi Menginap",
+        "duration": "Durasi",
+        "month": "bulan",
+        "months": "bulan",
+        "year": "tahun",
+        "years": "tahun",
+        "startDate": "Tanggal Mulai",
+        "endDate": "Tanggal Selesai",
+        "selectDate": "Pilih tanggal",
+        "selectStartDate": "Pilih Tanggal Mulai",
+        "selectStartDateFirst": "Pilih tanggal mulai terlebih dahulu"
+      },
       "promotions": {
         "stay": "*Penawaran Early Bird Eksklusif – Pesan Lebih Awal & Nikmati Diskon Khusus!🌟",
         "stayLink": "Klik di sini untuk melihat daftar!",
@@ -190,24 +210,56 @@
   "aboutUs": {
     "pageTitle": "Tentang Kami",
     "header": {
-      "title": "Tentang LIND Society",
-      "subtitle": "Menciptakan pengalaman liburan yang tak terlupakan"
+      "title": "Unlimited Luxury Stays & Property Management",
+      "subtitle": "Temukan residensi eksklusif dan kelola properti Anda dengan layanan profesional untuk pengalaman terbaik tanpa repot."
     },
-    "content": {
-      "vision": {
-        "title": "Visi Kami",
-        "description": "Menjadi platform terdepan dalam penyediaan akomodasi premium dan pengalaman wisata berkualitas tinggi di Indonesia."
-      },
-      "mission": {
-        "title": "Misi Kami",
-        "description": "Memberikan layanan terbaik dalam manajemen properti, pemesanan vila, dan aktivitas wisata dengan standar internasional."
-      },
-      "values": {
-        "title": "Nilai-nilai Kami",
-        "excellence": "Keunggulan",
-        "trust": "Kepercayaan",
-        "innovation": "Inovasi",
-        "service": "Pelayanan"
+    "content1": {
+      "title": "Siapa Kami",
+      "paragraph1": "Kami adalah platform premium yang memberikan pengalaman menginap eksklusif dan layanan manajemen properti terbaik. Kami menyediakan pilihan rumah & villa yang beragam yang telah dipilih dengan cermat untuk memenuhi kebutuhan para pelancong, sementara untuk pemilik properti, kami menawarkan solusi manajemen properti yang memaksimalkan potensi investasi mereka.",
+      "paragraph2": "Dengan pengalaman lebih dari 10 tahun di industri properti, kami memastikan bahwa setiap properti dikelola dengan tingkat keahlian dan perhatian detail tertinggi.",
+      "imageAlt": "Tim LIND Society"
+    },
+    "content2": {
+      "title": "Mengapa Memilih Kami?",
+      "subtitle": "Kami Mempermudah Pengalaman Booking Rumah & Villa Anda",
+      "description": "Platform kami menghubungkan pemilik properti dengan pelancong yang mencari pengalaman menginap unik di rumah dan villa. Kami menangani semuanya mulai dari pemasaran hingga manajemen tamu dengan perhatian luar biasa.",
+      "features": {
+        "professionalExperience": {
+          "title": "Pengalaman Profesional",
+          "description": "Dengan pengalaman bertahun-tahun di industri hotel dan properti, kami memiliki keahlian untuk mengelola properti secara optimal dan memberikan tamu pengalaman menginap yang luar biasa."
+        },
+        "marketAnalysis": {
+          "title": "Analisis Pasar Real-time",
+          "description": "Kami menggunakan data terbaru untuk menetapkan harga sewa yang optimal, memastikan bahwa properti Anda selalu menarik dan menguntungkan."
+        },
+        "customerService": {
+          "title": "Layanan Pelanggan 24/7",
+          "description": "Tim kami siap membantu kapan saja, memastikan kenyamanan tamu dan pemilik properti tanpa gangguan."
+        },
+        "transparency": {
+          "title": "Transparansi & Keamanan",
+          "description": "Kami berkomitmen memberikan pengalaman yang jelas dan tanpa biaya tersembunyi, membuat setiap transaksi aman dan transparan."
+        }
+      }
+    },
+    "content3": {
+      "title": "Layanan Kami",
+      "services": {
+        "booking": {
+          "title": "Booking Rumah & Villa",
+          "description": "Temukan pilihan properti eksklusif yang beragam yang menawarkan kenyamanan, privasi dan layanan bintang lima. Setiap properti telah dipilih dengan cermat untuk memberikan pengalaman menginap terbaik bagi setiap tamu.",
+          "linkText": "Pesan Tempat Impian Anda"
+        },
+        "buying": {
+          "title": "Beli Rumah & Villa",
+          "description": "Kami percaya setiap villa menyimpan cerita unik, menunggu babak selanjutnya. LIND Society dirancang untuk menghubungkan rumah-rumah luar biasa dengan mereka yang mencarinya, memastikan perjalanan yang mulus dari satu pemilik ke pemilik berikutnya.",
+          "linkText": "Temukan Rumah Sempurna Anda"
+        },
+        "management": {
+          "title": "Manajemen Properti",
+          "description": "Kami menawarkan manajemen lengkap properti Anda, mulai dari pengelolaan harian hingga pemasaran dan optimalisasi harga sewa, memastikan pendapatan maksimal dan pemeliharaan properti yang optimal.",
+          "linkText": "Mulai Kelola Properti Anda"
+        }
       }
     }
   },
@@ -712,6 +764,188 @@
       "rotateLeft": "Putar Kiri",
       "rotateRight": "Putar Kanan",
       "fullscreen": "Layar Penuh"
+    }
+  },
+  "buyResult": {
+    "breadcrumb": {
+      "home": "Beranda",
+      "searchResults": "Hasil pencarian pembelian properti"
+    },
+    "search": {
+      "location": "Lokasi",
+      "ownership": "Kepemilikan",
+      "bedrooms": "Kamar Tidur",
+      "bathrooms": "Kamar Mandi",
+      "priceRange": "Rentang Harga",
+      "search": "Cari",
+      "bedroomDescription": "Jumlah kamar tidur",
+      "bathroomDescription": "Jumlah kamar mandi",
+      "ownershipTypes": {
+        "leasehold": "Leasehold",
+        "freehold": "Freehold",
+        "both": "Keduanya"
+      }
+    },
+    "results": {
+      "propertiesFound": "properti ditemukan",
+      "sortBy": "Urutkan berdasarkan",
+      "showMore": "Tampilkan Lebih Banyak",
+      "currency": "IDR",
+      "per": "per",
+      "sqm": "m²"
+    },
+    "propertyCard": {
+      "bedrooms": "kamar tidur",
+      "bathrooms": "kamar mandi",
+      "lotSize": "Luas Tanah",
+      "buildingSize": "Luas Bangunan"
+    },
+    "preferredOptions": {
+      "title": "Pilihan yang Paling Disukai",
+      "options": {
+        "instantIncome": "Pendapatan instan",
+        "rentalReady": "Siap disewakan",
+        "oceanView": "Pemandangan laut",
+        "highEndLuxury": "Kemewahan kelas atas",
+        "jungleView": "Pemandangan hutan",
+        "landPlots": "Kavling tanah"
+      }
+    }
+  },
+  "rentResults": {
+    "breadcrumb": {
+      "home": "Beranda",
+      "searchResults": "Hasil pencarian villa sewa"
+    },
+    "search": {
+      "location": "Lokasi",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "bedrooms": "Kamar Tidur",
+      "guests": "Tamu",
+      "priceRange": "Rentang Harga",
+      "search": "Cari",
+      "bedroomDescription": "Jumlah kamar tidur",
+      "guestDescription": "Jumlah tamu",
+      "amenities": {
+        "airConditioner": "AC",
+        "pool": "Kolam Renang",
+        "kitchen": "Dapur",
+        "parking": "Parkir",
+        "beachfront": "Tepi Pantai",
+        "freeWifi": "WiFi Gratis",
+        "petFriendly": "Ramah Hewan",
+        "security": "Keamanan",
+        "mountainView": "Pemandangan Gunung",
+        "massage": "Pijat",
+        "bbqGrill": "Pemanggang BBQ",
+        "yoga": "Yoga",
+        "seaView": "Pemandangan Laut"
+      },
+      "clearFilters": "Hapus Filter"
+    },
+    "results": {
+      "propertiesFound": "properti ditemukan",
+      "sortBy": "Urutkan berdasarkan",
+      "showMore": "Tampilkan Lebih Banyak",
+      "currency": "IDR",
+      "per": "per",
+      "night": "malam"
+    },
+    "preferredOptions": {
+      "title": "Pilihan yang Paling Disukai",
+      "clearAll": "Hapus Semua"
+    }
+  },
+  "rentDetail": {
+    "header": {
+      "imageAlt": "Pemandangan villa",
+      "slideIndicator": "dari"
+    },
+    "content": {
+      "bookNow": "Pesan Sekarang",
+      "sendInquiry": "Kirim Pertanyaan",
+      "overview": "Ikhtisar",
+      "amenities": "Fasilitas",
+      "location": "Lokasi",
+      "reviews": "Ulasan",
+      "pricing": "Harga",
+      "availability": "Ketersediaan",
+      "features": {
+        "bedrooms": "Kamar Tidur",
+        "bathrooms": "Kamar Mandi",
+        "guests": "Tamu",
+        "sqm": "m²"
+      },
+      "bookingInfo": {
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "guests": "Tamu",
+        "total": "Total",
+        "perNight": "per malam",
+        "nights": "malam"
+      }
+    },
+    "inquiryForm": {
+      "title": "Kirim Pertanyaan",
+      "subtitle": "Tertarik dengan properti ini? Kirimkan pertanyaan Anda",
+      "name": "Nama",
+      "email": "Email",
+      "phone": "Nomor Telepon",
+      "message": "Pesan",
+      "messagePlaceholder": "Tulis pesan Anda di sini...",
+      "send": "Kirim Pertanyaan",
+      "sending": "Mengirim..."
+    }
+  },
+  "buyDetail": {
+    "header": {
+      "imageAlt": "Pemandangan properti",
+      "slideIndicator": "dari"
+    },
+    "content": {
+      "breadcrumbHome": "Beranda",
+      "availableForSale": "Tersedia untuk dijual",
+      "viewOnMap": "Lihat di peta",
+      "overallOn": "Keseluruhan dari",
+      "reviews": "ulasan",
+      "inquireNow": "Tanyakan Sekarang",
+      "sendInquiry": "Kirim Pertanyaan",
+      "overview": "Ikhtisar",
+      "features": "Fitur",
+      "location": "Lokasi",
+      "pricing": "Harga",
+      "details": "Detail",
+      "viewFullMap": "Lihat peta lengkap",
+      "aroundVilla": "Sekitar villa",
+      "propertyInfo": {
+        "bedrooms": "Kamar Tidur",
+        "bathrooms": "Kamar Mandi",
+        "lotSize": "Luas Tanah",
+        "buildingSize": "Luas Bangunan",
+        "sqm": "m²",
+        "ownership": "Kepemilikan",
+        "price": "Harga",
+        "currency": "IDR",
+        "productionStatus": "Status Produksi",
+        "yearBuilt": "Tahun Dibangun",
+        "lease": "Sewa",
+        "pricePerSqm": "Harga/m²",
+        "levels": "Tingkat",
+        "pool": "Kolam Renang",
+        "parking": "Parkir"
+      }
+    },
+    "inquiryForm": {
+      "title": "Kirim Pertanyaan",
+      "subtitle": "Tertarik dengan properti ini? Kirimkan pertanyaan Anda",
+      "name": "Nama",
+      "email": "Email",
+      "phone": "Nomor Telepon",
+      "message": "Pesan",
+      "messagePlaceholder": "Tulis pesan Anda di sini...",
+      "send": "Kirim Pertanyaan",
+      "sending": "Mengirim..."
     }
   }
 }

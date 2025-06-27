@@ -2,6 +2,7 @@
 
 import { format } from 'date-fns';
 import { ChevronDown, Slash } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { BiSwim } from 'react-icons/bi';
 import { FaParking, FaUmbrellaBeach } from 'react-icons/fa';
@@ -30,17 +31,18 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-import { PreferredOptions } from '@/modules/rent-results/preferred-options';
 import { PriceRange } from '@/modules/rent-results/price-range';
 
 interface PreferredOption {
   id: string;
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
   selected?: boolean;
 }
 
 const HeaderRentResult = () => {
+  const t = useTranslations('rentResults');
+
   // Location state
   const [location, setLocation] = useState('Bali');
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
@@ -62,69 +64,79 @@ const HeaderRentResult = () => {
   const [preferredOptions, setPreferredOptions] = useState<PreferredOption[]>([
     {
       id: 'air-cond',
-      label: 'Air conditioner',
+      labelKey: 'airConditioner',
       icon: <TbAirConditioning size={20} />,
       selected: false,
     },
-    { id: 'pool', label: 'Pool', icon: <BiSwim size={20} />, selected: false },
+    {
+      id: 'pool',
+      labelKey: 'pool',
+      icon: <BiSwim size={20} />,
+      selected: false,
+    },
     {
       id: 'kitchen',
-      label: 'Kitchen',
+      labelKey: 'kitchen',
       icon: <MdKitchen size={20} />,
       selected: false,
     },
     {
       id: 'parking',
-      label: 'Parking',
+      labelKey: 'parking',
       icon: <FaParking size={20} />,
       selected: false,
     },
     {
       id: 'beach',
-      label: 'Beachfront',
+      labelKey: 'beachfront',
       icon: <FaUmbrellaBeach size={20} />,
       selected: false,
     },
     {
       id: 'wifi',
-      label: 'Free WiFi',
+      labelKey: 'freeWifi',
       icon: <IoWifiOutline size={20} />,
       selected: false,
     },
     {
       id: 'pets',
-      label: 'Pet friendly',
+      labelKey: 'petFriendly',
       icon: <MdOutlinePets size={20} />,
       selected: false,
     },
     {
       id: 'security',
-      label: 'Security',
+      labelKey: 'security',
       icon: <MdOutlineSecurity size={20} />,
       selected: false,
     },
     {
       id: 'mountain',
-      label: 'Mountain view',
+      labelKey: 'mountainView',
       icon: <PiMountainsDuotone size={20} />,
       selected: false,
     },
     {
       id: 'massage',
-      label: 'Massage',
+      labelKey: 'massage',
       icon: <TbMassage size={20} />,
       selected: false,
     },
     {
       id: 'bbq',
-      label: 'BBQ grill',
+      labelKey: 'bbqGrill',
       icon: <TbGrill size={20} />,
       selected: false,
     },
-    { id: 'yoga', label: 'Yoga', icon: <GrYoga size={20} />, selected: false },
+    {
+      id: 'yoga',
+      labelKey: 'yoga',
+      icon: <GrYoga size={20} />,
+      selected: false,
+    },
     {
       id: 'seaview',
-      label: 'Sea view',
+      labelKey: 'seaView',
       icon: <RiRoadMapLine size={20} />,
       selected: false,
     },
@@ -172,14 +184,16 @@ const HeaderRentResult = () => {
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
-                  <BreadcrumbLink href='/'>Home</BreadcrumbLink>
+                  <BreadcrumbLink href='/'>
+                    {t('breadcrumb.home')}
+                  </BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator>
                   <Slash />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem className='font-semibold'>
                   <BreadcrumbLink href='/rent/result'>
-                    Rental villa search results
+                    {t('breadcrumb.searchResults')}
                   </BreadcrumbLink>
                 </BreadcrumbItem>
               </BreadcrumbList>
@@ -200,7 +214,9 @@ const HeaderRentResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Location</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.location')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
@@ -233,7 +249,9 @@ const HeaderRentResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaCalendar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Check in</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.checkIn')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {checkInDate
@@ -261,7 +279,9 @@ const HeaderRentResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaCalendar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Check out</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.checkOut')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {checkOutDate
@@ -292,7 +312,9 @@ const HeaderRentResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Bedrooms</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.bedrooms')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {bedrooms.toString().padStart(2, '0')}
@@ -305,7 +327,7 @@ const HeaderRentResult = () => {
                 <PopoverContent className='w-48 p-3'>
                   <div className='flex flex-col gap-3'>
                     <div className='flex justify-between items-center'>
-                      <span>Number of bedrooms</span>
+                      <span>{t('search.bedroomDescription')}</span>
                     </div>
                     <div className='flex items-center justify-between'>
                       <button
@@ -336,7 +358,9 @@ const HeaderRentResult = () => {
                   <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
                     <FaUser size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>Guests</span>
+                      <span className='font-semibold text-left'>
+                        {t('search.guests')}
+                      </span>
                       <div className='flex justify-between items-center'>
                         <span className='text-gray-500'>
                           {guests.toString().padStart(2, '0')}
@@ -349,7 +373,7 @@ const HeaderRentResult = () => {
                 <PopoverContent className='w-48 p-3'>
                   <div className='flex flex-col gap-3'>
                     <div className='flex justify-between items-center'>
-                      <span>Number of guests</span>
+                      <span>{t('search.guestDescription')}</span>
                     </div>
                     <div className='flex items-center justify-between'>
                       <button
@@ -363,9 +387,9 @@ const HeaderRentResult = () => {
                         {guests.toString().padStart(2, '0')}
                       </span>
                       <button
-                        onClick={() => setGuests(Math.min(20, guests + 1))}
+                        onClick={() => setGuests(Math.min(15, guests + 1))}
                         className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                        disabled={guests >= 20}
+                        disabled={guests >= 15}
                       >
                         +
                       </button>
@@ -373,34 +397,71 @@ const HeaderRentResult = () => {
                   </div>
                 </PopoverContent>
               </Popover>
+            </div>
 
-              {/* Search Button */}
+            {/* Amenities/Preferred Options */}
+            <div className='flex flex-col gap-3'>
+              <div className='flex justify-between items-center'>
+                <span className='text-lg md:text-[22px] text-primary font-semibold'>
+                  {t('preferredOptions.title')}
+                </span>
+                <Button
+                  variant='link'
+                  className='text-text text-sm font-medium p-0'
+                  onClick={handleClearOptions}
+                >
+                  {t('preferredOptions.clearAll')}
+                </Button>
+              </div>
+
+              <div className='flex flex-wrap gap-2'>
+                {preferredOptions.map((option) => (
+                  <Button
+                    key={option.id}
+                    variant={option.selected ? 'default' : 'outline'}
+                    className={`flex items-center gap-2 ${
+                      option.selected
+                        ? 'bg-primary text-white'
+                        : 'text-gray-500'
+                    }`}
+                    onClick={() => handleToggleOption(option.id)}
+                  >
+                    <span
+                      className={
+                        option.selected ? 'text-white' : 'text-gray-500'
+                      }
+                    >
+                      {option.icon}
+                    </span>
+                    <span
+                      className={`text-xs font-medium ${
+                        option.selected ? 'text-white' : 'text-gray-500'
+                      }`}
+                    >
+                      {t(`search.amenities.${option.labelKey}`)}
+                    </span>
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Range */}
+            <div className='flex flex-col gap-3'>
+              <span className='text-lg md:text-[22px] text-primary font-semibold'>
+                {t('search.priceRange')}
+              </span>
+              <PriceRange values={priceRange} onValueChange={setPriceRange} />
+            </div>
+
+            {/* Search Button */}
+            <div className='flex justify-center md:justify-end'>
               <Button
-                variant='primary'
-                size='lg'
-                className='w-full md:w-auto'
                 onClick={handleSearch}
+                className='w-full md:w-auto px-8 py-2 bg-primary hover:bg-primary/90'
               >
-                Search
+                {t('search.search')}
               </Button>
             </div>
-          </div>
-        </BaseContainer>
-      </div>
-
-      {/* Filters section */}
-      <div className='border-b py-6 md:py-8'>
-        <BaseContainer>
-          <div className='grid grid-cols-1 xl:grid-cols-2 gap-6 md:gap-8'>
-            {/* Preferred options section */}
-            <PreferredOptions
-              options={preferredOptions}
-              onToggleOption={handleToggleOption}
-              onClearAll={handleClearOptions}
-            />
-
-            {/* Price range section */}
-            <PriceRange values={priceRange} onValueChange={setPriceRange} />
           </div>
         </BaseContainer>
       </div>

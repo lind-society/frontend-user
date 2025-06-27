@@ -101,6 +101,26 @@
       "chooseLocation": "Choose Location",
       "searchButton": "Search",
       "advancedSearch": "Advanced Search",
+      "enhancedDateRange": {
+        "label": "Availability",
+        "selectDates": "Select dates",
+        "selectEndDate": "Select end date",
+        "daily": "Daily",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "howLongStay": "How long will you stay?",
+        "stayDuration": "Stay Duration",
+        "duration": "Duration",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "selectDate": "Select date",
+        "selectStartDate": "Select Start Date",
+        "selectStartDateFirst": "Select start date first"
+      },
       "promotions": {
         "stay": "*Exclusive Early Bird Offers – Book Early & Enjoy Special Discounts!🌟",
         "stayLink": "Click here to view the list!",
@@ -190,24 +210,56 @@
   "aboutUs": {
     "pageTitle": "About Us",
     "header": {
-      "title": "About LIND Society",
-      "subtitle": "Creating unforgettable vacation experiences"
+      "title": "Unlimited Luxury Stays & Property Management",
+      "subtitle": "Find exclusive residences and manage your property with professional services for the best hassle-free experience."
     },
-    "content": {
-      "vision": {
-        "title": "Our Vision",
-        "description": "To become the leading platform in providing premium accommodation and high-quality tourism experiences in Indonesia."
-      },
-      "mission": {
-        "title": "Our Mission",
-        "description": "To provide the best services in property management, villa bookings, and tourist activities with international standards."
-      },
-      "values": {
-        "title": "Our Values",
-        "excellence": "Excellence",
-        "trust": "Trust",
-        "innovation": "Innovation",
-        "service": "Service"
+    "content1": {
+      "title": "Who We Are",
+      "paragraph1": "We are a premium platform that delivers exclusive stay experiences and the best property management services. We provide a wide selection of homes & villas that have been carefully curated to meet the needs of travelers, while for property owners, we offer property management solutions that maximize the potential of their investment.",
+      "paragraph2": "With over 10 years of experience in the property industry, we ensure that each property is managed with the highest level of expertise and attention to detail.",
+      "imageAlt": "LIND Society Team"
+    },
+    "content2": {
+      "title": "Why Choose Us?",
+      "subtitle": "We Simplify Your Home & Villa Booking Experience",
+      "description": "Our platform connects property owners with travelers seeking unique stays in homes and villas. We handle everything from marketing to guest management with exceptional care.",
+      "features": {
+        "professionalExperience": {
+          "title": "Professional Experience",
+          "description": "With years of experience in the hotel and property industry, we have the expertise to manage properties optimally and provide guests with an exceptional stay."
+        },
+        "marketAnalysis": {
+          "title": "Real-time Market Analysis",
+          "description": "We use the latest data to set optimal rental prices, ensuring that your property is always attractive and profitable."
+        },
+        "customerService": {
+          "title": "24/7 Customer Service",
+          "description": "Our team is ready to help at any time, ensuring the comfort of guests and property owners without interruption."
+        },
+        "transparency": {
+          "title": "Transparency & Security",
+          "description": "We are committed to providing a clear experience and no hidden fees, making every transaction safe and transparent."
+        }
+      }
+    },
+    "content3": {
+      "title": "Our Services",
+      "services": {
+        "booking": {
+          "title": "Booking Home & Villas",
+          "description": "Discover a wide selection of exclusive properties that offer comfort, privacy and five-star service. Each property has been carefully selected to provide the best staying experience for each guest.",
+          "linkText": "Book Your Dream Stay"
+        },
+        "buying": {
+          "title": "Buy Home & Villas",
+          "description": "We believe every villa holds a unique story, waiting for its next chapter. LIND Society is designed to connect extraordinary homes with those who seek them, ensuring a seamless journey from one owner to the next.",
+          "linkText": "Find Your Perfect Home"
+        },
+        "management": {
+          "title": "Property Management",
+          "description": "We offer full management of your property, from daily management to marketing and rental price optimization, ensuring maximum income and optimal property maintenance.",
+          "linkText": "Start Managing Your Property"
+        }
       }
     }
   },
@@ -712,6 +764,188 @@
       "rotateLeft": "Rotate Left",
       "rotateRight": "Rotate Right",
       "fullscreen": "Fullscreen"
+    }
+  },
+  "buyResult": {
+    "breadcrumb": {
+      "home": "Home",
+      "searchResults": "Property purchase search results"
+    },
+    "search": {
+      "location": "Location",
+      "ownership": "Ownership",
+      "bedrooms": "Bedrooms",
+      "bathrooms": "Bathrooms",
+      "priceRange": "Price Range",
+      "search": "Search",
+      "bedroomDescription": "Number of bedrooms",
+      "bathroomDescription": "Number of bathrooms",
+      "ownershipTypes": {
+        "leasehold": "Leasehold",
+        "freehold": "Freehold",
+        "both": "Both"
+      }
+    },
+    "results": {
+      "propertiesFound": "properties found",
+      "sortBy": "Sort by",
+      "showMore": "Show More",
+      "currency": "IDR",
+      "per": "per",
+      "sqm": "sqm"
+    },
+    "propertyCard": {
+      "bedrooms": "bedrooms",
+      "bathrooms": "bathrooms",
+      "lotSize": "Lot Size",
+      "buildingSize": "Building Size"
+    },
+    "preferredOptions": {
+      "title": "Most Preferred Options",
+      "options": {
+        "instantIncome": "Instant income",
+        "rentalReady": "Rental ready",
+        "oceanView": "Ocean view",
+        "highEndLuxury": "High end luxury",
+        "jungleView": "Jungle view",
+        "landPlots": "Land plots"
+      }
+    }
+  },
+  "rentResults": {
+    "breadcrumb": {
+      "home": "Home",
+      "searchResults": "Rental villa search results"
+    },
+    "search": {
+      "location": "Location",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "bedrooms": "Bedrooms",
+      "guests": "Guests",
+      "priceRange": "Price Range",
+      "search": "Search",
+      "bedroomDescription": "Number of bedrooms",
+      "guestDescription": "Number of guests",
+      "amenities": {
+        "airConditioner": "Air conditioner",
+        "pool": "Pool",
+        "kitchen": "Kitchen",
+        "parking": "Parking",
+        "beachfront": "Beachfront",
+        "freeWifi": "Free WiFi",
+        "petFriendly": "Pet friendly",
+        "security": "Security",
+        "mountainView": "Mountain view",
+        "massage": "Massage",
+        "bbqGrill": "BBQ grill",
+        "yoga": "Yoga",
+        "seaView": "Sea view"
+      },
+      "clearFilters": "Clear Filters"
+    },
+    "results": {
+      "propertiesFound": "properties found",
+      "sortBy": "Sort by",
+      "showMore": "Show More",
+      "currency": "IDR",
+      "per": "per",
+      "night": "night"
+    },
+    "preferredOptions": {
+      "title": "Most Preferred Options",
+      "clearAll": "Clear All"
+    }
+  },
+  "rentDetail": {
+    "header": {
+      "imageAlt": "Villa view",
+      "slideIndicator": "of"
+    },
+    "content": {
+      "bookNow": "Book Now",
+      "sendInquiry": "Send Inquiry",
+      "overview": "Overview",
+      "amenities": "Amenities",
+      "location": "Location",
+      "reviews": "Reviews",
+      "pricing": "Pricing",
+      "availability": "Availability",
+      "features": {
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "guests": "Guests",
+        "sqm": "sqm"
+      },
+      "bookingInfo": {
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "guests": "Guests",
+        "total": "Total",
+        "perNight": "per night",
+        "nights": "nights"
+      }
+    },
+    "inquiryForm": {
+      "title": "Send Inquiry",
+      "subtitle": "Interested in this property? Send us your inquiry",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "send": "Send Inquiry",
+      "sending": "Sending..."
+    }
+  },
+  "buyDetail": {
+    "header": {
+      "imageAlt": "Property view",
+      "slideIndicator": "of"
+    },
+    "content": {
+      "breadcrumbHome": "Home",
+      "availableForSale": "Available for sale",
+      "viewOnMap": "View on map",
+      "overallOn": "Overall on",
+      "reviews": "reviews",
+      "inquireNow": "Inquire Now",
+      "sendInquiry": "Send Inquiry",
+      "overview": "Overview",
+      "features": "Features",
+      "location": "Location",
+      "pricing": "Pricing",
+      "details": "Details",
+      "viewFullMap": "View full map",
+      "aroundVilla": "Around the villa",
+      "propertyInfo": {
+        "bedrooms": "Bedrooms",
+        "bathrooms": "Bathrooms",
+        "lotSize": "Lot Size",
+        "buildingSize": "Building Size",
+        "sqm": "sqm",
+        "ownership": "Ownership",
+        "price": "Price",
+        "currency": "IDR",
+        "productionStatus": "Production Status",
+        "yearBuilt": "Year Built",
+        "lease": "Lease",
+        "pricePerSqm": "Price/Sqm",
+        "levels": "Levels",
+        "pool": "Pool",
+        "parking": "Parking"
+      }
+    },
+    "inquiryForm": {
+      "title": "Send Inquiry",
+      "subtitle": "Interested in this property? Send us your inquiry",
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "send": "Send Inquiry",
+      "sending": "Sending..."
     }
   }
 }

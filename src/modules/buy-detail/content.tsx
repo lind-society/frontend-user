@@ -1,6 +1,7 @@
 'use client';
 
 import { Check } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { GrMapLocation } from 'react-icons/gr';
 import { PiStarFill } from 'react-icons/pi';
@@ -19,6 +20,8 @@ import {
 } from '@/modules/rent-detail/constant';
 
 const ContentBuyDetail = () => {
+  const t = useTranslations('buyDetail.content');
+
   // Extract villa details for the inquiry form
   const villaDetails = {
     name: villaData.name,
@@ -44,7 +47,7 @@ const ContentBuyDetail = () => {
             {/* Breadcrumb */}
             <BreadcrumbLayout
               items={[
-                { label: 'Home', href: '/' },
+                { label: t('breadcrumbHome'), href: '/' },
                 { label: 'Home & Villas', href: '/buy' },
                 { label: 'Buy', href: '/buy/search' },
                 { label: 'Indonesia', href: '/buy/search' },
@@ -65,7 +68,9 @@ const ContentBuyDetail = () => {
                   {villaData.name}
                 </h4>
                 <div className='flex flex-col gap-2'>
-                  <span className='text-sm text-text'>Available for rent</span>
+                  <span className='text-sm text-text'>
+                    {t('availableForSale')}
+                  </span>
                   <div className='flex gap-3 items-center'>
                     {villaData.availableRentTypes.map((type, index) => (
                       <Badge
@@ -81,7 +86,9 @@ const ContentBuyDetail = () => {
               <div className='flex flex-col gap-4 items-start sm:items-end'>
                 <Button variant='primary' className='flex gap-2 items-center'>
                   <GrMapLocation size={18} />
-                  <span>{villaData.location} (View on map)</span>
+                  <span>
+                    {villaData.location} ({t('viewOnMap')})
+                  </span>
                 </Button>
                 <div className='flex gap-3 items-center'>
                   <h4 className='text-primary text-xl font-semibold'>

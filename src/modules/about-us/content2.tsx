@@ -1,3 +1,6 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaChartLine, FaHeadset, FaShieldAlt, FaUserTie } from 'react-icons/fa';
 
@@ -28,31 +31,29 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
 );
 
 const Content2AboutUs = () => {
+  const t = useTranslations('aboutUs.content2');
+
   // Features with contextual icons
   const features = [
     {
       icon: <FaUserTie className='text-primary w-6 h-6 md:w-7 md:h-7' />,
-      title: 'Professional Experience',
-      description:
-        'With years of experience in the hotel and property industry, we have the expertise to manage properties optimally and provide guests with an exceptional stay.',
+      title: t('features.professionalExperience.title'),
+      description: t('features.professionalExperience.description'),
     },
     {
       icon: <FaChartLine className='text-primary w-6 h-6 md:w-7 md:h-7' />,
-      title: 'Real-time Market Analysis',
-      description:
-        'We use the latest data to set optimal rental prices, ensuring that your property is always attractive and profitable.',
+      title: t('features.marketAnalysis.title'),
+      description: t('features.marketAnalysis.description'),
     },
     {
       icon: <FaHeadset className='text-primary w-6 h-6 md:w-7 md:h-7' />,
-      title: '24/7 Customer Service',
-      description:
-        'Our team is ready to help at any time, ensuring the comfort of guests and property owners without interruption.',
+      title: t('features.customerService.title'),
+      description: t('features.customerService.description'),
     },
     {
       icon: <FaShieldAlt className='text-primary w-6 h-6 md:w-7 md:h-7' />,
-      title: 'Transparency & Security',
-      description:
-        'We are committed to providing a clear experience and no hidden fees, making every transaction safe and transparent.',
+      title: t('features.transparency.title'),
+      description: t('features.transparency.description'),
     },
   ];
 
@@ -63,7 +64,7 @@ const Content2AboutUs = () => {
           {/* Section title */}
           <div className='text-center'>
             <h2 className='text-xl md:text-2xl lg:text-3xl font-semibold text-primary'>
-              Why Choose Us?
+              {t('title')}
             </h2>
           </div>
 
@@ -72,12 +73,10 @@ const Content2AboutUs = () => {
             {/* Left column - stacks on mobile */}
             <div className='w-full lg:w-[40%] flex flex-col gap-4'>
               <h3 className='text-xl md:text-2xl font-bold text-primary'>
-                We Simplify Your Home & Villa Booking Experience
+                {t('subtitle')}
               </h3>
               <p className='text-gray-600 text-base md:text-lg'>
-                Our platform connects property owners with travelers seeking
-                unique stays in homes and villas. We handle everything from
-                marketing to guest management with exceptional care.
+                {t('description')}
               </p>
             </div>
 

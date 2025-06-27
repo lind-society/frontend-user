@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -73,31 +76,30 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
 );
 
 const Content3AboutUs = () => {
+  const t = useTranslations('aboutUs.content3');
+
   // Services data
   const services = [
     {
       imageSrc: '/images/service-1.jpeg',
-      title: 'Booking Home & Villas',
-      description:
-        'Discover a wide selection of exclusive properties that offer comfort, privacy and five-star service. Each property has been carefully selected to provide the best staying experience for each guest.',
-      linkText: 'Book Your Dream Stay',
+      title: t('services.booking.title'),
+      description: t('services.booking.description'),
+      linkText: t('services.booking.linkText'),
       linkHref: '/rent',
     },
     {
       imageSrc: '/images/explore-2.png',
-      title: 'Buy Home & Villas',
-      description:
-        'We believe every villa holds a unique story, waiting for its next chapter. LIND Society is designed to connect extraordinary homes with those who seek them, ensuring a seamless journey from one owner to the next.',
-      linkText: 'Find Your Perfect Home',
+      title: t('services.buying.title'),
+      description: t('services.buying.description'),
+      linkText: t('services.buying.linkText'),
       linkHref: '/buy',
       reversed: true,
     },
     {
       imageSrc: '/images/media-7.png',
-      title: 'Property Management',
-      description:
-        'We offer full management of your property, from daily management to marketing and rental price optimization, ensuring maximum income and optimal property maintenance.',
-      linkText: 'Start Managing Your Property',
+      title: t('services.management.title'),
+      description: t('services.management.description'),
+      linkText: t('services.management.linkText'),
       linkHref: '/manage-property',
     },
   ];
@@ -109,7 +111,7 @@ const Content3AboutUs = () => {
           {/* Section title */}
           <div className='text-center'>
             <h2 className='text-xl md:text-2xl lg:text-3xl font-semibold text-primary'>
-              Our Services
+              {t('title')}
             </h2>
           </div>
 

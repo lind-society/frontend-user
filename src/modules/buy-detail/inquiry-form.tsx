@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
 
@@ -45,34 +46,53 @@ interface SendInquiryFormBuyProps {
 const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
   villaDetails,
 }) => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [countryCode, setCountryCode] = useState(countryCodes[0].code);
-  const [guestCount, setGuestCount] = useState('1');
-  const [message, setMessage] = useState('');
+  const t = useTranslations('buyDetail.inquiryForm');
 
-  // Handle booking submission
-  const handleSubmitBooking = () => {
-    // Validate form
-    if (!fullName || !email || !phoneNumber) {
-      alert('Please fill in all required fields.');
-      return;
-    }
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
+  const [isSubmitting] = useState(false);
 
-    // In a real app, you would send this data to an API
-    // eslint-disable-next-line no-console
-    console.log('Booking submitted:', {
-      fullName,
-      email,
-      phoneNumber: `${countryCode}${phoneNumber}`,
-      guestCount,
-      message,
-    });
-
-    // Show success message
-    alert('Your inquiry has been sent. We will contact you shortly!');
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setIsSubmitting(true);
+
+  //   try {
+  //     // Simulate API call
+  //     await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  //     // eslint-disable-next-line no-console
+  //     console.log('Form submitted:', formData);
+
+  //     // Reset form
+  //     setFormData({
+  //       name: '',
+  //       email: '',
+  //       phone: '',
+  //       message: '',
+  //     });
+
+  //     alert('Inquiry sent successfully!');
+  //   } catch (error) {
+  //     console.error('Error submitting form:', error);
+  //     alert('Failed to send inquiry. Please try again.');
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <div className='sticky top-2 border shadow-md bg-white rounded-md overflow-hidden'>
@@ -114,8 +134,10 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
           </Label>
           <Input
             placeholder='Enter your full name'
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={formData.name}
+            onChange={handleInputChange}
+            name='name'
+            required
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -123,8 +145,10 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
           <Input
             placeholder='Enter your email'
             type='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={formData.email}
+            onChange={handleInputChange}
+            name='email'
+            required
           />
         </div>
         <div className='flex flex-col gap-2'>
@@ -139,7 +163,7 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
                   type='button'
                   className='rounded-l-lg bg-primary text-white p-2 flex gap-2 items-center h-full'
                 >
-                  <span>{countryCode}</span>
+                  <span>{countryCodes[0].code}</span>
                   <svg
                     width='12'
                     height='12'
@@ -165,7 +189,12 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
                     <button
                       key={country.code}
                       className='w-full text-left px-3 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none'
-                      onClick={() => setCountryCode(country.code)}
+                      onClick={() =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          phone: country.code + prev.phone,
+                        }))
+                      }
                     >
                       <span className='font-medium'>{country.code}</span>{' '}
                       {country.country}
@@ -178,18 +207,24 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
               className='rounded-l-none'
               placeholder='Enter your phone number'
               type='tel'
-              value={phoneNumber}
-              onChange={(e) => {
-                // Allow only numbers
-                const value = e.target.value.replace(/\D/g, '');
-                setPhoneNumber(value);
-              }}
+              value={formData.phone}
+              onChange={handleInputChange}
+              name='phone'
+              required
             />
           </div>
         </div>
         <div className='flex flex-col gap-2'>
           <Label className='text-sm font-semibold text-primary'>Guest</Label>
-          <Select defaultValue='1' onValueChange={setGuestCount}>
+          <Select
+            defaultValue='1'
+            onValueChange={(value) =>
+              setFormData((prev) => ({
+                ...prev,
+                guestCount: value,
+              }))
+            }
+          >
             <SelectTrigger className='w-full'>
               <SelectValue placeholder='Select guest count' />
             </SelectTrigger>
@@ -213,16 +248,18 @@ const SendInquiryFormBuy: React.FC<SendInquiryFormBuyProps> = ({
           <Textarea
             placeholder='Enter your message'
             className='min-h-[100px]'
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={formData.message}
+            onChange={handleInputChange}
+            name='message'
+            required
           />
         </div>
         <Button
-          variant='primary'
-          className='w-full'
-          onClick={handleSubmitBooking}
+          type='submit'
+          disabled={isSubmitting}
+          className='w-full bg-primary hover:bg-primary/90'
         >
-          Send Inquiry or Book Now
+          {isSubmitting ? t('sending') : t('send')}
         </Button>
       </div>
     </div>

@@ -2,6 +2,7 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';
@@ -24,6 +25,8 @@ const villaImages = [
 ];
 
 const HeaderRentDetail = () => {
+  const t = useTranslations('rentDetail.header');
+
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -81,7 +84,7 @@ const HeaderRentDetail = () => {
                   >
                     <Image
                       src={image}
-                      alt={`Villa view ${index + 1}`}
+                      alt={`${t('imageAlt')} ${index + 1}`}
                       className='w-full h-full object-cover transition-transform hover:scale-105 duration-700'
                       width={1080}
                       height={720}
@@ -128,7 +131,7 @@ const HeaderRentDetail = () => {
 
           {/* Current slide indicator text */}
           <div className='absolute bottom-4 right-4 bg-black/50 text-white text-sm px-2 py-1 rounded-md'>
-            {current + 1} / {count}
+            {current + 1} {t('slideIndicator')} {count}
           </div>
         </div>
       </BaseContainer>

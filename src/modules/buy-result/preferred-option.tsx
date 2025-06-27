@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaHome, FaSearchDollar } from 'react-icons/fa';
 import { GiIsland, GiPalmTree } from 'react-icons/gi';
@@ -12,46 +13,48 @@ import { OptionCarousel } from '@/modules/rent/header/option-carousel';
 
 interface PreferredOption {
   id: string;
-  label: string;
+  labelKey: string;
   icon: React.ReactNode;
   selected?: boolean;
 }
 
 export const PreferredOptions = () => {
+  const t = useTranslations('buyResult.preferredOptions');
+
   const [options, setOptions] = useState<PreferredOption[]>([
     {
       id: 'instant-income',
-      label: 'Instant income',
+      labelKey: 'instantIncome',
       icon: <FaSearchDollar size={20} />,
       selected: false,
     },
     {
       id: 'rental-ready',
-      label: 'Rental ready',
+      labelKey: 'rentalReady',
       icon: <FaHome size={20} />,
       selected: false,
     },
     {
       id: 'ocean-view',
-      label: 'Ocean view',
+      labelKey: 'oceanView',
       icon: <IoWater size={20} />,
       selected: false,
     },
     {
       id: 'high-end-luxury',
-      label: 'High end luxury',
+      labelKey: 'highEndLuxury',
       icon: <MdOutlineVilla size={20} />,
       selected: false,
     },
     {
       id: 'jungle-view',
-      label: 'Jungle view',
+      labelKey: 'jungleView',
       icon: <GiPalmTree size={20} />,
       selected: false,
     },
     {
       id: 'land-plots',
-      label: 'Land plots',
+      labelKey: 'landPlots',
       icon: <GiIsland size={20} />,
       selected: false,
     },
@@ -82,7 +85,7 @@ export const PreferredOptions = () => {
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <span className='text-lg md:text-[22px] text-primary font-semibold'>
-          Most Preferred Options
+          {t('title')}
         </span>
         <Button
           variant='link'
@@ -111,7 +114,7 @@ export const PreferredOptions = () => {
                 option.selected ? 'text-white' : 'text-gray-500'
               }`}
             >
-              {option.label}
+              {t(`options.${option.labelKey}`)}
             </span>
           </Button>
         ))}
@@ -140,7 +143,7 @@ export const PreferredOptions = () => {
                       option.selected ? 'text-white' : 'text-gray-500'
                     }`}
                   >
-                    {option.label}
+                    {t(`options.${option.labelKey}`)}
                   </span>
                 </Button>
               ))}
@@ -165,7 +168,7 @@ export const PreferredOptions = () => {
                       option.selected ? 'text-white' : 'text-gray-500'
                     }`}
                   >
-                    {option.label}
+                    {t(`options.${option.labelKey}`)}
                   </span>
                 </Button>
               ))}
