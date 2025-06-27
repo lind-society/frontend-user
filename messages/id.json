@@ -272,7 +272,29 @@
         "selectDate": "Pilih tanggal",
         "bedrooms": "Kamar Tidur",
         "guests": "Tamu",
-        "searchButton": "Cari"
+        "searchButton": "Cari",
+        "enhancedDateRange": {
+          "label": "Check in - Check out",
+          "selectDates": "Pilih tanggal",
+          "daily": "Harian",
+          "monthly": "Bulanan",
+          "yearly": "Tahunan",
+          "howLongStay": "Berapa lama Anda ingin menginap?",
+          "stayDuration": "Durasi menginap",
+          "duration": "Durasi:",
+          "startDate": "Tanggal mulai:",
+          "endDate": "Tanggal selesai:",
+          "selectDate": "Pilih tanggal",
+          "selectStartDateFirst": "Pilih tanggal mulai terlebih dahulu",
+          "selectStartDate": "Pilih tanggal mulai",
+          "selectEndDate": "Pilih tanggal selesai",
+          "month": "bulan",
+          "months": "bulan",
+          "year": "tahun",
+          "years": "tahun",
+          "cancel": "Batal",
+          "apply": "Terapkan"
+        }
       }
     },
     "breadcrumb": {

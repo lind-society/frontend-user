@@ -39,7 +39,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         className='object-cover'
       />
     </div>
-    <div className='px-4 sm:px-6 md:px-8 bg-primary py-4 sm:py-5 md:py-6 text-center text-white text-lg sm:text-xl md:text-2xl font-bold '>
+    <div className='px-4 sm:px-6 md:px-8 bg-primary py-4 sm:py-5 md:py-6 text-center text-white text-lg sm:text-xl  font-bold '>
       <span className='line-clamp-1'>{title}</span>
     </div>
     <div className='flex flex-col text-primary border'>

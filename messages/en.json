@@ -272,7 +272,29 @@
         "selectDate": "Select date",
         "bedrooms": "Bedrooms",
         "guests": "Guests",
-        "searchButton": "Search"
+        "searchButton": "Search",
+        "enhancedDateRange": {
+          "label": "Check in - Check out",
+          "selectDates": "Select dates",
+          "daily": "Daily",
+          "monthly": "Monthly",
+          "yearly": "Yearly",
+          "howLongStay": "How long do you want to stay?",
+          "stayDuration": "Stay duration",
+          "duration": "Duration:",
+          "startDate": "Start date:",
+          "endDate": "End date:",
+          "selectDate": "Select date",
+          "selectStartDateFirst": "Select start date first",
+          "selectStartDate": "Select start date",
+          "selectEndDate": "Select end date",
+          "month": "month",
+          "months": "months",
+          "year": "year",
+          "years": "years",
+          "cancel": "Cancel",
+          "apply": "Apply"
+        }
       }
     },
     "breadcrumb": {

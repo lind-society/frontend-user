@@ -2,6 +2,7 @@
 
 import { addMonths, addYears, format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
 
@@ -21,6 +22,7 @@ interface EnhancedDateRangePickerProps {
   onRangeChange: (range: DateRange, durationType: DurationType) => void;
   initialRange?: DateRange;
   initialDurationType?: DurationType;
+  namespace?: string; // Allow custom translation namespace
 }
 
 export const EnhancedDateRangePicker: React.FC<
@@ -29,7 +31,9 @@ export const EnhancedDateRangePicker: React.FC<
   onRangeChange,
   initialRange = { from: undefined, to: undefined },
   initialDurationType = 'daily',
+  namespace = 'landingPage.search.enhancedDateRange', // Default to landing page namespace
 }) => {
+  const t = useTranslations(namespace);
   const [dateRange, setDateRange] = useState<DateRange>(initialRange);
   const [durationType, setDurationType] =
     useState<DurationType>(initialDurationType);
@@ -39,7 +43,7 @@ export const EnhancedDateRangePicker: React.FC<
   // Get formatted display dates
   const getDisplayText = () => {
     if (!dateRange.from) {
-      return 'Select dates';
+      return t('selectDates');
     }
 
     if (durationType === 'daily') {
@@ -48,7 +52,7 @@ export const EnhancedDateRangePicker: React.FC<
             dateRange.to,
             'dd MMM yyyy'
           )}`
-        : `${format(dateRange.from, 'dd MMM yyyy')} - Select end date`;
+        : `${format(dateRange.from, 'dd MMM yyyy')} - ${t('selectEndDate')}`;
     } else {
       // Calculate the projected end date based on start date and duration
       const endDate =
@@ -128,9 +132,7 @@ export const EnhancedDateRangePicker: React.FC<
         <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
           <FaCalendar size={24} className='text-primary' />
           <div className='flex flex-col w-full'>
-            <span className='font-semibold text-left'>
-              Check in - Check out
-            </span>
+            <span className='font-semibold text-left'>{t('label')}</span>
             <div className='flex justify-between items-center'>
               <span className='text-gray-500 truncate pr-2'>
                 {getDisplayText()}
@@ -149,13 +151,13 @@ export const EnhancedDateRangePicker: React.FC<
           <div className='px-3 pt-3'>
             <TabsList className='w-full grid grid-cols-3'>
               <TabsTrigger value='daily' className='text-xs'>
-                Daily
+                {t('daily')}
               </TabsTrigger>
               <TabsTrigger value='monthly' className='text-xs'>
-                Monthly
+                {t('monthly')}
               </TabsTrigger>
               <TabsTrigger value='yearly' className='text-xs'>
-                Yearly
+                {t('yearly')}
               </TabsTrigger>
             </TabsList>
           </div>
@@ -195,7 +197,7 @@ export const EnhancedDateRangePicker: React.FC<
               <div className='space-y-3'>
                 <div className='text-center'>
                   <h4 className='font-medium mb-2 text-sm'>
-                    How long do you want to stay?
+                    {t('howLongStay')}
                   </h4>
                   <div className='grid grid-cols-3 xl:grid-cols-6 gap-2'>
                     {[1, 2, 3, 4, 5, 6].map((value) => (
@@ -215,32 +217,38 @@ export const EnhancedDateRangePicker: React.FC<
                 </div>
 
                 <div className='space-y-2'>
-                  <h5 className='font-medium text-sm'>Stay duration</h5>
+                  <h5 className='font-medium text-sm'>{t('stayDuration')}</h5>
                   <div className='p-2 border rounded-md bg-tertiary/30 text-xs'>
                     <div className='flex justify-between items-center mb-2'>
-                      <span className='text-xs text-gray-500'>Duration:</span>
+                      <span className='text-xs text-gray-500'>
+                        {t('duration')}
+                      </span>
                       <span className='font-medium'>
                         {durationValue}{' '}
-                        {durationValue === 1 ? 'month' : 'months'}
+                        {durationValue === 1 ? t('month') : t('months')}
                       </span>
                     </div>
                     <div className='flex justify-between items-center mb-2'>
-                      <span className='text-xs text-gray-500'>Start date:</span>
+                      <span className='text-xs text-gray-500'>
+                        {t('startDate')}
+                      </span>
                       <span className='font-medium'>
                         {dateRange.from
                           ? format(dateRange.from, 'dd MMM yyyy')
-                          : 'Select date'}
+                          : t('selectDate')}
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <span className='text-xs text-gray-500'>End date:</span>
+                      <span className='text-xs text-gray-500'>
+                        {t('endDate')}
+                      </span>
                       <span className='font-medium'>
                         {dateRange.from
                           ? format(
                               addMonths(dateRange.from, durationValue),
                               'dd MMM yyyy'
                             )
-                          : 'Select start date first'}
+                          : t('selectStartDateFirst')}
                       </span>
                     </div>
                   </div>
@@ -248,7 +256,9 @@ export const EnhancedDateRangePicker: React.FC<
               </div>
 
               <div className='border-l pl-4'>
-                <h4 className='font-medium mb-2 text-sm'>Select start date</h4>
+                <h4 className='font-medium mb-2 text-sm'>
+                  {t('selectStartDate')}
+                </h4>
                 <Calendar
                   mode='single'
                   selected={dateRange.from}
@@ -280,7 +290,7 @@ export const EnhancedDateRangePicker: React.FC<
               <div className='space-y-3'>
                 <div>
                   <h4 className='font-medium mb-2 text-sm'>
-                    How long do you want to stay?
+                    {t('howLongStay')}
                   </h4>
                   <div className='grid grid-cols-3 gap-2'>
                     {[1, 2, 3, 4, 5, 6].map((value) => (
@@ -300,31 +310,38 @@ export const EnhancedDateRangePicker: React.FC<
                 </div>
 
                 <div className='space-y-2'>
-                  <h4 className='font-medium text-sm'>Stay duration</h4>
+                  <h4 className='font-medium text-sm'>{t('stayDuration')}</h4>
                   <div className='p-2 border rounded-md bg-tertiary/30 text-xs'>
                     <div className='flex justify-between items-center mb-2'>
-                      <span className='text-xs text-gray-500'>Duration:</span>
+                      <span className='text-xs text-gray-500'>
+                        {t('duration')}
+                      </span>
                       <span className='font-medium'>
-                        {durationValue} {durationValue === 1 ? 'year' : 'years'}
+                        {durationValue}{' '}
+                        {durationValue === 1 ? t('year') : t('years')}
                       </span>
                     </div>
                     <div className='flex justify-between items-center mb-2'>
-                      <span className='text-xs text-gray-500'>Start date:</span>
+                      <span className='text-xs text-gray-500'>
+                        {t('startDate')}
+                      </span>
                       <span className='font-medium'>
                         {dateRange.from
                           ? format(dateRange.from, 'dd MMM yyyy')
-                          : 'Select date'}
+                          : t('selectDate')}
                       </span>
                     </div>
                     <div className='flex justify-between items-center'>
-                      <span className='text-xs text-gray-500'>End date:</span>
+                      <span className='text-xs text-gray-500'>
+                        {t('endDate')}
+                      </span>
                       <span className='font-medium'>
                         {dateRange.from
                           ? format(
                               addYears(dateRange.from, durationValue),
                               'dd MMM yyyy'
                             )
-                          : 'Select start date first'}
+                          : t('selectStartDateFirst')}
                       </span>
                     </div>
                   </div>
@@ -332,7 +349,9 @@ export const EnhancedDateRangePicker: React.FC<
               </div>
 
               <div className='border-l pl-4'>
-                <h4 className='font-medium mb-2 text-sm'>Select start date</h4>
+                <h4 className='font-medium mb-2 text-sm'>
+                  {t('selectStartDate')}
+                </h4>
                 <Calendar
                   mode='single'
                   selected={dateRange.from}
@@ -366,7 +385,7 @@ export const EnhancedDateRangePicker: React.FC<
             onClick={() => setIsOpen(false)}
             className='text-xs'
           >
-            Cancel
+            {t('cancel')}
           </Button>
           <Button
             variant='primary'
@@ -375,7 +394,7 @@ export const EnhancedDateRangePicker: React.FC<
             disabled={!dateRange.from}
             className='text-xs'
           >
-            Apply
+            {t('apply')}
           </Button>
         </div>
       </PopoverContent>

@@ -7,12 +7,12 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
-import { FaCalendar, FaLocationDot, FaUser } from 'react-icons/fa6';
+import { FaLocationDot, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';
 
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
+import { EnhancedDateRangePicker } from '@/components/ui/enhanced-date-range';
 import {
   Popover,
   PopoverContent,
@@ -22,32 +22,51 @@ import { Separator } from '@/components/ui/separator';
 
 import { PreferredOptions } from '@/modules/rent/header/preferred-option';
 
+// Add these type definitions
+type DateRange = {
+  from: Date | undefined;
+  to?: Date | undefined;
+};
+
+type DurationType = 'daily' | 'monthly' | 'yearly';
+
 const HeaderRentPage = () => {
   const t = useTranslations('rent.header');
   const router = useRouter(); // Initialize router
 
-  // Search filter states
+  // Updated state to use DateRange and DurationType
   const [location, setLocation] = useState('Bali');
-  const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
-  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
-    new Date(new Date().setDate(new Date().getDate() + 4))
-  );
+  const [dateRange, setDateRange] = useState<DateRange>({
+    from: new Date(),
+    to: new Date(new Date().setDate(new Date().getDate() + 4)),
+  });
+  const [durationType, setDurationType] = useState<DurationType>('daily');
   const [bedrooms, setBedrooms] = useState(1);
   const [guests, setGuests] = useState(1);
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
 
-  // Handle search button click
-  const handleSearch = () => {
-    // Format dates for URL parameters
-    const checkIn = checkInDate ? format(checkInDate, 'yyyy-MM-dd') : '';
-    const checkOut = checkOutDate ? format(checkOutDate, 'yyyy-MM-dd') : '';
+  // Handle date range change from EnhancedDateRangePicker
+  const handleDateRangeChange = (range: DateRange, type: DurationType) => {
+    setDateRange(range);
+    setDurationType(type);
+  };
 
+  // Handle search button click - updated to use new state structure
+  const handleSearch = () => {
     // Build query parameters
     const params = new URLSearchParams();
     params.append('location', location);
-    params.append('checkIn', checkIn);
-    params.append('checkOut', checkOut);
+
+    // Use the new date range format
+    if (dateRange.from) {
+      params.append('checkIn', format(dateRange.from, 'yyyy-MM-dd'));
+    }
+    if (dateRange.to) {
+      params.append('checkOut', format(dateRange.to, 'yyyy-MM-dd'));
+    }
+
+    params.append('durationType', durationType);
     params.append('bedrooms', bedrooms.toString());
     params.append('guests', guests.toString());
 
@@ -55,17 +74,21 @@ const HeaderRentPage = () => {
     router.push(`/rent/result?${params.toString()}`);
   };
 
-  // Handle filter application
+  // Handle filter application - updated to use new date range format
   const handleFilterApply = (filterData: any) => {
-    // Format dates for URL parameters
-    const checkIn = checkInDate ? format(checkInDate, 'yyyy-MM-dd') : '';
-    const checkOut = checkOutDate ? format(checkOutDate, 'yyyy-MM-dd') : '';
-
     // Build query parameters
     const params = new URLSearchParams();
     params.append('location', location);
-    params.append('checkIn', checkIn);
-    params.append('checkOut', checkOut);
+
+    // Use the new date range format
+    if (dateRange.from) {
+      params.append('checkIn', format(dateRange.from, 'yyyy-MM-dd'));
+    }
+    if (dateRange.to) {
+      params.append('checkOut', format(dateRange.to, 'yyyy-MM-dd'));
+    }
+
+    params.append('durationType', durationType);
     params.append('bedrooms', bedrooms.toString());
     params.append('guests', guests.toString());
 
@@ -95,6 +118,7 @@ const HeaderRentPage = () => {
     // Navigate to results page with all parameters
     router.push(`/rent/result?${params.toString()}`);
   };
+
   return (
     <div className='py-6 md:py-10 relative bg-bg'>
       <Image
@@ -156,65 +180,13 @@ const HeaderRentPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Check in */}
-              <Popover>
-                <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-                    <FaCalendar size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.checkIn')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
-                          {checkInDate
-                            ? format(checkInDate, 'dd MMM yyyy')
-                            : t('search.selectDate')}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className='w-auto p-0'>
-                  <Calendar
-                    mode='single'
-                    selected={checkInDate}
-                    onSelect={setCheckInDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
-
-              {/* Check out */}
-              <Popover>
-                <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-                    <FaCalendar size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.checkOut')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
-                          {checkOutDate
-                            ? format(checkOutDate, 'dd MMM yyyy')
-                            : t('search.selectDate')}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className='w-auto p-0'>
-                  <Calendar
-                    mode='single'
-                    selected={checkOutDate}
-                    onSelect={setCheckOutDate}
-                    initialFocus
-                  />
-                </PopoverContent>
-              </Popover>
+              {/* Enhanced Date Range Picker - replaces separate check-in/check-out */}
+              <EnhancedDateRangePicker
+                onRangeChange={handleDateRangeChange}
+                initialRange={dateRange}
+                initialDurationType={durationType}
+                namespace='rent.header.search.enhancedDateRange'
+              />
 
               {/* Bedrooms */}
               <Popover>
