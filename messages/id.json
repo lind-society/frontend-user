@@ -1035,5 +1035,50 @@
       "enterYourMessage": "Masukkan pesan Anda",
       "tellUsWhatYouWouldLikeUsToHelpYouWith": "Beritahu kami apa yang ingin Anda minta bantuan"
     }
+  },
+  "touristActivityDetail": {
+    "loading": "Memuat...",
+    "ticketRegistration": "Pendaftaran Tiket",
+    "viewOnMap": "Lihat di peta!",
+    "open": "Buka",
+    "description": "Deskripsi",
+    "ticket": "Tiket",
+    "openSchedule": "Jadwal Buka (Waktu Setempat)",
+    "locationAndMap": "Lokasi & Peta",
+    "entranceTicket": "Tiket Masuk",
+    "seeDetails": "Lihat detail",
+    "pax": "/orang",
+    "getTicket": "Dapatkan Tiket",
+    "openingHour": "Jam Buka:",
+    "closingHour": "Jam Tutup:",
+    "startFrom": "Mulai dari",
+    "findYourTicket": "Cari Tiket Anda!",
+    "moreActivity": "Aktivitas Lainnya",
+    "pictures": "gambar",
+    "viewMore": "Lihat Selengkapnya",
+    "form": {
+      "title": "Silakan lengkapi formulir berikut untuk melanjutkan pendaftaran Anda. Tiket Anda akan dikirim melalui email. Mohon periksa email Anda.",
+      "fullName": "Nama lengkap",
+      "fullNamePlaceholder": "Masukkan nama lengkap Anda",
+      "email": "Email",
+      "emailPlaceholder": "Masukkan email Anda",
+      "phone": "Nomor telepon",
+      "phonePlaceholder": "Masukkan nomor kontak Anda",
+      "ticketAmount": "Tiket",
+      "agreement": "Dengan memberikan detail Anda, Anda setuju untuk menerima komunikasi pemasaran dari LIND Society.",
+      "next": "Selanjutnya"
+    },
+    "payment": {
+      "title": "Untuk menyelesaikan pendaftaran Anda, silakan pilih metode pembayaran Anda.",
+      "paymentMethods": "Metode Pembayaran",
+      "description": "Kami menawarkan opsi pembayaran yang fleksibel dan aman untuk membuat pembelian rumah atau villa atau pengalaman sewa Anda lancar. Platform kami mendukung berbagai metode pembayaran, termasuk transfer bank, kartu kredit dan debit, dan gateway pembayaran digital.",
+      "bankTransfer": "Transfer bank",
+      "cardPayments": "Pembayaran kartu",
+      "continueToPayment": "Lanjutkan ke Pembayaran"
+    },
+    "success": {
+      "title": "Pembayaran berhasil! Tiket Anda telah dikirim ke email Anda. Silakan periksa kotak masuk Anda.",
+      "return": "Kembali ke Aktivitas"
+    }
   }
 }

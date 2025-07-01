@@ -1019,5 +1019,50 @@
       "send": "Send Inquiry",
       "sending": "Sending..."
     }
+  },
+  "touristActivityDetail": {
+    "loading": "Loading...",
+    "ticketRegistration": "Ticket Registration",
+    "viewOnMap": "View on map!",
+    "open": "Open",
+    "description": "Description",
+    "ticket": "Ticket",
+    "openSchedule": "Open Schedule (Local Time)",
+    "locationAndMap": "Location & Map",
+    "entranceTicket": "Entrance Ticket",
+    "seeDetails": "See details",
+    "pax": "/pax",
+    "getTicket": "Get Ticket",
+    "openingHour": "Opening Hour:",
+    "closingHour": "Closing Hour:",
+    "startFrom": "Start from",
+    "findYourTicket": "Find Your Ticket!",
+    "moreActivity": "More Activity",
+    "pictures": "pictures",
+    "viewMore": "View More",
+    "form": {
+      "title": "Please complete the following form to proceed with your registration. Your ticket will be send via email. Please kindly check your email.",
+      "fullName": "Full name",
+      "fullNamePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "phone": "Phone number",
+      "phonePlaceholder": "Enter your contact number",
+      "ticketAmount": "Ticket",
+      "agreement": "By providing your details, you agree to receive marketing communications from LIND Society.",
+      "next": "Next"
+    },
+    "payment": {
+      "title": "To complete your registration, please select your payment method.",
+      "paymentMethods": "Payment Methods",
+      "description": "We offer flexible and secure payment options to make your home or villa purchase or rental experience seamless. Our platform supports multiple payment methods, including bank transfers, credit and debit cards, and digital payment gateways.",
+      "bankTransfer": "Bank transfer",
+      "cardPayments": "Card payments",
+      "continueToPayment": "Continue to Payment"
+    },
+    "success": {
+      "title": "Payment successful! Your ticket has been sent to your email. Please check your inbox.",
+      "return": "Return to Activities"
+    }
   }
 }
