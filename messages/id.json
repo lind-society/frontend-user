@@ -119,7 +119,9 @@
         "endDate": "Tanggal Selesai",
         "selectDate": "Pilih tanggal",
         "selectStartDate": "Pilih Tanggal Mulai",
-        "selectStartDateFirst": "Pilih tanggal mulai terlebih dahulu"
+        "selectStartDateFirst": "Pilih tanggal mulai terlebih dahulu",
+        "apply": "Terapkan",
+        "cancel": "Batal"
       },
       "promotions": {
         "stay": "*Penawaran Early Bird Eksklusif – Pesan Lebih Awal & Nikmati Diskon Khusus!🌟",

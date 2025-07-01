@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, Phone, SearchIcon, X } from 'lucide-react';
+import { Menu, Phone, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
@@ -15,6 +15,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import LocaleSwitcher from '@/components/ui/locale-switcher';
+import SearchBar from '@/components/ui/search-bar';
 import { Separator } from '@/components/ui/separator';
 
 const Navbar = () => {
@@ -42,15 +43,8 @@ const Navbar = () => {
           </Link>
 
           {/* Search - tablet and desktop only */}
-          <div className='hidden md:flex h-[52px] flex-1 max-w-md mx-2 lg:mx-4'>
-            <input
-              type='text'
-              placeholder={t('search.placeholder')}
-              className='h-full w-full px-2 lg:px-3 border border-gray-300 rounded-l-md focus:outline-none focus:ring-1 focus:ring-primary text-sm lg:text-base'
-            />
-            <button className='bg-primary h-full px-3 lg:px-6 rounded-r-md'>
-              <SearchIcon size={20} className='text-white' />
-            </button>
+          <div className='hidden md:flex flex-1 max-w-md mx-2 lg:mx-4'>
+            <SearchBar />
           </div>
 
           {/* Language, Currency, Social Icons - tablet and desktop */}
@@ -92,16 +86,7 @@ const Navbar = () => {
 
       {/* Mobile search */}
       <div className='md:hidden px-4 pb-3'>
-        <div className='flex h-[42px]'>
-          <input
-            type='text'
-            placeholder={t('search.placeholder')}
-            className='h-full w-full px-3 border border-gray-300 rounded-l-md focus:outline-none'
-          />
-          <button className='bg-primary h-full px-4 rounded-r-md'>
-            <SearchIcon size={20} className='text-white' />
-          </button>
-        </div>
+        <SearchBar />
       </div>
 
       <Separator />
