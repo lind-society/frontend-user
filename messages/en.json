@@ -119,7 +119,9 @@
         "endDate": "End Date",
         "selectDate": "Select date",
         "selectStartDate": "Select Start Date",
-        "selectStartDateFirst": "Select start date first"
+        "selectStartDateFirst": "Select start date first",
+        "apply": "Apply",
+        "cancel": "Cancel"
       },
       "promotions": {
         "stay": "*Exclusive Early Bird Offers – Book Early & Enjoy Special Discounts!🌟",
@@ -251,16 +253,17 @@
           "linkText": "Book Your Dream Stay"
         },
         "buying": {
-          "title": "Buy Home & Villas",
-          "description": "We believe every villa holds a unique story, waiting for its next chapter. LIND Society is designed to connect extraordinary homes with those who seek them, ensuring a seamless journey from one owner to the next.",
-          "linkText": "Find Your Perfect Home"
+          "title": "Buying Property",
+          "description": "Find your dream property with our full support. We not only help you find a property that suits your needs, but also assist in the negotiation and transaction process to completion.",
+          "linkText": "Find Your Perfect Property"
         },
         "management": {
           "title": "Property Management",
-          "description": "We offer full management of your property, from daily management to marketing and rental price optimization, ensuring maximum income and optimal property maintenance.",
-          "linkText": "Start Managing Your Property"
+          "description": "Maximize the potential of your property with our professional management services. From marketing to maintenance, we handle everything so you can enjoy passive income without the hassle.",
+          "linkText": "Learn More About Our Services"
         }
-      }
+      },
+      "imageAlt": "Our Service"
     }
   },
   "contactUs": {
@@ -1063,6 +1066,83 @@
     "success": {
       "title": "Payment successful! Your ticket has been sent to your email. Please check your inbox.",
       "return": "Return to Activities"
-    }
+    },
+    "gallery": {
+      "viewAllPhotos": "View All Photos"
+    },
+    "sidebar": {
+      "from": "From",
+      "person": "person",
+      "bookNow": "Book Now",
+      "addToWishlist": "Add to Wishlist",
+      "share": "Share"
+    },
+    "registrationForm": {
+      "title": "Registration Form",
+      "date": "Date",
+      "numberOfPeople": "Number of People",
+      "totalPrice": "Total Price",
+      "continueToPayment": "Continue to Payment",
+      "serviceFee": "Service Fee",
+      "person": "person",
+      "people": "people"
+    },
+    "paymentMethods": {
+      "title": "Select Payment Method",
+      "creditCard": "Credit Card (Visa, MasterCard, JCB)",
+      "virtualAccount": "Virtual Account (BCA, Mandiri, BRI, BNI)",
+      "eWallet": "E-Wallet (GoPay, OVO, ShopeePay)",
+      "proceedToPayment": "Proceed to Payment"
+    },
+    "successMessage": {
+      "title": "Booking Successful!",
+      "description": "Thank you for your booking! Your reservation has been confirmed. A confirmation email with all the details has been sent to your registered email address.",
+      "bookingDetails": "Booking Details:",
+      "activity": "Activity",
+      "date": "Date",
+      "participants": "Participants",
+      "totalPrice": "Total Price",
+      "backToHome": "Back to Home",
+      "viewMyBookings": "View My Bookings"
+    },
+    "return": "Return to Activities"
+  },
+  "SearchSuggestions": {
+    "popularSearches": "Popular Searches",
+    "exploreCategories": "Explore Categories",
+    "rentVilla": "Rent Villa",
+    "buyProperty": "Buy Property",
+    "touristActivity": "Tourist Activity",
+    "location": "Location",
+    "property": "Property",
+    "activity": "Activity",
+    "search": "Search"
+  },
+  "SearchBar": {
+    "loading": "Searching...",
+    "noResults": "No results found for \"{query}\"",
+    "tryAnotherKeyword": "Try another keyword"
+  },
+  "SearchResultItem": {
+    "rent": "Rent",
+    "buy": "Buy",
+    "activity": "Activity",
+    "property": "Property",
+    "bedrooms": "Beds",
+    "bathrooms": "Baths",
+    "guests": "Guests",
+    "viewDetails": "View Details"
+  },
+  "SearchResults": {
+    "resultsFor": "Search results for \"{query}\"",
+    "all": "All ({count})",
+    "rent": "Rent",
+    "buy": "Buy",
+    "activity": "Activity",
+    "property": "Property",
+    "noResultsForFilter": "No results for filter \"{filter}\"",
+    "tryAnotherFilter": "Try another filter",
+    "showingResults": "Showing {count} of {total} results",
+    "viewAllResults": "View All Results"
   }
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { Filter, SearchIcon, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -40,6 +41,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   const [activeFilter, setActiveFilter] = useState<
     'all' | 'rent' | 'buy' | 'tourist-activity'
   >('all');
+  const t = useTranslations('SearchResults');
 
   // Group results by type
   const groupedResults = {
@@ -58,13 +60,13 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   const getTypeLabel = (type: string) => {
     switch (type) {
       case 'rent':
-        return 'Sewa';
+        return t('rent');
       case 'buy':
-        return 'Beli';
+        return t('buy');
       case 'tourist-activity':
-        return 'Aktivitas';
+        return t('activity');
       default:
-        return 'Properti';
+        return t('property');
     }
   };
 
@@ -78,7 +80,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
           <div className='flex items-center gap-2'>
             <SearchIcon className='w-4 h-4 text-gray-400' />
             <span className='text-sm font-medium text-gray-700'>
-              Hasil Pencarian untuk "{query}"
+              {t('resultsFor', { query })}
             </span>
           </div>
           <button
@@ -97,7 +99,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             onClick={() => setActiveFilter('all')}
             className='text-xs'
           >
-            Semua ({results.length})
+            {t('all', { count: results.length })}
           </Button>
           <Button
             variant={activeFilter === 'rent' ? 'default' : 'outline'}
@@ -105,7 +107,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             onClick={() => setActiveFilter('rent')}
             className='text-xs'
           >
-            Sewa ({groupedResults.rent.length})
+            {t('rent')} ({groupedResults.rent.length})
           </Button>
           <Button
             variant={activeFilter === 'buy' ? 'default' : 'outline'}
@@ -113,7 +115,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             onClick={() => setActiveFilter('buy')}
             className='text-xs'
           >
-            Beli ({groupedResults.buy.length})
+            {t('buy')} ({groupedResults.buy.length})
           </Button>
           <Button
             variant={
@@ -123,7 +125,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             onClick={() => setActiveFilter('tourist-activity')}
             className='text-xs'
           >
-            Aktivitas ({groupedResults.tourist.length})
+            {t('activity')} ({groupedResults.tourist.length})
           </Button>
         </div>
       </div>
@@ -139,8 +141,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         ) : (
           <div className='p-8 text-center text-gray-500'>
             <Filter className='w-8 h-8 mx-auto mb-2 text-gray-300' />
-            <p>Tidak ada hasil untuk filter "{getTypeLabel(activeFilter)}"</p>
-            <p className='text-sm mt-1'>Coba filter lain</p>
+            <p>
+              {t('noResultsForFilter', { filter: getTypeLabel(activeFilter) })}
+            </p>
+            <p className='text-sm mt-1'>{t('tryAnotherFilter')}</p>
           </div>
         )}
       </div>
@@ -149,7 +153,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       <div className='p-3 border-t border-gray-100 bg-gray-50'>
         <div className='flex items-center justify-between'>
           <div className='text-xs text-gray-500'>
-            Menampilkan {filteredResults.length} dari {results.length} hasil
+            {t('showingResults', {
+              count: filteredResults.length,
+              total: results.length,
+            })}
           </div>
           <Button
             variant='outline'
@@ -157,7 +164,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             onClick={onViewAll}
             className='text-xs'
           >
-            Lihat Semua Hasil
+            {t('viewAllResults')}
           </Button>
         </div>
       </div>

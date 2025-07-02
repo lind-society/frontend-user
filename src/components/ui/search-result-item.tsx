@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Badge } from '@/components/ui/badge';
@@ -55,6 +56,7 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
   groupSize,
   onClick,
 }) => {
+  const t = useTranslations('SearchResultItem');
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'rent':
@@ -71,13 +73,13 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
   const getTypeLabel = (type: string) => {
     switch (type) {
       case 'rent':
-        return 'Sewa';
+        return t('rent');
       case 'buy':
-        return 'Beli';
+        return t('buy');
       case 'tourist-activity':
-        return 'Aktivitas';
+        return t('activity');
       default:
-        return 'Properti';
+        return t('property');
     }
   };
 
@@ -157,15 +159,21 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
                 <>
                   <div className='flex items-center'>
                     <Bed className='w-3 h-3 mr-1' />
-                    <span>{bedrooms} Kamar</span>
+                    <span>
+                      {bedrooms} {t('bedrooms')}
+                    </span>
                   </div>
                   <div className='flex items-center'>
                     <Bath className='w-3 h-3 mr-1' />
-                    <span>{bathrooms} Mandi</span>
+                    <span>
+                      {bathrooms} {t('bathrooms')}
+                    </span>
                   </div>
                   <div className='flex items-center'>
                     <Users className='w-3 h-3 mr-1' />
-                    <span>{guests} Tamu</span>
+                    <span>
+                      {guests} {t('guests')}
+                    </span>
                   </div>
                 </>
               )}
@@ -174,11 +182,15 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
                 <>
                   <div className='flex items-center'>
                     <Bed className='w-3 h-3 mr-1' />
-                    <span>{bedrooms} Kamar</span>
+                    <span>
+                      {bedrooms} {t('bedrooms')}
+                    </span>
                   </div>
                   <div className='flex items-center'>
                     <Bath className='w-3 h-3 mr-1' />
-                    <span>{bathrooms} Mandi</span>
+                    <span>
+                      {bathrooms} {t('bathrooms')}
+                    </span>
                   </div>
                   <div className='flex items-center'>
                     <span className='font-medium'>{size}</span>
@@ -211,7 +223,9 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
 
               {/* Quick action button */}
               <div className='text-xs'>
-                <span className='text-primary font-medium'>Lihat Detail →</span>
+                <span className='text-primary font-medium'>
+                  {t('viewDetails')} →
+                </span>
               </div>
             </div>
           </div>

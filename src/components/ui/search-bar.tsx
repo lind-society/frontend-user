@@ -166,6 +166,7 @@ const SearchBar = () => {
   const [isLoading, setIsLoading] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('navbar');
+  const t2 = useTranslations('SearchBar');
 
   // Handle click outside to close search
   useEffect(() => {
@@ -322,7 +323,7 @@ const SearchBar = () => {
             <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4'>
               <div className='text-center text-gray-500'>
                 <div className='animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto'></div>
-                <p className='mt-2'>Mencari...</p>
+                <p className='mt-2'>{t2('loading')}</p>
               </div>
             </div>
           ) : searchResults.length > 0 ? (
@@ -342,8 +343,8 @@ const SearchBar = () => {
             <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4'>
               <div className='text-center text-gray-500'>
                 <SearchIcon className='w-8 h-8 mx-auto mb-2 text-gray-300' />
-                <p>Tidak ada hasil ditemukan untuk "{searchQuery}"</p>
-                <p className='text-sm mt-1'>Coba kata kunci lain</p>
+                <p>{t2('noResults', { query: searchQuery })}</p>
+                <p className='text-sm mt-1'>{t2('tryAnotherKeyword')}</p>
               </div>
             </div>
           ) : searchQuery.length === 0 ? (

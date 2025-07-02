@@ -249,70 +249,60 @@
       "services": {
         "booking": {
           "title": "Booking Rumah & Villa",
-          "description": "Temukan pilihan properti eksklusif yang beragam yang menawarkan kenyamanan, privasi dan layanan bintang lima. Setiap properti telah dipilih dengan cermat untuk memberikan pengalaman menginap terbaik bagi setiap tamu.",
-          "linkText": "Pesan Tempat Impian Anda"
+          "description": "Temukan beragam pilihan properti eksklusif yang menawarkan kenyamanan, privasi, dan layanan bintang lima. Setiap properti telah dipilih dengan cermat untuk memberikan pengalaman menginap terbaik bagi setiap tamu.",
+          "linkText": "Pesan Penginapan Impian Anda"
         },
         "buying": {
-          "title": "Beli Rumah & Villa",
-          "description": "Kami percaya setiap villa menyimpan cerita unik, menunggu babak selanjutnya. LIND Society dirancang untuk menghubungkan rumah-rumah luar biasa dengan mereka yang mencarinya, memastikan perjalanan yang mulus dari satu pemilik ke pemilik berikutnya.",
-          "linkText": "Temukan Rumah Sempurna Anda"
+          "title": "Beli Properti",
+          "description": "Temukan properti impian Anda dengan dukungan penuh dari kami. Kami tidak hanya membantu Anda menemukan properti yang sesuai dengan kebutuhan Anda, tetapi juga mendampingi dalam proses negosiasi dan transaksi hingga selesai.",
+          "linkText": "Temukan Properti Sempurna Anda"
         },
         "management": {
           "title": "Manajemen Properti",
-          "description": "Kami menawarkan manajemen lengkap properti Anda, mulai dari pengelolaan harian hingga pemasaran dan optimalisasi harga sewa, memastikan pendapatan maksimal dan pemeliharaan properti yang optimal.",
-          "linkText": "Mulai Kelola Properti Anda"
+          "description": "Maksimalkan potensi properti Anda dengan layanan manajemen profesional kami. Mulai dari pemasaran hingga pemeliharaan, kami menangani semuanya agar Anda bisa menikmati pendapatan pasif tanpa repot.",
+          "linkText": "Pelajari Lebih Lanjut Tentang Layanan Kami"
         }
-      }
+      },
+      "imageAlt": "Layanan Kami"
     }
   },
-  "contactUs": {
-    "pageTitle": "Hubungi Kami",
-    "header": {
-      "title": "Hubungi Kami",
-      "subtitle": "Kami siap membantu Anda"
-    },
-    "content": {
-      "title": "Hubungi Kami",
-      "subtitle": "Punya pertanyaan atau butuh bantuan?",
-      "description": "Kami siap membantu! Hubungi kami untuk pertanyaan tentang pemesanan, layanan, atau informasi apa pun yang Anda butuhkan. Tim kami siap membuat pengalaman Anda menjadi lancar dan menyenangkan."
-    },
-    "contactInfo": {
-      "phone": "Telepon",
-      "email": "Email",
-      "address": "Alamat",
-      "instagram": "Instagram"
-    },
-    "form": {
-      "title": "Isi formulir",
-      "subtitle": "Kami akan menghubungi Anda dalam 24 jam",
-      "fullName": "Nama Lengkap",
-      "email": "Email",
-      "phone": "Nomor Telepon",
-      "inquiryType": "Jenis Pertanyaan",
-      "message": "Pesan",
-      "submit": "Kirim Pesan",
-      "successMessage": "Pesan berhasil dikirim! Kami akan menghubungi Anda segera.",
-      "inquiryTypes": {
-        "booking": "Pertanyaan Pemesanan",
-        "propertyManagement": "Manajemen Properti",
-        "propertyListing": "Daftarkan Properti Saya",
-        "support": "Dukungan Pelanggan",
-        "other": "Pertanyaan Lainnya"
-      },
-      "placeholders": {
-        "fullName": "Masukkan nama lengkap Anda",
-        "email": "Masukkan alamat email Anda",
-        "phone": "Masukkan nomor telepon Anda",
-        "inquiryType": "Pilih jenis pertanyaan",
-        "message": "Masukkan pesan Anda"
-      }
-    },
-    "info": {
-      "address": "Alamat",
-      "phone": "Telepon",
-      "email": "Email",
-      "socialMedia": "Media Sosial"
-    }
+  "SearchSuggestions": {
+    "popularSearches": "Pencarian Populer",
+    "exploreCategories": "Jelajahi Kategori",
+    "rentVilla": "Sewa Villa",
+    "buyProperty": "Beli Properti",
+    "touristActivity": "Aktivitas Wisata",
+    "location": "Lokasi",
+    "property": "Properti",
+    "activity": "Aktivitas",
+    "search": "Cari"
+  },
+  "SearchBar": {
+    "loading": "Mencari...",
+    "noResults": "Tidak ada hasil ditemukan untuk \"{query}\"",
+    "tryAnotherKeyword": "Coba kata kunci lain"
+  },
+  "SearchResultItem": {
+    "rent": "Sewa",
+    "buy": "Beli",
+    "activity": "Aktivitas",
+    "property": "Properti",
+    "bedrooms": "Kamar",
+    "bathrooms": "Mandi",
+    "guests": "Tamu",
+    "viewDetails": "Lihat Detail"
+  },
+  "SearchResults": {
+    "resultsFor": "Hasil pencarian untuk \"{query}\"",
+    "all": "Semua ({count})",
+    "rent": "Sewa",
+    "buy": "Beli",
+    "activity": "Aktivitas",
+    "property": "Properti",
+    "noResultsForFilter": "Tidak ada hasil untuk filter \"{filter}\"",
+    "tryAnotherFilter": "Coba filter lain",
+    "showingResults": "Menampilkan {count} dari {total} hasil",
+    "viewAllResults": "Lihat Semua Hasil"
   },
   "rent": {
     "pageTitle": "Sewa Villa & Properti",
