@@ -5,7 +5,7 @@ import { touristActivities } from '@/modules/tourist-activity/constant';
 import TouristActivityDetailModule from '@/modules/tourist-activity-detail';
 
 type Props = {
-  params: { name: string };
+  params: Promise<{ name: string }>;
 };
 
 // export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -24,7 +24,7 @@ type Props = {
 // }
 
 export default async function TouristActivityDetailPage({ params }: Props) {
-  const activityId = params.name;
+  const activityId = (await params).name;
   const activity = touristActivities.find((act) => act.id === activityId);
 
   if (!activity) {
