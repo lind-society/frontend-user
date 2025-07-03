@@ -1023,7 +1023,9 @@
       "enterYourPhoneNumber": "Masukkan nomor telepon Anda",
       "custom": "Kustom",
       "enterYourMessage": "Masukkan pesan Anda",
-      "tellUsWhatYouWouldLikeUsToHelpYouWith": "Beritahu kami apa yang ingin Anda minta bantuan"
+      "tellUsWhatYouWouldLikeUsToHelpYouWith": "Beritahu kami apa yang ingin Anda minta bantuan",
+      "guestSingular": "Tamu",
+      "guestPlural": "Tamu"
     }
   },
   "touristActivityDetail": {

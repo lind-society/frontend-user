@@ -1017,10 +1017,26 @@
       "name": "Name",
       "email": "Email",
       "phone": "Phone Number",
+      "phoneNumber": "Phone Number",
+      "guest": "Guest",
       "message": "Message",
       "messagePlaceholder": "Write your message here...",
       "send": "Send Inquiry",
-      "sending": "Sending..."
+      "sendInquiry": "Send Inquiry",
+      "sending": "Sending...",
+      "makeItYours": "Make it Yours",
+      "customerServiceFor": "Villa Customer Service for",
+      "askForROI": "Ask for ROI",
+      "enterYourFullName": "Enter your full name",
+      "enterYourEmail": "Enter your email",
+      "enterYourPhoneNumber": "Enter your phone number",
+      "custom": "Custom",
+      "enterYourMessage": "Enter your message",
+      "tellUsWhatYouWouldLikeUsToHelpYouWith": "Tell us what you would like us to help you with",
+      "selectDuration": "Select duration",
+      "selectGuestCount": "Select guest count",
+      "guestSingular": "Guest",
+      "guestPlural": "Guests"
     }
   },
   "touristActivityDetail": {
