@@ -1,4 +1,4 @@
-FROM registry.cakra.ai/node:lts-alpine AS base
+FROM node:22-alpine AS base
 
 RUN npm install -g corepack@0.31.0 && corepack enable
 
@@ -7,8 +7,6 @@ FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
-
-ARG ENV_VARS
 
 # Install dependencies based on the preferred package manager
 COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
@@ -31,9 +29,8 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED=1
 
-# Create a `.env` file from ARG
-ARG ENV_VARS
-RUN echo "${ENV_VARS}" > .env
+# NEXT_PUBLIC_* values are inlined at build time; they come from the
+# .env.production the deploy script places in the build context.
 
 RUN \
   if [ -f yarn.lock ]; then yarn run build; \
@@ -49,8 +46,6 @@ WORKDIR /app
 ENV NODE_ENV=production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED=1
-
-ARG ENV_VARS
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs

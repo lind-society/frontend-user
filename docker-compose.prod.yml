@@ -1,0 +1,22 @@
+# Production stack for the VPS, deployed by .github/workflows/deploy.yml.
+# .env.production lives only on the server: NEXT_PUBLIC_* values are baked in
+# at build time, the rest (auth secrets) are read at runtime.
+name: lind-web
+
+services:
+  web:
+    build: .
+    image: lind-web:latest
+    restart: unless-stopped
+    env_file: ./.env.production
+    ports: ['127.0.0.1:18080:3000']
+    healthcheck:
+      test: ['CMD', 'node', '-e', "fetch('http://127.0.0.1:3000').then(() => process.exit(0), () => process.exit(1))"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    logging:
+      driver: json-file
+      options: { max-size: '20m', max-file: '5' }
+    mem_limit: 1g

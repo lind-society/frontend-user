@@ -3,8 +3,31 @@ import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin();
 
+/**
+ * In production, uploaded files are served through the API itself
+ * (`/api/v1/storages/files/...`), so the API's own host has to be allowed for
+ * next/image. Derived from the env so switching to a domain needs no code edit.
+ */
+const apiHostPattern = (() => {
+  const raw = process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (!raw) return [];
+  try {
+    const url = new URL(raw);
+    return [
+      {
+        protocol: url.protocol.replace(':', ''),
+        hostname: url.hostname,
+        port: url.port,
+        pathname: '/**',
+      },
+    ];
+  } catch {
+    return [];
+  }
+})();
+
 const nextConfig = {
-  // output: 'standalone',
+  output: 'standalone',
   eslint: {
     dirs: ['src'],
   },
@@ -24,6 +47,7 @@ const nextConfig = {
      * on the next restart.
      */
     remotePatterns: [
+      ...apiHostPattern,
       {
         protocol: 'http',
         hostname: 'localhost',
