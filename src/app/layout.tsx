@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Inter, Lora, Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 import NextTopLoader from 'nextjs-toploader';
@@ -10,6 +11,35 @@ import '@/styles/globals.css';
 import Provider from '@/components/layouts/provider';
 
 import { siteConfig } from '@/constant/config';
+
+/**
+ * Three families, per the design spec:
+ *   Playfair Display — hero/section headings and product names
+ *   Lora            — card titles, breadcrumbs, price blocks
+ *   Inter           — body copy, buttons, forms, list items
+ */
+const display = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-display',
+});
+
+const heading = Lora({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+  style: ['normal', 'italic'],
+  variable: '--font-heading',
+});
+
+const body = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-body',
+});
 
 // !STARTERCONF Change these default meta
 // !STARTERCONF Look at @/constant/config to change them
@@ -63,11 +93,14 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html
+      lang={locale}
+      className={`${display.variable} ${heading.variable} ${body.variable}`}
+    >
       <body>
         <NextIntlClientProvider messages={messages}>
           <Provider>
-            <NextTopLoader color='#2E5153' showSpinner={false} />
+            <NextTopLoader color='#A2754C' showSpinner={false} />
             {children}
             <Toaster position='top-right' richColors closeButton />
           </Provider>

@@ -1,20 +1,16 @@
 // components/Footer.tsx
 'use client';
 
-import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6';
 
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import { Input } from '@/components/ui/input';
-import { Separator } from '@/components/ui/separator';
+import Logo from '@/components/ui/logo';
 
-// Footer link component for reusability
 const FooterLink = ({
   href,
   children,
@@ -24,198 +20,202 @@ const FooterLink = ({
 }) => (
   <Link
     href={href}
-    className='text-gray-600 hover:text-primary transition-colors duration-200'
+    className='text-ink transition-colors duration-200 hover:text-bronze-600'
   >
     {children}
   </Link>
+);
+
+const FooterColumn = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <div className='flex flex-col gap-3.5'>
+    <span className='font-heading text-lg font-semibold uppercase tracking-[0.06em] text-bronze-600'>
+      {title}
+    </span>
+    {children}
+  </div>
 );
 
 const Footer = () => {
   const t = useTranslations('footer');
 
   return (
-    <div className='bg-white'>
-      {/* Payment and social - Responsive */}
-      <BaseContainer>
-        <div className='flex flex-col md:flex-row gap-6 md:justify-between md:items-center py-6'>
-          {/* Payment section */}
-          <div className='flex flex-col sm:flex-row gap-4 sm:gap-8 items-start sm:items-center'>
-            <p className='text-primary font-semibold text-xl md:text-2xl whitespace-nowrap'>
-              {t('paymentChannels')}
-            </p>
-            <div className='flex items-center gap-4 md:gap-8 flex-wrap'>
-              <Image
-                src='/images/visa.png'
-                height={0}
-                width={0}
-                sizes='100vw'
-                alt='Visa'
-                className='h-[24px] md:h-[36px] w-auto object-contain'
+    <footer>
+      {/* ---- Newsletter band ---- */}
+      <section className='relative overflow-hidden'>
+        <Image
+          src='/images/header-landing-page.png'
+          alt=''
+          fill
+          sizes='100vw'
+          aria-hidden
+          className='object-cover'
+        />
+        <div aria-hidden className='absolute inset-0 bg-ink/80' />
+
+        <BaseContainer>
+          <div className='relative flex flex-col items-start gap-8 py-14 lg:flex-row lg:items-center lg:justify-between lg:py-20'>
+            <h2 className='max-w-xl whitespace-pre-line text-cream'>
+              {t('newsletter.title')}
+            </h2>
+
+            <form
+              className='flex w-full max-w-lg gap-3'
+              onSubmit={(e) => e.preventDefault()}
+            >
+              <label htmlFor='newsletter-email' className='sr-only'>
+                {t('newsletter.emailPlaceholder')}
+              </label>
+              <input
+                id='newsletter-email'
+                type='email'
+                placeholder={t('newsletter.emailPlaceholder')}
+                className='h-11 w-full rounded-none border border-cream/25 bg-ink/70 px-4 text-sm text-cream placeholder:text-cream/55 focus:border-bronze focus:outline-none focus:ring-0'
               />
-              <Image
-                src='/images/master-card.png'
-                height={0}
-                width={0}
-                sizes='100vw'
-                alt='Mastercard'
-                className='h-[24px] md:h-[36px] w-auto object-contain'
-              />
-              <Image
-                src='/images/american-express.png'
-                height={0}
-                width={0}
-                sizes='100vw'
-                alt='American Express'
-                className='h-[24px] md:h-[36px] w-auto object-contain'
-              />
-            </div>
+              <Button type='submit' variant='primary' className='h-11 px-7'>
+                {t('newsletter.subscribe')}
+              </Button>
+            </form>
           </div>
+        </BaseContainer>
+      </section>
 
-          {/* Social media section */}
-          <div className='flex gap-4 sm:gap-8 items-center'>
-            <p className='text-primary font-semibold text-xl md:text-2xl whitespace-nowrap'>
-              {t('followUs')}
-            </p>
-            <div className='flex gap-4 sm:gap-6'>
-              <Link href='#' aria-label='Facebook'>
-                <FaFacebook
-                  size={20}
-                  className='text-primary hover:opacity-80'
-                />
-              </Link>
-              <Link href='#' aria-label='Twitter'>
-                <FaTwitter
-                  size={20}
-                  className='text-primary hover:opacity-80'
-                />
-              </Link>
-              <Link href='#' aria-label='Instagram'>
-                <FaInstagram
-                  size={20}
-                  className='text-primary hover:opacity-80'
-                />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </BaseContainer>
-
-      <Separator />
-
-      {/* Main Footer Content - Responsive Grid */}
-      <BaseContainer>
-        <div className='flex flex-col gap-8 py-6 md:py-10'>
-          <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-8 gap-y-8 gap-x-4 md:gap-x-8 text-gray-600'>
-            {/* About Section - 4 cols on desktop, full width on mobile */}
-            <div className='col-span-2 sm:col-span-4 md:col-span-4 flex flex-col gap-3'>
-              <p className='text-primary font-semibold text-xl md:text-2xl'>
-                {t('about.title')}
-              </p>
-              <p className='text-text font-normal text-sm md:text-base'>
-                {t('about.description')}
-              </p>
-            </div>
-
-            {/* Services - 1 col on mobile, 1 col on desktop */}
-            <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
-              <span className='font-semibold text-base md:text-lg text-text'>
-                {t('services.title')}
-              </span>
-              <FooterLink href='/rent'>{t('services.rentVillas')}</FooterLink>
-              <FooterLink href='/buy'>{t('services.buyProperties')}</FooterLink>
-              <FooterLink href='/tourist-activity'>
-                {t('services.touristActivities')}
-              </FooterLink>
-              <FooterLink href='/manage-property'>
-                {t('services.propertyManagement')}
-              </FooterLink>
-            </div>
-
-            {/* About Links */}
-            <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
-              <span className='font-semibold text-base md:text-lg text-text'>
-                {t('aboutLinks.title')}
-              </span>
-              <FooterLink href='/about-us'>
-                {t('aboutLinks.aboutUs')}
-              </FooterLink>
-              <FooterLink href='/media'>{t('aboutLinks.media')}</FooterLink>
-              <FooterLink href='/blog'>{t('aboutLinks.blog')}</FooterLink>
-            </div>
-
-            {/* Help Links */}
-            <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
-              <span className='font-semibold text-base md:text-lg text-text'>
-                {t('help.title')}
-              </span>
-              <FooterLink href='/contact-us'>{t('help.contactUs')}</FooterLink>
-              <FooterLink href='/faq'>{t('help.faqs')}</FooterLink>
-              <FooterLink href='/support'>{t('help.support')}</FooterLink>
-            </div>
-
-            {/* More Info Links */}
-            <div className='col-span-1 sm:col-span-1 md:col-span-1 flex flex-col gap-3'>
-              <span className='font-semibold text-base md:text-lg text-text'>
-                {t('legal.title')}
-              </span>
-              <FooterLink href='/terms'>{t('legal.terms')}</FooterLink>
-              <FooterLink href='/privacy'>{t('legal.privacy')}</FooterLink>
-              <FooterLink href='/cancellation'>
-                {t('legal.cancellation')}
-              </FooterLink>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className='grid grid-cols-1 md:grid-cols-8 gap-8 mt-6'>
-            {/* Logo and Copyright */}
-            <div className='md:col-span-4 flex flex-col md:flex-row gap-4 md:gap-8 items-center md:items-center text-primary'>
-              <Image
-                src='/images/logo.png'
-                height={80}
-                width={120}
-                alt='LIND Society'
-                className='md:h-[96px] w-auto object-contain'
-              />
-              <p className='text-xs md:text-sm text-center md:text-left whitespace-pre-line'>
-                {t('copyright')}
-              </p>
-            </div>
-
-            {/* Newsletter Subscription */}
-            <div className='md:col-span-4 flex flex-col gap-3'>
-              <p className='text-base md:text-lg font-semibold'>
-                {t('newsletter.title')}
-              </p>
-              <div className='flex w-full   rounded-md overflow-hidden'>
-                <Input
-                  type='email'
-                  placeholder={t('newsletter.emailPlaceholder')}
-                  className='border border-primary rounded-r-none border-r-0 focus-visible:ring-0 focus-visible:ring-offset-0 w-full'
-                />
-                <Button
-                  variant='primary'
-                  className='rounded-l-none border-l-0 px-6'
+      {/* ---- Link columns ---- */}
+      <div className='bg-cream-warm text-ink'>
+        <BaseContainer>
+          <>
+            <div className='grid gap-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-16'>
+              {/* Brand */}
+              <div className='flex flex-col gap-6 lg:col-span-4 lg:pr-10'>
+                <Link
+                  href='/'
+                  aria-label='LIND Society'
+                  className='text-bronze-900'
                 >
-                  <ChevronRight size={16} />
-                  {t('newsletter.subscribe')}
+                  <Logo className='h-14 w-auto' />
+                </Link>
+                <p className='whitespace-pre-line text-sm leading-relaxed text-bronze-600'>
+                  {t('tagline')}
+                </p>
+                <div className='flex items-center gap-6 text-bronze-900'>
+                  <Link href='#' aria-label='Facebook'>
+                    <FaFacebookF
+                      size={22}
+                      className='transition-opacity hover:opacity-70'
+                    />
+                  </Link>
+                  <Link href='#' aria-label='Twitter'>
+                    <FaTwitter
+                      size={22}
+                      className='transition-opacity hover:opacity-70'
+                    />
+                  </Link>
+                  <Link href='#' aria-label='Instagram'>
+                    <FaInstagram
+                      size={22}
+                      className='transition-opacity hover:opacity-70'
+                    />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Link groups */}
+              <div className='grid gap-8 sm:grid-cols-3 lg:col-span-5 lg:border-x lg:border-bronze/25 lg:px-8'>
+                <FooterColumn title={t('explore.title')}>
+                  <FooterLink href='/rent'>{t('explore.stays')}</FooterLink>
+                  <FooterLink href='/buy'>{t('explore.properties')}</FooterLink>
+                  <FooterLink href='/tourist-activity'>
+                    {t('explore.experiences')}
+                  </FooterLink>
+                  <FooterLink href='/blog'>{t('explore.journal')}</FooterLink>
+                  <FooterLink href='/media'>
+                    {t('explore.destinations')}
+                  </FooterLink>
+                </FooterColumn>
+
+                <FooterColumn title={t('aboutLinks.title')}>
+                  <FooterLink href='/about-us'>
+                    {t('aboutLinks.aboutUs')}
+                  </FooterLink>
+                  <FooterLink href='/about-us'>
+                    {t('aboutLinks.ourStory')}
+                  </FooterLink>
+                  <FooterLink href='/manage-property'>
+                    {t('aboutLinks.partners')}
+                  </FooterLink>
+                  <FooterLink href='/about-us'>
+                    {t('aboutLinks.careers')}
+                  </FooterLink>
+                  <FooterLink href='/contact-us'>
+                    {t('aboutLinks.contact')}
+                  </FooterLink>
+                </FooterColumn>
+
+                <FooterColumn title={t('support.title')}>
+                  <FooterLink href='/faq'>{t('support.faqs')}</FooterLink>
+                  <FooterLink href='/faq'>
+                    {t('support.bookingGuide')}
+                  </FooterLink>
+                  <FooterLink href='/terms'>{t('support.terms')}</FooterLink>
+                  <FooterLink href='/privacy'>
+                    {t('support.privacy')}
+                  </FooterLink>
+                  <FooterLink href='/cancellation'>
+                    {t('support.cancellation')}
+                  </FooterLink>
+                </FooterColumn>
+              </div>
+
+              {/* Contact */}
+              <div className='flex flex-col gap-3.5 lg:col-span-3 lg:pl-4'>
+                <span className='font-heading text-lg font-semibold uppercase tracking-[0.06em] text-bronze-600'>
+                  {t('getInTouch.title')}
+                </span>
+                <p className='text-ink'>
+                  {t('getInTouch.conciergeLabel')}:{' '}
+                  <a
+                    href={`tel:${t('getInTouch.concierge').replace(/\s/g, '')}`}
+                    className='transition-colors hover:text-bronze-600'
+                  >
+                    {t('getInTouch.concierge')}
+                  </a>
+                </p>
+                <p className='text-ink'>
+                  {t('getInTouch.emailLabel')}:{' '}
+                  <a
+                    href={`mailto:${t('getInTouch.email')}`}
+                    className='transition-colors hover:text-bronze-600'
+                  >
+                    {t('getInTouch.email')}
+                  </a>
+                </p>
+                <p className='text-ink'>{t('getInTouch.location')}</p>
+
+                <Button
+                  asChild
+                  variant='primary'
+                  className='mt-3 h-12 w-full max-w-[260px]'
+                >
+                  <Link href='/contact-us'>{t('getInTouch.cta')}</Link>
                 </Button>
               </div>
-              <div className='flex items-start gap-2 mt-2'>
-                <Checkbox id='newsletter-consent' className='mt-1' />
-                <label
-                  htmlFor='newsletter-consent'
-                  className='text-xs text-gray-600 leading-tight'
-                >
-                  I consent to receive marketing emails and agree to the Terms
-                  of Service and Privacy Policy. I can unsubscribe at any time.
-                </label>
-              </div>
             </div>
-          </div>
-        </div>
-      </BaseContainer>
-    </div>
+
+            <p className='whitespace-pre-line border-t border-bronze/20 py-6 text-xs text-ink-muted'>
+              {t('copyright')}
+            </p>
+          </>
+        </BaseContainer>
+      </div>
+
+      {/* Bronze base rule that closes the page in the new design */}
+      <div aria-hidden className='h-2.5 w-full bg-bronze' />
+    </footer>
   );
 };
 

@@ -7,7 +7,8 @@ import React, { useState } from 'react';
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
 import { VillaCard } from '@/components/ui/card/villa';
-import { Separator } from '@/components/ui/separator';
+import { TextTabs } from '@/components/ui/text-tabs';
+import TitleSection from '@/components/ui/title-section';
 
 import { villas } from '@/modules/landing-page/constant';
 
@@ -20,86 +21,50 @@ const ExploreBestListLandingPage = () => {
   const [activeRentType, setActiveRentType] = useState<RentType>('rent');
   const [activeSchedule, setActiveSchedule] = useState<ScheduleType>('daily');
 
-  const handleRentTypeChange = (type: RentType) => {
-    setActiveRentType(type);
-  };
-
-  const handleScheduleChange = (schedule: ScheduleType) => {
-    setActiveSchedule(schedule);
-  };
-
-  const toggleFavorite = (id: number) => {
+  const toggleFavorite = (id: string | number) => {
     // In a real app, you would update this in your state management
     // eslint-disable-next-line no-console
     console.log(`Toggled favorite for villa ${id}`);
   };
 
-  // Determine the view more link based on the active rent type
   const viewMoreLink = activeRentType === 'rent' ? '/rent' : '/buy';
 
+  const rentTypeOptions = [
+    { value: 'rent' as const, label: t('forRent') },
+    { value: 'sale' as const, label: t('forSale') },
+  ];
+
+  const scheduleOptions = [
+    { value: 'daily' as const, label: t('daily') },
+    { value: 'monthly' as const, label: t('monthly') },
+    { value: 'yearly' as const, label: t('yearly') },
+  ];
+
   return (
-    <div className='py-10 md:py-16'>
+    <section className='py-14 md:py-20'>
       <BaseContainer>
-        <div className='flex flex-col gap-6 md:gap-8'>
-          <h3 className='text-center text-primary text-2xl md:text-3xl font-semibold'>
-            {t('title')}
-          </h3>
+        <div className='flex flex-col gap-8'>
+          <TitleSection title={t('title')} subTitle={t('subtitle')} />
 
-          {/* Filter controls - responsive layout */}
-          <div className='flex flex-col md:flex-row md:justify-between gap-4 md:gap-0'>
-            <div className='flex gap-2 md:gap-3 overflow-x-auto hideScrollbar'>
-              <Button
-                variant={activeRentType === 'rent' ? 'primary' : 'secondary'}
-                onClick={() => handleRentTypeChange('rent')}
-                className='whitespace-nowrap'
-              >
-                {t('forRent')}
-              </Button>
-              <Button
-                variant={activeRentType === 'sale' ? 'primary' : 'secondary'}
-                onClick={() => handleRentTypeChange('sale')}
-                className='whitespace-nowrap'
-              >
-                {t('forSale')}
-              </Button>
-            </div>
+          {/* Filters */}
+          <div className='flex flex-col gap-4 border-b border-bronze/25 pb-3 sm:flex-row sm:items-center sm:justify-between'>
+            <TextTabs
+              options={rentTypeOptions}
+              value={activeRentType}
+              onChange={setActiveRentType}
+            />
 
-            {/* Only show schedule filter for rent */}
+            {/* Duration only applies to rentals */}
             {activeRentType === 'rent' && (
-              <div className='flex gap-2 md:gap-3 overflow-x-auto hideScrollbar'>
-                <Button
-                  variant={activeSchedule === 'daily' ? 'primary' : 'secondary'}
-                  onClick={() => handleScheduleChange('daily')}
-                  className='whitespace-nowrap'
-                >
-                  {t('daily')}
-                </Button>
-                <Button
-                  variant={
-                    activeSchedule === 'monthly' ? 'primary' : 'secondary'
-                  }
-                  onClick={() => handleScheduleChange('monthly')}
-                  className='whitespace-nowrap'
-                >
-                  {t('monthly')}
-                </Button>
-                <Button
-                  variant={
-                    activeSchedule === 'yearly' ? 'primary' : 'secondary'
-                  }
-                  onClick={() => handleScheduleChange('yearly')}
-                  className='whitespace-nowrap'
-                >
-                  {t('yearly')}
-                </Button>
-              </div>
+              <TextTabs
+                options={scheduleOptions}
+                value={activeSchedule}
+                onChange={setActiveSchedule}
+              />
             )}
           </div>
 
-          <Separator />
-
-          {/* Villa cards - responsive grid */}
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
             {villas.map((villa) => (
               <VillaCard
                 key={villa.id}
@@ -110,30 +75,14 @@ const ExploreBestListLandingPage = () => {
             ))}
           </div>
 
-          {/* View more button with dynamic link */}
-          <div className='flex justify-center mt-6'>
-            <Button
-              variant='outline'
-              className='border-primary text-primary hover:bg-primary/10'
-              asChild
-            >
+          <div className='mt-2 flex justify-center'>
+            <Button variant='outline' className='px-10' asChild>
               <Link href={viewMoreLink}>{t('viewMore')}</Link>
             </Button>
           </div>
         </div>
       </BaseContainer>
-
-      {/* Responsive CSS for hiding scrollbar */}
-      <style jsx global>{`
-        .hideScrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hideScrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 };
 

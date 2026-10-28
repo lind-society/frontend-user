@@ -1,7 +1,7 @@
 'use client';
 
 import * as AccordionPrimitive from '@radix-ui/react-accordion';
-import { ChevronDown } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -11,21 +11,25 @@ const Accordion = AccordionPrimitive.Root;
 export type AccordionItemProps = React.ComponentPropsWithoutRef<
   typeof AccordionPrimitive.Item
 > & {
-  border?: boolean; // New optional prop
+  border?: boolean;
 };
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
-  AccordionItemProps // Use the extended prop type
+  AccordionItemProps
 >(({ className, border = true, ...props }, ref) => (
   <AccordionPrimitive.Item
     ref={ref}
-    className={cn(border ? 'border-b' : '', className)} // Conditionally apply 'border-b'
+    className={cn(border ? 'border-b border-bronze/25' : '', className)}
     {...props}
   />
 ));
 AccordionItem.displayName = 'AccordionItem';
 
+/**
+ * The redesign puts a bronze plus marker ahead of the question and rotates it
+ * into a minus when the panel opens.
+ */
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
@@ -34,13 +38,16 @@ const AccordionTrigger = React.forwardRef<
     <AccordionPrimitive.Trigger
       ref={ref}
       className={cn(
-        'flex flex-1 items-center justify-between py-4 font-medium transition-all  [&[data-state=open]>svg]:rotate-180',
+        'group flex flex-1 items-center gap-3 py-5 text-start text-base text-ink transition-colors hover:text-bronze-600 md:text-lg',
         className
       )}
       {...props}
     >
+      <Plus
+        className='h-5 w-5 shrink-0 text-bronze-600 transition-transform duration-200 group-data-[state=open]:rotate-45'
+        strokeWidth={1.5}
+      />
       {children}
-      <ChevronDown className='h-4 w-4 shrink-0 transition-transform duration-200' />
     </AccordionPrimitive.Trigger>
   </AccordionPrimitive.Header>
 ));
@@ -52,10 +59,12 @@ const AccordionContent = React.forwardRef<
 >(({ className, children, ...props }, ref) => (
   <AccordionPrimitive.Content
     ref={ref}
-    className='overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down text-start'
+    className='overflow-hidden text-start text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down'
     {...props}
   >
-    <div className={cn('pb-4 pt-0', className)}>{children}</div>
+    <div className={cn('pb-5 pl-8 pt-0 text-ink-soft', className)}>
+      {children}
+    </div>
   </AccordionPrimitive.Content>
 ));
 

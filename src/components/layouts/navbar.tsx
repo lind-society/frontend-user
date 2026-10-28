@@ -1,11 +1,21 @@
 'use client';
 
-import { Menu, Phone, X } from 'lucide-react';
-import Image from 'next/image';
+import {
+  Building2,
+  ChevronDown,
+  Globe,
+  Heart,
+  Menu,
+  Phone,
+  X,
+} from 'lucide-react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
-import { FaFacebook, FaHeart, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { usePathname } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import React, { useEffect, useState, useTransition } from 'react';
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6';
+
+import { cn } from '@/lib/utils';
 
 import BaseContainer from '@/components/layouts/container';
 import {
@@ -14,234 +24,241 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import LocaleSwitcher from '@/components/ui/locale-switcher';
-import SearchBar from '@/components/ui/search-bar';
-import { Separator } from '@/components/ui/separator';
+import Logo from '@/components/ui/logo';
+
+import { Locale } from '@/i18n/config';
+import { setUserLocale } from '@/i18n/service';
+
+/**
+ * Routes whose hero artwork sits directly beneath the header, so the bar has
+ * to float transparently over the image instead of painting the cream chrome.
+ * Matched exactly — nested routes (e.g. /rent/result) use the solid variant.
+ */
+const OVERLAY_ROUTES = [
+  '/',
+  '/rent',
+  '/buy',
+  '/about-us',
+  '/contact-us',
+  '/manage-property',
+];
+
+const PRIMARY_LINKS = [
+  { href: '/rent', key: 'stay' },
+  { href: '/buy', key: 'buy' },
+  { href: '/tourist-activity', key: 'touristActivity' },
+  { href: '/blog', key: 'journal' },
+  { href: '/about-us', key: 'aboutUs' },
+] as const;
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const t = useTranslations('navbar');
+  const pathname = usePathname();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const isOverlayRoute = OVERLAY_ROUTES.includes(pathname);
+  /* Once the hero has scrolled past, the floating bar has to become solid
+     again or the links land on top of the page content. */
+  const isTransparent = isOverlayRoute && !isScrolled && !isMenuOpen;
+
+  useEffect(() => {
+    if (!isOverlayRoute) return;
+    const onScroll = () => setIsScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isOverlayRoute]);
+
+  // Close the slide-over whenever the route changes.
+  useEffect(() => setIsMenuOpen(false), [pathname]);
 
   return (
-    <div className='bg-white'>
+    <header
+      className={cn(
+        'top-0 z-50 w-full transition-colors duration-300',
+        isOverlayRoute ? 'fixed' : 'sticky',
+        isTransparent
+          ? 'bg-transparent text-cream'
+          : 'bg-bone text-ink border-b border-bronze/15'
+      )}
+    >
       <BaseContainer>
-        <nav className='flex justify-between items-center text-gray-600 py-3'>
-          {/* Logo - responsive on all devices */}
-          <Link href='/' className='flex-shrink-0'>
-            <Image
-              src='/images/logo.png'
-              alt='logo'
-              width={153}
-              height={58}
-              priority
-              className='w-auto h-[40px] md:h-[45px] lg:h-[58px]'
-            />
+        <nav className='flex h-[72px] items-center justify-between gap-4 lg:h-[92px]'>
+          {/* Logo */}
+          <Link href='/' aria-label='LIND Society' className='shrink-0'>
+            <Logo className='h-11 w-auto lg:h-14' />
           </Link>
 
-          {/* Search - tablet and desktop only */}
-          <div className='hidden md:flex flex-1 max-w-md mx-2 lg:mx-4'>
-            <SearchBar />
+          {/* Primary navigation — desktop. Property Management moved to the
+              "More" panel (see NavMenuPanel) so only 5 items compete for
+              space here, matching the design and fitting comfortably on
+              13" laptop widths (1024-1279px) without shrinking below this. */}
+          <div className='hidden items-center gap-6 lg:flex xl:gap-9'>
+            {PRIMARY_LINKS.map(({ href, key }) => {
+              const isActive =
+                pathname === href || pathname.startsWith(`${href}/`);
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={cn(
+                    'whitespace-nowrap text-sm uppercase tracking-[0.08em] transition-colors',
+                    isActive
+                      ? isTransparent
+                        ? 'text-cream'
+                        : 'text-ink'
+                      : cn(
+                          'text-bronze-600',
+                          isTransparent
+                            ? 'text-cream/75 hover:text-cream'
+                            : 'hover:text-ink'
+                        )
+                  )}
+                >
+                  {t(`navigation.${key}`)}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Language, Currency, Social Icons - tablet and desktop */}
-          <div className='hidden md:flex gap-3 lg:gap-8 items-center'>
-            {/* Language Dropdown with LocaleSwitcher */}
-            <LocaleSwitcher />
+          {/* Locale + menu trigger */}
+          <div className='flex shrink-0 items-center gap-3 lg:gap-5'>
+            <LocaleGlobe />
 
-            {/* Currency Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger
-                hasChevron={true}
-                className='flex items-center gap-1 lg:gap-3'
-              >
-                <span className='text-base lg:text-lg font-semibold'>
-                  {t('currency')}
-                </span>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent>
-                <DropdownMenuItem>IDR</DropdownMenuItem>
-                <DropdownMenuItem>USD</DropdownMenuItem>
-                <DropdownMenuItem>EUR</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <span
+              aria-hidden
+              className={cn(
+                'hidden h-6 w-px lg:block',
+                isTransparent ? 'bg-cream/40' : 'bg-bronze/40'
+              )}
+            />
 
-            {/* Social Media Icons - desktop only */}
-            <div className='hidden lg:flex items-center gap-6 lg:gap-8'>
-              <FaFacebook className='text-primary' size={24} />
-              <FaTwitter className='text-primary' size={24} />
-              <FaInstagram className='text-primary' size={24} />
-            </div>
+            <button
+              type='button'
+              onClick={() => setIsMenuOpen((open) => !open)}
+              aria-expanded={isMenuOpen}
+              aria-label={isMenuOpen ? t('menu.close') : t('menu.open')}
+              className={cn(
+                'p-1 transition-colors',
+                isTransparent
+                  ? 'text-cream hover:text-cream/70'
+                  : 'text-bronze-600 hover:text-ink'
+              )}
+            >
+              {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
+            </button>
           </div>
-
-          {/* Mobile menu button */}
-          <button className='md:hidden p-2' onClick={toggleMenu}>
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </nav>
       </BaseContainer>
 
-      {/* Mobile search */}
-      <div className='md:hidden px-4 pb-3'>
-        <SearchBar />
-      </div>
+      {isMenuOpen && <NavMenuPanel onNavigate={() => setIsMenuOpen(false)} />}
+    </header>
+  );
+};
 
-      <Separator />
+/** Globe + locale code, matching the new header's right-hand cluster. */
+const LocaleGlobe = () => {
+  const locale = useLocale();
+  const t = useTranslations('LocaleSwitcher');
+  const [isPending, startTransition] = useTransition();
 
-      {/* Desktop Menu Navigation - Now with direct links instead of dropdowns */}
+  const change = (next: Locale) =>
+    startTransition(() => {
+      setUserLocale(next);
+    });
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        className={cn(
+          'flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.08em] transition-opacity focus:outline-none',
+          isPending && 'pointer-events-none opacity-60'
+        )}
+      >
+        <Globe size={18} />
+        {locale}
+        <ChevronDown size={16} />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end' className='w-32'>
+        <DropdownMenuItem onSelect={() => change('en')}>
+          {t('en')}
+        </DropdownMenuItem>
+        <DropdownMenuItem onSelect={() => change('id')}>
+          {t('id')}
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+/**
+ * Slide-down panel behind the hamburger. On desktop it carries the secondary
+ * destinations the top bar no longer shows; on mobile it also carries the
+ * primary links, which are hidden below `lg`.
+ */
+const NavMenuPanel = ({ onNavigate }: { onNavigate: () => void }) => {
+  const t = useTranslations('navbar');
+
+  const secondary = [
+    { href: '/media', label: t('menu.browse') },
+    {
+      href: '/manage-property',
+      label: t('navigation.propertyManagement'),
+      icon: Building2,
+    },
+    { href: '/contact-us', label: t('contact'), icon: Phone },
+    { href: '/wishlist', label: t('wishlist'), icon: Heart },
+  ];
+
+  return (
+    <div className='border-t border-bronze/15 bg-bone text-ink shadow-lg'>
       <BaseContainer>
-        <div className='hidden md:block py-3 lg:py-5 text-gray-600'>
-          <div className='flex justify-between items-center'>
-            {/* Main navigation links */}
-            <div className='flex gap-2 items-center overflow-x-auto pb-1 hideScrollbar'>
-              {/* Main categories - direct links */}
+        <div className='grid gap-8 py-8 sm:grid-cols-2'>
+          {/* Primary links — only needed where the top bar collapses them */}
+          <div className='flex flex-col gap-1 lg:hidden'>
+            <span className='eyebrow mb-2'>{t('menu.browse')}</span>
+            {PRIMARY_LINKS.map(({ href, key }) => (
               <Link
-                href='/rent'
-                className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
+                key={href}
+                href={href}
+                onClick={onNavigate}
+                className='py-2 font-display text-2xl text-ink transition-colors hover:text-bronze-600'
               >
-                {t('navigation.stay')}
+                {t(`navigation.${key}`)}
               </Link>
-              <Link
-                href='/buy'
-                className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
-              >
-                {t('navigation.buy')}
-              </Link>
-              <Link
-                href='/tourist-activity'
-                className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
-              >
-                {t('navigation.touristActivity')}
-              </Link>
-              <Link
-                href='/manage-property'
-                className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
-              >
-                {t('navigation.propertyManagement')}
-              </Link>
-              <Link
-                href='/about-us'
-                className='font-semibold text-base lg:text-lg px-2 lg:px-3 py-2 hover:text-primary whitespace-nowrap transition-colors'
-              >
-                {t('navigation.aboutUs')}
-              </Link>
-            </div>
+            ))}
+          </div>
 
-            {/* Contact and wishlist */}
-            <div className='flex-shrink-0 flex gap-2 lg:gap-8 items-center whitespace-nowrap'>
+          <div className='flex flex-col gap-1'>
+            <span className='eyebrow mb-2'>{t('menu.more')}</span>
+            {secondary.map(({ href, label, icon: Icon }) => (
               <Link
-                href='/contact-us'
-                className='flex gap-1 lg:gap-2 items-center hover:text-primary transition-colors'
+                key={href}
+                href={href}
+                onClick={onNavigate}
+                className='flex items-center gap-2 py-2 text-base text-ink-soft transition-colors hover:text-bronze-600'
               >
-                <Phone className='text-gray-600' size={22} />
-                <span className='font-semibold text-base lg:text-lg'>
-                  {t('contact')}
-                </span>
+                {Icon && <Icon size={18} className='text-bronze-600' />}
+                {label}
               </Link>
-              <Link
-                href='/wishlist'
-                className='flex gap-1 lg:gap-2 items-center hover:text-primary transition-colors'
-              >
-                <FaHeart className='text-red-600' size={22} />
-                <span className='font-semibold text-base lg:text-lg'>
-                  {t('wishlist')}
-                </span>
+            ))}
+
+            <div className='mt-4 flex items-center gap-5 text-bronze-600'>
+              <Link href='#' aria-label='Facebook'>
+                <FaFacebookF size={18} className='hover:opacity-70' />
+              </Link>
+              <Link href='#' aria-label='Twitter'>
+                <FaTwitter size={18} className='hover:opacity-70' />
+              </Link>
+              <Link href='#' aria-label='Instagram'>
+                <FaInstagram size={18} className='hover:opacity-70' />
               </Link>
             </div>
           </div>
         </div>
       </BaseContainer>
-
-      {/* Mobile Menu - Now with direct links instead of expandable sections */}
-      {isMenuOpen && (
-        <div className='md:hidden bg-white border-t'>
-          <div className='px-4 py-2 space-y-2'>
-            {/* Main categories */}
-            <div className='border-b border-gray-100 py-3'>
-              <Link href='/rent' className='block py-2 font-medium text-lg'>
-                {t('navigation.stay')}
-              </Link>
-              <Link href='/buy' className='block py-2 font-medium text-lg'>
-                {t('navigation.buy')}
-              </Link>
-              <Link
-                href='/tourist-activity'
-                className='block py-2 font-medium text-lg'
-              >
-                {t('navigation.touristActivity')}
-              </Link>
-              <Link
-                href='/manage-property'
-                className='block py-2 font-medium text-lg'
-              >
-                {t('navigation.propertyManagement')}
-              </Link>
-              <Link href='/about-us' className='block py-2 font-medium text-lg'>
-                {t('navigation.aboutUs')}
-              </Link>
-            </div>
-
-            {/* Contact and Wishlist */}
-            <div className='border-b border-gray-100 py-3'>
-              <Link href='/contact-us' className='flex items-center py-2 gap-3'>
-                <Phone className='text-gray-600' size={22} />
-                <span className='font-medium text-lg'>{t('contact')}</span>
-              </Link>
-              <Link href='/wishlist' className='flex items-center py-2 gap-3'>
-                <FaHeart className='text-red-600' size={22} />
-                <span className='font-medium text-lg'>{t('wishlist')}</span>
-              </Link>
-            </div>
-
-            {/* Language, Currency, Social for mobile */}
-            <div className='py-3 space-y-3'>
-              {/* Language Switcher */}
-              <div className='flex justify-between items-center'>
-                <span className='font-medium text-lg'>Language</span>
-                <LocaleSwitcher />
-              </div>
-
-              {/* Currency */}
-              <div className='flex justify-between items-center'>
-                <span className='font-medium text-lg'>Currency</span>
-                <DropdownMenu>
-                  <DropdownMenuTrigger className='flex items-center gap-2'>
-                    <span className='text-lg font-semibold'>
-                      {t('currency')}
-                    </span>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuItem>IDR</DropdownMenuItem>
-                    <DropdownMenuItem>USD</DropdownMenuItem>
-                    <DropdownMenuItem>EUR</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </div>
-
-              {/* Social Media for mobile */}
-              <div className='flex gap-4 pt-2'>
-                <FaFacebook className='text-primary' size={24} />
-                <FaTwitter className='text-primary' size={24} />
-                <FaInstagram className='text-primary' size={24} />
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* CSS for hiding scrollbar */}
-      <style jsx global>{`
-        .hideScrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hideScrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </div>
   );
 };

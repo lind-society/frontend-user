@@ -2,7 +2,7 @@
 'use client';
 
 import { format } from 'date-fns';
-import { ChevronDown } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'nextjs-toploader/app';
@@ -18,11 +18,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { Separator } from '@/components/ui/separator';
+import {
+  SearchField,
+  SearchFieldRow,
+  SearchPanel,
+  SearchStepper,
+} from '@/components/ui/search-panel';
 
 import { PreferredOptions } from '@/modules/rent/header/preferred-option';
 
-// Add these type definitions
 type DateRange = {
   from: Date | undefined;
   to?: Date | undefined;
@@ -30,11 +34,22 @@ type DateRange = {
 
 type DurationType = 'daily' | 'monthly' | 'yearly';
 
+const formatDate = (date: Date | undefined) =>
+  date ? format(date, 'dd MMM yyyy') : '--';
+
+/** "19 Aug 2026 — 24 Aug 2026", or the placeholder while nothing is picked. */
+const formatRange = (range: DateRange, placeholder: string) => {
+  if (!range.from) return placeholder;
+
+  return `${formatDate(range.from)} — ${
+    range.to ? formatDate(range.to) : placeholder
+  }`;
+};
+
 const HeaderRentPage = () => {
   const t = useTranslations('rent.header');
-  const router = useRouter(); // Initialize router
+  const router = useRouter();
 
-  // Updated state to use DateRange and DurationType
   const [location, setLocation] = useState('Bali');
   const [dateRange, setDateRange] = useState<DateRange>({
     from: new Date(),
@@ -46,130 +61,99 @@ const HeaderRentPage = () => {
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
 
-  // Handle date range change from EnhancedDateRangePicker
   const handleDateRangeChange = (range: DateRange, type: DurationType) => {
     setDateRange(range);
     setDurationType(type);
   };
 
-  // Handle search button click - updated to use new state structure
-  const handleSearch = () => {
-    // Build query parameters
+  /** Shared query string for both the plain search and the filter dialog. */
+  const baseParams = () => {
     const params = new URLSearchParams();
     params.append('location', location);
-
-    // Use the new date range format
     if (dateRange.from) {
       params.append('checkIn', format(dateRange.from, 'yyyy-MM-dd'));
     }
     if (dateRange.to) {
       params.append('checkOut', format(dateRange.to, 'yyyy-MM-dd'));
     }
-
     params.append('durationType', durationType);
     params.append('bedrooms', bedrooms.toString());
     params.append('guests', guests.toString());
-
-    // Navigate to results page
-    router.push(`/rent/result?${params.toString()}`);
+    return params;
   };
 
-  // Handle filter application - updated to use new date range format
+  const handleSearch = () => {
+    router.push(`/rent/result?${baseParams().toString()}`);
+  };
+
   const handleFilterApply = (filterData: any) => {
-    // Build query parameters
-    const params = new URLSearchParams();
-    params.append('location', location);
+    const params = baseParams();
 
-    // Use the new date range format
-    if (dateRange.from) {
-      params.append('checkIn', format(dateRange.from, 'yyyy-MM-dd'));
-    }
-    if (dateRange.to) {
-      params.append('checkOut', format(dateRange.to, 'yyyy-MM-dd'));
-    }
-
-    params.append('durationType', durationType);
-    params.append('bedrooms', bedrooms.toString());
-    params.append('guests', guests.toString());
-
-    // Add filter parameters
     if (filterData) {
       if (filterData.minPrice)
         params.append('minPrice', filterData.minPrice.toString());
       if (filterData.maxPrice)
         params.append('maxPrice', filterData.maxPrice.toString());
-
-      // Add collections as a comma-separated list
-      if (filterData.collections && filterData.collections.length > 0) {
+      if (filterData.collections?.length) {
         params.append('collections', filterData.collections.join(','));
       }
-
-      // Add freebies as a comma-separated list
-      if (filterData.freebies && filterData.freebies.length > 0) {
+      if (filterData.freebies?.length) {
         params.append('freebies', filterData.freebies.join(','));
       }
-
-      // Add amenities as a comma-separated list
-      if (filterData.amenities && filterData.amenities.length > 0) {
+      if (filterData.amenities?.length) {
         params.append('amenities', filterData.amenities.join(','));
       }
     }
 
-    // Navigate to results page with all parameters
     router.push(`/rent/result?${params.toString()}`);
   };
 
   return (
-    <div className='py-6 md:py-10 relative bg-bg'>
+    <section className='relative isolate flex min-h-[720px] flex-col justify-end overflow-hidden pb-10 pt-[72px] lg:min-h-[780px] lg:pt-[92px]'>
       <Image
         src='/images/header-buy.jpeg'
-        width={0}
-        height={0}
+        alt=''
+        fill
+        priority
+        aria-hidden
         sizes='100vw'
-        className='w-full h-full object-cover absolute top-0 left-0  max-h-[600px] bg-[#0000004D]'
-        alt='header landing page'
+        className='-z-10 object-cover'
       />
+      <div
+        aria-hidden
+        className='absolute inset-0 -z-10 bg-gradient-to-b from-ink/70 via-ink/30 to-ink/60'
+      />
+
       <BaseContainer>
-        <div className='flex flex-col gap-6 md:gap-8 justify-center relative'>
-          {/* Responsive header content */}
-          <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
-            <div className='flex flex-col gap-4 md:gap-6 max-w-full lg:max-w-[867px] mb-8 lg:mb-0'>
-              <h1 className='text-white h0 font-bold'>{t('title')}</h1>
-              <div className='px-3 md:px-5 border-white border-solid border-l-2 text-white text-lg md:text-[22px]'>
-                {t('subtitle')}
-              </div>
-            </div>
+        <div className='flex flex-col gap-10'>
+          <div className='flex max-w-3xl flex-col gap-6 pt-16'>
+            <h1 className='text-cream'>{t('title')}</h1>
+            <p className='border-l-2 border-cream pl-5 text-base leading-relaxed text-cream/90 md:text-lg'>
+              {t('subtitle')}
+            </p>
           </div>
 
-          {/* Search Box */}
-          <div className='bg-white rounded-lg px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-md'>
-            {/* Search inputs */}
-            <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
+          <SearchPanel>
+            <SearchFieldRow>
               {/* Location */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-                    <FaLocationDot size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.location')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{location}</span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={FaLocationDot}
+                    label={t('search.location')}
+                    value={location}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-56 p-2'>
                   <div className='flex flex-col'>
                     {locations.map((loc) => (
                       <button
                         key={loc}
-                        className={`py-2 px-3 text-left rounded-md ${
+                        type='button'
+                        className={`rounded px-3 py-2 text-left transition-colors ${
                           location === loc
-                            ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-gray-100'
+                            ? 'bg-bronze/15 text-bronze-600'
+                            : 'hover:bg-bronze/10'
                         }`}
                         onClick={() => setLocation(loc)}
                       >
@@ -180,136 +164,83 @@ const HeaderRentPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Enhanced Date Range Picker - replaces separate check-in/check-out */}
+              {/* Check in / Check out */}
               <EnhancedDateRangePicker
                 onRangeChange={handleDateRangeChange}
                 initialRange={dateRange}
                 initialDurationType={durationType}
                 namespace='rent.header.search.enhancedDateRange'
+                renderTrigger={({ open }) => (
+                  <SearchField
+                    icon={Calendar}
+                    label={t('search.dates.label')}
+                    value={formatRange(
+                      dateRange,
+                      t('search.dates.placeholder')
+                    )}
+                    onClick={open}
+                  />
+                )}
               />
 
               {/* Bedrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-                    <IoBed size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.bedrooms')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
-                          {bedrooms.toString().padStart(2, '0')}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={IoBed}
+                    label={t('search.bedrooms')}
+                    value={bedrooms.toString().padStart(2, '0')}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-48 p-3'>
-                  <div className='flex flex-col gap-3'>
-                    <div className='flex justify-between items-center'>
-                      <span>Number of bedrooms</span>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <button
-                        onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                        disabled={bedrooms <= 1}
-                      >
-                        -
-                      </button>
-                      <span className='font-semibold'>
-                        {bedrooms.toString().padStart(2, '0')}
-                      </span>
-                      <button
-                        onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                        disabled={bedrooms >= 10}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  <SearchStepper
+                    description={t('search.bedroomDescription')}
+                    value={bedrooms}
+                    min={1}
+                    max={10}
+                    onChange={setBedrooms}
+                  />
                 </PopoverContent>
               </Popover>
 
               {/* Guests */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-                    <FaUser size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.guests')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
-                          {guests.toString().padStart(2, '0')}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={FaUser}
+                    label={t('search.guests')}
+                    value={guests.toString().padStart(2, '0')}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-48 p-3'>
-                  <div className='flex flex-col gap-3'>
-                    <div className='flex justify-between items-center'>
-                      <span>Number of guests</span>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <button
-                        onClick={() => setGuests(Math.max(1, guests - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                        disabled={guests <= 1}
-                      >
-                        -
-                      </button>
-                      <span className='font-semibold'>
-                        {guests.toString().padStart(2, '0')}
-                      </span>
-                      <button
-                        onClick={() => setGuests(Math.min(20, guests + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                        disabled={guests >= 20}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  <SearchStepper
+                    description={t('search.guestDescription')}
+                    value={guests}
+                    min={1}
+                    max={20}
+                    onChange={setGuests}
+                  />
                 </PopoverContent>
               </Popover>
 
-              {/* Search Button */}
-              <Button
-                variant='primary'
-                size='lg'
-                className='w-full md:w-auto'
-                onClick={handleSearch}
-              >
-                {t('search.searchButton')}
-              </Button>
+              <div className='flex items-center pt-3 lg:pl-6 lg:pt-0'>
+                <Button
+                  variant='cta'
+                  className='h-14 w-full px-8 lg:w-auto lg:px-10'
+                  onClick={handleSearch}
+                >
+                  {t('search.searchButton')}
+                </Button>
+              </div>
+            </SearchFieldRow>
+
+            <div className='mt-5 border-t border-bronze/30 pt-5'>
+              <PreferredOptions onFilterApply={handleFilterApply} />
             </div>
-
-            <Separator />
-
-            {/* Using the updated PreferredOptions component */}
-            <PreferredOptions onFilterApply={handleFilterApply} />
-          </div>
+          </SearchPanel>
         </div>
       </BaseContainer>
-
-      {/* Responsive CSS for hiding scrollbar */}
-      <style jsx global>{`
-        .hideScrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hideScrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 };
 

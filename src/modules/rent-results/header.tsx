@@ -2,8 +2,10 @@
 
 import { format } from 'date-fns';
 import { ChevronDown, Slash } from 'lucide-react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import React, { useState } from 'react';
+import { useRouter } from 'nextjs-toploader/app';
+import React, { useMemo, useState } from 'react';
 import { BiSwim } from 'react-icons/bi';
 import { FaParking, FaUmbrellaBeach } from 'react-icons/fa';
 import { FaCalendar, FaLocationDot, FaUser } from 'react-icons/fa6';
@@ -41,107 +43,155 @@ interface PreferredOption {
   selected?: boolean;
 }
 
+/** Ids the homepage/rent chips and the filter dialog both push to the URL. */
+const readSelectedAmenityIds = (params: URLSearchParams): Set<string> => {
+  const ids = new Set<string>();
+  const single = params.get('amenity');
+  if (single) ids.add(single);
+  const list = params.get('amenities');
+  if (list)
+    list
+      .split(',')
+      .filter(Boolean)
+      .forEach((id) => ids.add(id));
+  return ids;
+};
+
 const HeaderRentResult = () => {
   const t = useTranslations('rentResults');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Location state
-  const [location, setLocation] = useState('Bali');
+  // Location state — seeded from ?location=, which is also what "search"
+  // gets sent as (villas don't have a dedicated city filter, only a free-text
+  // `search` across name/city/state/country).
+  const [location, setLocation] = useState(
+    () => searchParams.get('location') ?? 'Bali'
+  );
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
 
   // Date selection state
-  const [checkInDate, setCheckInDate] = useState<Date | undefined>(new Date());
-  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
-    new Date(new Date().setDate(new Date().getDate() + 4))
-  );
+  const [checkInDate, setCheckInDate] = useState<Date | undefined>(() => {
+    const fromUrl = searchParams.get('checkIn');
+    return fromUrl ? new Date(fromUrl) : new Date();
+  });
+  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(() => {
+    const fromUrl = searchParams.get('checkOut');
+    if (fromUrl) return new Date(fromUrl);
+    return new Date(new Date().setDate(new Date().getDate() + 4));
+  });
 
   // Room and guests state
-  const [bedrooms, setBedrooms] = useState(1);
-  const [guests, setGuests] = useState(1);
+  const [bedrooms, setBedrooms] = useState(
+    () => Number(searchParams.get('bedrooms')) || 1
+  );
+  const [guests, setGuests] = useState(
+    () => Number(searchParams.get('guests')) || 1
+  );
 
   // Price range state
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500000]);
-
-  // Options state with selection tracking
-  const [preferredOptions, setPreferredOptions] = useState<PreferredOption[]>([
-    {
-      id: 'air-cond',
-      labelKey: 'airConditioner',
-      icon: <TbAirConditioning size={20} />,
-      selected: false,
-    },
-    {
-      id: 'pool',
-      labelKey: 'pool',
-      icon: <BiSwim size={20} />,
-      selected: false,
-    },
-    {
-      id: 'kitchen',
-      labelKey: 'kitchen',
-      icon: <MdKitchen size={20} />,
-      selected: false,
-    },
-    {
-      id: 'parking',
-      labelKey: 'parking',
-      icon: <FaParking size={20} />,
-      selected: false,
-    },
-    {
-      id: 'beach',
-      labelKey: 'beachfront',
-      icon: <FaUmbrellaBeach size={20} />,
-      selected: false,
-    },
-    {
-      id: 'wifi',
-      labelKey: 'freeWifi',
-      icon: <IoWifiOutline size={20} />,
-      selected: false,
-    },
-    {
-      id: 'pets',
-      labelKey: 'petFriendly',
-      icon: <MdOutlinePets size={20} />,
-      selected: false,
-    },
-    {
-      id: 'security',
-      labelKey: 'security',
-      icon: <MdOutlineSecurity size={20} />,
-      selected: false,
-    },
-    {
-      id: 'mountain',
-      labelKey: 'mountainView',
-      icon: <PiMountainsDuotone size={20} />,
-      selected: false,
-    },
-    {
-      id: 'massage',
-      labelKey: 'massage',
-      icon: <TbMassage size={20} />,
-      selected: false,
-    },
-    {
-      id: 'bbq',
-      labelKey: 'bbqGrill',
-      icon: <TbGrill size={20} />,
-      selected: false,
-    },
-    {
-      id: 'yoga',
-      labelKey: 'yoga',
-      icon: <GrYoga size={20} />,
-      selected: false,
-    },
-    {
-      id: 'seaview',
-      labelKey: 'seaView',
-      icon: <RiRoadMapLine size={20} />,
-      selected: false,
-    },
+  const [priceRange, setPriceRange] = useState<[number, number]>(() => [
+    Number(searchParams.get('minPrice')) || 0,
+    Number(searchParams.get('maxPrice')) || 20000000,
   ]);
+
+  const initialSelectedAmenities = useMemo(
+    () => readSelectedAmenityIds(searchParams),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  );
+
+  // Options state with selection tracking — `selected` is seeded from the
+  // ?amenity= (single chip click) or ?amenities= (filter dialog) query param,
+  // which is how a chip clicked on the homepage/rent page arrives here lit up.
+  const [preferredOptions, setPreferredOptions] = useState<PreferredOption[]>(
+    (
+      [
+        {
+          id: 'air-cond',
+          labelKey: 'airConditioner',
+          icon: <TbAirConditioning size={20} />,
+          selected: false,
+        },
+        {
+          id: 'pool',
+          labelKey: 'pool',
+          icon: <BiSwim size={20} />,
+          selected: false,
+        },
+        {
+          id: 'kitchen',
+          labelKey: 'kitchen',
+          icon: <MdKitchen size={20} />,
+          selected: false,
+        },
+        {
+          id: 'parking',
+          labelKey: 'parking',
+          icon: <FaParking size={20} />,
+          selected: false,
+        },
+        {
+          id: 'beach',
+          labelKey: 'beachfront',
+          icon: <FaUmbrellaBeach size={20} />,
+          selected: false,
+        },
+        {
+          id: 'wifi',
+          labelKey: 'freeWifi',
+          icon: <IoWifiOutline size={20} />,
+          selected: false,
+        },
+        {
+          id: 'pets',
+          labelKey: 'petFriendly',
+          icon: <MdOutlinePets size={20} />,
+          selected: false,
+        },
+        {
+          id: 'security',
+          labelKey: 'security',
+          icon: <MdOutlineSecurity size={20} />,
+          selected: false,
+        },
+        {
+          id: 'mountain',
+          labelKey: 'mountainView',
+          icon: <PiMountainsDuotone size={20} />,
+          selected: false,
+        },
+        {
+          id: 'massage',
+          labelKey: 'massage',
+          icon: <TbMassage size={20} />,
+          selected: false,
+        },
+        {
+          id: 'bbq',
+          labelKey: 'bbqGrill',
+          icon: <TbGrill size={20} />,
+          selected: false,
+        },
+        {
+          id: 'yoga',
+          labelKey: 'yoga',
+          icon: <GrYoga size={20} />,
+          selected: false,
+        },
+        {
+          id: 'seaview',
+          labelKey: 'seaView',
+          icon: <RiRoadMapLine size={20} />,
+          selected: false,
+        },
+      ] as PreferredOption[]
+    ).map((option) => ({
+      ...option,
+      selected: initialSelectedAmenities.has(option.id),
+    }))
+  );
 
   // Handle option selection toggle
   const handleToggleOption = (id: string) => {
@@ -159,21 +209,30 @@ const HeaderRentResult = () => {
     );
   };
 
-  // Handle search button click
+  // Handle search button click — pushes the current filter state into the
+  // URL, which is what `ResultRentContent` (the sibling below) reads to
+  // actually query the API. URL is the shared state between the two.
   const handleSearch = () => {
-    // eslint-disable-next-line no-console
-    console.log('Search with parameters:', {
-      location,
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      bedrooms,
-      guests,
-      priceRange,
-      selectedOptions: preferredOptions
-        .filter((opt) => opt.selected)
-        .map((opt) => opt.id),
-    });
-    // Actual search implementation would go here
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('location', location);
+    if (checkInDate) params.set('checkIn', checkInDate.toISOString());
+    if (checkOutDate) params.set('checkOut', checkOutDate.toISOString());
+    params.set('bedrooms', String(bedrooms));
+    params.set('guests', String(guests));
+    params.set('minPrice', String(priceRange[0]));
+    params.set('maxPrice', String(priceRange[1]));
+
+    const selectedIds = preferredOptions
+      .filter((opt) => opt.selected)
+      .map((opt) => opt.id);
+    params.delete('amenity');
+    if (selectedIds.length > 0) {
+      params.set('amenities', selectedIds.join(','));
+    } else {
+      params.delete('amenities');
+    }
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
@@ -181,7 +240,7 @@ const HeaderRentResult = () => {
       {/* Breadcrumb section */}
       <div className='border-y py-4 md:py-6'>
         <BaseContainer>
-          <div className='rounded-md bg-white border px-3 py-1'>
+          <div className='rounded bg-cream-light border px-3 py-1'>
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
@@ -206,20 +265,20 @@ const HeaderRentResult = () => {
       {/* Search form section */}
       <div className='border-b py-6'>
         <BaseContainer>
-          <div className='bg-white rounded-lg px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-md'>
+          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-sm'>
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.location')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{location}</span>
+                        <span className='text-ink-muted'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
@@ -230,10 +289,10 @@ const HeaderRentResult = () => {
                     {locations.map((loc) => (
                       <button
                         key={loc}
-                        className={`py-2 px-3 text-left rounded-md ${
+                        className={`py-2 px-3 text-left rounded ${
                           location === loc
                             ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-gray-100'
+                            : 'hover:bg-sand/40'
                         }`}
                         onClick={() => setLocation(loc)}
                       >
@@ -247,14 +306,14 @@ const HeaderRentResult = () => {
               {/* Check in */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <FaCalendar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.checkIn')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {checkInDate
                             ? format(checkInDate, 'dd MMM yyyy')
                             : 'Select date'}
@@ -277,14 +336,14 @@ const HeaderRentResult = () => {
               {/* Check out */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <FaCalendar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.checkOut')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {checkOutDate
                             ? format(checkOutDate, 'dd MMM yyyy')
                             : 'Select date'}
@@ -310,14 +369,14 @@ const HeaderRentResult = () => {
               {/* Bedrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.bedrooms')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {bedrooms.toString().padStart(2, '0')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -333,7 +392,7 @@ const HeaderRentResult = () => {
                     <div className='flex items-center justify-between'>
                       <button
                         onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bedrooms <= 1}
                       >
                         -
@@ -343,7 +402,7 @@ const HeaderRentResult = () => {
                       </span>
                       <button
                         onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bedrooms >= 10}
                       >
                         +
@@ -356,14 +415,14 @@ const HeaderRentResult = () => {
               {/* Guests */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <FaUser size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.guests')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {guests.toString().padStart(2, '0')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -379,7 +438,7 @@ const HeaderRentResult = () => {
                     <div className='flex items-center justify-between'>
                       <button
                         onClick={() => setGuests(Math.max(1, guests - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={guests <= 1}
                       >
                         -
@@ -389,7 +448,7 @@ const HeaderRentResult = () => {
                       </span>
                       <button
                         onClick={() => setGuests(Math.min(15, guests + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={guests >= 15}
                       >
                         +

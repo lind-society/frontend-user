@@ -115,7 +115,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
           <SlidersHorizontal size={20} className='text-primary' />
           <span className='text-primary'>{t('title').split(' ')[0]}</span>
           {getSelectedCitiesCount() > 0 && (
-            <span className='bg-primary text-white rounded-full text-xs py-0.5 px-2 ml-1'>
+            <span className='bg-primary text-cream rounded-full text-xs py-0.5 px-2 ml-1'>
               {getSelectedCitiesCount()}
             </span>
           )}
@@ -147,7 +147,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
               {t('title')}
             </DialogTitle>
             <Button variant='ghost' size='icon' onClick={() => setOpen(false)}>
-              <X className='text-gray-500' />
+              <X className='text-ink-muted' />
             </Button>
           </div>
         </DialogHeader>
@@ -165,8 +165,8 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   key={country}
                   className={`px-5 py-3 flex justify-between cursor-pointer ${
                     activeCountry === country
-                      ? 'bg-primary text-white'
-                      : 'text-primary hover:bg-gray-50'
+                      ? 'bg-primary text-cream'
+                      : 'text-primary hover:bg-bone'
                   }`}
                   onClick={() => handleCountryClick(country)}
                 >
@@ -176,7 +176,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   </div>
                   <ChevronRight
                     className={
-                      activeCountry === country ? 'text-white' : 'text-primary'
+                      activeCountry === country ? 'text-cream' : 'text-primary'
                     }
                   />
                 </div>
@@ -201,7 +201,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                       key={city}
                       variant={selectedCities[city] ? 'primary' : 'outline'}
                       className={`
-                        ${selectedCities[city] ? 'text-white' : 'text-primary'}
+                        ${selectedCities[city] ? 'text-cream' : 'text-primary'}
                         md:text-sm text-xs px-3 py-1 h-auto
                       `}
                       onClick={() => toggleCity(city)}
@@ -216,7 +216,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
                   <span className='text-primary font-semibold text-sm'>
                     {t('filterByCity')}
                   </span>
-                  <span className='text-xs text-gray-500'>
+                  <span className='text-xs text-ink-muted'>
                     {getSelectedCitiesCount()}{' '}
                     {getSelectedCitiesCount() === 1
                       ? t('citySelected')
@@ -234,7 +234,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
             </ScrollArea>
 
             {/* Action buttons - Fixed to bottom */}
-            <div className='border-t p-4 md:p-5 flex justify-between mt-auto sticky bottom-0 bg-white'>
+            <div className='border-t p-4 md:p-5 flex justify-between mt-auto sticky bottom-0 bg-cream-light'>
               <Button
                 variant='ghost'
                 onClick={() => {

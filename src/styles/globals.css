@@ -26,35 +26,37 @@
   --color-primary-800: rgb(var(--tw-color-primary-800)); /* #075985 */
   --color-primary-900: rgb(var(--tw-color-primary-900)); /* #0c4a6e */
   /* #endregion  /**======== Primary Color =========== */
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
+  /* LIND Society palette, expressed as HSL triplets for the shadcn primitives.
+     Keep these in sync with the `colors` block in tailwind.config.ts. */
+  --background: 42 36% 95%; /* #F6F3EC bone */
+  --foreground: 0 0% 10%; /* #1A1A1A ink  */
 
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
+  --card: 32 81% 94%; /* #FCF0E2 cream */
+  --card-foreground: 0 0% 10%;
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
+  --popover: 42 36% 95%;
+  --popover-foreground: 0 0% 10%;
 
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
+  --primary: 29 36% 47%; /* #A2754C bronze */
+  --primary-foreground: 32 81% 94%;
 
-  --secondary: 210 40% 96.1%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 33 45% 85%; /* #EADAC7 sand  */
+  --secondary-foreground: 0 0% 10%;
 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215.4 16.3% 46.9%;
+  --muted: 33 45% 85%;
+  --muted-foreground: 30 8% 38%; /* #68625A */
 
-  --accent: 210 40% 96.1%;
-  --accent-foreground: 222.2 47.4% 11.2%;
+  --accent: 32 81% 94%;
+  --accent-foreground: 29 36% 47%;
 
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
+  --destructive-foreground: 32 81% 94%;
 
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
+  --border: 35 30% 84%; /* #E3D9CB */
+  --input: 35 30% 84%;
+  --ring: 29 36% 47%;
 
-  --radius: 0.5rem;
+  --radius: 0.25rem;
 }
 
 @layer base {
@@ -76,7 +78,7 @@
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #a8bbbf;
+    background-color: #cfac81;
   }
 
   /* inter var - latin */
@@ -96,33 +98,59 @@
   }
 
   /* #region  /**=========== Responsive Typography =========== */
+  /* Per the design spec:
+       h1/h2  Playfair Display 500 — hero and section headings
+       h3-h5  Lora 600            — card titles and sub-headings
+     Body copy defaults to Inter (see the `body` rule below). */
+
   .h0 {
-    @apply font-bold font-primary text-[48px] leading-[57.6px] sm:text-[56px] sm:leading-[67.2px] md:text-[64px] md:leading-[76.8px] lg:text-[72px] lg:leading-[86.4px];
+    @apply font-display font-medium tracking-[-0.01em] text-[36px] leading-[1.25] sm:text-[44px] md:text-[52px] lg:text-[56px] lg:leading-[1.3];
   }
 
   h1,
   .h1 {
-    @apply font-bold font-primary text-[40px] leading-[48px] sm:text-[48px] sm:leading-[57.6px] md:text-[52px] md:leading-[62.4px] lg:text-[56px] lg:leading-[67.2px];
+    /* Spec: Playfair Display 500, 48px / 90px line-height */
+    @apply font-display font-medium tracking-[-0.01em] text-[32px] leading-[1.35] sm:text-[38px] sm:leading-[1.5] md:text-[44px] md:leading-[1.7] lg:text-[48px] lg:leading-[90px];
   }
 
   h2,
   .h2 {
-    @apply font-bold font-primary text-[32px] leading-[38.4px] sm:text-[40px] sm:leading-[48px] md:text-[44px] md:leading-[52.8px] lg:text-[48px] lg:leading-[57.6px];
+    @apply font-display font-medium tracking-[-0.01em] text-[26px] leading-[1.25] sm:text-[30px] md:text-[34px] lg:text-[38px];
   }
 
   h3,
   .h3 {
-    @apply font-bold font-primary text-[28px] leading-[33.6px] sm:text-[32px] sm:leading-[38.4px] md:text-[36px] md:leading-[43.2px] lg:text-[40px] lg:leading-[48px];
+    /* Spec: Lora 600, 20px / 100% — dark feature-card titles */
+    @apply font-heading font-semibold text-[18px] leading-[1.2] sm:text-[19px] lg:text-[20px];
   }
 
   h4,
   .h4 {
-    @apply font-bold font-primary text-[24px] leading-[28.8px] sm:text-[28px] sm:leading-[33.6px] md:text-[32px] md:leading-[38.4px] lg:text-[36px] lg:leading-[43.2px];
+    @apply font-heading font-semibold text-[17px] leading-[1.25] lg:text-[18px];
   }
 
   h5,
   .h5 {
-    @apply font-bold font-primary text-[20px] leading-[24px] sm:text-[24px] sm:leading-[28.8px] md:text-[28px] md:leading-[33.6px] lg:text-[32px] lg:leading-[38.4px];
+    @apply font-heading font-semibold text-[16px] leading-[1.3] lg:text-[17px];
+  }
+
+  /* Product / villa names keep Playfair even at card scale (spec: 600, 20px) */
+  .product-title {
+    @apply font-display font-semibold text-[20px] leading-none;
+  }
+
+  /* Price block: Lora, with the italic "Start from" qualifier above it */
+  .price-label {
+    @apply font-heading italic font-normal text-[11px] leading-none;
+  }
+
+  .price-amount {
+    @apply font-heading font-bold text-[18px] leading-none whitespace-nowrap;
+  }
+
+  /* Small bronze eyebrow/section label used above headings in the new design */
+  .eyebrow {
+    @apply font-primary uppercase tracking-[0.18em] text-xs font-medium;
   }
 
   .body-tiny-600 {
@@ -203,6 +231,10 @@
   .p {
     @apply font-primary text-sm md:text-base;
   }
+
+  body {
+    @apply bg-bone text-ink;
+  }
   /* #endregion  /**======== Typography =========== */
 
   .layout {
@@ -219,12 +251,19 @@
   .min-h-main {
     @apply min-h-[calc(100vh-56px)];
   }
-  :root {
-    --radius: 0.5rem;
+  .hover-card {
+    @apply hover:shadow-md hover:-translate-y-0.5 cursor-pointer duration-300 transition-all ease-in-out;
   }
 
-  .hover-card {
-    @apply hover:shadow-sm hover:drop-shadow-md cursor-pointer hover:shadow-primary-blue duration-300 transition-all ease-in-out;
+  /* Dark editorial band — used by the hero search bar, feature grids and the
+     newsletter strip in the new design. */
+  .section-dark {
+    @apply bg-ink text-cream;
+  }
+
+  /* Bronze rule the design puts under section headings */
+  .rule-bronze {
+    @apply block h-px w-16 bg-bronze;
   }
 
   .animation-transition {

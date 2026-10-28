@@ -43,9 +43,9 @@ const ImageCard = ({ image }: ImageCardProps) => (
         width={0}
         height={0}
         sizes='100vw'
-        className='h-[220px] w-full object-cover rounded-md'
+        className='h-[220px] w-full object-cover rounded'
       />
-      <div className='absolute bottom-0 left-0 bg-primary rounded-tr-lg py-2 px-4 text-white'>
+      <div className='absolute bottom-0 left-0 bg-primary rounded-tr py-2 px-4 text-cream'>
         {image.count} pictures
       </div>
     </div>
@@ -70,7 +70,7 @@ const ImageGallerySection = ({ title, images }: ImageGallerySectionProps) => {
   const [, setApi] = useState<CarouselApi | null>(null);
 
   return (
-    <div className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-white rounded-md border'>
+    <div className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-cream-light rounded border'>
       <span className='text-xl text-primary font-semibold'>{title}</span>
 
       <div className='relative'>
@@ -92,8 +92,8 @@ const ImageGallerySection = ({ title, images }: ImageGallerySectionProps) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className='left-0 bg-white/80 hover:bg-white border-primary text-primary' />
-          <CarouselNext className='right-0 bg-white/80 hover:bg-white border-primary text-primary' />
+          <CarouselPrevious className='left-0 bg-cream-light/80 hover:bg-cream-light border-primary text-primary' />
+          <CarouselNext className='right-0 bg-cream-light/80 hover:bg-cream-light border-primary text-primary' />
         </Carousel>
       </div>
     </div>
@@ -102,7 +102,7 @@ const ImageGallerySection = ({ title, images }: ImageGallerySectionProps) => {
 
 const ContentImage = () => {
   // Handler for favorite toggle in nearby villas
-  const handleFavoriteToggle = (id: number) => {
+  const handleFavoriteToggle = (id: string | number) => {
     // eslint-disable-next-line no-console
     console.log(`Toggled favorite for villa ${id}`);
     // In a real application, you would use a state management solution or context
@@ -110,16 +110,16 @@ const ContentImage = () => {
   };
 
   return (
-    <div className='py-8 bg-gray-50'>
+    <div className='py-8 bg-bone'>
       <BaseContainer>
         <div className='flex flex-col gap-8 pb-8'>
           {/* 360 Video Tour Section */}
-          <div className='px-4 sm:px-6 py-4 flex flex-col gap-2 bg-white rounded-md border'>
+          <div className='px-4 sm:px-6 py-4 flex flex-col gap-2 bg-cream-light rounded border'>
             <span className='text-xl text-primary font-semibold'>
               360 Video Tour
             </span>
             <Image
-              className='h-full w-full object-contain rounded-md object-top'
+              className='h-full w-full object-contain rounded object-top'
               width={0}
               height={0}
               sizes='100vw'
@@ -147,7 +147,7 @@ const ContentImage = () => {
           />
 
           {/* Nearby Villas Section */}
-          <div className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-white rounded-md border'>
+          <div className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-cream-light rounded border'>
             <span className='text-xl text-primary font-semibold'>
               Nearby Villas
             </span>

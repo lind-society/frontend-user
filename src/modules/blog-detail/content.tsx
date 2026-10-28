@@ -186,7 +186,7 @@ const ContentBlogDetail = () => {
       case 'image':
         return (
           <figure key={index} className='my-8 block'>
-            <div className='rounded-lg overflow-hidden'>
+            <div className='rounded overflow-hidden'>
               <Image
                 src={item.src}
                 alt={item.alt}
@@ -252,25 +252,25 @@ const ContentBlogDetail = () => {
             </header>
 
             {/* Social sharing */}
-            <div className='flex justify-between items-center w-full border-y border-gray-200 py-4'>
+            <div className='flex justify-between items-center w-full border-y border-bronze/25 py-4'>
               <div className='flex gap-2 items-center'>
                 <a
                   href='#'
-                  className='flex items-center justify-center rounded-md bg-primary w-10 h-10 text-white hover:bg-primary/90 transition-colors'
+                  className='flex items-center justify-center rounded bg-primary w-10 h-10 text-cream hover:bg-primary/90 transition-colors'
                   aria-label='Share on Instagram'
                 >
                   <FaInstagram size={20} />
                 </a>
                 <a
                   href='#'
-                  className='flex items-center justify-center rounded-md bg-primary w-10 h-10 text-white hover:bg-primary/90 transition-colors'
+                  className='flex items-center justify-center rounded bg-primary w-10 h-10 text-cream hover:bg-primary/90 transition-colors'
                   aria-label='Share on Twitter'
                 >
                   <FaTwitter size={20} />
                 </a>
                 <a
                   href='#'
-                  className='flex items-center justify-center rounded-md bg-primary w-10 h-10 text-white hover:bg-primary/90 transition-colors'
+                  className='flex items-center justify-center rounded bg-primary w-10 h-10 text-cream hover:bg-primary/90 transition-colors'
                   aria-label='Share on Facebook'
                 >
                   <FaFacebook size={20} />
@@ -287,7 +287,7 @@ const ContentBlogDetail = () => {
 
             {/* Featured image */}
             <figure className='my-6'>
-              <div className='rounded-lg overflow-hidden'>
+              <div className='rounded overflow-hidden'>
                 <Image
                   src='/images/blog-2.jpeg'
                   width={1000}
@@ -307,7 +307,7 @@ const ContentBlogDetail = () => {
           </article>
 
           {/* Related articles section */}
-          <section className='mt-8 pt-8 border-t border-gray-200'>
+          <section className='mt-8 pt-8 border-t border-bronze/25'>
             <div className='flex flex-col gap-8'>
               <div className='flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4'>
                 <h2 className='text-xl md:text-2xl font-semibold text-primary'>

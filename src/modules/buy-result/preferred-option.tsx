@@ -102,16 +102,16 @@ export const PreferredOptions = () => {
             key={option.id}
             variant={option.selected ? 'default' : 'outline'}
             className={`flex items-center gap-2 min-w-max ${
-              option.selected ? 'bg-primary text-white' : 'text-gray-500'
+              option.selected ? 'bg-primary text-cream' : 'text-ink-muted'
             }`}
             onClick={() => handleToggleOption(option.id)}
           >
-            <span className={option.selected ? 'text-white' : 'text-gray-500'}>
+            <span className={option.selected ? 'text-cream' : 'text-ink-muted'}>
               {option.icon}
             </span>
             <span
               className={`text-xs font-medium ${
-                option.selected ? 'text-white' : 'text-gray-500'
+                option.selected ? 'text-cream' : 'text-ink-muted'
               }`}
             >
               {t(`options.${option.labelKey}`)}
@@ -129,18 +129,20 @@ export const PreferredOptions = () => {
                   key={option.id}
                   variant={option.selected ? 'default' : 'outline'}
                   className={`flex items-center gap-2 min-w-max ${
-                    option.selected ? 'bg-primary text-white' : 'text-gray-500'
+                    option.selected ? 'bg-primary text-cream' : 'text-ink-muted'
                   }`}
                   onClick={() => handleToggleOption(option.id)}
                 >
                   <span
-                    className={option.selected ? 'text-white' : 'text-gray-500'}
+                    className={
+                      option.selected ? 'text-cream' : 'text-ink-muted'
+                    }
                   >
                     {option.icon}
                   </span>
                   <span
                     className={`text-xs font-medium ${
-                      option.selected ? 'text-white' : 'text-gray-500'
+                      option.selected ? 'text-cream' : 'text-ink-muted'
                     }`}
                   >
                     {t(`options.${option.labelKey}`)}
@@ -154,18 +156,20 @@ export const PreferredOptions = () => {
                   key={option.id}
                   variant={option.selected ? 'default' : 'outline'}
                   className={`flex items-center gap-2 min-w-max ${
-                    option.selected ? 'bg-primary text-white' : 'text-gray-500'
+                    option.selected ? 'bg-primary text-cream' : 'text-ink-muted'
                   }`}
                   onClick={() => handleToggleOption(option.id)}
                 >
                   <span
-                    className={option.selected ? 'text-white' : 'text-gray-500'}
+                    className={
+                      option.selected ? 'text-cream' : 'text-ink-muted'
+                    }
                   >
                     {option.icon}
                   </span>
                   <span
                     className={`text-xs font-medium ${
-                      option.selected ? 'text-white' : 'text-gray-500'
+                      option.selected ? 'text-cream' : 'text-ink-muted'
                     }`}
                   >
                     {t(`options.${option.labelKey}`)}

@@ -63,7 +63,7 @@ const ContentRentDetail = () => {
             />
 
             {/* Villa Header */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between bg-white rounded-md border gap-4 sm:gap-0'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between bg-cream-light rounded border gap-4 sm:gap-0'>
               <div className='flex flex-col gap-3'>
                 <h4 className='text-xl sm:text-2xl font-semibold text-primary'>
                   {villaData.name}
@@ -76,7 +76,7 @@ const ContentRentDetail = () => {
                     {villaData.availableRentTypes.map((type, index) => (
                       <Badge
                         key={type}
-                        className={`bg-primary/${80 + index * 10} text-white`}
+                        className={`bg-primary/${80 + index * 10} text-cream`}
                       >
                         {type}
                       </Badge>
@@ -117,7 +117,7 @@ const ContentRentDetail = () => {
             </div>
 
             {/* Key Features */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('keyFeatures')}
               </span>
@@ -129,7 +129,7 @@ const ContentRentDetail = () => {
             </div>
 
             {/* Highlights */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border text-sm'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border text-sm'>
               <span className='text-xl text-primary font-semibold'>
                 {t('highlights')}
               </span>
@@ -138,7 +138,7 @@ const ContentRentDetail = () => {
                   {paragraph}
                 </span>
               ))}
-              <ul className='list-disc pl-5 space-y-1 text-gray-600'>
+              <ul className='list-disc pl-5 space-y-1 text-ink-soft'>
                 {villaData.highlightBullets.map((bullet, index) => (
                   <li key={index}>{bullet}</li>
                 ))}
@@ -146,7 +146,7 @@ const ContentRentDetail = () => {
             </div>
 
             {/* Villa Policies */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('villaPolicies')}
               </span>
@@ -155,10 +155,7 @@ const ContentRentDetail = () => {
               </span>
               <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                 {villaData.houseRules.map((rule, index) => (
-                  <div
-                    key={index}
-                    className='flex gap-2 p-2.5 border rounded-lg'
-                  >
+                  <div key={index} className='flex gap-2 p-2.5 border rounded'>
                     <span className='text-primary'>{rule.icon}</span>
                     <span className='text-sm text-primary font-semibold'>
                       {rule.text}
@@ -170,7 +167,7 @@ const ContentRentDetail = () => {
               {villaData.specialNotes.map((note, index) => (
                 <div
                   key={index}
-                  className='w-full flex items-start gap-2 p-2.5 border rounded-lg'
+                  className='w-full flex items-start gap-2 p-2.5 border rounded'
                 >
                   <span className='text-primary flex-shrink-0 mt-0.5'>
                     {note.icon}
@@ -189,7 +186,7 @@ const ContentRentDetail = () => {
                 <PaymentTermItem key={index} number={index + 1} text={term} />
               ))}
             </div>
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
               <div className='flex justify-between'>
                 <span className='text-xl text-primary font-semibold'>
                   {t('reviews')}
@@ -217,7 +214,7 @@ const ContentRentDetail = () => {
                   </div>
                 </div>
               </div>
-              <div className='p-6 flex flex-col gap-6 rounded-lg border'>
+              <div className='p-6 flex flex-col gap-6 rounded border'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col'>
                     <span className='text-primary text-lg font-semibold'>
@@ -256,7 +253,7 @@ const ContentRentDetail = () => {
                   modern, and very comfortable. Perfect for a family vacation!"
                 </span>
               </div>
-              <div className='p-6 flex flex-col gap-6 rounded-lg border'>
+              <div className='p-6 flex flex-col gap-6 rounded border'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col'>
                     <span className='text-primary text-lg font-semibold'>
@@ -316,7 +313,7 @@ const ContentRentDetail = () => {
                 </Button>
               </div>
             </div>
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('location')} & Map
               </span>
@@ -335,7 +332,7 @@ const ContentRentDetail = () => {
                 publishing software like Aldus PageMaker including versions of
                 Lorem Ipsum.
               </span>
-              <div className='w-full h-[300px] md:h-[400px] bg-gray-100 rounded-lg overflow-hidden mb-4 border'>
+              <div className='w-full h-[300px] md:h-[400px] bg-sand/40 rounded overflow-hidden mb-4 border'>
                 <div className="w-full h-full bg-[url('/images/map.png')] bg-cover bg-center opacity-80 relative">
                   <div className='absolute inset-0 flex items-center justify-center'>
                     <Button variant='primary'>{t('viewFullMap')}</Button>
@@ -349,7 +346,7 @@ const ContentRentDetail = () => {
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
                   {/* First column - Nearby places */}
                   <div className='flex flex-col gap-3'>
-                    <span className='text-sm font-semibold text-gray-700'>
+                    <span className='text-sm font-semibold text-ink-soft'>
                       {t('nearbyPlaces')}
                     </span>
                     {villaLocations.nearby.map((location, index) => (
@@ -369,7 +366,7 @@ const ContentRentDetail = () => {
 
                   {/* Second column - Further attractions */}
                   <div className='flex flex-col gap-3'>
-                    <span className='text-sm font-semibold text-gray-700'>
+                    <span className='text-sm font-semibold text-ink-soft'>
                       {t('furtherAway')}
                     </span>
                     {villaLocations.furtherAway.map((location, index) => (
@@ -389,7 +386,7 @@ const ContentRentDetail = () => {
                 </div>
               </div>
             </div>
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('serviceFeatures')}
               </span>

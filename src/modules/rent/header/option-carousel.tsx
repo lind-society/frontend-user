@@ -51,35 +51,37 @@ const OptionCarousel: React.FC<OptionCarouselProps> = ({
     <div className={`relative ${className}`}>
       {/* Left scroll button */}
       {showLeftArrow && (
-        <div className='absolute left-0 top-1/2 -translate-y-1/2 z-10'>
+        <div className='absolute left-0 top-1/2 z-10 -translate-y-1/2'>
           <Button
-            variant='outline'
+            variant='primary'
             size='icon'
-            className='h-8 w-8 rounded-full drop-shadow-md'
+            className='h-11 w-9 rounded-none'
             onClick={scrollLeft}
+            aria-label='Scroll left'
           >
-            <ChevronLeft className='h-4 w-4' />
+            <ChevronLeft className='h-5 w-5' />
           </Button>
         </div>
       )}
 
       {/* Right scroll button */}
       {showRightArrow && (
-        <div className='absolute right-0 top-1/2 -translate-y-1/2 z-10'>
+        <div className='absolute right-0 top-1/2 z-10 -translate-y-1/2'>
           <Button
-            variant='outline'
+            variant='primary'
             size='icon'
-            className='h-8 w-8 rounded-full drop-shadow-md'
+            className='h-11 w-9 rounded-none'
             onClick={scrollRight}
+            aria-label='Scroll right'
           >
-            <ChevronRight className='h-4 w-4' />
+            <ChevronRight className='h-5 w-5' />
           </Button>
         </div>
       )}
 
       {/* Carousel content */}
       <div
-        className='flex items-center gap-3 overflow-x-auto hideScrollbar py-2 px-1'
+        className='scrollbar-hide flex items-center gap-3 overflow-x-auto py-1'
         ref={carouselRef}
         onScroll={checkForArrows}
       >

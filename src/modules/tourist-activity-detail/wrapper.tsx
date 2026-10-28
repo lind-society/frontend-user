@@ -8,10 +8,8 @@ import { TouristActivity } from '@/modules/tourist-activity/constant';
 import Content from '@/modules/tourist-activity-detail/content';
 import Gallery from '@/modules/tourist-activity-detail/gallery';
 import ImagePreviewModal from '@/modules/tourist-activity-detail/image-preview-modal';
-import PaymentMethods from '@/modules/tourist-activity-detail/payment-methods';
 import RegistrationForm from '@/modules/tourist-activity-detail/registration-form';
 import Sidebar from '@/modules/tourist-activity-detail/sidebar';
-import SuccessMessage from '@/modules/tourist-activity-detail/success-message';
 
 interface TouristActivityDetailWrapperProps {
   activity: TouristActivity;
@@ -20,75 +18,68 @@ interface TouristActivityDetailWrapperProps {
 export default function TouristActivityDetailWrapper({
   activity,
 }: TouristActivityDetailWrapperProps) {
-  const [selectedImage, setSelectedImage] = useState<string>(
-    activity.images[0]
-  );
-  const [view, setView] = useState<'details' | 'form' | 'payment' | 'success'>(
-    'details'
-  );
+  // Every consumer below reads from this, not `activity.images` directly, so
+  // an activity with no uploaded photos yet never hands `<Image src>` an
+  // empty/undefined value.
+  const images =
+    activity.images.length > 0
+      ? activity.images
+      : ['/images/modern-villa-background.webp'];
+
+  const [selectedImage, setSelectedImage] = useState<string>(images[0]);
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [view, setView] = useState<'details' | 'form'>('details');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleGetTicket = () => {
     setView('form');
   };
 
-  const handleFormSubmit = () => {
-    setView('payment');
-  };
-
-  const handlePaymentSubmit = () => {
-    setView('success');
-  };
-
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
+  // The registration form redirects to /booking/[token] on a real booking —
+  // it never reaches a local "payment" or "success" step. Those used to be
+  // separate screens here with their own fake local state, duplicating (and
+  // never actually calling) the same booking + payment flow already built
+  // and working for villas at /booking/[token].
   if (view === 'form') {
     return (
       <RegistrationForm
-        activityName={activity.name}
-        onSubmit={handleFormSubmit}
+        activity={activity}
+        selectedDate={selectedDate}
+        onBack={() => setView('details')}
       />
     );
   }
 
-  if (view === 'payment') {
-    return (
-      <PaymentMethods
-        activityName={activity.name}
-        onSubmit={handlePaymentSubmit}
-      />
-    );
-  }
-
-  if (view === 'success') {
-    return <SuccessMessage activityName={activity.name} />;
-  }
-
-  const selectedImageIndex = activity.images.findIndex(
-    (img) => img === selectedImage
-  );
+  const selectedImageIndex = images.findIndex((img) => img === selectedImage);
 
   return (
     <>
-      <div className='bg-gray-50 min-h-screen'>
+      <div className='bg-bone min-h-screen'>
         <BaseContainer>
           <>
             <Gallery
-              images={activity.images}
+              images={images}
               selectedImage={selectedImage}
               onSelectImage={setSelectedImage}
               onMainImageClick={openModal}
             />
             <div className='flex flex-col lg:flex-row gap-8'>
-              <Content activity={activity} onGetTicket={handleGetTicket} />
+              <Content
+                activity={activity}
+                onGetTicket={handleGetTicket}
+                selectedDate={selectedDate}
+                onSelectDate={setSelectedDate}
+              />
               <Sidebar activity={activity} onGetTicket={handleGetTicket} />
             </div>
           </>
         </BaseContainer>
       </div>
       <ImagePreviewModal
-        images={activity.images}
+        images={images}
         isOpen={isModalOpen}
         onClose={closeModal}
         startIndex={selectedImageIndex}

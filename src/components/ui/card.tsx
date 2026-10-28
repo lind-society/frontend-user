@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'rounded-lg border border-neutral-200 bg-white text-neutral-950 shadow-sm dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50',
+      'rounded-lg border border-bronze/30 bg-cream-light text-ink shadow-sm',
       className
     )}
     {...props}
@@ -50,7 +50,7 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn('text-sm text-neutral-500 dark:text-neutral-400', className)}
+    className={cn('text-sm text-ink-muted', className)}
     {...props}
   />
 ));
@@ -121,7 +121,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {showSaleBadge && (
             <div className='absolute top-4 left-4 z-10'>
               <span
-                className={`${saleBadgeColor} text-sm text-white h-fit px-3 py-1 rounded-md`}
+                className={`${saleBadgeColor} text-sm text-white h-fit px-3 py-1 rounded`}
               >
                 {saleBadgeText}
               </span>
@@ -133,13 +133,13 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <div className='opacity-0 group-hover:opacity-100 group-hover:flex flex-col gap-1.5 transition-opacity duration-300'>
               <button
                 aria-label='Add to Wishlist'
-                className='rounded-full w-10 h-10 flex items-center justify-center bg-white hover:bg-primary-blue transition-colors'
+                className='rounded-full w-10 h-10 flex items-center justify-center bg-cream-light hover:bg-primary-blue transition-colors'
               >
                 <CiHeart className='text-gray-custom-900 text-lg' />
               </button>
               <button
                 aria-label='View Product'
-                className='rounded-full w-10 h-10 flex items-center justify-center bg-white hover:bg-primary-blue transition-colors'
+                className='rounded-full w-10 h-10 flex items-center justify-center bg-cream-light hover:bg-primary-blue transition-colors'
               >
                 <IoEyeOutline className='text-gray-custom-900 text-lg' />
               </button>
@@ -152,7 +152,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             width={400} // Adjust as needed
             height={360} // Adjust as needed
             sizes='100vw'
-            className='w-full object-cover object-right-bottom h-[360px] rounded-t-xl'
+            className='w-full object-cover object-right-bottom h-[360px] rounded-t'
             alt={imageAlt}
           />
         </div>
@@ -160,10 +160,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
         {/* Product Details */}
         <div className='flex justify-between mt-4 px-4 pb-2'>
           <div className='flex flex-col gap-1.5 text-start'>
-            <span className='text-lg text-gray-900 min-h-[56px]'>{title}</span>
-            <span className='font-semibold text-2xl text-gray-900'>
-              {price}
-            </span>
+            <span className='text-lg text-ink min-h-[56px]'>{title}</span>
+            <span className='font-semibold text-2xl text-ink'>{price}</span>
             {originalPrice && discountPercentage && (
               <div className='flex items-center gap-1.5'>
                 <p className='text-xs text-gray-custom-400 line-through'>

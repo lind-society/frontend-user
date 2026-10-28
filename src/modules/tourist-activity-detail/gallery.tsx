@@ -28,7 +28,7 @@ const Gallery: React.FC<GalleryProps> = ({
             alt='Main Activity'
             width={800}
             height={400}
-            className='rounded-lg w-full h-[320px] object-cover'
+            className='rounded w-full h-[320px] object-cover'
             priority
             sizes='100vw'
           />
@@ -39,8 +39,8 @@ const Gallery: React.FC<GalleryProps> = ({
           <button
             key={img}
             onClick={() => onSelectImage(img)}
-            className={`border rounded-lg overflow-hidden focus:outline-none ${
-              selectedImage === img ? 'border-primary' : 'border-gray-200'
+            className={`border rounded overflow-hidden focus:outline-none ${
+              selectedImage === img ? 'border-primary' : 'border-bronze/25'
             }`}
           >
             <Image

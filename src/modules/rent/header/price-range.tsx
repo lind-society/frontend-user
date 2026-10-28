@@ -192,7 +192,7 @@ const PriceRangeSlider = ({
   return (
     <div className={`space-y-5 ${className}`}>
       {/* Current price range display - Better visibility */}
-      <div className='text-center text-sm font-medium text-gray-600'>
+      <div className='text-center text-sm font-medium text-ink-soft'>
         {formatCurrency(values[0], formatOptions)} -{' '}
         {formatCurrency(values[1], formatOptions)}
       </div>
@@ -207,18 +207,18 @@ const PriceRangeSlider = ({
           step={step}
           onValueChange={handleSliderChange}
         >
-          <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-gray-200'>
+          <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-sand'>
             <SliderPrimitive.Range className='absolute h-full bg-primary' />
           </SliderPrimitive.Track>
-          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
-          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
         </SliderPrimitive.Root>
       </div>
 
       {/* Input fields - Responsive layout with formatted values */}
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5'>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>{t('minimumPrice')}</Label>
+          <Label className='text-ink-muted text-sm'>{t('minimumPrice')}</Label>
           <Input
             type='text' // Changed from 'number' to 'text' to support formatting
             value={inputMin}
@@ -229,7 +229,7 @@ const PriceRangeSlider = ({
           />
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>{t('maximumPrice')}</Label>
+          <Label className='text-ink-muted text-sm'>{t('maximumPrice')}</Label>
           <Input
             type='text' // Changed from 'number' to 'text' to support formatting
             value={inputMax}

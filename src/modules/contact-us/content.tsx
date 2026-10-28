@@ -6,7 +6,6 @@ import {
   FaEnvelope,
   FaInstagram,
   FaMapMarkerAlt,
-  FaPaperPlane,
   FaPhoneAlt,
 } from 'react-icons/fa';
 
@@ -57,48 +56,50 @@ const ContentContactUs = () => {
   };
 
   return (
-    <div className='py-8 md:py-12 lg:py-16'>
+    <section className='py-14 md:py-20'>
       <BaseContainer>
         <div className='flex flex-col lg:flex-row gap-8 lg:gap-12'>
           {/* Left column - Contact Information */}
           <div className='flex flex-col gap-8 w-full lg:w-1/2 justify-center'>
             <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-2'>
-                <h4 className='text-primary text-xl md:text-2xl font-semibold'>
-                  {t('content.title')}
-                </h4>
-                <span className='text-text text-xl md:text-2xl font-semibold'>
+                <h2 className='text-bronze-600'>{t('content.title')}</h2>
+                <span className='font-heading text-xl font-semibold text-ink md:text-2xl'>
                   {t('content.subtitle')}
                 </span>
               </div>
-              <span className='text-text'>{t('content.description')}</span>
+              <span className='leading-relaxed text-ink-soft'>
+                {t('content.description')}
+              </span>
             </div>
 
             {/* Contact methods grid */}
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>
               {/* Phone */}
               <div className='flex gap-3 items-center'>
-                <div className='rounded-md bg-primary h-12 w-12 flex items-center justify-center text-white'>
-                  <FaPhoneAlt size={20} />
+                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                  <FaPhoneAlt size={26} />
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-text text-lg font-semibold'>
+                  <span className='text-lg font-semibold text-ink'>
                     {t('contactInfo.phone')}
                   </span>
-                  <span className='text-sm text-text'>(+62) 812 3456 7890</span>
+                  <span className='text-sm text-ink-soft'>
+                    (+62) 812 3456 7890
+                  </span>
                 </div>
               </div>
 
               {/* Email */}
               <div className='flex gap-3 items-center'>
-                <div className='rounded-md bg-primary h-12 w-12 flex items-center justify-center text-white'>
-                  <FaEnvelope size={20} />
+                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                  <FaEnvelope size={26} />
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-text text-lg font-semibold'>
+                  <span className='text-lg font-semibold text-ink'>
                     {t('contactInfo.email')}
                   </span>
-                  <span className='text-sm text-text'>
+                  <span className='text-sm text-ink-soft'>
                     lindsociety@gmail.com
                   </span>
                 </div>
@@ -106,14 +107,14 @@ const ContentContactUs = () => {
 
               {/* Address */}
               <div className='flex gap-3 items-start sm:col-span-2'>
-                <div className='rounded-md bg-primary h-12 w-12 flex items-center justify-center text-white flex-shrink-0'>
-                  <FaMapMarkerAlt size={20} />
+                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                  <FaMapMarkerAlt size={26} />
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-text text-lg font-semibold'>
+                  <span className='text-lg font-semibold text-ink'>
                     {t('contactInfo.address')}
                   </span>
-                  <span className='text-sm text-text'>
+                  <span className='text-sm text-ink-soft'>
                     45 Sudirman Avenue, Level 5, Jakarta, Indonesia 10210
                   </span>
                 </div>
@@ -121,26 +122,24 @@ const ContentContactUs = () => {
 
               {/* Instagram */}
               <div className='flex gap-3 items-center'>
-                <div className='rounded-md bg-primary h-12 w-12 flex items-center justify-center text-white'>
-                  <FaInstagram size={20} />
+                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                  <FaInstagram size={26} />
                 </div>
                 <div className='flex flex-col'>
-                  <span className='text-text text-lg font-semibold'>
+                  <span className='text-lg font-semibold text-ink'>
                     {t('contactInfo.instagram')}
                   </span>
-                  <span className='text-sm text-text'>@lindsociety</span>
+                  <span className='text-sm text-ink-soft'>@lindsociety</span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Right column - Contact Form */}
-          <div className='w-full lg:w-1/2 shadow-md rounded-lg overflow-hidden'>
-            <div className='py-4 px-6 flex flex-col gap-1 bg-primary'>
-              <span className='text-white text-sm md:text-base'>
-                {t('form.title')}
-              </span>
-              <span className='text-xl md:text-2xl text-white font-semibold'>
+          <div className='w-full overflow-hidden rounded border border-bronze/25 lg:w-1/2'>
+            <div className='flex flex-col gap-1 bg-ink px-6 py-4'>
+              <span className='text-sm text-cream/80'>{t('form.title')}</span>
+              <span className='font-heading text-xl font-semibold text-cream md:text-2xl'>
                 {t('form.subtitle')}
               </span>
             </div>
@@ -151,7 +150,7 @@ const ContentContactUs = () => {
             >
               {/* Full Name */}
               <div className='flex flex-col gap-2'>
-                <Label className='text-sm font-semibold text-primary'>
+                <Label className='text-sm font-semibold text-ink'>
                   {t('form.fullName')}
                 </Label>
                 <Input
@@ -164,7 +163,7 @@ const ContentContactUs = () => {
 
               {/* Email */}
               <div className='flex flex-col gap-2'>
-                <Label className='text-sm font-semibold text-primary'>
+                <Label className='text-sm font-semibold text-ink'>
                   {t('form.email')}
                 </Label>
                 <Input
@@ -178,7 +177,7 @@ const ContentContactUs = () => {
 
               {/* Phone Number */}
               <div className='flex flex-col gap-2'>
-                <Label className='text-sm font-semibold text-primary'>
+                <Label className='text-sm font-semibold text-ink'>
                   {t('form.phone')}
                 </Label>
                 <div className='flex w-full'>
@@ -187,7 +186,7 @@ const ContentContactUs = () => {
                     <PopoverTrigger asChild>
                       <button
                         type='button'
-                        className='rounded-l-lg bg-primary text-white p-2 flex gap-2 items-center flex-shrink-0'
+                        className='flex h-10 flex-shrink-0 items-center gap-2 rounded-l border border-bronze-600 bg-bronze-600 px-3 text-white'
                       >
                         <span>{countryCode}</span>
                         <svg
@@ -196,7 +195,7 @@ const ContentContactUs = () => {
                           viewBox='0 0 12 12'
                           fill='none'
                           xmlns='http://www.w3.org/2000/svg'
-                          className='text-white'
+                          className='text-cream'
                         >
                           <path
                             d='M6 8.5L2 4.5H10L6 8.5Z'
@@ -211,7 +210,7 @@ const ContentContactUs = () => {
                           <button
                             key={country.code}
                             type='button'
-                            className='py-2 px-3 text-left rounded-md hover:bg-gray-100 flex items-center gap-2'
+                            className='py-2 px-3 text-left rounded hover:bg-sand/40 flex items-center gap-2'
                             onClick={() => setCountryCode(country.code)}
                           >
                             <span className='font-medium'>{country.code}</span>{' '}
@@ -235,7 +234,7 @@ const ContentContactUs = () => {
 
               {/* Inquiry Type */}
               <div className='flex flex-col gap-2'>
-                <Label className='text-sm font-semibold text-primary'>
+                <Label className='text-sm font-semibold text-ink'>
                   {t('form.inquiryType')}
                 </Label>
                 <Select value={context} onValueChange={setContext} required>
@@ -266,7 +265,7 @@ const ContentContactUs = () => {
 
               {/* Message */}
               <div className='flex flex-col gap-2'>
-                <Label className='text-sm font-semibold text-primary'>
+                <Label className='text-sm font-semibold text-ink'>
                   {t('form.message')}
                 </Label>
                 <Textarea
@@ -279,19 +278,14 @@ const ContentContactUs = () => {
               </div>
 
               {/* Submit Button */}
-              <Button
-                variant='primary'
-                className='w-full mt-2 flex items-center gap-2'
-                type='submit'
-              >
-                <FaPaperPlane />
-                <span>{t('form.submit')}</span>
+              <Button variant='cta' className='mt-2 h-12 w-full' type='submit'>
+                {t('form.submit')}
               </Button>
             </form>
           </div>
         </div>
       </BaseContainer>
-    </div>
+    </section>
   );
 };
 

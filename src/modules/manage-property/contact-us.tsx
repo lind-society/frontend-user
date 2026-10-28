@@ -22,7 +22,7 @@ const ContactUsManageProperty = () => {
           </div>
           <Button
             variant='outline'
-            className='bg-white flex items-center gap-2 w-fit'
+            className='bg-cream-light flex items-center gap-2 w-fit'
             asChild
           >
             <Link href='/contact-us' className='flex gap-2 items-center'>

@@ -34,12 +34,14 @@ export const parseFormattedNumber = (value: string): number => {
 };
 
 export const formatPrice = (price: number): string => {
-  if (price >= 1000000) {
-    return `$${(price / 1000000).toFixed(price % 1000000 === 0 ? 0 : 1)}M`;
-  } else if (price >= 1000) {
-    return `$${(price / 1000).toFixed(price % 1000 === 0 ? 0 : 1)}K`;
+  if (price >= 1000000000) {
+    return `Rp${(price / 1000000000).toFixed(
+      price % 1000000000 === 0 ? 0 : 1
+    )}M`;
+  } else if (price >= 1000000) {
+    return `Rp${(price / 1000000).toFixed(price % 1000000 === 0 ? 0 : 1)}Jt`;
   } else {
-    return `$${price}`;
+    return `Rp${price}`;
   }
 };
 
@@ -55,8 +57,8 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
   values,
   onValueChange,
   min = 0,
-  max = 5000000, // Higher max for property purchase
-  step = 10000,
+  max = 20000000000, // property sale prices run in the billions of IDR
+  step = 100000000,
 }) => {
   const t = useTranslations('inputComponents.priceRange');
   const [inputMin, setInputMin] = React.useState<string>(
@@ -125,41 +127,41 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
 
   const formatOptions: Intl.NumberFormatOptions = {
     style: 'currency',
-    currency: 'USD',
+    currency: 'IDR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   };
 
-  // Price range options - adjusted for property purchases
+  // Price range options - adjusted for property purchases (billions of IDR)
   const priceRangeOptions = [
     {
-      label: `Up to ${formatCurrency(500000, formatOptions)}`,
-      onClick: () => handleSliderChange([min, 500000]),
+      label: `Up to ${formatCurrency(2000000000, formatOptions)}`,
+      onClick: () => handleSliderChange([min, 2000000000]),
     },
     {
-      label: `${formatCurrency(500000, formatOptions)} - ${formatCurrency(
-        1000000,
+      label: `${formatCurrency(2000000000, formatOptions)} - ${formatCurrency(
+        5000000000,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([500000, 1000000]),
+      onClick: () => handleSliderChange([2000000000, 5000000000]),
     },
     {
-      label: `${formatCurrency(1000000, formatOptions)} - ${formatCurrency(
-        2000000,
+      label: `${formatCurrency(5000000000, formatOptions)} - ${formatCurrency(
+        10000000000,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([1000000, 2000000]),
+      onClick: () => handleSliderChange([5000000000, 10000000000]),
     },
     {
-      label: `${formatCurrency(2000000, formatOptions)} - ${formatCurrency(
-        5000000,
+      label: `${formatCurrency(10000000000, formatOptions)} - ${formatCurrency(
+        15000000000,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([2000000, 5000000]),
+      onClick: () => handleSliderChange([10000000000, 15000000000]),
     },
     {
-      label: `Above ${formatCurrency(5000000, formatOptions)}`,
-      onClick: () => handleSliderChange([5000000, max]),
+      label: `Above ${formatCurrency(15000000000, formatOptions)}`,
+      onClick: () => handleSliderChange([15000000000, max]),
     },
   ];
 
@@ -188,7 +190,7 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
       {/* Current price display and slider */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='md:col-span-1 flex flex-col gap-2'>
-          <div className='text-center text-sm font-medium text-gray-600'>
+          <div className='text-center text-sm font-medium text-ink-soft'>
             {formatPrice(values[0])} - {formatPrice(values[1])}
           </div>
 
@@ -202,11 +204,11 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
               step={step}
               onValueChange={handleSliderChange}
             >
-              <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-gray-200'>
+              <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-sand'>
                 <SliderPrimitive.Range className='absolute h-full bg-primary' />
               </SliderPrimitive.Track>
-              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
-              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
             </SliderPrimitive.Root>
           </div>
         </div>
@@ -214,7 +216,9 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
         {/* Input fields */}
         <div className='grid grid-cols-2 gap-3 md:gap-4'>
           <div className='flex flex-col gap-2'>
-            <Label className='text-gray-500 text-sm'>{t('minimumPrice')}</Label>
+            <Label className='text-ink-muted text-sm'>
+              {t('minimumPrice')}
+            </Label>
             <Input
               type='text'
               value={inputMin}
@@ -225,7 +229,9 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
             />
           </div>
           <div className='flex flex-col gap-2'>
-            <Label className='text-gray-500 text-sm'>{t('maximumPrice')}</Label>
+            <Label className='text-ink-muted text-sm'>
+              {t('maximumPrice')}
+            </Label>
             <Input
               type='text'
               value={inputMax}

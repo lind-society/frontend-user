@@ -26,8 +26,8 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
   values,
   onValueChange,
   min = 0,
-  max = 1500000,
-  step = 1000,
+  max = 20000000,
+  step = 100000,
 }) => {
   const [inputMin, setInputMin] = React.useState<string>(
     formatNumber(values[0])
@@ -95,44 +95,44 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
 
   const formatOptions: Intl.NumberFormatOptions = {
     style: 'currency',
-    currency: 'USD',
+    currency: 'IDR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   };
 
-  // Price range options
+  // Price range options — steps sized for nightly villa rates (IDR millions).
   const priceRangeOptions = [
     {
-      label: `Up to ${formatCurrency(250000, formatOptions)}`,
-      onClick: () => handleSliderChange([min, 250000]),
+      label: `Up to ${formatCurrency(3000000, formatOptions)}`,
+      onClick: () => handleSliderChange([min, 3000000]),
     },
     {
-      label: `${formatCurrency(250000, formatOptions)} - ${formatCurrency(
-        500000,
+      label: `${formatCurrency(3000000, formatOptions)} - ${formatCurrency(
+        6000000,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([250000, 500000]),
+      onClick: () => handleSliderChange([3000000, 6000000]),
     },
     {
-      label: `${formatCurrency(500000, formatOptions)} - ${formatCurrency(
-        750000,
+      label: `${formatCurrency(6000000, formatOptions)} - ${formatCurrency(
+        10000000,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([500000, 750000]),
+      onClick: () => handleSliderChange([6000000, 10000000]),
     },
     {
-      label: `${formatCurrency(750000, formatOptions)} - ${formatCurrency(
-        1000000,
+      label: `${formatCurrency(10000000, formatOptions)} - ${formatCurrency(
+        15000000,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([750000, 1000000]),
+      onClick: () => handleSliderChange([10000000, 15000000]),
     },
     {
-      label: `${formatCurrency(1000000, formatOptions)} - ${formatCurrency(
+      label: `${formatCurrency(15000000, formatOptions)} - ${formatCurrency(
         max,
         formatOptions
       )}`,
-      onClick: () => handleSliderChange([1000000, max]),
+      onClick: () => handleSliderChange([15000000, max]),
     },
   ];
 
@@ -161,7 +161,7 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
       {/* Current price display and slider */}
       <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
         <div className='md:col-span-1 flex flex-col gap-2'>
-          <div className='text-center text-sm font-medium text-gray-600'>
+          <div className='text-center text-sm font-medium text-ink-soft'>
             {formatCurrency(values[0], formatOptions)} -{' '}
             {formatCurrency(values[1], formatOptions)}
           </div>
@@ -176,11 +176,11 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
               step={step}
               onValueChange={handleSliderChange}
             >
-              <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-gray-200'>
+              <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-sand'>
                 <SliderPrimitive.Range className='absolute h-full bg-primary' />
               </SliderPrimitive.Track>
-              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
-              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+              <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
             </SliderPrimitive.Root>
           </div>
         </div>
@@ -188,7 +188,7 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
         {/* Input fields */}
         <div className='grid grid-cols-2 gap-3 md:gap-4'>
           <div className='flex flex-col gap-2'>
-            <Label className='text-gray-500 text-sm'>Minimum Price</Label>
+            <Label className='text-ink-muted text-sm'>Minimum Price</Label>
             <Input
               type='text'
               value={inputMin}
@@ -199,7 +199,7 @@ export const PriceRange: React.FC<PriceRangeProps> = ({
             />
           </div>
           <div className='flex flex-col gap-2'>
-            <Label className='text-gray-500 text-sm'>Maximum Price</Label>
+            <Label className='text-ink-muted text-sm'>Maximum Price</Label>
             <Input
               type='text'
               value={inputMax}

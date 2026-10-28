@@ -25,7 +25,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
     <div className='h-[48px] w-[48px] md:h-[64px] md:w-[64px] bg-tertiary flex items-center justify-center rounded-full shrink-0'>
       {icon}
     </div>
-    <div className='flex flex-col gap-2 md:gap-3 text-white'>
+    <div className='flex flex-col gap-2 md:gap-3 text-cream'>
       <h5 className='text-lg md:text-xl font-bold'>{title}</h5>
       <p className='font-medium md:font-semibold text-sm md:text-base line-clamp-4 overflow-hidden'>
         {description}
@@ -75,7 +75,7 @@ const Content2ManageProperty = () => {
   ];
 
   return (
-    <div className='bg-bg py-8 md:py-12 lg:py-16'>
+    <div className='py-8 md:py-12 lg:py-16'>
       <BaseContainer>
         <div className='flex flex-col gap-6 md:gap-8'>
           <div className='flex flex-col gap-2 md:gap-3 text-center'>

@@ -1,6 +1,6 @@
-/* eslint-disable no-console */
 'use client';
 
+import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
@@ -8,65 +8,40 @@ import { RiArrowRightUpLine } from 'react-icons/ri';
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
 
-interface ExploreOptionProps {
-  label: string;
-  onClick?: () => void;
-}
-
-const ExploreOption: React.FC<ExploreOptionProps> = ({ label, onClick }) => (
-  <Button
-    variant='primary'
-    className='flex items-center gap-2 whitespace-nowrap w-full sm:w-auto'
-    onClick={onClick}
-  >
-    <span>{label}</span>
-    <RiArrowRightUpLine size={20} className='text-white' />
-  </Button>
-);
-
 const ExploreListRentPage = () => {
   const t = useTranslations('rent.exploreList');
 
   const exploreOptions = [
-    {
-      label: t('options.daily'),
-      onClick: () => console.log('Daily Rentals clicked'),
-    },
-    {
-      label: t('options.monthly'),
-      onClick: () => console.log('Monthly Rentals clicked'),
-    },
-    {
-      label: t('options.yearly'),
-      onClick: () => console.log('Yearly Rentals clicked'),
-    },
+    { label: t('options.daily'), href: '/rent/result?durationType=daily' },
+    { label: t('options.monthly'), href: '/rent/result?durationType=monthly' },
+    { label: t('options.yearly'), href: '/rent/result?durationType=yearly' },
   ];
 
   return (
-    <div className='bg-gray-50'>
+    <section className='bg-sand'>
       <BaseContainer>
-        <div className='flex flex-col lg:flex-row lg:justify-between gap-6 py-8 md:py-12 lg:py-16'>
-          {/* Header Section - Responsive column on mobile, row on desktop */}
-          <div className='flex flex-col gap-2 lg:max-w-[410px]'>
-            <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-primary'>
-              {t('title')}
-            </h2>
-            <p className='text-base md:text-lg text-text'>{t('subtitle')}</p>
+        <div className='flex flex-col gap-8 py-12 lg:flex-row lg:items-center lg:justify-between lg:py-16'>
+          <div className='flex flex-col gap-2 lg:max-w-md'>
+            <h2 className='whitespace-pre-line text-ink'>{t('title')}</h2>
+            <p className='text-ink-soft'>{t('subtitle')}</p>
           </div>
 
-          {/* Buttons Section - Responsive grid layout */}
-          <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 lg:flex lg:flex-wrap lg:items-center'>
-            {exploreOptions.map((option, index) => (
-              <ExploreOption
-                key={index}
-                label={option.label}
-                onClick={option.onClick}
-              />
+          <div className='grid grid-cols-1 gap-3 sm:grid-cols-3 lg:flex lg:flex-wrap lg:items-center lg:gap-4'>
+            {exploreOptions.map((option) => (
+              <Button key={option.href} variant='primary' asChild>
+                <Link
+                  href={option.href}
+                  className='flex items-center gap-2 whitespace-nowrap'
+                >
+                  <span>{option.label}</span>
+                  <RiArrowRightUpLine size={18} />
+                </Link>
+              </Button>
             ))}
           </div>
         </div>
       </BaseContainer>
-    </div>
+    </section>
   );
 };
 

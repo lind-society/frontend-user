@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 // Define blog post type
 export interface BlogPost {
-  id: number;
+  /** string for API-backed posts (uuid), number for the legacy static data */
+  id: string | number;
   title: string;
   date: string;
   excerpt: string;
@@ -34,7 +35,7 @@ export const BlogCard = ({ post }: { post: BlogPost }) => (
       </h5>
     </Link>
 
-    <p className='text-sm md:text-base text-gray-600 line-clamp-3'>
+    <p className='text-sm md:text-base text-ink-soft line-clamp-3'>
       {post.excerpt}
     </p>
   </div>

@@ -10,6 +10,9 @@ import React, { useEffect, useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
 import { TbCurrencyDollar } from 'react-icons/tb';
 
+import { toTouristActivity } from '@/lib/mappers/activity';
+import { useActivities } from '@/hooks/api/useActivity';
+
 import BaseContainer from '@/components/layouts/container';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -37,7 +40,6 @@ import { SortOption, sortOptions } from '@/modules/buy-result/result';
 import { formatCurrency } from '@/modules/rent/header/price-range';
 import {
   activityLocations,
-  touristActivities,
   TouristActivity,
 } from '@/modules/tourist-activity/constant';
 import FilterDialogTourist from '@/modules/tourist-activity/filter-dialog';
@@ -49,8 +51,6 @@ interface FilterData {
 
 const ContentTourist1 = () => {
   const t = useTranslations('touristActivity.content');
-  const tCategories = useTranslations('touristActivity.categories');
-  const tActivities = useTranslations('touristActivity.activities');
 
   const [selectedSort, setSelectedSort] = useState<SortOption>('recommended');
   const [selectedLocation, setSelectedLocation] = useState<string>('');
@@ -62,9 +62,24 @@ const ContentTourist1 = () => {
   const [displayLimit, setDisplayLimit] = useState<number>(6);
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
+  /**
+   * Filtering and sorting below run client-side over the full result set, so we
+   * request a single generous page rather than paginating server-side. Bump
+   * this if a tenant ever exceeds it — the API caps nothing on its own.
+   */
+  const { data: activitiesResponse, isLoading } = useActivities({
+    page: 1,
+    limit: 200,
+  });
+
+  const sourceActivities = React.useMemo(
+    () => (activitiesResponse?.data.data ?? []).map(toTouristActivity),
+    [activitiesResponse]
+  );
+
   // Filter and sort activities
   useEffect(() => {
-    let filtered = [...touristActivities];
+    let filtered = [...sourceActivities];
 
     // Filter by location
     if (selectedLocation) {
@@ -108,7 +123,14 @@ const ContentTourist1 = () => {
     }
 
     setActivities(filtered);
-  }, [selectedSort, selectedLocation, searchTerm, minPrice, maxPrice]);
+  }, [
+    sourceActivities,
+    selectedSort,
+    selectedLocation,
+    searchTerm,
+    minPrice,
+    maxPrice,
+  ]);
 
   // Toggle favorite status of an activity
   const toggleFavorite = (activityId: string) => {
@@ -173,7 +195,7 @@ const ContentTourist1 = () => {
                 ))}
               </SelectContent>
             </Select>
-            <div className='flex border rounded-md w-full md:w-auto'>
+            <div className='flex border rounded w-full md:w-auto'>
               <input
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -181,7 +203,9 @@ const ContentTourist1 = () => {
                 className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none py-3 px-4 w-full md:w-[400px]'
               />
               <button
-                className='bg-primary rounded-r-md p-4 text-white flex items-center justify-center'
+                type='button'
+                aria-label={t('search.searchButton')}
+                className='flex items-center justify-center rounded-r bg-bronze-600 p-4 text-white transition-colors hover:bg-bronze-700'
                 onClick={handleSearch}
               >
                 <Search size={20} />
@@ -191,7 +215,7 @@ const ContentTourist1 = () => {
 
           {/* Activity count */}
           <div className='flex gap-2 items-center'>
-            <span className='font-medium text-gray-500'>
+            <span className='font-medium text-ink-muted'>
               {t('search.availableActivity')}:
             </span>
             <span className='text-xl text-primary'>{activities.length}</span>
@@ -245,25 +269,25 @@ const ContentTourist1 = () => {
                     </span>
                     <div className='flex justify-between'>
                       <div className='flex flex-col gap-1'>
-                        <span className='text-sm text-gray-500'>
+                        <span className='text-sm text-ink-muted'>
                           {t('search.minPrice')}
                         </span>
                         <input
                           type='number'
                           value={minPrice}
                           onChange={(e) => setMinPrice(Number(e.target.value))}
-                          className='w-32 border rounded-md p-2'
+                          className='w-32 border rounded p-2'
                         />
                       </div>
                       <div className='flex flex-col gap-1'>
-                        <span className='text-sm text-gray-500'>
+                        <span className='text-sm text-ink-muted'>
                           {t('search.maxPrice')}
                         </span>
                         <input
                           type='number'
                           value={maxPrice}
                           onChange={(e) => setMaxPrice(Number(e.target.value))}
-                          className='w-32 border rounded-md p-2'
+                          className='w-32 border rounded p-2'
                         />
                       </div>
                     </div>
@@ -272,7 +296,7 @@ const ContentTourist1 = () => {
               </Popover>
             </div>
 
-            <div className='flex gap-3 md:gap-8'>
+            <div className='flex flex-wrap gap-3 md:gap-8'>
               {/* Filters button */}
               <FilterDialogTourist onApplyFilters={handleApplyFilters} />
 
@@ -281,9 +305,9 @@ const ContentTourist1 = () => {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant='outline'
-                    className='flex items-center justify-center gap-2 text-primary text-xs font-semibold'
+                    className='flex max-w-full items-center justify-center gap-2 text-xs font-semibold text-bronze-600'
                   >
-                    <span className='whitespace-nowrap'>
+                    <span className='truncate'>
                       {t('search.sortBy')}{' '}
                       {
                         sortOptions.find((opt) => opt.value === selectedSort)
@@ -313,19 +337,43 @@ const ContentTourist1 = () => {
           </div>
 
           {/* Activity cards grid */}
+          {isLoading && (
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8'>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <div
+                  key={index}
+                  className='h-[380px] rounded bg-sand/40 animate-pulse'
+                />
+              ))}
+            </div>
+          )}
+
+          {!isLoading && activities.length === 0 && (
+            <p className='text-center text-ink-muted py-8'>
+              No activities found.
+            </p>
+          )}
+
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8'>
             {activities.slice(0, displayLimit).map((activity) => (
               <div
                 key={activity.id}
-                className='flex flex-col rounded-lg overflow-hidden border border-gray-200 bg-white hover:shadow-md transition-shadow'
+                className='flex flex-col rounded overflow-hidden border border-bronze/25 bg-cream-light hover:shadow-sm transition-shadow'
               >
                 {/* Card image */}
                 <div className='relative h-[240px] w-full'>
                   <Link href={`/tourist-activity/${activity.id}`}>
                     <Image
                       className='w-full h-full object-cover'
-                      src={activity.images[0]}
-                      alt={tActivities(`${activity.id}.name`)}
+                      // An activity with no photos yet gave `<Image>` an
+                      // undefined `src`, which Next throws a hard render
+                      // error on — that took the whole page down to the
+                      // error boundary instead of just that one card.
+                      src={
+                        activity.images[0] ||
+                        '/images/modern-villa-background.webp'
+                      }
+                      alt={activity.name}
                       sizes='100vw'
                       width={0}
                       height={0}
@@ -333,24 +381,27 @@ const ContentTourist1 = () => {
                   </Link>
 
                   {/* Rating badge */}
-                  <div className='absolute left-0 bottom-0 bg-primary px-4 py-2 rounded-tr-lg z-10 flex gap-2 items-center'>
-                    <Star className='text-white' size={16} />
-                    <span className='text-white'>
+                  <div className='absolute left-0 bottom-0 bg-primary px-4 py-2 rounded-tr z-10 flex gap-2 items-center'>
+                    <Star className='text-cream' size={16} />
+                    <span className='text-cream'>
                       {activity.rating.toFixed(1)}
                     </span>
                   </div>
 
                   {/* Favorite button */}
                   <button
+                    type='button'
+                    aria-label={t('favorite')}
+                    aria-pressed={favorites.has(activity.id)}
                     onClick={() => toggleFavorite(activity.id)}
-                    className='absolute right-4 top-4 bg-white/80 hover:bg-white rounded-full p-2 transition-colors'
+                    className='absolute right-4 top-4 rounded-full bg-cream-light/80 p-2 transition-colors hover:bg-cream-light'
                   >
                     <Heart
                       size={20}
                       className={
                         favorites.has(activity.id)
                           ? 'fill-red-500 text-red-500'
-                          : 'text-gray-600'
+                          : 'text-ink-soft'
                       }
                     />
                   </button>
@@ -359,8 +410,8 @@ const ContentTourist1 = () => {
                 {/* Location and category */}
                 <div className='px-6 py-4 flex justify-between border-b'>
                   <span className='text-sm text-text'>{activity.location}</span>
-                  <Badge className='bg-primary px-3 rounded-md'>
-                    {tCategories(activity.category)}
+                  <Badge className='bg-primary px-3 rounded'>
+                    {activity.category}
                   </Badge>
                 </div>
 
@@ -372,7 +423,7 @@ const ContentTourist1 = () => {
                       className='hover:text-primary/80'
                     >
                       <p className='text-lg md:text-xl text-primary font-semibold'>
-                        {tActivities(`${activity.id}.name`)}
+                        {activity.name}
                       </p>
                     </Link>
                     <div className='flex flex-col text-start md:text-end items-start md:items-end text-primary'>
@@ -380,19 +431,19 @@ const ContentTourist1 = () => {
                         {activity.currency} {activity.price.toLocaleString()}
                       </span>
                       <span className='italic text-xs md:text-sm font-normal'>
-                        /{t(`cards.${activity.priceUnit}`)}
+                        /{activity.priceUnit}
                       </span>
                     </div>
                   </div>
-                  <p className='text-gray-600 font-normal text-sm md:text-base line-clamp-3'>
-                    {tActivities(`${activity.id}.description`)}
+                  <p className='text-ink-soft font-normal text-sm md:text-base line-clamp-3'>
+                    {activity.description}
                   </p>
                   <div className='flex justify-between items-center mt-2'>
                     <div className='flex items-center gap-2'>
-                      <span className='text-xs px-2 py-1 bg-gray-100 rounded-md'>
+                      <span className='text-xs px-2 py-1 bg-sand/40 rounded'>
                         {activity.duration}
                       </span>
-                      <span className='text-xs px-2 py-1 bg-gray-100 rounded-md'>
+                      <span className='text-xs px-2 py-1 bg-sand/40 rounded'>
                         {activity.groupSize === 'Individual'
                           ? t('cards.individualGroup')
                           : activity.groupSize.includes('Max')
@@ -406,7 +457,7 @@ const ContentTourist1 = () => {
                           : activity.groupSize}
                       </span>
                     </div>
-                    <span className='text-xs text-gray-500'>
+                    <span className='text-xs text-ink-muted'>
                       {activity.reviews} {t('cards.reviews')}
                     </span>
                   </div>

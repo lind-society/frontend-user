@@ -90,8 +90,8 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
   };
 
   return (
-    <div className='sticky 2xl:top-4 top-[-84px] border shadow-md bg-white rounded-md overflow-hidden'>
-      <div className='bg-primary text-white flex flex-col gap-1 px-6 py-3'>
+    <div className='sticky 2xl:top-4 top-[-84px] border shadow-sm bg-cream-light rounded overflow-hidden'>
+      <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
         <span className=''>{t('sendInquiry')} or</span>
         <span className='text-2xl font-semibold'>{tContent('bookNow')}</span>
       </div>
@@ -198,7 +198,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
               <PopoverTrigger asChild>
                 <button
                   type='button'
-                  className='rounded-l-lg bg-primary text-white p-2 flex gap-2 items-center h-full'
+                  className='rounded-l bg-primary text-cream p-2 flex gap-2 items-center h-full'
                 >
                   <span>{countryCode}</span>
                   <svg
@@ -207,7 +207,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
                     viewBox='0 0 12 12'
                     fill='none'
                     xmlns='http://www.w3.org/2000/svg'
-                    className='text-white'
+                    className='text-cream'
                   >
                     <path
                       d='M6 8.5L2 4.5H10L6 8.5Z'
@@ -225,7 +225,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({ villaDetails }) => {
                   {countryCodes.map((country) => (
                     <button
                       key={country.code}
-                      className='w-full text-left px-3 py-2 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none'
+                      className='w-full text-left px-3 py-2 hover:bg-sand/40 focus:bg-sand/40 focus:outline-none'
                       onClick={() => setCountryCode(country.code)}
                     >
                       <span className='font-medium'>{country.code}</span>{' '}

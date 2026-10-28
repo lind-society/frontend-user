@@ -51,13 +51,13 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: Tpagination) => {
   return (
     <div className='flex items-center justify-center my-4'>
       <button
-        className='group p-2 rounded-md text-sm text-primary-main disabled:text-neutral-300 flex items-center gap-2 font-semibold'
+        className='group p-2 rounded text-sm text-bronze-600 disabled:text-ink-muted/60 flex items-center gap-2 font-semibold'
         onClick={handlePrevClick}
         disabled={currentPage === 1}
       >
         <FaChevronLeft
-          className={`text-sm rounded-md ${
-            currentPage === 1 ? 'text-neutral-300' : 'text-primary-main'
+          className={`text-sm rounded ${
+            currentPage === 1 ? 'text-ink-muted/60' : 'text-bronze-600'
           }`}
         />
         Prev
@@ -66,8 +66,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: Tpagination) => {
         {getPageNumbers().map((page, index) => (
           <button
             key={index}
-            className={`mx-1 px-3 py-2 rounded-md text-sm font-semibold text-neutral-500 ${
-              page === currentPage ? ' text-primary-main' : 'text-neutral-300'
+            className={`mx-1 px-3 py-2 rounded text-sm font-semibold text-ink-muted ${
+              page === currentPage ? ' text-bronze-600' : 'text-ink-muted/60'
             }`}
             onClick={() => {
               if (typeof page === 'number') {
@@ -81,16 +81,14 @@ const Pagination = ({ currentPage, totalPages, onPageChange }: Tpagination) => {
       </div>
 
       <button
-        className='group p-2 text-sm rounded-md text-primary-main disabled:text-neutral-300 flex gap-2 items-center font-semibold'
+        className='group p-2 text-sm rounded text-bronze-600 disabled:text-ink-muted/60 flex gap-2 items-center font-semibold'
         onClick={handleNextClick}
         disabled={currentPage === totalPages}
       >
         Next
         <FaChevronRight
-          className={`text-sm rounded-md ${
-            currentPage === totalPages
-              ? 'text-neutral-300'
-              : 'text-primary-main'
+          className={`text-sm rounded ${
+            currentPage === totalPages ? 'text-ink-muted/60' : 'text-bronze-600'
           } `}
         />
       </button>

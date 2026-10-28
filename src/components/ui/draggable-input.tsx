@@ -248,7 +248,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                 <button
                   type='button'
                   onClick={rotateLeft}
-                  className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
+                  className='bg-cream-light bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
                   title={t('rotateLeft')}
                 >
                   <FaRotateLeft size={20} />
@@ -256,7 +256,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                 <button
                   type='button'
                   onClick={rotateRight}
-                  className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
+                  className='bg-cream-light bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
                   title={t('rotateRight')}
                 >
                   <FaRotateRight size={20} />
@@ -264,7 +264,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                 <button
                   type='button'
                   onClick={toggleFullscreen}
-                  className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
+                  className='bg-cream-light bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
                   title={t('fullscreen')}
                 >
                   <FaExpand size={20} />
@@ -292,7 +292,7 @@ export const UploadDraggableField = <T extends FieldValues>({
             <button
               type='button'
               onClick={toggleFullscreen}
-              className='bg-white bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
+              className='bg-cream-light bg-opacity-75 hover:bg-opacity-100 p-1 rounded-full shadow'
               title={t('fullscreen')}
             >
               <FaExpand size={20} />
@@ -312,7 +312,7 @@ export const UploadDraggableField = <T extends FieldValues>({
 
     if (type === 'application/pdf' || type.includes('document')) {
       return (
-        <div className='text-black break-all mt-4'>
+        <div className='text-ink break-all mt-4'>
           <a
             href={previewUrl}
             target='_blank'
@@ -325,7 +325,7 @@ export const UploadDraggableField = <T extends FieldValues>({
       );
     }
 
-    return <span className='text-black mt-4'>{t('unsupportedFileType')}</span>;
+    return <span className='text-ink mt-4'>{t('unsupportedFileType')}</span>;
   };
 
   const handleEyeClick = (e: React.MouseEvent) => {
@@ -337,12 +337,12 @@ export const UploadDraggableField = <T extends FieldValues>({
     <div className={className}>
       <div
         {...getRootProps()}
-        className='flex flex-col items-center bg-neutral-50 justify-center relative w-full p-2 border rounded-lg border-neutral-300'
+        className='flex flex-col items-center bg-cream-light justify-center relative w-full p-2 border rounded-lg border-bronze/30'
       >
         {field.value && !isLoading && (
           <div
             onClick={handleRemoveFile}
-            className='absolute right-4 top-4 shadow-md rounded-full bg-white cursor-pointer'
+            className='absolute right-4 top-4 shadow-md rounded-full bg-cream-light cursor-pointer'
           >
             <AiOutlineCloseCircle color='#e63a3a' size={30} />
           </div>
@@ -351,16 +351,16 @@ export const UploadDraggableField = <T extends FieldValues>({
         <button
           type='button'
           onClick={handleChangeFile}
-          className='flex flex-col items-center w-full px-4 py-3 bg-neutral-50 dark:bg-transparent rounded-lg cursor-pointer'
+          className='flex flex-col items-center w-full px-4 py-3 bg-cream-light rounded-lg cursor-pointer'
         >
           <div className='flex flex-col items-center'>
-            <AiOutlineCloudUpload className='text-4xl text-gray-400 mb-2' />
+            <AiOutlineCloudUpload className='text-4xl text-ink-muted mb-2' />
           </div>
-          <span className='mt-2 text-xs md:text-sm lg:text-sm text-center text-black font-semibold dark:text-white'>
+          <span className='mt-2 text-xs md:text-sm lg:text-sm text-center text-ink font-semibold'>
             {t('dragDropSelect')} {label}
           </span>
-          <div className='flex items-center w-full border border-neutral-300 rounded-lg mt-4 overflow-hidden'>
-            <p className='bg-gray-500 hover:bg-primary-700 cursor-pointer w-fit text-white h-full transition-colors ease-in-out duration-300 px-4 rounded-l-lg flex items-center text-xs py-2 whitespace-nowrap'>
+          <div className='flex items-center w-full border border-bronze/30 rounded-lg mt-4 overflow-hidden'>
+            <p className='flex h-full w-fit cursor-pointer items-center whitespace-nowrap rounded-l bg-bronze-600 px-4 py-2 text-xs text-white transition-colors duration-300 ease-in-out hover:bg-bronze-700'>
               {t('selectFile')}
             </p>
             <p className='px-4 text-xs text-nowrap overflow-hidden overflow-ellipsis whitespace-nowrap'>
@@ -371,7 +371,7 @@ export const UploadDraggableField = <T extends FieldValues>({
                 href={previewUrl}
                 target='_blank'
                 rel='noopener noreferrer'
-                className='ml-auto text-gray-500 text-xs underline mr-2'
+                className='ml-auto text-ink-muted text-xs underline mr-2'
                 onClick={handleEyeClick} // Prevent re-input on click
               >
                 <FaEye />

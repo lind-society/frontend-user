@@ -37,7 +37,7 @@ const TrustedBuyerSection = () => {
   ];
 
   return (
-    <div className='bg-white py-10 md:py-12 lg:py-[64px]'>
+    <div className='bg-cream-light py-10 md:py-12 lg:py-[64px]'>
       <BaseContainer>
         <div className='flex flex-col md:flex-row md:justify-between gap-8 md:gap-10 md:items-center'>
           {/* Left section with title and description */}
@@ -73,7 +73,7 @@ const TrustedBuyerSection = () => {
                   >
                     <div className='relative aspect-[3/4] w-full h-full'>
                       <Image
-                        className='rounded-lg object-cover'
+                        className='rounded object-cover'
                         src={image.src}
                         alt={image.alt}
                         fill

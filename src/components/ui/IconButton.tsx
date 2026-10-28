@@ -63,26 +63,24 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
               'text-primary-500',
               'border-primary-500 border',
               'hover:bg-primary-50 active:bg-primary-100 disabled:bg-primary-100',
-              isDarkBg &&
-                'hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800',
+              isDarkBg && 'hover:bg-ink active:bg-ink disabled:bg-ink',
             ],
             variant === 'ghost' && [
               'text-primary-500',
               'shadow-none',
               'hover:bg-primary-50 active:bg-primary-100 disabled:bg-primary-100',
-              isDarkBg &&
-                'hover:bg-gray-900 active:bg-gray-800 disabled:bg-gray-800',
+              isDarkBg && 'hover:bg-ink active:bg-ink disabled:bg-ink',
             ],
             variant === 'light' && [
-              'bg-white text-gray-700',
-              'border border-gray-300',
-              'hover:text-dark hover:bg-gray-100',
-              'active:bg-white/80 disabled:bg-gray-200',
+              'bg-cream-light text-ink-soft',
+              'border border-bronze/30',
+              'hover:text-dark hover:bg-sand/40',
+              'active:bg-cream-light/80 disabled:bg-sand',
             ],
             variant === 'dark' && [
-              'bg-gray-900 text-white',
-              'border border-gray-600',
-              'hover:bg-gray-800 active:bg-gray-700 disabled:bg-gray-700',
+              'bg-ink text-white',
+              'border border-bronze/40',
+              'hover:bg-ink active:bg-ink disabled:bg-ink/60',
             ],
           ],
           //#endregion  //*======== Variants ===========
@@ -99,7 +97,7 @@ const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
               'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
               {
                 'text-white': ['primary', 'dark'].includes(variant),
-                'text-black': ['light'].includes(variant),
+                'text-ink': ['light'].includes(variant),
                 'text-primary-500': ['outline', 'ghost'].includes(variant),
               }
             )}

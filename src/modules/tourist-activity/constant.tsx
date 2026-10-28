@@ -66,8 +66,13 @@ export interface TouristActivity {
   name: string;
   location: string;
   description: string;
+  /** Final price — after discount, when there is one. */
   price: number;
+  /** Same as `price` when there's no discount; the detail page only shows a strikethrough when this is higher. Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  originalPrice?: number;
   currency: string;
+  /** UUID, needed to actually book — the display `currency` above is just its symbol/code. Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  currencyId?: string;
   priceUnit: string;
   rating: number;
   reviews: number;
@@ -78,6 +83,16 @@ export interface TouristActivity {
   groupSize: string;
   popularity: number; // 1-100 for popularity sorting
   featured: boolean;
+  /** `HH:mm`. Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  openingHour?: string;
+  /** `HH:mm`. Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  closingHour?: string;
+  /** Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  mapLink?: string;
+  /** Total slots per day. Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  dailyLimit?: number;
+  /** Completed bookings today, toward `dailyLimit`. Optional — only the real API mapper (`toTouristActivity`) sets it. */
+  bookedToday?: number;
 }
 
 // Sample tourism activities

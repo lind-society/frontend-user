@@ -10,7 +10,7 @@ import FaQRentPage from '@/modules/rent/faq';
 
 const ManagePropertyModules = () => {
   return (
-    <div className='bg-bg'>
+    <div className='bg-bone'>
       <HeaderManageProperty />
       <Content1ManageProperty />
       <JoinUsManageProperty />

@@ -85,8 +85,8 @@ export const TextField = <T extends FieldValues>({
 
   const inputVariant = clsx({
     'py-4 rounded-lg': variant === 'lg',
-    'py-2 rounded-md': variant === 'md',
-    'p-1 rounded-md': variant === 'sm',
+    'py-2 rounded': variant === 'md',
+    'p-1 rounded': variant === 'sm',
   });
 
   const inputDefaultStyle =
@@ -138,7 +138,7 @@ export const TextField = <T extends FieldValues>({
           <textarea
             rows={textAreaRow}
             {...{ ...props, ...field }}
-            className={`w-full ${inputStatus}  ${props.className} flex min-h-[75px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50`}
+            className={`w-full ${inputStatus}  ${props.className} flex min-h-[75px] w-full rounded border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50`}
           ></textarea>
         )}
 

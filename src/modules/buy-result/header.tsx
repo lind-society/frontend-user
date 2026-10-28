@@ -1,7 +1,9 @@
 'use client';
 
 import { ChevronDown, Slash } from 'lucide-react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
+import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
@@ -27,30 +29,56 @@ import {
 import { PreferredOptions } from '@/modules/buy-result/preferred-option';
 import { PriceRange } from '@/modules/buy-result/price-range';
 
+/** UI label -> API `ownershipType` enum value (or omitted for "Both"). */
+const OWNERSHIP_TO_FILTER: Record<string, string | undefined> = {
+  Leasehold: 'leasehold',
+  Freehold: 'freehold',
+  Both: undefined,
+};
+const FILTER_TO_OWNERSHIP: Record<string, string> = {
+  leasehold: 'Leasehold',
+  freehold: 'Freehold',
+};
+
 const HeaderBuyResult = () => {
   const t = useTranslations('buyResult');
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // Location state
-  const [location, setLocation] = useState('Bali');
-  const [ownership, setOwnership] = useState('Leasehold');
+  const [location, setLocation] = useState(
+    () => searchParams.get('location') ?? 'Bali'
+  );
+  const [ownership, setOwnership] = useState(
+    () => FILTER_TO_OWNERSHIP[searchParams.get('ownership') ?? ''] ?? 'Both'
+  );
   const [bedrooms, setBedrooms] = useState(1);
   const [bathrooms, setBathrooms] = useState(1);
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500000]);
+  const [priceRange, setPriceRange] = useState<[number, number]>(() => [
+    Number(searchParams.get('minPrice')) || 0,
+    Number(searchParams.get('maxPrice')) || 20000000000,
+  ]);
 
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
   const ownershipTypes = ['Leasehold', 'Freehold', 'Both'];
 
-  // Handle search button click
+  // Pushes the current filter state into the URL — buy-result/result.tsx (a
+  // sibling component) reads it from there to actually query the API.
+  // Bedrooms/bathrooms aren't sent: properties have no such filterable
+  // column on the backend (they're derived client-side from `additionals`).
   const handleSearch = () => {
-    // eslint-disable-next-line no-console
-    console.log('Search with parameters:', {
-      location,
-      ownership,
-      bedrooms,
-      bathrooms,
-      priceRange,
-    });
-    // Actual search implementation would go here
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('location', location);
+    const ownershipFilter = OWNERSHIP_TO_FILTER[ownership];
+    if (ownershipFilter) {
+      params.set('ownership', ownershipFilter);
+    } else {
+      params.delete('ownership');
+    }
+    params.set('minPrice', String(priceRange[0]));
+    params.set('maxPrice', String(priceRange[1]));
+
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
@@ -58,7 +86,7 @@ const HeaderBuyResult = () => {
       {/* Breadcrumb section */}
       <div className='border-y py-4 md:py-6'>
         <BaseContainer>
-          <div className='rounded-md bg-white border px-3 py-1'>
+          <div className='rounded bg-cream-light border px-3 py-1'>
             <Breadcrumb>
               <BreadcrumbList>
                 <BreadcrumbItem>
@@ -83,20 +111,20 @@ const HeaderBuyResult = () => {
       {/* Search form section */}
       <div className='border-b py-6'>
         <BaseContainer>
-          <div className='bg-white rounded-lg px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-md'>
+          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-sm'>
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.location')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{location}</span>
+                        <span className='text-ink-muted'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
@@ -107,10 +135,10 @@ const HeaderBuyResult = () => {
                     {locations.map((loc) => (
                       <button
                         key={loc}
-                        className={`py-2 px-3 text-left rounded-md ${
+                        className={`py-2 px-3 text-left rounded ${
                           location === loc
                             ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-gray-100'
+                            : 'hover:bg-sand/40'
                         }`}
                         onClick={() => setLocation(loc)}
                       >
@@ -124,14 +152,14 @@ const HeaderBuyResult = () => {
               {/* Ownership */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <GrCertificate size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.ownership')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{ownership}</span>
+                        <span className='text-ink-muted'>{ownership}</span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
@@ -142,10 +170,10 @@ const HeaderBuyResult = () => {
                     {ownershipTypes.map((type) => (
                       <button
                         key={type}
-                        className={`py-2 px-3 text-left rounded-md ${
+                        className={`py-2 px-3 text-left rounded ${
                           ownership === type
                             ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-gray-100'
+                            : 'hover:bg-sand/40'
                         }`}
                         onClick={() => setOwnership(type)}
                       >
@@ -159,14 +187,14 @@ const HeaderBuyResult = () => {
               {/* Bedrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.bedrooms')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {bedrooms.toString().padStart(2, '0')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -182,7 +210,7 @@ const HeaderBuyResult = () => {
                     <div className='flex items-center justify-between'>
                       <button
                         onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bedrooms <= 1}
                       >
                         -
@@ -192,7 +220,7 @@ const HeaderBuyResult = () => {
                       </span>
                       <button
                         onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bedrooms >= 10}
                       >
                         +
@@ -205,14 +233,14 @@ const HeaderBuyResult = () => {
               {/* Bathrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <LuBath size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.bathrooms')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {bathrooms.toString().padStart(2, '0')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -228,7 +256,7 @@ const HeaderBuyResult = () => {
                     <div className='flex items-center justify-between'>
                       <button
                         onClick={() => setBathrooms(Math.max(1, bathrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bathrooms <= 1}
                       >
                         -
@@ -240,7 +268,7 @@ const HeaderBuyResult = () => {
                         onClick={() =>
                           setBathrooms(Math.min(10, bathrooms + 1))
                         }
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bathrooms >= 10}
                       >
                         +
@@ -253,16 +281,16 @@ const HeaderBuyResult = () => {
               {/* Price Range */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <TbCurrencyDollar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.priceRange')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
-                          ${priceRange[0].toLocaleString()} - $
-                          {priceRange[1].toLocaleString()}
+                        <span className='text-ink-muted'>
+                          Rp{priceRange[0].toLocaleString('id-ID')} - Rp
+                          {priceRange[1].toLocaleString('id-ID')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>

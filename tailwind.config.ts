@@ -13,14 +13,51 @@ export default {
         '20': 'repeat(20, minmax(0, 1fr))',
       },
       fontFamily: {
-        primary: ['Quicksand', ...defaultTheme.fontFamily.sans],
+        /* Inter — body copy, buttons, forms, list items */
+        primary: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
+        /* Playfair Display — hero/section headings and product names */
+        display: ['var(--font-display)', ...defaultTheme.fontFamily.serif],
+        /* Lora — card titles, breadcrumbs, price blocks */
+        heading: ['var(--font-heading)', ...defaultTheme.fontFamily.serif],
+        serif: ['var(--font-heading)', ...defaultTheme.fontFamily.serif],
       },
       colors: {
-        primary: '#2E5153',
-        secondary: '#9BBABD',
-        tertiary: '#E2F2EC',
-        text: '#192B2B',
-        bg: '#F9FBF9',
+        /* ---- LIND Society brand palette ---- */
+        bronze: {
+          DEFAULT: '#A2754C',
+          50: '#FAF5EF',
+          100: '#F0E3D2',
+          200: '#E0C8A9',
+          300: '#CFAC81',
+          400: '#BB9066',
+          500: '#A2754C',
+          600: '#8A6340',
+          700: '#6E4F33',
+          800: '#523B26',
+          900: '#36271A',
+        },
+        sand: '#EADAC7',
+        /* muted warm text used on the dark feature cards */
+        'cream-dim': '#D7C8B0',
+        cream: '#FCF0E2',
+        'cream-light': '#FDF3E6',
+        /* footer band — the design uses this on every page, and it is a shade
+           warmer than cream-light; measured off the exports in Design baru/ */
+        'cream-warm': '#FAF0E7',
+        bone: '#F6F3EC',
+        ink: {
+          DEFAULT: '#1A1A1A',
+          soft: '#363533',
+          muted: '#68625A',
+        },
+        /* ---- legacy semantic aliases, remapped to the new brand ---- */
+        primary: '#A2754C',
+        'primary-hover': '#8A6340',
+        secondary: '#EADAC7',
+        tertiary: '#FCF0E2',
+        text: '#1A1A1A',
+        bg: '#F6F3EC',
         'primary-blue': '#003D67',
         'secondary-blue': '#023151',
         'tertiary-blue': '#0B77C2',
@@ -30,7 +67,7 @@ export default {
         'primary-yellow': '#F0B100',
         'secondary-yellow': '#CB9705',
         'tertiary-yellow': '#FFCE45',
-        background: '#F8F8F8',
+        background: '#F6F3EC',
         warning: '#FF8A00',
         danger: '#EA4B48',
         'gray-custom': {
@@ -57,7 +94,7 @@ export default {
           '800': '#173B1A',
           '900': '#002603',
         },
-        dark: '#222222',
+        dark: '#1A1A1A',
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',

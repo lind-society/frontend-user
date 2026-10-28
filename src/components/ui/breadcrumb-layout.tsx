@@ -33,12 +33,18 @@ const BreadcrumbLayout: React.FC<BreadcrumbLayoutProps> = ({
   }
 
   return (
-    <div className='rounded-md bg-white border px-3 py-1'>
+    <div className='rounded-sm border border-bronze/25 bg-cream-light px-4 py-2'>
       <Breadcrumb>
         <BreadcrumbList>
           {items.map((item, index) => (
             <React.Fragment key={index}>
-              <BreadcrumbItem className={item.isActive ? 'font-semibold' : ''}>
+              <BreadcrumbItem
+                className={
+                  item.isActive
+                    ? 'font-heading text-[15px] font-semibold text-bronze-600'
+                    : 'text-[15px] text-ink-soft'
+                }
+              >
                 <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
               </BreadcrumbItem>
 

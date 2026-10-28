@@ -18,7 +18,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='100vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
             ))}
@@ -35,7 +35,7 @@ const GalleryImageTourist = () => {
                     width={0}
                     height={0}
                     sizes='50vw'
-                    className='w-full h-full object-cover rounded-lg'
+                    className='w-full h-full object-cover rounded'
                   />
                 </div>
               ))}
@@ -49,7 +49,7 @@ const GalleryImageTourist = () => {
                     width={0}
                     height={0}
                     sizes='50vw'
-                    className='w-full h-full object-cover rounded-lg'
+                    className='w-full h-full object-cover rounded'
                   />
                 </div>
               ))}
@@ -67,7 +67,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                   priority
                 />
               </div>
@@ -78,7 +78,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
             </div>
@@ -92,7 +92,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
               <div className='row-span-2 h-full'>
@@ -102,7 +102,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
             </div>
@@ -116,7 +116,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
               <div className='row-span-3 h-full'>
@@ -126,7 +126,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
             </div>
@@ -140,7 +140,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
               <div className='row-span-2 h-full'>
@@ -150,7 +150,7 @@ const GalleryImageTourist = () => {
                   width={0}
                   height={0}
                   sizes='25vw'
-                  className='w-full h-full object-cover rounded-lg'
+                  className='w-full h-full object-cover rounded'
                 />
               </div>
             </div>

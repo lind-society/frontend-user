@@ -2,96 +2,70 @@
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import BaseContainer from '@/components/layouts/container';
 import {
-  type CarouselApi,
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import TitleSection from '@/components/ui/title-section';
 
 import { destinations } from '@/modules/landing-page/constant';
 
-// Define destination type
-
 const ExploreIconicLandingPage = () => {
-  const [api, setApi] = useState<CarouselApi>();
   const t = useTranslations('landingPage.exploreIconic');
 
-  // Use effect to track carousel state
-  useEffect(() => {
-    if (!api) {
-      return;
-    }
-  }, [api]);
-
   return (
-    <div className='py-10 md:py-16'>
+    <section className='py-14 md:py-20'>
       <BaseContainer>
-        <div className='flex flex-col gap-6 md:gap-8'>
-          <div className='flex flex-col gap-2'>
-            <h3 className='text-center text-primary text-2xl md:text-3xl font-semibold'>
-              {t('title')}
-            </h3>
-            <p className='text-text font-normal text-center px-4 md:px-0'>
-              {t('subtitle')}
-            </p>
-          </div>
+        <div className='flex flex-col gap-10'>
+          <TitleSection title={t('title')} subTitle={t('subtitle')} />
 
-          {/* Carousel wrapper */}
-          <div className='relative'>
-            <Carousel
-              opts={{
-                align: 'start',
-                loop: true,
-                // Show different number of slides based on viewport width
-                slidesToScroll: 1,
-              }}
-              className='w-full'
-              setApi={setApi}
-            >
-              <CarouselContent className='-ml-2 md:-ml-4'>
-                {destinations.map((destination) => (
-                  <CarouselItem
-                    key={destination.id}
-                    className='pl-2 md:pl-4 basis-full sm:basis-1/2 xl:basis-1/3'
-                  >
-                    <div className='relative h-[280px] md:h-[380px] lg:h-[439px] w-full rounded-lg overflow-hidden'>
-                      {/* Image with proper gradient overlay */}
-                      <div className='absolute inset-0 z-10 bg-gradient-to-b from-black/0 via-black/0 to-black/80'></div>
-                      <Image
-                        src={destination.image}
-                        alt={destination.name}
-                        fill
-                        className='object-cover w-full h-full'
-                      />
+          <Carousel
+            opts={{ align: 'start', loop: true, slidesToScroll: 1 }}
+            className='w-full'
+          >
+            <CarouselContent className='-ml-4 md:-ml-6'>
+              {destinations.map((destination) => (
+                <CarouselItem
+                  key={destination.id}
+                  className='basis-full pl-4 sm:basis-1/2 md:pl-6 xl:basis-1/3'
+                >
+                  <div className='group relative aspect-[4/3] w-full overflow-hidden'>
+                    <Image
+                      src={destination.image}
+                      alt={destination.name}
+                      fill
+                      sizes='(min-width: 1280px) 33vw, (min-width: 640px) 50vw, 100vw'
+                      className='object-cover transition-transform duration-500 group-hover:scale-105'
+                    />
+                    {/* Scrim so the caption stays legible over any photograph */}
+                    <div
+                      aria-hidden
+                      className='absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/10 to-transparent'
+                    />
 
-                      {/* Location text overlay */}
-                      <div className='absolute bottom-0 left-0 right-0 z-20 p-5 flex justify-between items-center text-white gap-2'>
-                        <p className='text-lg md:text-xl font-semibold whitespace-nowrap'>
-                          {destination.name}
-                        </p>
-                        <p className='text-sm md:text-base font-normal line-clamp-1 text-end'>
-                          {destination.location}
-                        </p>
-                      </div>
+                    <div className='absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-5 text-cream'>
+                      <p className='font-display text-xl'>{destination.name}</p>
+                      <p className='line-clamp-1 text-right text-sm text-cream/85'>
+                        {destination.location}
+                      </p>
                     </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
 
-              {/* Navigation arrows */}
-              <CarouselPrevious className='left-2 md:left-4 lg:left-6 bg-white/80 hover:bg-white' />
-              <CarouselNext className='right-2 md:right-4 lg:right-6 bg-white/80 hover:bg-white' />
-            </Carousel>
-          </div>
+            <CarouselPrevious className='left-4 h-14 w-11 rounded-none border-0 bg-bronze/85 text-cream hover:bg-bronze hover:text-cream' />
+            <CarouselNext className='right-4 h-14 w-11 rounded-none border-0 bg-bronze/85 text-cream hover:bg-bronze hover:text-cream' />
+          </Carousel>
         </div>
       </BaseContainer>
-    </div>
+    </section>
   );
 };
 

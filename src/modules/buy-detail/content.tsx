@@ -62,7 +62,7 @@ const ContentBuyDetail = () => {
             />
 
             {/* Villa Header */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between bg-white rounded-md border gap-4 sm:gap-0'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between bg-cream-light rounded border gap-4 sm:gap-0'>
               <div className='flex flex-col gap-3'>
                 <h4 className='text-xl sm:text-2xl font-semibold text-primary'>
                   {villaData.name}
@@ -75,7 +75,7 @@ const ContentBuyDetail = () => {
                     {villaData.availableRentTypes.map((type, index) => (
                       <Badge
                         key={type}
-                        className={`bg-primary/${80 + index * 10} text-white`}
+                        className={`bg-primary/${80 + index * 10} text-cream`}
                       >
                         {type}
                       </Badge>
@@ -116,7 +116,7 @@ const ContentBuyDetail = () => {
             </div>
 
             {/* Key Features */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('features')}
               </span>
@@ -124,7 +124,7 @@ const ContentBuyDetail = () => {
                 {villaDataBuy.features.map((feature) => (
                   <div
                     key={feature.id}
-                    className='p-2.5 flex gap-2 items-center col-span-1 border rounded-md'
+                    className='p-2.5 flex gap-2 items-center col-span-1 border rounded'
                   >
                     <div className='bg-tertiary h-10 w-10 flex items-center justify-center rounded-full'>
                       {feature.icon}
@@ -143,7 +143,7 @@ const ContentBuyDetail = () => {
             </div>
 
             {/* Highlights */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-white rounded-md border text-sm'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border text-sm'>
               <span className='text-xl text-primary font-semibold'>
                 {t('overview')}
               </span>
@@ -152,14 +152,14 @@ const ContentBuyDetail = () => {
                   {paragraph}
                 </span>
               ))}
-              <ul className='list-disc pl-5 space-y-1 text-gray-600'>
+              <ul className='list-disc pl-5 space-y-1 text-ink-soft'>
                 {villaData.highlightBullets.map((bullet, index) => (
                   <li key={index}>{bullet}</li>
                 ))}
               </ul>
             </div>
 
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('location')} & Map
               </span>
@@ -178,7 +178,7 @@ const ContentBuyDetail = () => {
                 publishing software like Aldus PageMaker including versions of
                 Lorem Ipsum.
               </span>
-              <div className='w-full h-[300px] md:h-[400px] bg-gray-100 rounded-lg overflow-hidden mb-4 border'>
+              <div className='w-full h-[300px] md:h-[400px] bg-sand/40 rounded overflow-hidden mb-4 border'>
                 <div className="w-full h-full bg-[url('/images/map.png')] bg-cover bg-center opacity-80 relative">
                   <div className='absolute inset-0 flex items-center justify-center'>
                     <Button variant='primary'>{t('viewFullMap')}</Button>
@@ -192,7 +192,7 @@ const ContentBuyDetail = () => {
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
                   {/* First column - Nearby places */}
                   <div className='flex flex-col gap-3'>
-                    <span className='text-sm font-semibold text-gray-700'>
+                    <span className='text-sm font-semibold text-ink-soft'>
                       {t('nearbyPlaces')}
                     </span>
                     {villaLocations.nearby.map((location, index) => (
@@ -212,7 +212,7 @@ const ContentBuyDetail = () => {
 
                   {/* Second column - Further attractions */}
                   <div className='flex flex-col gap-3'>
-                    <span className='text-sm font-semibold text-gray-700'>
+                    <span className='text-sm font-semibold text-ink-soft'>
                       {t('furtherAway')}
                     </span>
                     {villaLocations.furtherAway.map((location, index) => (
@@ -232,7 +232,7 @@ const ContentBuyDetail = () => {
                 </div>
               </div>
             </div>
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-white rounded-md border'>
+            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
               <span className='text-xl text-primary font-semibold'>
                 {t('serviceFacilities')}
               </span>

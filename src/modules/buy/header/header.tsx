@@ -111,7 +111,7 @@ const HeaderBuyPage = () => {
   };
 
   return (
-    <div className='py-6 md:pb-10 md:pt-[68px] relative bg-bg'>
+    <div className='py-6 md:pb-10 md:pt-[68px] relative'>
       <Image
         src='/images/header-buy.jpeg'
         width={0}
@@ -125,28 +125,28 @@ const HeaderBuyPage = () => {
           {/* Responsive header content */}
           <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
             <div className='flex flex-col gap-4 md:gap-6 max-w-full lg:max-w-[867px] mb-8 lg:mb-0'>
-              <h1 className='text-white h0 font-bold'>{t('title')}</h1>
-              <div className='px-3 md:px-5 border-white border-solid border-l-2 text-white text-lg md:text-[22px]'>
+              <h1 className='text-cream h0 font-bold'>{t('title')}</h1>
+              <div className='px-3 md:px-5 border-white border-solid border-l-2 text-cream text-lg md:text-[22px]'>
                 {t('subtitle')}
               </div>
             </div>
           </div>
 
           {/* Search Box */}
-          <div className='bg-white rounded-lg px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-md'>
+          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-sm'>
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <FaLocationDot size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.location')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>{location}</span>
+                        <span className='text-ink-muted'>{location}</span>
                         <ChevronDown size={18} className='text-primary' />
                       </div>
                     </div>
@@ -157,10 +157,10 @@ const HeaderBuyPage = () => {
                     {locations.map((loc) => (
                       <button
                         key={loc}
-                        className={`py-2 px-3 text-left rounded-md ${
+                        className={`py-2 px-3 text-left rounded ${
                           location === loc
                             ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-gray-100'
+                            : 'hover:bg-sand/40'
                         }`}
                         onClick={() => setLocation(loc)}
                       >
@@ -174,14 +174,14 @@ const HeaderBuyPage = () => {
               {/* Ownership */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <GrCertificate size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.ownership')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {ownershipTypes.find(
                             (type) => type.value === ownership
                           )?.label || ownership}
@@ -196,10 +196,10 @@ const HeaderBuyPage = () => {
                     {ownershipTypes.map((type) => (
                       <button
                         key={type.value}
-                        className={`py-2 px-3 text-left rounded-md ${
+                        className={`py-2 px-3 text-left rounded ${
                           ownership === type.value
                             ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-gray-100'
+                            : 'hover:bg-sand/40'
                         }`}
                         onClick={() => setOwnership(type.value)}
                       >
@@ -213,14 +213,14 @@ const HeaderBuyPage = () => {
               {/* Bedrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <IoBed size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.bedrooms')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {bedrooms.toString().padStart(2, '0')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -236,7 +236,7 @@ const HeaderBuyPage = () => {
                     <div className='flex items-center justify-between'>
                       <button
                         onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bedrooms <= 1}
                       >
                         -
@@ -246,7 +246,7 @@ const HeaderBuyPage = () => {
                       </span>
                       <button
                         onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bedrooms >= 10}
                       >
                         +
@@ -259,14 +259,14 @@ const HeaderBuyPage = () => {
               {/* Bathrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <LuBath size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.bathrooms')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500'>
+                        <span className='text-ink-muted'>
                           {bathrooms.toString().padStart(2, '0')}
                         </span>
                         <ChevronDown size={18} className='text-primary' />
@@ -282,7 +282,7 @@ const HeaderBuyPage = () => {
                     <div className='flex items-center justify-between'>
                       <button
                         onClick={() => setBathrooms(Math.max(1, bathrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bathrooms <= 1}
                       >
                         -
@@ -294,7 +294,7 @@ const HeaderBuyPage = () => {
                         onClick={() =>
                           setBathrooms(Math.min(10, bathrooms + 1))
                         }
-                        className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
+                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
                         disabled={bathrooms >= 10}
                       >
                         +
@@ -307,14 +307,14 @@ const HeaderBuyPage = () => {
               {/* Price Range */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
+                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
                     <TbCurrencyDollar size={24} className='text-primary' />
                     <div className='flex flex-col w-full'>
                       <span className='font-semibold text-left'>
                         {t('search.priceRange')}
                       </span>
                       <div className='flex justify-between items-center'>
-                        <span className='text-gray-500 truncate max-w-[150px]'>
+                        <span className='text-ink-muted truncate max-w-[150px]'>
                           {getDisplayPriceRange()}
                         </span>
                         <ChevronDown size={18} className='text-primary' />

@@ -9,7 +9,7 @@ export const FeatureCard: React.FC<{
   const t = useTranslations('rentDetail.content.features');
 
   return (
-    <div className='p-2.5 flex gap-2 items-center col-span-1 border rounded-md'>
+    <div className='p-2.5 flex gap-2 items-center col-span-1 border rounded'>
       <div className='bg-tertiary h-10 w-10 flex items-center justify-center rounded-full'>
         {feature.icon}
       </div>

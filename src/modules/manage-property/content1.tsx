@@ -27,7 +27,7 @@ const Content1ManageProperty = () => {
               <RiArrowRightUpLine size={20} />
             </Button>
           </div>
-          <div className='w-full sm:w-[90%] md:w-[80%] lg:w-[50%] max-w-[600px] overflow-hidden rounded-lg shadow-md'>
+          <div className='w-full sm:w-[90%] md:w-[80%] lg:w-[50%] max-w-[600px] overflow-hidden rounded shadow-sm'>
             <Image
               src='/images/media-7.png'
               alt='Property Management Services'

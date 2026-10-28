@@ -1,9 +1,8 @@
 'use client'; // Error components must be Client Components
 
 import * as React from 'react';
-import { RiAlarmWarningFill } from 'react-icons/ri';
 
-import TextButton from '@/components/ui/TextButton';
+import { Button } from '@/components/ui/button';
 
 export default function Error({
   error,
@@ -19,18 +18,17 @@ export default function Error({
 
   return (
     <main>
-      <section className='bg-white'>
-        <div className='layout flex min-h-screen flex-col items-center justify-center text-center text-black'>
-          <RiAlarmWarningFill
-            size={60}
-            className='drop-shadow-glow animate-flicker text-red-500'
-          />
-          <h1 className='mt-8 text-4xl md:text-6xl'>
-            Oops, something went wrong!
-          </h1>
-          <TextButton variant='basic' onClick={reset} className='mt-4'>
+      <section className='bg-bone'>
+        <div className='layout flex min-h-screen flex-col items-center justify-center gap-5 text-center'>
+          <span className='eyebrow text-bronze-600'>Something went wrong</span>
+          <h1 className='text-ink'>We hit an unexpected turn.</h1>
+          <p className='max-w-md text-ink-soft'>
+            Sorry about that. Try again, and if it keeps happening our concierge
+            team is one message away.
+          </p>
+          <Button variant='primary' className='mt-2' onClick={reset}>
             Try again
-          </TextButton>
+          </Button>
         </div>
       </section>
     </main>

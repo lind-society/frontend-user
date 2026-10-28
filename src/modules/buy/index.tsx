@@ -8,7 +8,7 @@ import FaQRentPage from '@/modules/rent/faq';
 
 const BuyModules = () => {
   return (
-    <div className='bg-bg'>
+    <div className='bg-cream-light'>
       <HeaderBuyPage />
       <RecomendationPropertiesBuyPage />
       <TrustedBuyerSection />

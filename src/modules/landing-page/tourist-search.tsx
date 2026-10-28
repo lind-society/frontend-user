@@ -1,11 +1,10 @@
 'use client';
 
 import { format } from 'date-fns';
-import { ChevronDown } from 'lucide-react';
-import Link from 'next/link';
+import { Search } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
-import { FaCalendar } from 'react-icons/fa6';
+import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
 import { TbCurrencyDollar } from 'react-icons/tb';
 
 import { Button } from '@/components/ui/button';
@@ -16,12 +15,10 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+  PromoStrip,
+  SearchField,
+  SearchFieldRow,
+} from '@/components/ui/search-panel';
 
 import { formatCurrency } from '@/modules/rent/header/price-range';
 import { activityLocations } from '@/modules/tourist-activity/constant';
@@ -51,47 +48,58 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
 
   return (
     <>
-      {/* Search inputs */}
-      <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
+      <SearchFieldRow>
         {/* Location */}
-        <Select value={selectedLocation} onValueChange={setSelectedLocation}>
-          <SelectTrigger className='w-full md:w-[240px] h-[46px] border border-transparent hover:border-gray-200'>
-            <SelectValue placeholder={t('chooseLocation')} />
-          </SelectTrigger>
-          <SelectContent>
-            {activityLocations.map((location) => (
-              <SelectItem key={location} value={location}>
-                {location}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Popover>
+          <PopoverTrigger asChild>
+            <SearchField
+              icon={FaLocationDot}
+              label={t('location.label')}
+              value={selectedLocation || t('chooseLocation')}
+            />
+          </PopoverTrigger>
+          <PopoverContent className='max-h-72 w-56 overflow-y-auto p-2'>
+            <div className='flex flex-col'>
+              {activityLocations.map((location) => (
+                <button
+                  key={location}
+                  type='button'
+                  className={`rounded px-3 py-2 text-left transition-colors ${
+                    selectedLocation === location
+                      ? 'bg-bronze/15 text-bronze-600'
+                      : 'hover:bg-bronze/10'
+                  }`}
+                  onClick={() => setSelectedLocation(location)}
+                >
+                  {location}
+                </button>
+              ))}
+            </div>
+          </PopoverContent>
+        </Popover>
 
-        {/* Search term */}
-        <div className='flex border rounded-md w-full md:w-auto border-transparent hover:border-gray-200'>
+        {/* Free-text activity search */}
+        <div className='flex flex-1 flex-col gap-1 px-1 py-3 lg:px-6 lg:py-2'>
+          <span className='flex items-center gap-2 text-sm text-bronze-300'>
+            <Search size={16} className='shrink-0 text-bronze' />
+            {t('whatToDo')}
+          </span>
           <input
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={t('whatToDo')}
-            className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none py-3 px-4 w-full md:w-[240px]'
+            className='w-full border-none bg-transparent p-0 text-base text-cream placeholder:text-cream/45 focus:outline-none focus:ring-0'
           />
         </div>
 
         {/* Date availability */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button
-              variant='outline'
-              className='flex gap-2 items-center w-full md:w-auto'
-            >
-              <FaCalendar className='text-primary text-xl' />
-              <span className='text-primary'>
-                {selectedDate
-                  ? format(selectedDate, 'dd MMM yyyy')
-                  : t('availability')}
-              </span>
-              <ChevronDown className='text-primary' />
-            </Button>
+            <SearchField
+              icon={FaCalendar}
+              label={t('availability')}
+              value={selectedDate ? format(selectedDate, 'dd MMM yyyy') : '—'}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-auto p-0'>
             <Calendar
@@ -106,43 +114,42 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
         {/* Price range */}
         <Popover>
           <PopoverTrigger asChild>
-            <Button
-              variant='outline'
-              className='flex gap-2 items-center w-full md:w-auto'
-            >
-              <TbCurrencyDollar className='text-primary text-xl' />
-              <span className='text-primary'>
-                {minPrice === 0 && maxPrice === 5000000
-                  ? t('priceRange.label')
-                  : `${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}`}
-              </span>
-              <ChevronDown className='text-primary' />
-            </Button>
+            <SearchField
+              icon={TbCurrencyDollar}
+              label={t('priceRange.label')}
+              value={
+                minPrice === 0 && maxPrice === 5000000
+                  ? t('priceRange.anyPrice')
+                  : `${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}`
+              }
+            />
           </PopoverTrigger>
           <PopoverContent className='w-80 p-4'>
             <div className='flex flex-col gap-4'>
-              <span className='font-medium'>{t('priceRange.label')}</span>
-              <div className='flex justify-between'>
+              <span className='font-heading text-lg font-semibold'>
+                {t('priceRange.label')}
+              </span>
+              <div className='flex justify-between gap-3'>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-sm text-gray-500'>
+                  <span className='text-sm text-ink-muted'>
                     {t('priceRange.minPrice')}
                   </span>
                   <input
                     type='number'
                     value={minPrice}
                     onChange={(e) => setMinPrice(Number(e.target.value))}
-                    className='w-32 border rounded-md p-2'
+                    className='w-32 rounded border border-bronze/30 bg-transparent p-2'
                   />
                 </div>
                 <div className='flex flex-col gap-1'>
-                  <span className='text-sm text-gray-500'>
+                  <span className='text-sm text-ink-muted'>
                     {t('priceRange.maxPrice')}
                   </span>
                   <input
                     type='number'
                     value={maxPrice}
                     onChange={(e) => setMaxPrice(Number(e.target.value))}
-                    className='w-32 border rounded-md p-2'
+                    className='w-32 rounded border border-bronze/30 bg-transparent p-2'
                   />
                 </div>
               </div>
@@ -150,27 +157,23 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
           </PopoverContent>
         </Popover>
 
-        {/* Search Button */}
-        <Button
-          variant='primary'
-          size='lg'
-          className='w-full md:w-auto'
-          onClick={handleSearch}
-        >
-          {t('searchButton')}
-        </Button>
-      </div>
+        <div className='flex items-center pt-3 lg:pl-6 lg:pt-0'>
+          <Button
+            variant='cta'
+            className='h-14 w-full px-8 lg:w-auto lg:px-10'
+            onClick={handleSearch}
+          >
+            {t('searchButton')}
+          </Button>
+        </div>
+      </SearchFieldRow>
 
-      {/* Promotions */}
-      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
-        <p className='font-semibold text-primary'>{t('promotions.tourist')}</p>
-        <Link
-          href='/tourist-activity'
-          className='font-semibold text-primary underline whitespace-nowrap'
-        >
-          {t('promotions.touristLink')}
-        </Link>
-      </div>
+      <PromoStrip
+        className='mt-4'
+        message={t('promotions.tourist')}
+        linkLabel={t('promotions.touristLink')}
+        href='/early-bird'
+      />
     </>
   );
 };

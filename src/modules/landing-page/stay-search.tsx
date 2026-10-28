@@ -1,7 +1,6 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
-import Link from 'next/link';
+import { Calendar } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -14,18 +13,41 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
+import {
+  PromoStrip,
+  SearchField,
+  SearchFieldRow,
+  SearchStepper,
+} from '@/components/ui/search-panel';
 
 interface StaySearchProps {
   onSearch: (searchParams: Record<string, string>) => void;
 }
 
-// Add these type definitions at the top of your file
 type DateRange = {
   from: Date | undefined;
-  to?: Date | undefined; // Note the optional to property
+  to?: Date | undefined;
 };
 
 type DurationType = 'daily' | 'monthly' | 'yearly';
+
+const formatDate = (date: Date | undefined) =>
+  date
+    ? date.toLocaleDateString('en-GB', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      })
+    : '—';
+
+/** "19 Aug 2026 — 24 Aug 2026", or the placeholder while nothing is picked. */
+const formatRange = (range: DateRange, placeholder: string) => {
+  if (!range.from) return placeholder;
+
+  return `${formatDate(range.from)} — ${
+    range.to ? formatDate(range.to) : placeholder
+  }`;
+};
 
 const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
   const [location, setLocation] = useState('Bali');
@@ -36,9 +58,7 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
     from: new Date(),
     to: new Date(new Date().setDate(new Date().getDate() + 4)),
   });
-  const [durationType, setDurationType] = useState<
-    'daily' | 'monthly' | 'yearly'
-  >('daily');
+  const [durationType, setDurationType] = useState<DurationType>('daily');
   const [bedrooms, setBedrooms] = useState(1);
   const [guests, setGuests] = useState(2);
   const t = useTranslations('landingPage.search');
@@ -56,47 +76,33 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
     });
   };
 
-  const handleDateRangeChange = (
-    range: DateRange, // External DateRange with optional 'to'
-    type: DurationType
-  ) => {
-    // Create a properly typed object for state
-    setDateRange({
-      from: range.from,
-      to: range.to || undefined,
-    });
+  const handleDateRangeChange = (range: DateRange, type: DurationType) => {
+    setDateRange({ from: range.from, to: range.to || undefined });
     setDurationType(type);
   };
 
   return (
     <>
-      {/* Search inputs */}
-      <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
+      <SearchFieldRow>
         {/* Location */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <FaLocationDot size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('location.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>{location}</span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={FaLocationDot}
+              label={t('location.label')}
+              value={location}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-56 p-2'>
             <div className='flex flex-col'>
               {locations.map((loc) => (
                 <button
                   key={loc}
-                  className={`py-2 px-3 text-left rounded-md ${
+                  type='button'
+                  className={`rounded px-3 py-2 text-left transition-colors ${
                     location === loc
-                      ? 'bg-primary/10 text-primary'
-                      : 'hover:bg-gray-100'
+                      ? 'bg-bronze/15 text-bronze-600'
+                      : 'hover:bg-bronze/10'
                   }`}
                   onClick={() => setLocation(loc)}
                 >
@@ -107,128 +113,78 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
           </PopoverContent>
         </Popover>
 
-        {/* Enhanced Date Range Picker - replaces separate check-in/check-out */}
+        {/* Stay dates — one field for the whole range, edited in one panel */}
         <EnhancedDateRangePicker
           onRangeChange={handleDateRangeChange}
           initialRange={dateRange}
           initialDurationType={durationType}
+          renderTrigger={({ open }) => (
+            <SearchField
+              icon={Calendar}
+              label={t('dates.label')}
+              value={formatRange(dateRange, t('dates.placeholder'))}
+              onClick={open}
+            />
+          )}
         />
 
         {/* Bedrooms */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <IoBed size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('bedrooms.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {bedrooms.toString().padStart(2, '0')}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={IoBed}
+              label={t('bedrooms.label')}
+              value={bedrooms.toString().padStart(2, '0')}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-48 p-3'>
-            <div className='flex flex-col gap-3'>
-              <div className='flex justify-between items-center'>
-                <span>{t('bedrooms.description')}</span>
-              </div>
-              <div className='flex items-center justify-between'>
-                <button
-                  onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={bedrooms <= 1}
-                >
-                  -
-                </button>
-                <span className='font-semibold'>
-                  {bedrooms.toString().padStart(2, '0')}
-                </span>
-                <button
-                  onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={bedrooms >= 10}
-                >
-                  +
-                </button>
-              </div>
-            </div>
+            <SearchStepper
+              description={t('bedrooms.description')}
+              value={bedrooms}
+              min={1}
+              max={10}
+              onChange={setBedrooms}
+            />
           </PopoverContent>
         </Popover>
 
         {/* Guests */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <IoPeopleOutline size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('guests.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {guests.toString().padStart(2, '0')}{' '}
-                    {guests > 1 ? 'guests' : 'guest'}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={IoPeopleOutline}
+              label={t('guests.label')}
+              value={guests.toString().padStart(2, '0')}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-48 p-3'>
-            <div className='flex flex-col gap-3'>
-              <div className='flex justify-between items-center'>
-                <span>{t('guests.description')}</span>
-              </div>
-              <div className='flex items-center justify-between'>
-                <button
-                  onClick={() => setGuests(Math.max(1, guests - 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={guests <= 1}
-                >
-                  -
-                </button>
-                <span className='font-semibold'>
-                  {guests.toString().padStart(2, '0')}
-                </span>
-                <button
-                  onClick={() => setGuests(Math.min(20, guests + 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={guests >= 20}
-                >
-                  +
-                </button>
-              </div>
-            </div>
+            <SearchStepper
+              description={t('guests.description')}
+              value={guests}
+              min={1}
+              max={20}
+              onChange={setGuests}
+            />
           </PopoverContent>
         </Popover>
-      </div>
 
-      {/* Search button and advanced options */}
-      <div className='flex flex-col md:flex-row gap-3 md:gap-4 md:justify-between md:items-center pt-3 md:pt-0'>
-        <Button
-          onClick={handleSearch}
-          variant='primary'
-          size='lg'
-          className='w-full md:w-auto px-8 md:px-12'
-        >
-          {t('searchButton')}
-        </Button>
-        {/* Promotions */}
-      </div>
-      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
-        <p className='font-semibold text-primary'>{t('promotions.stay')}</p>
-        <Link
-          href='/rent'
-          className='font-semibold text-primary underline whitespace-nowrap'
-        >
-          {t('promotions.stayLink')}
-        </Link>
-      </div>
+        <div className='flex items-center pt-3 lg:pl-6 lg:pt-0'>
+          <Button
+            onClick={handleSearch}
+            variant='cta'
+            className='h-14 w-full px-8 lg:w-auto lg:px-10'
+          >
+            {t('searchButton')}
+          </Button>
+        </div>
+      </SearchFieldRow>
+
+      <PromoStrip
+        className='mt-4'
+        message={t('promotions.stay')}
+        linkLabel={t('promotions.stayLink')}
+        href='/early-bird'
+      />
     </>
   );
 };

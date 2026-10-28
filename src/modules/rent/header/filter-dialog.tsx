@@ -129,13 +129,16 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant='outline' className='flex gap-2 items-center'>
-          <SlidersHorizontal size={20} className='text-primary' />
-          <span className='text-primary'>{t('title')}</span>
+        <Button
+          variant='ghost'
+          className='flex items-center gap-2 text-cream hover:text-bronze-200'
+        >
+          <SlidersHorizontal size={18} />
+          <span>{t('title')}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className='max-w-[90vw]  p-0 h-[80vh] flex flex-col max-h-[80vh]'>
-        <div className='flex px-4 md:px-8 py-4 md:py-5 justify-between border-b sticky top-0 bg-white z-10'>
+        <div className='flex px-4 md:px-8 py-4 md:py-5 justify-between border-b sticky top-0 bg-cream-light z-10'>
           <DialogTitle>
             <div className='flex gap-2 items-center'>
               <SlidersHorizontal size={24} className='text-primary' />
@@ -145,7 +148,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             </div>
           </DialogTitle>
           <Button variant='ghost' size='icon' onClick={() => setOpen(false)}>
-            <X size={20} className='text-gray-500' />
+            <X size={20} className='text-ink-muted' />
           </Button>
         </div>
 
@@ -167,10 +170,10 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             {/* Collections Section */}
             <div className='px-4 md:px-8 py-4 border-b flex flex-col gap-2'>
               <div className='flex justify-between'>
-                <span className='text-lg font-semibold text-gray-800'>
+                <span className='text-lg font-semibold text-ink'>
                   {t('collections')}
                 </span>
-                <ChevronUp className='text-gray-500' />
+                <ChevronUp className='text-ink-muted' />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2'>
                 {collectionsData.map((item, index) => (
@@ -185,7 +188,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                     />
                     <label
                       htmlFor={`collection-${index}`}
-                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
+                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-ink-soft'
                     >
                       {item.label}
                     </label>
@@ -200,10 +203,10 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             {/* Freebies Section */}
             <div className='px-4 md:px-8 py-4 border-b flex flex-col gap-2'>
               <div className='flex justify-between'>
-                <span className='text-lg font-semibold text-gray-800'>
+                <span className='text-lg font-semibold text-ink'>
                   {t('freebies')}
                 </span>
-                <ChevronUp className='text-gray-500' />
+                <ChevronUp className='text-ink-muted' />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2'>
                 {freebiesData.map((item, index) => (
@@ -218,7 +221,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                     />
                     <label
                       htmlFor={`freebie-${index}`}
-                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
+                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-ink-soft'
                     >
                       {item.label}
                     </label>
@@ -230,10 +233,10 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
             {/* Amenities Section */}
             <div className='px-4 md:px-8 pb-10 pt-4 border-b flex flex-col gap-2'>
               <div className='flex justify-between'>
-                <span className='text-lg font-semibold text-gray-800'>
+                <span className='text-lg font-semibold text-ink'>
                   {t('amenities')}
                 </span>
-                <ChevronUp className='text-gray-500' />
+                <ChevronUp className='text-ink-muted' />
               </div>
               <div className='grid grid-cols-1 sm:grid-cols-2'>
                 {amenitiesData.map((item, index) => (
@@ -248,7 +251,7 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
                     />
                     <label
                       htmlFor={`amenity-${index}`}
-                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700'
+                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-ink-soft'
                     >
                       {item.label}
                     </label>
@@ -262,11 +265,11 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
           </div>
         </ScrollArea>
 
-        <div className='border-t px-4 md:px-8 py-4 flex justify-between absolute w-full bottom-0 bg-white'>
+        <div className='border-t px-4 md:px-8 py-4 flex justify-between absolute w-full bottom-0 bg-cream-light'>
           <Button
             variant='ghost'
             onClick={handleClear}
-            className='text-sm font-medium text-gray-700'
+            className='text-sm font-medium text-ink-soft'
           >
             {t('clearAll')}
           </Button>

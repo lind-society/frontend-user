@@ -346,7 +346,7 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
             className={`text-xs whitespace-nowrap ${
               selectedOptionId === option.id
                 ? 'bg-primary text-white'
-                : 'text-gray-700'
+                : 'text-ink-soft'
             }`}
           >
             {option.label}
@@ -354,7 +354,7 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
         ))}
       </div>
 
-      <div className='text-center text-sm font-medium text-gray-600'>
+      <div className='text-center text-sm font-medium text-ink-soft'>
         {getCurrentRangeText()}
       </div>
       {/* Slider */}
@@ -367,7 +367,7 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
           step={step}
           onValueChange={handleSliderChange}
         >
-          <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-gray-200'>
+          <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-sand'>
             <SliderPrimitive.Range className='absolute h-full bg-primary' />
           </SliderPrimitive.Track>
           <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
@@ -378,7 +378,7 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
       {/* Input fields */}
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>{t('minimumPrice')}</Label>
+          <Label className='text-ink-muted text-sm'>{t('minimumPrice')}</Label>
           <Input
             type='text'
             value={minInputValue}
@@ -389,7 +389,7 @@ export const PriceRangeSelector: React.FC<PriceRangeSelectorProps> = ({
           />
         </div>
         <div className='flex flex-col gap-2'>
-          <Label className='text-gray-500 text-sm'>{t('maximumPrice')}</Label>
+          <Label className='text-ink-muted text-sm'>{t('maximumPrice')}</Label>
           <Input
             type='text'
             value={maxInputValue}

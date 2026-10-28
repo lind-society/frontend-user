@@ -26,7 +26,7 @@ const Content1AboutUs = () => {
 
           {/* Image container - optimized for all screens */}
           <div className='w-full lg:w-1/2 order-1 lg:order-2'>
-            <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-lg'>
+            <div className='relative w-full aspect-[4/3] rounded overflow-hidden shadow-sm'>
               <Image
                 src='/images/content-about-1.jpeg'
                 alt={t('imageAlt')}

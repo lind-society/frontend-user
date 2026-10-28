@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -24,6 +25,8 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
   onToggleOption,
   onClearAll,
 }) => {
+  const t = useTranslations('rentResults');
+
   // Split options for better responsive layout on smaller screens
   const halfLength = Math.ceil(options.length / 2);
   const firstHalf = options.slice(0, halfLength);
@@ -33,14 +36,14 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
     <div className='flex flex-col gap-4'>
       <div className='flex justify-between items-center'>
         <span className='text-lg md:text-[22px] text-primary font-semibold'>
-          Most Preferred Options
+          {t('preferredOptions.title')}
         </span>
         <Button
           variant='link'
           className='text-text text-sm font-medium p-0'
           onClick={onClearAll}
         >
-          Clear
+          {t('preferredOptions.clearAll')}
         </Button>
       </div>
 
@@ -50,19 +53,19 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
             key={option.id}
             variant={option.selected ? 'default' : 'outline'}
             className={`flex items-center gap-2 min-w-max ${
-              option.selected ? 'bg-primary text-white' : 'text-gray-500'
+              option.selected ? 'bg-primary text-cream' : 'text-ink-muted'
             }`}
             onClick={() => onToggleOption(option.id)}
           >
-            <span className={option.selected ? 'text-white' : 'text-gray-500'}>
+            <span className={option.selected ? 'text-cream' : 'text-ink-muted'}>
               {option.icon}
             </span>
             <span
               className={`text-xs font-medium ${
-                option.selected ? 'text-white' : 'text-gray-500'
+                option.selected ? 'text-cream' : 'text-ink-muted'
               }`}
             >
-              {option.labelKey}
+              {t(`search.amenities.${option.labelKey}`)}
             </span>
           </Button>
         ))}
@@ -77,21 +80,23 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
                   key={option.id}
                   variant={option.selected ? 'default' : 'outline'}
                   className={`flex items-center gap-2 min-w-max ${
-                    option.selected ? 'bg-primary text-white' : 'text-gray-500'
+                    option.selected ? 'bg-primary text-cream' : 'text-ink-muted'
                   }`}
                   onClick={() => onToggleOption(option.id)}
                 >
                   <span
-                    className={option.selected ? 'text-white' : 'text-gray-500'}
+                    className={
+                      option.selected ? 'text-cream' : 'text-ink-muted'
+                    }
                   >
                     {option.icon}
                   </span>
                   <span
                     className={`text-xs font-medium ${
-                      option.selected ? 'text-white' : 'text-gray-500'
+                      option.selected ? 'text-cream' : 'text-ink-muted'
                     }`}
                   >
-                    {option.labelKey}
+                    {t(`search.amenities.${option.labelKey}`)}
                   </span>
                 </Button>
               ))}
@@ -102,21 +107,23 @@ export const PreferredOptions: React.FC<PreferredOptionsProps> = ({
                   key={option.id}
                   variant={option.selected ? 'default' : 'outline'}
                   className={`flex items-center gap-2 min-w-max ${
-                    option.selected ? 'bg-primary text-white' : 'text-gray-500'
+                    option.selected ? 'bg-primary text-cream' : 'text-ink-muted'
                   }`}
                   onClick={() => onToggleOption(option.id)}
                 >
                   <span
-                    className={option.selected ? 'text-white' : 'text-gray-500'}
+                    className={
+                      option.selected ? 'text-cream' : 'text-ink-muted'
+                    }
                   >
                     {option.icon}
                   </span>
                   <span
                     className={`text-xs font-medium ${
-                      option.selected ? 'text-white' : 'text-gray-500'
+                      option.selected ? 'text-cream' : 'text-ink-muted'
                     }`}
                   >
-                    {option.labelKey}
+                    {t(`search.amenities.${option.labelKey}`)}
                   </span>
                 </Button>
               ))}

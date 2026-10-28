@@ -101,7 +101,7 @@ const ContentMedia = () => {
   ];
 
   return (
-    <div className='py-[32px] md:py-10 lg:py-14 bg-bg'>
+    <div className='py-[32px] md:py-10 lg:py-14'>
       <BaseContainer>
         <div className='flex flex-col gap-8'>
           <BreadcrumbLayout
@@ -116,7 +116,7 @@ const ContentMedia = () => {
           />
 
           <div className='flex flex-col gap-2 items-center text-center'>
-            <h4 className='text-primary'>Moments Captured, Memories Made</h4>
+            <h1 className='text-ink'>Moments Captured, Memories Made</h1>
             <span className='text-text text-xl md:text-2xl font-semibold'>
               Guest Experiences Through the Lens.
             </span>
@@ -129,7 +129,7 @@ const ContentMedia = () => {
                 {column.map((image, imgIndex) => (
                   <div
                     key={`desktop-${colIndex}-${imgIndex}`}
-                    className='relative rounded-lg overflow-hidden group cursor-pointer'
+                    className='relative rounded overflow-hidden group cursor-pointer'
                     onClick={() => openLightbox(image.src, image.alt)}
                   >
                     <Image
@@ -140,8 +140,8 @@ const ContentMedia = () => {
                       alt={image.alt}
                       className={`w-full ${image.height} object-cover transition-transform duration-300 group-hover:scale-105`}
                     />
-                    <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
-                      <FaExpand className='text-white text-2xl' />
+                    <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
+                      <FaExpand className='text-cream text-2xl' />
                     </div>
                   </div>
                 ))}
@@ -157,7 +157,7 @@ const ContentMedia = () => {
                 (image, index) => (
                   <div
                     key={`tablet-col1-${index}`}
-                    className='relative rounded-lg overflow-hidden group cursor-pointer'
+                    className='relative rounded overflow-hidden group cursor-pointer'
                     onClick={() => openLightbox(image.src, image.alt)}
                   >
                     <Image
@@ -176,8 +176,8 @@ const ContentMedia = () => {
                           : 'h-[320px]'
                       } object-cover transition-transform duration-300 group-hover:scale-105`}
                     />
-                    <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
-                      <FaExpand className='text-white text-2xl' />
+                    <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
+                      <FaExpand className='text-cream text-2xl' />
                     </div>
                   </div>
                 )
@@ -193,7 +193,7 @@ const ContentMedia = () => {
               ].map((image, index) => (
                 <div
                   key={`tablet-col2-${index}`}
-                  className='relative rounded-lg overflow-hidden group cursor-pointer'
+                  className='relative rounded overflow-hidden group cursor-pointer'
                   onClick={() => openLightbox(image.src, image.alt)}
                 >
                   <Image
@@ -212,8 +212,8 @@ const ContentMedia = () => {
                         : 'h-[330px]'
                     } object-cover transition-transform duration-300 group-hover:scale-105`}
                   />
-                  <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
-                    <FaExpand className='text-white text-2xl' />
+                  <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
+                    <FaExpand className='text-cream text-2xl' />
                   </div>
                 </div>
               ))}
@@ -239,7 +239,7 @@ const ContentMedia = () => {
             ].map((image, index) => (
               <div
                 key={`mobile-${index}`}
-                className='relative rounded-lg overflow-hidden group cursor-pointer'
+                className='relative rounded overflow-hidden group cursor-pointer'
                 onClick={() => openLightbox(image.src, image.alt)}
               >
                 <Image
@@ -256,8 +256,8 @@ const ContentMedia = () => {
                       : 'h-[280px]'
                   } object-cover transition-transform duration-300 group-hover:scale-105`}
                 />
-                <div className='absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
-                  <FaExpand className='text-white text-2xl' />
+                <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
+                  <FaExpand className='text-cream text-2xl' />
                 </div>
               </div>
             ))}
@@ -266,11 +266,11 @@ const ContentMedia = () => {
           {/* Lightbox for fullscreen view */}
           {selectedImage && (
             <div
-              className='fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4'
+              className='fixed inset-0 bg-ink/90 z-50 flex items-center justify-center p-4'
               onClick={closeLightbox}
             >
               <button
-                className='absolute top-6 right-6 text-white p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors'
+                className='absolute top-6 right-6 text-cream p-2 rounded-full bg-ink/50 hover:bg-ink/70 transition-colors'
                 onClick={closeLightbox}
                 aria-label='Close image preview'
               >
@@ -287,7 +287,7 @@ const ContentMedia = () => {
                   height={800}
                   className='object-contain mx-auto max-h-[90vh]'
                 />
-                <p className='text-white text-center mt-2 text-sm'>
+                <p className='text-cream text-center mt-2 text-sm'>
                   {selectedAlt}
                 </p>
               </div>

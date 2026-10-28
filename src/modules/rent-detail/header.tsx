@@ -67,7 +67,7 @@ const HeaderRentDetail = () => {
               align: 'center',
               loop: true,
             }}
-            className='w-full bg-white'
+            className='w-full bg-cream-light'
           >
             <CarouselContent className='-ml-4 items-center'>
               {villaImages.map((image, index) => (
@@ -76,7 +76,7 @@ const HeaderRentDetail = () => {
                   className='pl-4 h-[460px] md:h-[560px] flex items-center basis-full sm:basis-2/3 md:basis-3/4 '
                 >
                   <div
-                    className={`w-full overflow-hidden transition-all duration-300 ease-in-out rounded-lg ${
+                    className={`w-full overflow-hidden transition-all duration-300 ease-in-out rounded ${
                       current === index
                         ? 'h-[460px] md:h-[560px] z-10'
                         : 'h-[380px] md:h-[480px] opacity-50'
@@ -121,7 +121,7 @@ const HeaderRentDetail = () => {
                 className={`w-3 h-3 rounded-full transition-all ${
                   current === index
                     ? 'bg-primary w-6'
-                    : 'bg-gray-300 hover:bg-gray-400'
+                    : 'bg-bronze/25 hover:bg-bronze/40'
                 }`}
                 onClick={() => api?.scrollTo(index)}
                 aria-label={`Go to slide ${index + 1}`}
@@ -130,7 +130,7 @@ const HeaderRentDetail = () => {
           </div>
 
           {/* Current slide indicator text */}
-          <div className='absolute bottom-4 right-4 bg-black/50 text-white text-sm px-2 py-1 rounded-md'>
+          <div className='absolute bottom-4 right-4 bg-ink/50 text-cream text-sm px-2 py-1 rounded'>
             {current + 1} {t('slideIndicator')} {count}
           </div>
         </div>

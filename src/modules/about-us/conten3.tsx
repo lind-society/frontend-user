@@ -32,7 +32,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
   >
     {/* Image container */}
     <div className='w-full lg:w-1/2'>
-      <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden shadow-md'>
+      <div className='relative w-full aspect-[4/3] rounded overflow-hidden shadow-sm'>
         <Image
           src={imageSrc}
           alt={title}

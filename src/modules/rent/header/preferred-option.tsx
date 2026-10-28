@@ -13,7 +13,7 @@ import { PiMountainsDuotone } from 'react-icons/pi';
 import { RiRoadMapLine } from 'react-icons/ri';
 import { TbAirConditioning, TbGrill, TbMassage } from 'react-icons/tb';
 
-import { Button } from '@/components/ui/button';
+import { AmenityChip } from '@/components/ui/amenity-chip';
 
 import { FiltersDialog } from '@/modules/rent/header/filter-dialog';
 import { OptionCarousel } from '@/modules/rent/header/option-carousel';
@@ -36,55 +36,55 @@ export function PreferredOptions({ onFilterApply }: PreferredOptionsProps) {
     {
       id: 'air-cond',
       label: t('amenities.airConditioner'),
-      icon: <TbAirConditioning size={24} />,
+      icon: <TbAirConditioning size={18} />,
     },
-    { id: 'pool', label: t('amenities.pool'), icon: <BiSwim size={24} /> },
+    { id: 'pool', label: t('amenities.pool'), icon: <BiSwim size={18} /> },
     {
       id: 'kitchen',
       label: t('amenities.kitchen'),
-      icon: <MdKitchen size={24} />,
+      icon: <MdKitchen size={18} />,
     },
     {
       id: 'parking',
       label: t('amenities.parking'),
-      icon: <FaParking size={24} />,
+      icon: <FaParking size={18} />,
     },
     {
       id: 'beach',
       label: t('amenities.beachfront'),
-      icon: <FaUmbrellaBeach size={24} />,
+      icon: <FaUmbrellaBeach size={18} />,
     },
     {
       id: 'wifi',
       label: t('amenities.freeWifi'),
-      icon: <IoWifiOutline size={24} />,
+      icon: <IoWifiOutline size={18} />,
     },
     {
       id: 'pets',
       label: t('amenities.petFriendly'),
-      icon: <MdOutlinePets size={24} />,
+      icon: <MdOutlinePets size={18} />,
     },
     {
       id: 'security',
       label: t('amenities.security'),
-      icon: <MdOutlineSecurity size={24} />,
+      icon: <MdOutlineSecurity size={18} />,
     },
     {
       id: 'mountain',
       label: t('amenities.mountainView'),
-      icon: <PiMountainsDuotone size={24} />,
+      icon: <PiMountainsDuotone size={18} />,
     },
     {
       id: 'massage',
       label: t('amenities.massage'),
-      icon: <TbMassage size={24} />,
+      icon: <TbMassage size={18} />,
     },
-    { id: 'bbq', label: t('amenities.bbqGrill'), icon: <TbGrill size={24} /> },
-    { id: 'yoga', label: t('amenities.yoga'), icon: <GrYoga size={24} /> },
+    { id: 'bbq', label: t('amenities.bbqGrill'), icon: <TbGrill size={18} /> },
+    { id: 'yoga', label: t('amenities.yoga'), icon: <GrYoga size={18} /> },
     {
       id: 'seaview',
       label: t('amenities.seaView'),
-      icon: <RiRoadMapLine size={24} />,
+      icon: <RiRoadMapLine size={18} />,
     },
   ];
 
@@ -129,9 +129,9 @@ export function PreferredOptions({ onFilterApply }: PreferredOptionsProps) {
   };
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex justify-between items-center'>
-        <span className='text-lg md:text-[22px] text-primary font-semibold'>
+    <div className='flex flex-col gap-3'>
+      <div className='flex items-center justify-between gap-4'>
+        <span className='font-heading text-xl font-semibold text-bronze'>
           {t('title')}
         </span>
         <FiltersDialog onApply={handleFilterApply} />
@@ -139,17 +139,13 @@ export function PreferredOptions({ onFilterApply }: PreferredOptionsProps) {
 
       <OptionCarousel>
         {preferredOptions.map((option) => (
-          <Button
+          <AmenityChip
             key={option.id}
-            variant='outline'
-            className='flex items-center gap-2 min-w-max'
+            icon={option.icon}
             onClick={() => handleOptionClick(option.id)}
           >
-            <span className='text-gray-500'>{option.icon}</span>
-            <span className='text-xs font-medium text-gray-500'>
-              {option.label}
-            </span>
-          </Button>
+            {option.label}
+          </AmenityChip>
         ))}
       </OptionCarousel>
     </div>

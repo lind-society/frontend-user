@@ -1,27 +1,137 @@
+import { AxiosError } from 'axios';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { MdEmail, MdSecurity } from 'react-icons/md';
 
+import {
+  useCreateBookingPayment,
+  useCreatePaymentRequest,
+} from '@/hooks/api/useBooking';
+
 import BaseContainer from '@/components/layouts/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 
-interface PaymentMethodsProps {
-  onContinue: () => void;
+import { ReservationBookingView } from './booking-view';
+
+import { PaymentRequest } from '@/types/api/booking';
+
+/**
+ * The on-screen buttons map onto the gateway's channel codes. Card brands all
+ * route through the one card channel — the gateway decides the network from the
+ * card number, not from which logo the guest clicked.
+ */
+const CHANNEL_CODES: Record<string, string> = {
+  bri: 'BRI',
+  bni: 'BNI',
+  bca: 'BCA',
+  mandiri: 'MANDIRI',
+  visa: 'CARDS',
+  mastercard: 'CARDS',
+  jcb: 'CARDS',
+  amex: 'CARDS',
+};
+
+function readErrorMessage(error: unknown): string {
+  const message = (error as AxiosError<{ message?: string | string[] }>)
+    ?.response?.data?.message;
+
+  if (Array.isArray(message)) return message.join(', ');
+  if (typeof message === 'string') return message;
+
+  return 'Something went wrong while starting the payment. Please try again.';
 }
 
-const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
+interface PaymentMethodsProps {
+  onContinue: () => void;
+  /**
+   * A real booking. Without it this screen stays the click-through mock that
+   * `/rent/[name]/reservation` has always been.
+   */
+  booking?: ReservationBookingView;
+  bookingId?: string;
+  token?: string;
+}
+
+const PaymentMethods = ({
+  onContinue,
+  booking,
+  bookingId,
+  token,
+}: PaymentMethodsProps) => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<string>('');
+  const [request, setRequest] = useState<PaymentRequest | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const createPayment = useCreateBookingPayment(bookingId, token);
+  const createRequest = useCreatePaymentRequest(bookingId, token);
 
   const handleSelectPayment = (method: string) => {
     setSelectedPaymentMethod(method);
+    setError(null);
+  };
+
+  const redirectUrl =
+    request?.actions?.find((action) => action.value?.startsWith('http'))
+      ?.value ?? null;
+  const qrString =
+    request?.actions?.find(
+      (action) => action.value && !action.value.startsWith('http')
+    )?.value ?? null;
+  const virtualAccount = request?.channelProperties?.virtualAccountNumber;
+
+  const handleContinue = async () => {
+    // No booking behind this screen means the original mock flow.
+    if (!booking || !bookingId || !token) {
+      onContinue();
+      return;
+    }
+
+    const channelCode = CHANNEL_CODES[selectedPaymentMethod];
+
+    if (!channelCode) return;
+
+    setError(null);
+    setSubmitting(true);
+
+    try {
+      // The backend refuses a second payment while one is still pending, so an
+      // already-open payment is continued rather than replaced.
+      const bookingPaymentId =
+        booking.outstandingPaymentId ??
+        (
+          await createPayment.mutateAsync({
+            paymentChannel: channelCode,
+          })
+        ).id;
+
+      const result = await createRequest.mutateAsync({
+        bookingPaymentId,
+        channelCode,
+      });
+
+      setRequest(result);
+
+      const redirect = result.actions?.find((action) =>
+        action.value?.startsWith('http')
+      )?.value;
+
+      if (redirect) {
+        window.location.href = redirect;
+      }
+    } catch (caught) {
+      setError(readErrorMessage(caught));
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <BaseContainer>
-      <div className='flex flex-col lg:flex-row justify-between bg-white py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded-lg shadow-md gap-6'>
+      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm gap-6'>
         {/* Left Column - Payment Methods */}
         <div className='py-4 flex-1 flex flex-col gap-5'>
           <h3 className='text-xl md:text-2xl font-semibold text-primary'>
@@ -43,7 +153,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'bri'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('bri')}
@@ -59,7 +169,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'bni'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('bni')}
@@ -75,7 +185,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'bca'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('bca')}
@@ -91,7 +201,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'mandiri'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('mandiri')}
@@ -118,7 +228,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'visa'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('visa')}
@@ -139,7 +249,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'mastercard'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('mastercard')}
@@ -160,7 +270,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'jcb'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('jcb')}
@@ -176,7 +286,7 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
                 }
                 className={`flex items-center gap-2 ${
                   selectedPaymentMethod === 'amex'
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }`}
                 onClick={() => handleSelectPayment('amex')}
@@ -192,13 +302,51 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
             </div>
           </div>
 
+          {error && (
+            <div className='rounded border border-red-200 bg-red-50 p-4 text-sm text-red-700'>
+              {error}
+            </div>
+          )}
+
+          {/* Instructions from the gateway, once a payment has been started. */}
+          {(virtualAccount || qrString || redirectUrl) && (
+            <div className='flex flex-col gap-3 border rounded p-4'>
+              {virtualAccount && (
+                <div className='flex flex-col gap-1'>
+                  <span className='text-text text-sm'>
+                    Virtual account number
+                  </span>
+                  <span className='text-primary text-lg font-semibold break-all'>
+                    {virtualAccount}
+                  </span>
+                </div>
+              )}
+              {qrString && (
+                <div className='flex flex-col gap-1'>
+                  <span className='text-text text-sm'>QRIS code</span>
+                  <span className='text-primary text-xs break-all'>
+                    {qrString}
+                  </span>
+                </div>
+              )}
+              {redirectUrl && (
+                <Button variant='primary' asChild>
+                  <a href={redirectUrl}>Continue to payment</a>
+                </Button>
+              )}
+              <span className='text-text text-sm'>
+                This page updates on its own once the payment is received.
+              </span>
+            </div>
+          )}
+
           <Button
             variant='primary'
             className='w-full md:w-auto md:self-start mt-4'
-            disabled={!selectedPaymentMethod}
-            onClick={onContinue}
+            disabled={!selectedPaymentMethod || submitting}
+            onClick={handleContinue}
           >
-            Continue to Payment Details
+            {submitting ? 'Starting payment...' : 'Continue to Payment Details'}
           </Button>
 
           <div className='flex flex-col gap-4 mt-4'>
@@ -217,8 +365,8 @@ const PaymentMethods = ({ onContinue }: PaymentMethodsProps) => {
         </div>
 
         {/* Right Column - Help Box */}
-        <div className='w-full h-fit lg:w-[340px] border shadow-md'>
-          <div className='bg-primary text-white flex flex-col gap-1 px-6 py-3'>
+        <div className='w-full h-fit lg:w-[340px] border shadow-sm'>
+          <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
             <span className='text-lg md:text-xl font-semibold'>
               Help & Payment Confirmation
             </span>

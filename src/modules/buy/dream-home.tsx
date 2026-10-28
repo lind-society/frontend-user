@@ -73,17 +73,17 @@ const DreamHomeBuyPage = () => {
               />
             </div>
             <div className='bg-primary p-6 md:p-8 flex flex-col gap-4 md:gap-5'>
-              <h2 className='text-white text-xl md:text-2xl lg:text-3xl font-bold'>
+              <h2 className='text-cream text-xl md:text-2xl lg:text-3xl font-bold'>
                 {t('title')}
               </h2>
-              <p className='text-white text-base md:text-lg lg:text-xl font-medium md:font-semibold'>
+              <p className='text-cream text-base md:text-lg lg:text-xl font-medium md:font-semibold'>
                 {t('subtitle')}
               </p>
             </div>
           </div>
 
           {/* Right column with features */}
-          <div className='grid grid-cols-1  gap-6 text-white h-full'>
+          <div className='grid grid-cols-1  gap-6 text-cream h-full'>
             {features.map((feature, index) => (
               <FeatureCard
                 key={index}

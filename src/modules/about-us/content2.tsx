@@ -17,13 +17,13 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
 }) => (
-  <div className='bg-primary px-5 py-6 rounded-lg shadow-md transition-transform hover:scale-[1.02]'>
+  <div className='bg-primary px-5 py-6 rounded shadow-sm transition-transform hover:scale-[1.02]'>
     <div className='h-14 w-14 md:h-16 md:w-16 bg-tertiary flex items-center justify-center rounded-full mb-4'>
       {icon}
     </div>
-    <div className='text-white'>
+    <div className='text-cream'>
       <h3 className='text-lg md:text-xl font-bold mb-2'>{title}</h3>
-      <p className='text-sm md:text-base text-white/90 line-clamp-4'>
+      <p className='text-sm md:text-base text-cream/90 line-clamp-4'>
         {description}
       </p>
     </div>
@@ -58,7 +58,7 @@ const Content2AboutUs = () => {
   ];
 
   return (
-    <section className='py-10 md:py-16 lg:py-20 bg-gray-50'>
+    <section className='py-10 md:py-16 lg:py-20'>
       <BaseContainer>
         <div className='flex flex-col gap-10 md:gap-12 lg:gap-16'>
           {/* Section title */}
@@ -75,7 +75,7 @@ const Content2AboutUs = () => {
               <h3 className='text-xl md:text-2xl font-bold text-primary'>
                 {t('subtitle')}
               </h3>
-              <p className='text-gray-600 text-base md:text-lg'>
+              <p className='text-ink-soft text-base md:text-lg'>
                 {t('description')}
               </p>
             </div>

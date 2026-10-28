@@ -6,10 +6,17 @@
     "currency": "IDR",
     "navigation": {
       "stay": "Menginap",
-      "buy": "Beli",
-      "touristActivity": "Aktivitas Wisata",
+      "buy": "Properti",
+      "touristActivity": "Pengalaman",
+      "journal": "Jurnal",
       "propertyManagement": "Manajemen Properti",
-      "aboutUs": "Tentang Kami"
+      "aboutUs": "Tentang"
+    },
+    "menu": {
+      "open": "Buka menu",
+      "close": "Tutup menu",
+      "browse": "Jelajahi",
+      "more": "Lainnya"
     },
     "contact": "Hubungi Kami",
     "wishlist": "Wishlist",
@@ -18,6 +25,32 @@
     }
   },
   "footer": {
+    "tagline": "Rumah pilihan, pengalaman menginap luar biasa,\ndan momen bermakna\ndi Bali dan sekitarnya.",
+    "explore": {
+      "title": "Jelajahi",
+      "stays": "Menginap",
+      "properties": "Properti",
+      "experiences": "Pengalaman",
+      "journal": "Jurnal",
+      "destinations": "Destinasi"
+    },
+    "support": {
+      "title": "Dukungan",
+      "faqs": "FAQ",
+      "bookingGuide": "Panduan Pemesanan",
+      "terms": "Syarat & Ketentuan",
+      "privacy": "Kebijakan Privasi",
+      "cancellation": "Kebijakan Pembatalan"
+    },
+    "getInTouch": {
+      "title": "Hubungi Kami",
+      "conciergeLabel": "Concierge",
+      "concierge": "+62 812 3456 7890",
+      "emailLabel": "Email",
+      "email": "hello@lindsociety.com",
+      "location": "Bali, Indonesia",
+      "cta": "Pesan Sekarang"
+    },
     "paymentChannels": "Saluran Pembayaran",
     "followUs": "Ikuti Kami",
     "about": {
@@ -34,6 +67,10 @@
     "aboutLinks": {
       "title": "Tentang",
       "aboutUs": "Tentang Kami",
+      "ourStory": "Kisah Kami",
+      "partners": "Mitra",
+      "careers": "Karier",
+      "contact": "Kontak",
       "media": "Galeri Media",
       "blog": "Blog"
     },
@@ -50,16 +87,16 @@
       "cancellation": "Kebijakan Pembatalan"
     },
     "newsletter": {
-      "title": "Berlangganan newsletter kami untuk keuntungan vila dan tips insider, plus diskon hingga 30%",
-      "emailPlaceholder": "Masukkan alamat email Anda",
+      "title": "Jadilah yang pertama menemukan\nrumah pilihan & pengalaman eksklusif.",
+      "emailPlaceholder": "Alamat email Anda",
       "subscribe": "Berlangganan"
     },
     "copyright": "© 2025 LIND Society. 45 Sudirman Avenue, Level 5, Jakarta, Indonesia 10210\nNomor Lisensi Bisnis Indonesia: 0123456789"
   },
   "landingPage": {
     "header": {
-      "title": "Nikmati Liburan Impian Anda",
-      "subtitle": "Kami menyediakan berbagai akomodasi penginapan terbaik untuk Anda yang membutuhkannya.",
+      "title": "Rumah Pilihan.\nMenginap Istimewa.\nHidup Berkesan.",
+      "subtitle": "Vila pilihan, pengalaman unik,\ndan momen abadi di Bali dan sekitarnya.",
       "stats": {
         "satisfiedVisitors": "Pengunjung Puas",
         "tourGuides": "Pemandu Wisata Luar Biasa",
@@ -99,29 +136,22 @@
       "availability": "Ketersediaan",
       "whatToDo": "Apa yang ingin Anda lakukan?",
       "chooseLocation": "Pilih Lokasi",
-      "searchButton": "Cari",
+      "searchButton": "Cari Vila",
       "advancedSearch": "Pencarian Lanjutan",
       "enhancedDateRange": {
         "label": "Ketersediaan",
         "selectDates": "Pilih tanggal",
         "selectEndDate": "Pilih tanggal akhir",
+        "selectDate": "Pilih tanggal",
+        "apply": "Terapkan",
+        "cancel": "Batal",
         "daily": "Harian",
         "monthly": "Bulanan",
         "yearly": "Tahunan",
         "howLongStay": "Berapa lama menginap?",
-        "stayDuration": "Durasi Menginap",
-        "duration": "Durasi",
-        "month": "bulan",
-        "months": "bulan",
-        "year": "tahun",
-        "years": "tahun",
-        "startDate": "Tanggal Mulai",
-        "endDate": "Tanggal Selesai",
-        "selectDate": "Pilih tanggal",
-        "selectStartDate": "Pilih Tanggal Mulai",
-        "selectStartDateFirst": "Pilih tanggal mulai terlebih dahulu",
-        "apply": "Terapkan",
-        "cancel": "Batal"
+        "monthCount": "{count} bulan",
+        "yearCount": "{count} tahun",
+        "startingDateAt": "Mulai tanggal"
       },
       "promotions": {
         "stay": "*Penawaran Early Bird Eksklusif – Pesan Lebih Awal & Nikmati Diskon Khusus!🌟",
@@ -130,6 +160,10 @@
         "buyLink": "Jelajahi properti premium!",
         "tourist": "*Diskon Grup Khusus - Pesan Aktivitas untuk 4+ Orang dan Hemat 15%!🌴",
         "touristLink": "Jelajahi aktivitas dengan rating terbaik!"
+      },
+      "dates": {
+        "label": "Tanggal Menginap",
+        "placeholder": "Pilih tanggal"
       }
     },
     "exploreIconic": {
@@ -137,58 +171,78 @@
       "subtitle": "Bepergian melampaui hal biasa dan rangkul keajaiban destinasi paling ikonik di dunia."
     },
     "exploreBest": {
-      "title": "Jelajahi Daftar Terbaik LIND",
+      "title": "Rumah Unggulan",
       "forRent": "Untuk Disewa",
       "forSale": "Untuk Dijual",
       "daily": "Harian",
       "monthly": "Bulanan",
       "yearly": "Tahunan",
-      "viewMore": "Lihat Lebih Banyak"
+      "viewMore": "Lihat Lebih Banyak",
+      "subtitle": "Menginap pilihan yang dikurasi khusus untuk Anda oleh LIND Society."
+    },
+    "trustBar": {
+      "curated": {
+        "title": "Koleksi Pilihan",
+        "description": "Hanya rumah terbaik"
+      },
+      "personal": {
+        "title": "Layanan Personal",
+        "description": "Disesuaikan kebutuhan Anda"
+      },
+      "partners": {
+        "title": "Mitra Terpercaya",
+        "description": "Dipilih dengan cermat"
+      },
+      "concierge": {
+        "title": "Concierge 24/7",
+        "description": "Kami siap membantu"
+      }
     },
     "whyChooseUs": {
-      "title": "Mengapa Memilih Kami?",
+      "title": "Pengalaman LIND",
       "features": {
-        "bestRates": {
-          "title": "Tarif Terbaik Dijamin",
-          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        "handpicked": {
+          "title": "Rumah Pilihan",
+          "description": "Kualitas di atas kuantitas"
         },
-        "excellentService": {
-          "title": "Layanan Luar Biasa",
-          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        "localInsight": {
+          "title": "Wawasan Lokal",
+          "description": "Temukan permata tersembunyi"
         },
-        "support24": {
-          "title": "Dukungan 24/7",
-          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        "seamlessStay": {
+          "title": "Menginap Tanpa Ribet",
+          "description": "Dari pesan hingga check-out"
+        },
+        "meaningfulMoments": {
+          "title": "Momen Bermakna",
+          "description": "Ciptakan kenangan abadi"
         }
       }
     },
     "discover": {
       "title": "Temukan Pengalaman Tak Terlupakan",
-      "subtitle": "Buka rahasia dunia dan mulai perjalanan tak terlupakan bersama LIND Society.",
+      "subtitle": "Ungkap rahasia dunia dan mulailah perjalanan tak terlupakan bersama LIND Society.",
+      "viewAll": "Lihat Semua Pengalaman",
       "experiences": {
-        "journey": {
-          "title": "Perjalanan",
-          "count": "150+ perjalanan"
+        "privateChef": {
+          "title": "Koki Pribadi",
+          "count": "di vila Anda"
         },
-        "adventures": {
-          "title": "Petualangan",
-          "count": "30+ tempat"
+        "sunriseYoga": {
+          "title": "Yoga Matahari Terbit",
+          "count": "di tepi pantai"
+        },
+        "cultural": {
+          "title": "Perjalanan Budaya",
+          "count": "di dekat Anda"
         },
         "wellness": {
-          "title": "Kesehatan",
-          "count": "50+ tempat"
+          "title": "Kebugaran & Terapi",
+          "count": "sesuai permintaan"
         },
-        "culture": {
-          "title": "Budaya",
-          "count": "10+ perjalanan"
-        },
-        "culinaries": {
-          "title": "Kuliner",
-          "count": "200+ tempat"
-        },
-        "specialEvents": {
-          "title": "Acara Khusus",
-          "count": "10+ acara"
+        "history": {
+          "title": "Pelajari Sejarah",
+          "count": "di mana pun Anda menginap"
         }
       }
     },
@@ -207,6 +261,32 @@
       "subtitle": "Pengalaman Tamu Melalui Lensa.",
       "viewAllMedia": "Lihat Semua Media",
       "loadMore": "Muat Lebih Banyak"
+    },
+    "journalBanner": {
+      "eyebrow": "Hidup Indah",
+      "title": "Ruang yang menginspirasi.\nMomen yang bermakna.",
+      "subtitle": "Jurnal tentang hunian, perjalanan, desain, dan budaya.",
+      "cta": "Baca Jurnal"
+    },
+    "ecosystem": {
+      "title": "Dunia Hidup yang Indah",
+      "subtitle": "Ekosistem Lind",
+      "description": "Arsitektur, mode, perayaan, dan pengalaman — dikurasi dengan gairah, diciptakan dengan tujuan.",
+      "viewMore": "Lihat Selengkapnya",
+      "items": {
+        "architecture": {
+          "title": "Arsitektur & Desain Interior"
+        },
+        "wedding": {
+          "title": "Desain Pernikahan & Acara"
+        },
+        "fashion": {
+          "title": "Mode Abadi yang Penuh Makna"
+        },
+        "experiences": {
+          "title": "Pengalaman & Perayaan Terkurasi"
+        }
+      }
     }
   },
   "aboutUs": {
@@ -307,37 +387,34 @@
   "rent": {
     "pageTitle": "Sewa Villa & Properti",
     "header": {
-      "title": "Temukan Sewa Villa Terpilih dengan LIND Society",
-      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "title": "Temukan Vila Sewa Pilihan bersama LIND Society.",
+      "subtitle": "Vila pilihan, pengalaman unik,\ndan momen abadi di Bali dan sekitarnya.",
       "search": {
         "location": "Lokasi",
-        "checkIn": "Check in",
-        "checkOut": "Check out",
         "selectDate": "Pilih tanggal",
         "bedrooms": "Kamar Tidur",
         "guests": "Tamu",
-        "searchButton": "Cari",
+        "searchButton": "Cari Vila",
         "enhancedDateRange": {
           "label": "Check in - Check out",
           "selectDates": "Pilih tanggal",
+          "selectDate": "Pilih tanggal",
+          "selectEndDate": "Pilih tanggal selesai",
+          "cancel": "Batal",
+          "apply": "Terapkan",
           "daily": "Harian",
           "monthly": "Bulanan",
           "yearly": "Tahunan",
-          "howLongStay": "Berapa lama Anda ingin menginap?",
-          "stayDuration": "Durasi menginap",
-          "duration": "Durasi:",
-          "startDate": "Tanggal mulai:",
-          "endDate": "Tanggal selesai:",
-          "selectDate": "Pilih tanggal",
-          "selectStartDateFirst": "Pilih tanggal mulai terlebih dahulu",
-          "selectStartDate": "Pilih tanggal mulai",
-          "selectEndDate": "Pilih tanggal selesai",
-          "month": "bulan",
-          "months": "bulan",
-          "year": "tahun",
-          "years": "tahun",
-          "cancel": "Batal",
-          "apply": "Terapkan"
+          "howLongStay": "Berapa lama menginap?",
+          "monthCount": "{count} bulan",
+          "yearCount": "{count} tahun",
+          "startingDateAt": "Mulai tanggal"
+        },
+        "bedroomDescription": "Jumlah kamar tidur",
+        "guestDescription": "Jumlah tamu",
+        "dates": {
+          "label": "Tanggal Menginap",
+          "placeholder": "Pilih tanggal"
         }
       }
     },
@@ -565,7 +642,8 @@
         "minPrice": "Harga Min",
         "maxPrice": "Harga Maks",
         "sortBy": "Urutkan berdasarkan",
-        "availableActivity": "Aktivitas tersedia"
+        "availableActivity": "Aktivitas tersedia",
+        "searchButton": "Cari aktivitas"
       },
       "cards": {
         "reviews": "ulasan",
@@ -580,7 +658,8 @@
       },
       "buttons": {
         "showMore": "Tampilkan Lebih Banyak"
-      }
+      },
+      "favorite": "Tambah ke favorit"
     },
     "explore": {
       "title": "Jelajahi Aktivitas Wisata Lain Kami",
@@ -942,7 +1021,14 @@
       "custom": "Kustom",
       "enterYourMessage": "Masukkan pesan Anda",
       "persons": "orang",
-      "selectDate": "Pilih tanggal"
+      "selectDate": "Pilih tanggal",
+      "askForROI": "Tanya ROI",
+      "customerServiceFor": "Layanan Pelanggan Vila untuk",
+      "entertainment": "Hiburan",
+      "kids": "Anak-anak",
+      "makeItYours": "Jadikan Milik Anda",
+      "meals": "Makanan",
+      "transport": "Transportasi"
     }
   },
   "buyDetail": {
@@ -999,7 +1085,8 @@
         "meals": "Makanan",
         "transport": "Transportasi",
         "kids": "Anak-anak"
-      }
+      },
+      "details": "Detail"
     },
     "inquiryForm": {
       "title": "Kirim Pertanyaan",
@@ -1025,7 +1112,9 @@
       "enterYourMessage": "Masukkan pesan Anda",
       "tellUsWhatYouWouldLikeUsToHelpYouWith": "Beritahu kami apa yang ingin Anda minta bantuan",
       "guestSingular": "Tamu",
-      "guestPlural": "Tamu"
+      "guestPlural": "Tamu",
+      "selectDuration": "Pilih durasi",
+      "selectGuestCount": "Pilih jumlah tamu"
     }
   },
   "touristActivityDetail": {
@@ -1041,6 +1130,8 @@
     "seeDetails": "Lihat detail",
     "pax": "/orang",
     "getTicket": "Dapatkan Tiket",
+    "ticketsLeftToday": "{count} tiket tersisa hari ini",
+    "soldOutToday": "Habis untuk hari ini",
     "openingHour": "Jam Buka:",
     "closingHour": "Jam Tutup:",
     "startFrom": "Mulai dari",
@@ -1057,8 +1148,13 @@
       "phone": "Nomor telepon",
       "phonePlaceholder": "Masukkan nomor kontak Anda",
       "ticketAmount": "Tiket",
+      "total": "Total",
       "agreement": "Dengan memberikan detail Anda, Anda setuju untuk menerima komunikasi pemasaran dari LIND Society.",
-      "next": "Selanjutnya"
+      "agreementRequired": "Mohon setujui ketentuan sebelum melanjutkan.",
+      "genericError": "Terjadi kesalahan. Silakan coba lagi.",
+      "back": "Kembali",
+      "next": "Selanjutnya",
+      "submitting": "Memproses booking..."
     },
     "payment": {
       "title": "Untuk menyelesaikan pendaftaran Anda, silakan pilih metode pembayaran Anda.",
@@ -1071,6 +1167,121 @@
     "success": {
       "title": "Pembayaran berhasil! Tiket Anda telah dikirim ke email Anda. Silakan periksa kotak masuk Anda.",
       "return": "Kembali ke Aktivitas"
+    },
+    "gallery": {
+      "viewAllPhotos": "Lihat Semua Foto"
+    },
+    "paymentMethods": {
+      "creditCard": "Kartu Kredit (Visa, MasterCard, JCB)",
+      "eWallet": "E-Wallet (GoPay, OVO, ShopeePay)",
+      "proceedToPayment": "Lanjutkan ke Pembayaran",
+      "title": "Pilih Metode Pembayaran",
+      "virtualAccount": "Virtual Account (BCA, Mandiri, BRI, BNI)"
+    },
+    "registrationForm": {
+      "continueToPayment": "Lanjut ke Pembayaran",
+      "date": "Tanggal",
+      "numberOfPeople": "Jumlah Orang",
+      "people": "orang",
+      "person": "orang",
+      "serviceFee": "Biaya Layanan",
+      "title": "Formulir Pendaftaran",
+      "totalPrice": "Total Harga"
+    },
+    "return": "Kembali ke Aktivitas",
+    "sidebar": {
+      "addToWishlist": "Tambah ke Wishlist",
+      "bookNow": "Pesan Sekarang",
+      "from": "Mulai dari",
+      "person": "orang",
+      "share": "Bagikan"
+    },
+    "successMessage": {
+      "activity": "Aktivitas",
+      "backToHome": "Kembali ke Beranda",
+      "bookingDetails": "Detail Pemesanan:",
+      "date": "Tanggal",
+      "description": "Terima kasih atas pemesanan Anda! Reservasi Anda telah dikonfirmasi. Email konfirmasi berisi seluruh detail telah dikirim ke alamat email terdaftar Anda.",
+      "participants": "Peserta",
+      "title": "Pemesanan Berhasil!",
+      "totalPrice": "Total Harga",
+      "viewMyBookings": "Lihat Pemesanan Saya"
+    }
+  },
+  "contactUs": {
+    "pageTitle": "Hubungi Kami",
+    "header": {
+      "title": "Terhubung dengan LIND Society",
+      "subtitle": "Hubungi kami hari ini dan mari ciptakan pengalaman vila yang istimewa bersama."
+    },
+    "content": {
+      "title": "Hubungi Kami",
+      "subtitle": "Punya pertanyaan atau butuh bantuan?",
+      "description": "Kami siap membantu! Hubungi kami untuk pertanyaan seputar pemesanan, layanan, atau informasi apa pun yang Anda butuhkan. Tim kami siap membuat pengalaman Anda mulus dan menyenangkan."
+    },
+    "contactInfo": {
+      "phone": "Telepon",
+      "email": "Email",
+      "address": "Alamat",
+      "instagram": "Instagram"
+    },
+    "form": {
+      "title": "Isi formulir",
+      "subtitle": "Kami akan menghubungi Anda dalam 24 jam",
+      "fullName": "Nama Lengkap",
+      "email": "Email",
+      "phone": "Nomor Telepon",
+      "inquiryType": "Jenis Pertanyaan",
+      "message": "Pesan",
+      "submit": "Kirim Pesan Anda",
+      "successMessage": "Pesan berhasil dikirim! Kami akan segera menghubungi Anda.",
+      "inquiryTypes": {
+        "booking": "Pertanyaan Pemesanan",
+        "propertyManagement": "Manajemen Properti",
+        "propertyListing": "Daftarkan Properti Saya",
+        "support": "Dukungan Pelanggan",
+        "other": "Pertanyaan Lainnya"
+      },
+      "placeholders": {
+        "fullName": "Masukkan nama lengkap Anda",
+        "email": "Masukkan alamat email Anda",
+        "phone": "Masukkan nomor telepon Anda",
+        "inquiryType": "Pilih jenis pertanyaan",
+        "message": "Masukkan pesan Anda"
+      }
+    },
+    "info": {
+      "address": "Alamat",
+      "phone": "Telepon",
+      "email": "Email",
+      "socialMedia": "Media Sosial"
+    }
+  },
+  "earlyBird": {
+    "heading": "Tertarik dengan Indonesia Summer Early Bird Sale untuk musim 2025/2026? Cukup tinggalkan detail Anda untuk masuk daftar Early Bird eksklusif kami, tim kami akan segera menghubungi Anda. Jangan sampai terlewat!",
+    "fullName": "Nama lengkap",
+    "fullNamePlaceholder": "Masukkan nama lengkap Anda",
+    "email": "Email",
+    "emailPlaceholder": "Masukkan email Anda",
+    "phoneNumber": "Nomor Telepon",
+    "phoneNumberPlaceholder": "Masukkan nomor telepon Anda",
+    "consent": "Dengan memberikan detail Anda, Anda setuju menerima komunikasi pemasaran dari LIND Society",
+    "submit": "Kirim",
+    "successTitle": "Terima kasih!",
+    "successMessage": "Kami telah membuka WhatsApp dengan detail Anda siap dikirim — tim kami akan segera menghubungi Anda."
+  },
+  "states": {
+    "error": {
+      "villas": "Vila tidak dapat dimuat",
+      "properties": "Properti tidak dapat dimuat",
+      "journal": "Jurnal tidak dapat dimuat",
+      "description": "Terjadi kesalahan di sisi kami. Silakan muat ulang halaman untuk mencoba lagi."
+    },
+    "empty": {
+      "villas": "Tidak ada vila yang cocok",
+      "villasDescription": "Coba perluas rentang tanggal atau hapus salah satu filter untuk melihat lebih banyak pilihan.",
+      "properties": "Tidak ada properti yang cocok",
+      "propertiesDescription": "Coba sesuaikan rentang harga atau filter kepemilikan untuk melihat lebih banyak listing."
     }
   }
 }

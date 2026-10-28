@@ -7,23 +7,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import SearchResultItem from '@/components/ui/search-result-item';
 
-interface SearchResult {
-  id: string;
-  title: string;
-  location: string;
-  price: string;
-  period: string;
-  rating: number;
-  reviews: number;
-  image: string;
-  type: 'rent' | 'buy' | 'tourist-activity';
-  bedrooms?: number;
-  bathrooms?: number;
-  guests?: number;
-  size?: string;
-  duration?: string;
-  groupSize?: string;
-}
+import { SearchResult } from '@/types/search-result';
 
 interface SearchResultsProps {
   results: SearchResult[];
@@ -73,19 +57,19 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   const filteredResults = getFilteredResults();
 
   return (
-    <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-[600px] overflow-hidden'>
+    <div className='absolute top-full left-0 right-0 mt-1 bg-cream-light border border-bronze/25 rounded-lg shadow-lg z-50 max-h-[600px] overflow-hidden'>
       {/* Header */}
-      <div className='p-4 border-b border-gray-100'>
+      <div className='p-4 border-b border-bronze/15'>
         <div className='flex items-center justify-between mb-3'>
           <div className='flex items-center gap-2'>
-            <SearchIcon className='w-4 h-4 text-gray-400' />
-            <span className='text-sm font-medium text-gray-700'>
+            <SearchIcon className='w-4 h-4 text-ink-muted' />
+            <span className='text-sm font-medium text-ink-soft'>
               {t('resultsFor', { query })}
             </span>
           </div>
           <button
             onClick={onClose}
-            className='text-gray-400 hover:text-gray-600 transition-colors'
+            className='text-ink-muted hover:text-ink-soft transition-colors'
           >
             <X className='w-4 h-4' />
           </button>
@@ -139,8 +123,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             ))}
           </div>
         ) : (
-          <div className='p-8 text-center text-gray-500'>
-            <Filter className='w-8 h-8 mx-auto mb-2 text-gray-300' />
+          <div className='p-8 text-center text-ink-muted'>
+            <Filter className='w-8 h-8 mx-auto mb-2 text-ink-muted/60' />
             <p>
               {t('noResultsForFilter', { filter: getTypeLabel(activeFilter) })}
             </p>
@@ -150,9 +134,9 @@ const SearchResults: React.FC<SearchResultsProps> = ({
       </div>
 
       {/* Footer */}
-      <div className='p-3 border-t border-gray-100 bg-gray-50'>
+      <div className='p-3 border-t border-bronze/15 bg-bone'>
         <div className='flex items-center justify-between'>
-          <div className='text-xs text-gray-500'>
+          <div className='text-xs text-ink-muted'>
             {t('showingResults', {
               count: filteredResults.length,
               total: results.length,

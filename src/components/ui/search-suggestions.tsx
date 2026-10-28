@@ -68,16 +68,16 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
       case 'activity':
         return 'bg-purple-100 text-purple-800';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-sand/40 text-ink';
     }
   };
 
   return (
-    <div className='absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 max-h-[500px] overflow-y-auto'>
+    <div className='absolute top-full left-0 right-0 mt-1 bg-cream-light border border-bronze/25 rounded-lg shadow-lg z-50 p-4 max-h-[500px] overflow-y-auto'>
       {/* Header */}
       <div className='flex items-center gap-2 mb-4'>
-        <TrendingUp className='w-4 h-4 text-gray-400' />
-        <span className='text-sm font-medium text-gray-700'>
+        <TrendingUp className='w-4 h-4 text-ink-muted' />
+        <span className='text-sm font-medium text-ink-soft'>
           {t('popularSearches')}
         </span>
       </div>
@@ -88,11 +88,11 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
           <button
             key={suggestion.id}
             onClick={() => onSuggestionClick(suggestion.text)}
-            className='flex items-center justify-between p-3 text-left hover:bg-gray-50 rounded-lg transition-colors border border-gray-100'
+            className='flex items-center justify-between p-3 text-left hover:bg-bone rounded-lg transition-colors border border-bronze/15'
           >
             <div className='flex items-center gap-2'>
               {getTypeIcon(suggestion.type)}
-              <span className='text-sm font-medium text-gray-900'>
+              <span className='text-sm font-medium text-ink'>
                 {suggestion.text}
               </span>
             </div>
@@ -100,37 +100,37 @@ const SearchSuggestions: React.FC<SearchSuggestionsProps> = ({
               <Badge className={`text-xs ${getTypeColor(suggestion.type)}`}>
                 {getTypeLabel(suggestion.type)}
               </Badge>
-              <span className='text-xs text-gray-500'>{suggestion.count}</span>
+              <span className='text-xs text-ink-muted'>{suggestion.count}</span>
             </div>
           </button>
         ))}
       </div>
 
       {/* Quick Links */}
-      <div className='mt-4 pt-4 border-t border-gray-100'>
+      <div className='mt-4 pt-4 border-t border-bronze/15'>
         <div className='flex items-center gap-2 mb-2'>
-          <span className='text-sm font-medium text-gray-700'>
+          <span className='text-sm font-medium text-ink-soft'>
             {t('exploreCategories')}
           </span>
         </div>
         <div className='flex flex-col md:flex-row gap-2'>
           <Link
             href='/rent'
-            className='flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded-md transition-colors'
+            className='flex items-center gap-2 px-3 py-2 text-sm text-blue-600 hover:bg-blue-50 rounded transition-colors'
           >
             <Home className='w-4 h-4' />
             {t('rentVilla')}
           </Link>
           <Link
             href='/buy'
-            className='flex items-center gap-2 px-3 py-2 text-sm text-green-600 hover:bg-green-50 rounded-md transition-colors'
+            className='flex items-center gap-2 px-3 py-2 text-sm text-green-600 hover:bg-green-50 rounded transition-colors'
           >
             <Home className='w-4 h-4' />
             {t('buyProperty')}
           </Link>
           <Link
             href='/tourist-activity'
-            className='flex items-center gap-2 px-3 py-2 text-sm text-purple-600 hover:bg-purple-50 rounded-md transition-colors'
+            className='flex items-center gap-2 px-3 py-2 text-sm text-purple-600 hover:bg-purple-50 rounded transition-colors'
           >
             <Plane className='w-4 h-4' />
             {t('touristActivity')}

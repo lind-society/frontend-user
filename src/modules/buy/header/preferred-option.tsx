@@ -107,7 +107,7 @@ export function PreferredOptionsBuyPage({
             onClick={() => handleOptionClick(option.id)}
           >
             <span className='text-primary'>{option.icon}</span>
-            <span className='text-xs sm:text-sm font-medium text-gray-500'>
+            <span className='text-xs sm:text-sm font-medium text-ink-muted'>
               {option.label}
             </span>
           </Button>

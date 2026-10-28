@@ -245,7 +245,7 @@ const CarouselPreviousCustom = React.forwardRef<
       onClick={scrollPrev}
       {...props}
     >
-      <MdArrowBack className='text-gray-700 text-2xl' />
+      <MdArrowBack className='text-ink-soft text-2xl' />
       <span className='sr-only'>Previous slide</span>
     </Button>
   );
@@ -297,7 +297,7 @@ const CarouselNextCustom = React.forwardRef<
       onClick={scrollNext}
       {...props}
     >
-      <MdArrowForward className='text-gray-700 text-2xl' />
+      <MdArrowForward className='text-ink-soft text-2xl' />
       <span className='sr-only'>Next slide</span>
     </Button>
   );

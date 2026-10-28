@@ -26,7 +26,7 @@ const HeaderTouristActivity = () => {
             ]}
           />
           <div className='flex flex-col gap-2 text-center items-center'>
-            <h4 className='text-primary'>{t('title')}</h4>
+            <h1 className='text-ink'>{t('title')}</h1>
             <span className='max-w-[850px] text-text'>{t('subtitle')}</span>
           </div>
           <Image

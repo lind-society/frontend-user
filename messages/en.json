@@ -5,11 +5,18 @@
     },
     "currency": "USD",
     "navigation": {
-      "stay": "Stay",
-      "buy": "Buy",
-      "touristActivity": "Tourist Activity",
+      "stay": "Stays",
+      "buy": "Properties",
+      "touristActivity": "Experiences",
+      "journal": "Journal",
       "propertyManagement": "Property Management",
-      "aboutUs": "About Us"
+      "aboutUs": "About"
+    },
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu",
+      "browse": "Browse",
+      "more": "More"
     },
     "contact": "Contact Us",
     "wishlist": "Wishlist",
@@ -18,6 +25,32 @@
     }
   },
   "footer": {
+    "tagline": "Curated homes, extraordinary stays,\nand meaningful experiences\nin Bali and beyond.",
+    "explore": {
+      "title": "Explore",
+      "stays": "Stays",
+      "properties": "Properties",
+      "experiences": "Experiences",
+      "journal": "Journal",
+      "destinations": "Destinations"
+    },
+    "support": {
+      "title": "Support",
+      "faqs": "FAQs",
+      "bookingGuide": "Booking Guide",
+      "terms": "Terms & Conditions",
+      "privacy": "Privacy Policy",
+      "cancellation": "Cancellation Policy"
+    },
+    "getInTouch": {
+      "title": "Get in touch",
+      "conciergeLabel": "Concierge",
+      "concierge": "+62 812 3456 7890",
+      "emailLabel": "Email",
+      "email": "hello@lindsociety.com",
+      "location": "Bali, Indonesia",
+      "cta": "Book With Us"
+    },
     "paymentChannels": "Payment channels",
     "followUs": "Follow us",
     "about": {
@@ -34,6 +67,10 @@
     "aboutLinks": {
       "title": "About",
       "aboutUs": "About Us",
+      "ourStory": "Our Story",
+      "partners": "Partners",
+      "careers": "Careers",
+      "contact": "Contact",
       "media": "Media Gallery",
       "blog": "Blog"
     },
@@ -50,16 +87,16 @@
       "cancellation": "Cancellation Policy"
     },
     "newsletter": {
-      "title": "Subscribe to our newsletter for villa perks and insider tips, plus discount up to 30%",
-      "emailPlaceholder": "Enter your email address",
+      "title": "Be the first to discover\ncurated homes & exclusive experiences.",
+      "emailPlaceholder": "Your email address",
       "subscribe": "Subscribe"
     },
     "copyright": "© 2025 LIND Society. 45 Sudirman Avenue, Level 5, Jakarta, Indonesia 10210\nIndonesian Business Licence Number: 0123456789"
   },
   "landingPage": {
     "header": {
-      "title": "Enjoy Your Dream Vacation",
-      "subtitle": "We provide a variety of the best lodging accommodations for those of you who need it.",
+      "title": "Curated Homes.\nExtraordinary Stays.\nBeautiful Living.",
+      "subtitle": "Handpicked villas, unique experiences,\nand timeless moments in Bali and beyond.",
       "stats": {
         "satisfiedVisitors": "Satisfied Visitors",
         "tourGuides": "Amazing Tour Guides",
@@ -99,29 +136,22 @@
       "availability": "Availability",
       "whatToDo": "What do you want to do?",
       "chooseLocation": "Choose Location",
-      "searchButton": "Search",
+      "searchButton": "Find Homes",
       "advancedSearch": "Advanced Search",
       "enhancedDateRange": {
         "label": "Availability",
         "selectDates": "Select dates",
         "selectEndDate": "Select end date",
+        "selectDate": "Select date",
+        "apply": "Apply",
+        "cancel": "Cancel",
         "daily": "Daily",
         "monthly": "Monthly",
         "yearly": "Yearly",
         "howLongStay": "How long will you stay?",
-        "stayDuration": "Stay Duration",
-        "duration": "Duration",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "startDate": "Start Date",
-        "endDate": "End Date",
-        "selectDate": "Select date",
-        "selectStartDate": "Select Start Date",
-        "selectStartDateFirst": "Select start date first",
-        "apply": "Apply",
-        "cancel": "Cancel"
+        "monthCount": "{count, plural, one {# month} other {# months}}",
+        "yearCount": "{count, plural, one {# year} other {# years}}",
+        "startingDateAt": "Starting date at"
       },
       "promotions": {
         "stay": "*Exclusive Early Bird Offers – Book Early & Enjoy Special Discounts!🌟",
@@ -130,6 +160,10 @@
         "buyLink": "Explore premium properties!",
         "tourist": "*Special Group Discounts - Book Activities for 4+ People and Save 15%!🌴",
         "touristLink": "Explore top-rated activities!"
+      },
+      "dates": {
+        "label": "Stay dates",
+        "placeholder": "Select date"
       }
     },
     "exploreIconic": {
@@ -137,58 +171,78 @@
       "subtitle": "Travel beyond the ordinary and embrace the magic of the world's most iconic destinations."
     },
     "exploreBest": {
-      "title": "Explore LIND's Best List",
+      "title": "Featured Homes",
       "forRent": "For Rent",
       "forSale": "For Sale",
       "daily": "Daily",
       "monthly": "Monthly",
       "yearly": "Yearly",
-      "viewMore": "View More"
+      "viewMore": "View More",
+      "subtitle": "Handpicked stays specially made for you by LIND Society."
+    },
+    "trustBar": {
+      "curated": {
+        "title": "Curated Collections",
+        "description": "Only the finest homes"
+      },
+      "personal": {
+        "title": "Personal Services",
+        "description": "Tailored to your needs"
+      },
+      "partners": {
+        "title": "Trusted Partners",
+        "description": "Carefully selected"
+      },
+      "concierge": {
+        "title": "24/7 Concierge",
+        "description": "We're here for you"
+      }
     },
     "whyChooseUs": {
-      "title": "Why Choose Us?",
+      "title": "The LIND Experience",
       "features": {
-        "bestRates": {
-          "title": "Best Rates Guaranteed",
-          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        "handpicked": {
+          "title": "Handpicked Homes",
+          "description": "Quality over quantity"
         },
-        "excellentService": {
-          "title": "Excellent Services",
-          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        "localInsight": {
+          "title": "Local Insight",
+          "description": "Discover hidden gems"
         },
-        "support24": {
-          "title": "24/7 Support",
-          "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo, voluptatibus."
+        "seamlessStay": {
+          "title": "Seamless Stay",
+          "description": "From booking to check-out"
+        },
+        "meaningfulMoments": {
+          "title": "Meaningful Moments",
+          "description": "Create lasting memories"
         }
       }
     },
     "discover": {
       "title": "Discover Unforgettable Experiences",
       "subtitle": "Unveil the secrets of the world and embark on unforgettable journeys with LIND Society.",
+      "viewAll": "View All Experiences",
       "experiences": {
-        "journey": {
-          "title": "Journey",
-          "count": "150+ journey"
+        "privateChef": {
+          "title": "Private Chef",
+          "count": "in your villa"
         },
-        "adventures": {
-          "title": "Adventures",
-          "count": "30+ spots"
+        "sunriseYoga": {
+          "title": "Sunrise Yoga",
+          "count": "by the beach"
+        },
+        "cultural": {
+          "title": "Cultural Journeys",
+          "count": "near you"
         },
         "wellness": {
-          "title": "Wellness",
-          "count": "50+ spots"
+          "title": "Wellness & Healing",
+          "count": "at your request"
         },
-        "culture": {
-          "title": "Culture",
-          "count": "10+ journey"
-        },
-        "culinaries": {
-          "title": "Culinaries",
-          "count": "200+ spots"
-        },
-        "specialEvents": {
-          "title": "Special Events",
-          "count": "10+ events"
+        "history": {
+          "title": "Learn History",
+          "count": "anywhere you stay"
         }
       }
     },
@@ -207,6 +261,32 @@
       "subtitle": "Guest Experiences Through the Lens.",
       "viewAllMedia": "View All Media",
       "loadMore": "Load More"
+    },
+    "journalBanner": {
+      "eyebrow": "Live Beautifully",
+      "title": "Spaces that inspire.\nMoments that matter.",
+      "subtitle": "A journal of living, travelling, design, and culture.",
+      "cta": "Read Journal"
+    },
+    "ecosystem": {
+      "title": "A World of Beautiful Living",
+      "subtitle": "The Lind Ecosystem",
+      "description": "Architecture, fashion, celebrations, and experiences — curated with passion, created with purpose.",
+      "viewMore": "View More",
+      "items": {
+        "architecture": {
+          "title": "Architecture & Interior Design"
+        },
+        "wedding": {
+          "title": "Wedding & Event Design"
+        },
+        "fashion": {
+          "title": "Timeless Fashion Crafted with Meaning"
+        },
+        "experiences": {
+          "title": "Curated Experiences & Celebrations"
+        }
+      }
     }
   },
   "aboutUs": {
@@ -315,40 +395,50 @@
       "socialMedia": "Social Media"
     }
   },
+  "earlyBird": {
+    "heading": "Are you interested in our Indonesia Summer Early Bird Sale for 2025/2026 season. Simply leave your details to be on our exclusive Early Bird list, we will be in contact in due course. Don't miss out!",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "phoneNumber": "Phone Number",
+    "phoneNumberPlaceholder": "Enter your phone number",
+    "consent": "By providing your details, you agree to receive marketing communications from LIND Society",
+    "submit": "Submit",
+    "successTitle": "Thank you!",
+    "successMessage": "We've opened WhatsApp with your details ready to send — our team will get back to you shortly."
+  },
   "rent": {
     "pageTitle": "Rent Villas & Properties",
     "header": {
-      "title": "Discover Handpicked Villa Rentals with LIND Society",
-      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+      "title": "Discover Handpicked Villa Rentals with LIND Society.",
+      "subtitle": "Handpicked villas, unique experiences,\nand timeless moments in Bali and beyond.",
       "search": {
         "location": "Location",
-        "checkIn": "Check in",
-        "checkOut": "Check out",
         "selectDate": "Select date",
         "bedrooms": "Bedrooms",
         "guests": "Guests",
-        "searchButton": "Search",
+        "searchButton": "Find Homes",
         "enhancedDateRange": {
           "label": "Check in - Check out",
           "selectDates": "Select dates",
+          "selectDate": "Select date",
+          "selectEndDate": "Select end date",
+          "cancel": "Cancel",
+          "apply": "Apply",
           "daily": "Daily",
           "monthly": "Monthly",
           "yearly": "Yearly",
-          "howLongStay": "How long do you want to stay?",
-          "stayDuration": "Stay duration",
-          "duration": "Duration:",
-          "startDate": "Start date:",
-          "endDate": "End date:",
-          "selectDate": "Select date",
-          "selectStartDateFirst": "Select start date first",
-          "selectStartDate": "Select start date",
-          "selectEndDate": "Select end date",
-          "month": "month",
-          "months": "months",
-          "year": "year",
-          "years": "years",
-          "cancel": "Cancel",
-          "apply": "Apply"
+          "howLongStay": "How long will you stay?",
+          "monthCount": "{count, plural, one {# month} other {# months}}",
+          "yearCount": "{count, plural, one {# year} other {# years}}",
+          "startingDateAt": "Starting date at"
+        },
+        "bedroomDescription": "Number of bedrooms",
+        "guestDescription": "Number of guests",
+        "dates": {
+          "label": "Stay dates",
+          "placeholder": "Select date"
         }
       }
     },
@@ -576,7 +666,8 @@
         "minPrice": "Min Price",
         "maxPrice": "Max Price",
         "sortBy": "Sort by",
-        "availableActivity": "Available activity"
+        "availableActivity": "Available activity",
+        "searchButton": "Search activities"
       },
       "cards": {
         "reviews": "reviews",
@@ -591,7 +682,8 @@
       },
       "buttons": {
         "showMore": "Show More"
-      }
+      },
+      "favorite": "Add to favourites"
     },
     "explore": {
       "title": "Explore Another Our Tourist Activity",
@@ -1008,8 +1100,17 @@
         "pricePerSqm": "Price/Sqm",
         "levels": "Levels",
         "pool": "Pool",
-        "parking": "Parking"
-      }
+        "parking": "Parking",
+        "entertainment": "Entertainment",
+        "kids": "Kids",
+        "meals": "Meals",
+        "transport": "Transport"
+      },
+      "availability": "Availability",
+      "keyFeatures": "Key Features",
+      "next": "Next",
+      "previous": "Previous",
+      "serviceFeatures": "Services & Features"
     },
     "inquiryForm": {
       "title": "Send Inquiry",
@@ -1036,7 +1137,8 @@
       "selectDuration": "Select duration",
       "selectGuestCount": "Select guest count",
       "guestSingular": "Guest",
-      "guestPlural": "Guests"
+      "guestPlural": "Guests",
+      "fullName": "Full Name"
     }
   },
   "touristActivityDetail": {
@@ -1052,6 +1154,8 @@
     "seeDetails": "See details",
     "pax": "/pax",
     "getTicket": "Get Ticket",
+    "ticketsLeftToday": "{count} tickets left today",
+    "soldOutToday": "Sold out for today",
     "openingHour": "Opening Hour:",
     "closingHour": "Closing Hour:",
     "startFrom": "Start from",
@@ -1068,8 +1172,13 @@
       "phone": "Phone number",
       "phonePlaceholder": "Enter your contact number",
       "ticketAmount": "Ticket",
+      "total": "Total",
       "agreement": "By providing your details, you agree to receive marketing communications from LIND Society.",
-      "next": "Next"
+      "agreementRequired": "Please agree to the terms before continuing.",
+      "genericError": "Something went wrong. Please try again.",
+      "back": "Back",
+      "next": "Next",
+      "submitting": "Booking..."
     },
     "payment": {
       "title": "To complete your registration, please select your payment method.",
@@ -1160,5 +1269,19 @@
     "tryAnotherFilter": "Try another filter",
     "showingResults": "Showing {count} of {total} results",
     "viewAllResults": "View All Results"
+  },
+  "states": {
+    "error": {
+      "villas": "We couldn't load these villas",
+      "properties": "We couldn't load these properties",
+      "journal": "We couldn't load the journal",
+      "description": "Something went wrong on our side. Please refresh the page to try again."
+    },
+    "empty": {
+      "villas": "No villas match your search",
+      "villasDescription": "Try widening your dates or removing a filter to see more homes.",
+      "properties": "No properties match your search",
+      "propertiesDescription": "Try adjusting your price range or ownership filter to see more listings."
+    }
   }
 }

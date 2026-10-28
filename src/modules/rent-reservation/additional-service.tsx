@@ -15,9 +15,18 @@ import { Separator } from '@/components/ui/separator';
 
 interface AdditionalServiceProps {
   onContinue: () => void;
+  /**
+   * Set on a real booking that has not been confirmed by the property yet.
+   * There is nothing to continue to until the owner replies, so the button is
+   * held closed and says why.
+   */
+  awaitingConfirmation?: boolean;
 }
 
-const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
+const AdditionalService = ({
+  onContinue,
+  awaitingConfirmation,
+}: AdditionalServiceProps) => {
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
   const toggleService = (service: string) => {
@@ -30,7 +39,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
 
   return (
     <BaseContainer>
-      <div className='flex flex-col lg:flex-row justify-between bg-white py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded-lg shadow-md gap-6'>
+      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm gap-6'>
         {/* Left Column - Additional Services */}
         <div className='py-4 flex-1 flex flex-col gap-5'>
           <h3 className='text-xl md:text-2xl font-semibold text-primary'>
@@ -46,7 +55,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
               }
               className={`w-full sm:w-auto flex gap-2 items-center ${
                 selectedServices.includes('private-chef')
-                  ? 'text-white'
+                  ? 'text-cream'
                   : 'text-primary'
               }`}
               size='sm'
@@ -55,7 +64,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
               <ChefHat
                 className={
                   selectedServices.includes('private-chef')
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }
                 size={18}
@@ -71,7 +80,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
               }
               className={`w-full sm:w-auto flex gap-2 items-center ${
                 selectedServices.includes('airport-transfer')
-                  ? 'text-white'
+                  ? 'text-cream'
                   : 'text-primary'
               }`}
               size='sm'
@@ -80,7 +89,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
               <MdAirportShuttle
                 className={
                   selectedServices.includes('airport-transfer')
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }
                 size={18}
@@ -94,7 +103,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
               }
               className={`w-full sm:w-auto flex gap-2 items-center ${
                 selectedServices.includes('car-rental')
-                  ? 'text-white'
+                  ? 'text-cream'
                   : 'text-primary'
               }`}
               size='sm'
@@ -103,7 +112,7 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
               <MdDirectionsCar
                 className={
                   selectedServices.includes('car-rental')
-                    ? 'text-white'
+                    ? 'text-cream'
                     : 'text-primary'
                 }
                 size={18}
@@ -130,12 +139,23 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
             size='lg'
             className='w-full sm:w-auto mt-4'
             onClick={onContinue}
+            disabled={awaitingConfirmation}
           >
-            Continue to Payment
+            {awaitingConfirmation
+              ? 'Waiting for the property to confirm'
+              : 'Continue to Payment'}
           </Button>
 
+          {awaitingConfirmation && (
+            <span className='text-text text-sm'>
+              We are confirming your dates with the property. This page updates
+              on its own, and we will message you on WhatsApp as soon as it is
+              confirmed.
+            </span>
+          )}
+
           {/* Additional information section */}
-          <div className='lg:hidden flex flex-col gap-4 mt-2 bg-gray-50 p-4 rounded-lg'>
+          <div className='lg:hidden flex flex-col gap-4 mt-2 bg-bone p-4 rounded'>
             <h4 className='text-lg font-semibold text-primary'>
               Important Information
             </h4>
@@ -161,8 +181,8 @@ const AdditionalService = ({ onContinue }: AdditionalServiceProps) => {
         </div>
 
         {/* Right Column - Contact Box */}
-        <div className='w-full lg:w-[340px] border shadow-md'>
-          <div className='bg-primary text-white flex flex-col gap-1 px-6 py-3'>
+        <div className='w-full lg:w-[340px] border shadow-sm'>
+          <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
             <span className='text-sm md:text-base'>Send Inquiry or</span>
             <span className='text-xl md:text-2xl font-semibold'>
               Make it Yours

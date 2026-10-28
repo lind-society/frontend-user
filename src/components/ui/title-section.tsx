@@ -1,8 +1,8 @@
+import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 
-import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 type TitleSectionProps = {
   title: string;
@@ -11,43 +11,52 @@ type TitleSectionProps = {
   link?: string;
   description?: string;
   isDepthAlign?: boolean;
+  /** Label for the CTA beside the heading. Required whenever `link` is set. */
+  linkLabel?: string;
+  /**
+   * `center` is the new design's default for full-width sections; `start`
+   * keeps the heading left with the CTA pushed to the opposite edge.
+   */
+  align?: 'center' | 'start';
 };
 
 const TitleSection = ({
   title,
   subTitle,
   link,
+  linkLabel,
   description,
-  isDepthAlign = true,
+  align = 'center',
 }: TitleSectionProps) => {
-  const t = useTranslations('HomePage');
+  const isCenter = align === 'center';
 
   return (
     <div
-      className={`flex sm:flex-row flex-col gap-y-4 justify-between ${
-        description && 'items-start sm:items-end'
-      } ${isDepthAlign ? 'xl:px-9' : ''} `}
-    >
-      <div className={`flex flex-col gap-[18px] text-start `}>
-        <h5 className='text-gray-900 font-semibold'>{title}</h5>
-        {subTitle && <p className='text-gray-600 text-xl'>{subTitle}</p>}
-      </div>
-      {link && (
-        <Button
-          className='rounded-full'
-          variant='primary-red'
-          size='default'
-          asChild
-        >
-          <Link href={link}>
-            <span>{t('discover-section.cta')}</span>
-          </Link>
-        </Button>
+      className={cn(
+        'flex gap-y-3',
+        isCenter
+          ? 'flex-col items-center text-center'
+          : 'flex-col justify-between gap-x-8 sm:flex-row sm:items-end'
       )}
-      {description && (
-        <p className='text-xl text-gray-custom-600 font-medium'>
-          {description}
-        </p>
+    >
+      <div className={cn('flex flex-col gap-2', isCenter && 'items-center')}>
+        <h2 className='text-ink'>{title}</h2>
+        {subTitle && (
+          <p className='max-w-2xl text-ink-soft md:text-lg'>{subTitle}</p>
+        )}
+        {description && (
+          <p className='max-w-2xl text-ink-soft md:text-lg'>{description}</p>
+        )}
+      </div>
+
+      {link && (
+        <Link
+          href={link}
+          className='inline-flex shrink-0 items-center gap-1.5 text-sm text-bronze-600 underline-offset-4 transition-colors hover:text-bronze-600 hover:underline'
+        >
+          <span>{linkLabel ?? 'View All'}</span>
+          <ArrowUpRight size={16} />
+        </Link>
       )}
     </div>
   );

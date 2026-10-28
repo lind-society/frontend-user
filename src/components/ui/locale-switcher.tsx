@@ -55,16 +55,14 @@ function LocaleSwitcherSelect({ defaultValue, items, label, theme }: Props) {
   }
 
   const colorText =
-    theme === 'dark'
-      ? 'text-white'
-      : 'text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white ';
+    theme === 'dark' ? 'text-white' : 'text-ink-soft hover:text-ink ';
 
   return (
     <div className='relative'>
       <DropdownMenu>
         <DropdownMenuTrigger defaultValue={defaultValue} asChild>
           <button
-            className={` flex items-center gap-2 rounded-md text-sm font-medium focus:outline-none ${colorText} ${
+            className={` flex items-center gap-2 rounded text-sm font-medium focus:outline-none ${colorText} ${
               isPending && 'pointer-events-none opacity-60'
             }`}
           >

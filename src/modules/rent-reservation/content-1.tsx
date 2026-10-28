@@ -8,6 +8,8 @@ import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
+import { ReservationBookingView } from './booking-view';
+
 type ReservationStep =
   | 'additional-services'
   | 'payment-method'
@@ -15,10 +17,17 @@ type ReservationStep =
 
 interface ContentRentReservation1Props {
   currentStep: ReservationStep;
+  /**
+   * A real booking to render instead of the placeholders. Omitted by
+   * `/rent/[name]/reservation`, which is still a design mock — leaving it out
+   * keeps that screen byte-identical to before.
+   */
+  booking?: ReservationBookingView;
 }
 
 const ContentRentReservation1 = ({
   currentStep,
+  booking,
 }: ContentRentReservation1Props) => {
   // Helper function to determine active step styles
   const getStepStyles = (step: number) => {
@@ -36,9 +45,9 @@ const ContentRentReservation1 = ({
     if (isActive) {
       return 'border-2 border-primary bg-primary/10';
     } else if (isCompleted) {
-      return 'border-2 border-primary bg-white';
+      return 'border-2 border-primary bg-cream-light';
     } else {
-      return 'border-2 border-gray-200 bg-white';
+      return 'border-2 border-bronze/25 bg-cream-light';
     }
   };
 
@@ -56,11 +65,11 @@ const ContentRentReservation1 = ({
       (step === 2 && currentStep === 'payment-details');
 
     if (isActive) {
-      return 'bg-primary text-white';
+      return 'bg-primary text-cream';
     } else if (isCompleted) {
-      return 'bg-green-500 text-white';
+      return 'bg-green-500 text-cream';
     } else {
-      return 'bg-gray-200 text-gray-500';
+      return 'bg-sand text-ink-muted';
     }
   };
 
@@ -81,7 +90,7 @@ const ContentRentReservation1 = ({
 
   return (
     <BaseContainer>
-      <div className='flex flex-col gap-8 md:gap-12 justify-center items-center bg-white py-8 md:py-12 lg:py-16 px-10 lg:px-16 xl:px-20 rounded-lg shadow-md'>
+      <div className='flex flex-col gap-8 md:gap-12 justify-center items-center bg-cream-light py-8 md:py-12 lg:py-16 px-10 lg:px-16 xl:px-20 rounded shadow-sm'>
         {/* Header section */}
         <div className='flex flex-col gap-4 md:gap-6 items-center xl:max-w-2xl'>
           <h2 className='text-2xl md:text-3xl lg:text-4xl font-semibold text-text text-center'>
@@ -103,7 +112,7 @@ const ContentRentReservation1 = ({
         <div className='hidden md:flex items-center justify-between w-full max-w-5xl'>
           {/* Step 1 */}
           <div
-            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded shadow-sm ${getStepStyles(
               1
             )}`}
           >
@@ -135,7 +144,7 @@ const ContentRentReservation1 = ({
 
           {/* Step 2 */}
           <div
-            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded shadow-sm ${getStepStyles(
               2
             )}`}
           >
@@ -169,7 +178,7 @@ const ContentRentReservation1 = ({
 
           {/* Step 3 */}
           <div
-            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+            className={`max-w-[280px] lg:max-w-[320px] min-h-[180px] px-6 lg:px-9 py-5 flex flex-col gap-2.5 items-center rounded shadow-sm ${getStepStyles(
               3
             )}`}
           >
@@ -194,7 +203,7 @@ const ContentRentReservation1 = ({
           {/* Step 1 */}
           <div className='relative w-full max-w-[320px]'>
             <div
-              className={`px-6 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+              className={`px-6 py-5 flex flex-col gap-2.5 items-center rounded shadow-sm ${getStepStyles(
                 1
               )}`}
             >
@@ -222,7 +231,7 @@ const ContentRentReservation1 = ({
                 currentStep === 'payment-method' ||
                 currentStep === 'payment-details'
                   ? 'bg-green-500'
-                  : 'bg-gray-200'
+                  : 'bg-sand'
               }`}
             ></div>
           </div>
@@ -230,7 +239,7 @@ const ContentRentReservation1 = ({
           {/* Step 2 */}
           <div className='relative w-full max-w-[320px]'>
             <div
-              className={`px-6 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+              className={`px-6 py-5 flex flex-col gap-2.5 items-center rounded shadow-sm ${getStepStyles(
                 2
               )}`}
             >
@@ -257,9 +266,7 @@ const ContentRentReservation1 = ({
             {/* Vertical connecting line */}
             <div
               className={`absolute left-1/2 -bottom-12 w-0.5 h-12 -translate-x-1/2 ${
-                currentStep === 'payment-details'
-                  ? 'bg-green-500'
-                  : 'bg-gray-200'
+                currentStep === 'payment-details' ? 'bg-green-500' : 'bg-sand'
               }`}
             ></div>
           </div>
@@ -267,7 +274,7 @@ const ContentRentReservation1 = ({
           {/* Step 3 */}
           <div className='w-full max-w-[320px]'>
             <div
-              className={`px-6 py-5 flex flex-col gap-2.5 items-center rounded-lg shadow-sm ${getStepStyles(
+              className={`px-6 py-5 flex flex-col gap-2.5 items-center rounded shadow-sm ${getStepStyles(
                 3
               )}`}
             >
@@ -297,11 +304,11 @@ const ContentRentReservation1 = ({
               {/* Villa image - responsive sizing */}
               <div className='w-full lg:w-[470px] lg:flex-shrink-0'>
                 <Image
-                  src='/images/explore-2.png'
+                  src={booking?.photo || '/images/explore-2.png'}
                   width={0}
                   height={0}
-                  alt='LIND Villa property view'
-                  className='w-full h-[300px] md:h-[350px] lg:h-[380px] object-cover rounded-lg shadow-md'
+                  alt={booking?.propertyName ?? 'LIND Villa property view'}
+                  className='w-full h-[300px] md:h-[350px] lg:h-[380px] object-cover rounded shadow-sm'
                   sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 470px'
                   priority
                 />
@@ -314,69 +321,101 @@ const ContentRentReservation1 = ({
                   <div className='flex flex-col gap-2 sm:gap-3'>
                     <div className='flex gap-2 items-center'>
                       <span className='text-xl md:text-2xl text-text font-semibold'>
-                        LIND Villa
+                        {booking?.propertyName ?? 'LIND Villa'}
                       </span>
-                      <div className='flex items-center gap-1'>
-                        <FaStar className='text-primary' />
-                        <span className='text-text text-sm font-medium'>
-                          4.8
-                        </span>
-                      </div>
+                      {/* The public booking payload carries no rating, so the
+                          badge is only shown for the placeholder. */}
+                      {!booking && (
+                        <div className='flex items-center gap-1'>
+                          <FaStar className='text-primary' />
+                          <span className='text-text text-sm font-medium'>
+                            4.8
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <span className='text-text text-xs sm:text-sm'>
-                      Jl. Raya Ubud No. 25, Ubud, Gianyar, Bali 80571, Indonesia
+                      {booking?.propertyAddress ??
+                        'Jl. Raya Ubud No. 25, Ubud, Gianyar, Bali 80571, Indonesia'}
                     </span>
                   </div>
                   <Button
                     variant='primary'
                     className='flex items-center gap-2 text-xs sm:text-sm'
                     size='sm'
+                    asChild={Boolean(booking?.mapLink)}
                   >
-                    <MapPin size={16} />
-                    <span className='font-semibold'>View on map</span>
+                    {booking?.mapLink ? (
+                      <a
+                        href={booking.mapLink}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <MapPin size={16} />
+                        <span className='font-semibold'>View on map</span>
+                      </a>
+                    ) : (
+                      <>
+                        <MapPin size={16} />
+                        <span className='font-semibold'>View on map</span>
+                      </>
+                    )}
                   </Button>
                 </div>
 
                 {/* Property features */}
                 <div className='flex items-center gap-3 md:gap-4'>
-                  <div className='flex items-center gap-1.5'>
-                    <div className='h-5 w-5 md:h-6 md:w-6 bg-tertiary flex items-center justify-center rounded-full'>
-                      <IoBed className='text-primary' size={12} />
-                    </div>
-                    <span className='text-sm md:text-base'>8 beds</span>
-                  </div>
-                  <div className='flex items-center gap-1.5'>
-                    <div className='h-5 w-5 md:h-6 md:w-6 bg-tertiary flex items-center justify-center rounded-full'>
-                      <FaBath className='text-primary' size={12} />
-                    </div>
-                    <span className='text-sm md:text-base'>4 baths</span>
-                  </div>
+                  {/* The backend has no bedroom or bathroom count on a booking,
+                      so these are shown only for the placeholder rather than
+                      inventing numbers on a real reservation. */}
+                  {!booking && (
+                    <>
+                      <div className='flex items-center gap-1.5'>
+                        <div className='h-5 w-5 md:h-6 md:w-6 bg-tertiary flex items-center justify-center rounded-full'>
+                          <IoBed className='text-primary' size={12} />
+                        </div>
+                        <span className='text-sm md:text-base'>8 beds</span>
+                      </div>
+                      <div className='flex items-center gap-1.5'>
+                        <div className='h-5 w-5 md:h-6 md:w-6 bg-tertiary flex items-center justify-center rounded-full'>
+                          <FaBath className='text-primary' size={12} />
+                        </div>
+                        <span className='text-sm md:text-base'>4 baths</span>
+                      </div>
+                    </>
+                  )}
                   <div className='flex items-center gap-1.5'>
                     <div className='h-5 w-5 md:h-6 md:w-6 bg-tertiary flex items-center justify-center rounded-full'>
                       <FaUser className='text-primary' size={12} />
                     </div>
-                    <span className='text-sm md:text-base'>4 guests</span>
+                    <span className='text-sm md:text-base'>
+                      {booking ? `${booking.guests} guests` : '4 guests'}
+                    </span>
                   </div>
                 </div>
 
                 {/* Check-in/out dates */}
                 <div className='flex gap-4 sm:gap-8'>
                   <div className='flex flex-col gap-1'>
-                    <span className='text-text text-sm'>Check-in</span>
+                    <span className='text-text text-sm'>
+                      {booking?.isActivity ? 'Date' : 'Check-in'}
+                    </span>
                     <span className='text-primary text-sm font-semibold'>
-                      25th May 2024
+                      {booking?.checkIn ?? '25th May 2024'}
                     </span>
                   </div>
                   <Separator
                     orientation='vertical'
                     className='hidden sm:flex'
                   />
-                  <div className='flex flex-col gap-1'>
-                    <span className='text-text text-sm'>Check-out</span>
-                    <span className='text-primary text-sm font-semibold'>
-                      30th May 2024
-                    </span>
-                  </div>
+                  {!booking?.isActivity && (
+                    <div className='flex flex-col gap-1'>
+                      <span className='text-text text-sm'>Check-out</span>
+                      <span className='text-primary text-sm font-semibold'>
+                        {booking?.checkOut ?? '30th May 2024'}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Price details */}
@@ -386,17 +425,23 @@ const ContentRentReservation1 = ({
                   </span>
                   <Separator />
                   <div className='flex justify-between text-text text-xs sm:text-sm'>
-                    <span>IDR 4,900,000 x 7 nights</span>
-                    <span>IDR 34,900,000</span>
+                    <span>
+                      {booking?.nightlyLabel ?? 'IDR 4,900,000 x 7 nights'}
+                    </span>
+                    <span>{booking?.nightlyAmount ?? 'IDR 34,900,000'}</span>
                   </div>
-                  <div className='flex justify-between text-text text-xs sm:text-sm'>
-                    <span>Booking.com service fee</span>
-                    <span>IDR 400,000</span>
-                  </div>
+                  {/* There is no service fee on a real booking — the total the
+                      backend prices is the whole amount charged. */}
+                  {!booking && (
+                    <div className='flex justify-between text-text text-xs sm:text-sm'>
+                      <span>Booking.com service fee</span>
+                      <span>IDR 400,000</span>
+                    </div>
+                  )}
                   <Separator />
                   <div className='flex justify-between text-text text-sm font-semibold'>
                     <span>Total</span>
-                    <span>IDR 35,300,000</span>
+                    <span>{booking?.totalAmount ?? 'IDR 35,300,000'}</span>
                   </div>
                 </div>
               </div>

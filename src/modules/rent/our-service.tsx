@@ -1,22 +1,10 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import React from 'react';
-import { RiVerifiedBadgeFill } from 'react-icons/ri';
+import { RiCheckboxCircleFill } from 'react-icons/ri';
 
 import BaseContainer from '@/components/layouts/container';
-
-interface ServiceItemProps {
-  text: string;
-}
-
-const ServiceItem: React.FC<ServiceItemProps> = ({ text }) => (
-  <div className='flex gap-2 items-center px-4 sm:px-6 py-3 border-b'>
-    <RiVerifiedBadgeFill size={20} className='text-primary min-w-[20px]' />
-    <p className='text-base sm:text-lg md:text-xl lg:text-[22px] font-semibold'>
-      {text}
-    </p>
-  </div>
-);
+import TitleSection from '@/components/ui/title-section';
 
 interface ServiceCardProps {
   title: string;
@@ -29,24 +17,39 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   imageSrc,
   services,
 }) => (
-  <div className='flex flex-col shadow-sm hover:shadow-md transition-shadow'>
+  <div className='flex flex-col'>
     <div className='relative aspect-[4/3] w-full'>
       <Image
         fill
-        alt={`${title} service`}
+        alt={title}
         src={imageSrc}
-        sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
+        sizes='(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'
         className='object-cover'
       />
     </div>
-    <div className='px-4 sm:px-6 md:px-8 bg-primary py-4 sm:py-5 md:py-6 text-center text-white text-lg sm:text-xl  font-bold '>
-      <span className='line-clamp-1'>{title}</span>
+
+    <div className='bg-bronze-600 px-6 py-4'>
+      <span className='font-heading text-lg font-semibold text-cream'>
+        {title}
+      </span>
     </div>
-    <div className='flex flex-col text-primary border'>
-      {services.map((service, index) => (
-        <ServiceItem key={index} text={service} />
+
+    <ul className='flex flex-col border border-t-0 border-bronze/25 bg-cream-light'>
+      {services.map((service) => (
+        <li
+          key={service}
+          className='flex items-center gap-3 border-b border-bronze/15 px-5 py-3 last:border-b-0'
+        >
+          <RiCheckboxCircleFill
+            size={20}
+            className='shrink-0 text-bronze-600'
+          />
+          <span className='text-[22px] leading-[1.3] tracking-[0.1px] text-ink'>
+            {service}
+          </span>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 );
 
@@ -93,22 +96,15 @@ const OurServiceRentPage = () => {
   ];
 
   return (
-    <section className='bg-gray-50 py-8 md:py-12 lg:py-16'>
+    <section className='py-14 md:py-20'>
       <BaseContainer>
-        <div className='flex flex-col gap-6 md:gap-8'>
-          {/* Header Section */}
-          <div className='flex flex-col gap-2 md:gap-4 text-center'>
-            <h4 className=' text-primary'>{t('title')}</h4>
-            <p className='text-lg md:text-xl lg:text-[22px] text-text'>
-              {t('subtitle')}
-            </p>
-          </div>
+        <div className='flex flex-col gap-10'>
+          <TitleSection title={t('title')} subTitle={t('subtitle')} />
 
-          {/* Service Cards - Responsive Grid */}
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8'>
-            {serviceCards.map((card, index) => (
+          <div className='grid grid-cols-1 items-start gap-6 sm:grid-cols-2 lg:grid-cols-3'>
+            {serviceCards.map((card) => (
               <ServiceCard
-                key={index}
+                key={card.title}
                 title={card.title}
                 imageSrc={card.imageSrc}
                 services={card.services}

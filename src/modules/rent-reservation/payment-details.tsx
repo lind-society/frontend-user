@@ -12,15 +12,25 @@ import BaseContainer from '@/components/layouts/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 
-const PaymentDetails = () => {
+import { ReservationBookingView } from './booking-view';
+
+interface PaymentDetailsProps {
+  /**
+   * A real booking. Without it this screen keeps the placeholder transaction it
+   * has always shown on `/rent/[name]/reservation`.
+   */
+  booking?: ReservationBookingView;
+}
+
+const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
   return (
     <BaseContainer>
-      <div className='flex flex-col lg:flex-row justify-between bg-white py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded-lg shadow-md gap-6'>
+      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm gap-6'>
         {/* Left Column - Payment Details */}
         <div className='py-4 flex-1 flex flex-col gap-5'>
           <div className='flex items-center gap-3 mb-2'>
             <div className='w-8 h-8 rounded-full bg-green-500 flex items-center justify-center'>
-              <FaCheck className='text-white' size={16} />
+              <FaCheck className='text-cream' size={16} />
             </div>
             <h3 className='text-xl md:text-2xl font-semibold text-primary'>
               Payment Completed
@@ -42,7 +52,7 @@ const PaymentDetails = () => {
                 <MdPayment className='text-primary' size={14} />
               </div>
               <span className='text-sm text-primary font-semibold'>
-                ID Transaksi: #TRX202502054321
+                ID Transaksi: #{booking?.reference ?? 'TRX202502054321'}
               </span>
             </Button>
             <Button
@@ -53,7 +63,13 @@ const PaymentDetails = () => {
                 <MdCalendarMonth className='text-primary' size={14} />
               </div>
               <span className='text-sm text-primary font-semibold'>
-                February 5, 2025
+                {booking?.paidAt
+                  ? new Intl.DateTimeFormat('en-GB', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    }).format(new Date(booking.paidAt))
+                  : 'February 5, 2025'}
               </span>
             </Button>
             <Button
@@ -70,7 +86,9 @@ const PaymentDetails = () => {
                 />
               </div>
               <span className='text-sm text-primary font-semibold'>
-                Paid via Virtual Account (BCA)
+                {booking?.paidChannel
+                  ? `Paid via ${booking.paidChannel}`
+                  : 'Paid via Virtual Account (BCA)'}
               </span>
             </Button>
           </div>
@@ -127,14 +145,14 @@ const PaymentDetails = () => {
         </div>
 
         {/* Right Column - Help Box */}
-        <div className='w-full h-fit lg:w-[340px] border shadow-md'>
-          <div className='bg-primary text-white flex flex-col gap-1 px-6 py-3'>
+        <div className='w-full h-fit lg:w-[340px] border shadow-sm'>
+          <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
             <span className='text-lg md:text-xl font-semibold'>
               Need Assistance?
             </span>
           </div>
           <div className='p-4 md:p-6 flex flex-col gap-4'>
-            <div className='text-center border rounded-md bg-green-50 p-4 text-green-700 font-semibold'>
+            <div className='text-center border rounded bg-green-50 p-4 text-green-700 font-semibold'>
               Your booking is confirmed!
             </div>
             <div className='flex gap-3 items-center'>

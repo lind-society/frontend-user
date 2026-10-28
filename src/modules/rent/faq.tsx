@@ -14,97 +14,63 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import TitleSection from '@/components/ui/title-section';
 
-interface FAQItem {
-  question: string;
-  answer: string;
-}
+const FAQ_KEYS = [
+  'whatIncluded',
+  'howToBook',
+  'paymentMethods',
+  'additionalFees',
+  'specialArrangements',
+] as const;
 
 const FaQRentPage = () => {
   const t = useTranslations('rent.faq');
 
-  const faqs: FAQItem[] = [
-    {
-      question: t('questions.whatIncluded.question'),
-      answer: t('questions.whatIncluded.answer'),
-    },
-    {
-      question: t('questions.howToBook.question'),
-      answer: t('questions.howToBook.answer'),
-    },
-    {
-      question: t('questions.paymentMethods.question'),
-      answer: t('questions.paymentMethods.answer'),
-    },
-    {
-      question: t('questions.additionalFees.question'),
-      answer: t('questions.additionalFees.answer'),
-    },
-    {
-      question: t('questions.specialArrangements.question'),
-      answer: t('questions.specialArrangements.answer'),
-    },
-  ];
-
   return (
-    <section className='bg-gray-50 py-8 md:py-12 lg:py-16'>
+    <section className='py-14 md:py-20'>
       <BaseContainer>
-        <div className='flex flex-col gap-6 md:gap-12'>
-          {/* Header Section */}
-          <div className='flex flex-col gap-2 md:gap-4 text-center'>
-            <h2 className='text-xl md:text-2xl lg:text-3xl font-semibold text-primary'>
-              {t('title')}
-            </h2>
-            <p className='text-lg md:text-xl lg:text-[22px] text-text'>
-              {t('subtitle')}
-            </p>
-          </div>
+        <div className='flex flex-col gap-10'>
+          <TitleSection title={t('title')} subTitle={t('subtitle')} />
 
-          {/* Content Section - Responsive layout */}
-          <div className='flex flex-col lg:flex-row gap-8'>
-            {/* FAQ Accordion - Takes full width on mobile/tablet */}
-            <div className='flex flex-col w-full lg:flex-1'>
+          <div className='flex flex-col gap-10 lg:flex-row lg:gap-14'>
+            <div className='w-full lg:flex-1'>
               <Accordion type='single' collapsible className='w-full'>
-                {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className='text-lg md:text-xl text-primary font-semibold text-start'>
-                      {faq.question}
+                {FAQ_KEYS.map((key) => (
+                  <AccordionItem key={key} value={key}>
+                    <AccordionTrigger>
+                      {t(`questions.${key}.question`)}
                     </AccordionTrigger>
-                    <AccordionContent className='text-base md:text-lg text-text'>
-                      {faq.answer}
+                    <AccordionContent>
+                      {t(`questions.${key}.answer`)}
                     </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
             </div>
 
-            {/* Contact Section - Full width on mobile, fixed width on desktop */}
-            <div className='flex flex-col gap-5 w-full lg:w-[400px]'>
-              <div className='relative w-full h-[260px] lg:h-auto lg:aspect-[400/260]'>
+            <aside className='flex w-full flex-col gap-4 lg:w-[360px]'>
+              <div className='relative aspect-[360/230] w-full overflow-hidden'>
                 <Image
                   src='/images/faq-buy.jpeg'
-                  alt='FAQ Image'
+                  alt=''
                   fill
-                  sizes='(max-width: 1024px) 100vw, 400px'
-                  className='rounded-lg shadow-md object-cover'
+                  aria-hidden
+                  sizes='(max-width: 1024px) 100vw, 360px'
+                  className='object-cover'
                 />
               </div>
-              <p className='text-xl md:text-2xl font-bold text-primary'>
+              <p className='font-heading text-xl font-semibold text-ink'>
                 {t('needMoreAssistance')}
               </p>
-              <p className='text-base md:text-lg text-primary'>
-                {t('teamReady')}
-              </p>
-              <Button variant='primary' asChild>
-                <Link
-                  href='/contact-us'
-                  className='flex items-center gap-2 w-fit'
-                >
+              <p className='text-sm text-ink-soft'>{t('teamReady')}</p>
+              <Button variant='primary' className='w-fit' asChild>
+                <Link href='/contact-us' className='flex items-center gap-2'>
                   <span>{t('contactUs')}</span>
-                  <RiArrowRightUpLine size={20} className='text-white' />
+                  <RiArrowRightUpLine size={18} />
                 </Link>
               </Button>
-            </div>
+            </aside>
           </div>
         </div>
       </BaseContainer>

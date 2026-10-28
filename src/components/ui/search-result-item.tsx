@@ -19,24 +19,14 @@ import React from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 
-interface SearchResultItemProps {
-  id: string;
-  title: string;
-  location: string;
-  price: string;
-  period: string;
-  rating: number;
-  reviews: number;
-  image: string;
-  type: 'rent' | 'buy' | 'tourist-activity';
-  bedrooms?: number;
-  bathrooms?: number;
-  guests?: number;
-  size?: string;
-  duration?: string;
-  groupSize?: string;
+import { SearchResult } from '@/types/search-result';
+
+type SearchResultItemProps = SearchResult & {
   onClick?: () => void;
-}
+};
+
+/** Shown when a hit has no photo — GET /search returns none. */
+const FALLBACK_IMAGE = '/images/discover-1.png';
 
 const SearchResultItem: React.FC<SearchResultItemProps> = ({
   id,
@@ -92,7 +82,7 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
       case 'tourist-activity':
         return 'bg-purple-100 text-purple-800 border-purple-200';
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-200';
+        return 'bg-sand/40 text-ink border-bronze/25';
     }
   };
 
@@ -108,15 +98,17 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
     return `Rp ${formatted}`;
   };
 
+  const hasRating = rating !== undefined;
+
   return (
     <Link href={`/${type}/${id}`} onClick={onClick}>
-      <Card className='p-4 hover:bg-gray-50 transition-all duration-200 cursor-pointer border border-gray-200 shadow-sm hover:shadow-md'>
+      <Card className='p-4 hover:bg-bone transition-all duration-200 cursor-pointer border border-bronze/25 shadow-sm hover:shadow-md'>
         <div className='flex gap-4'>
           {/* Image */}
           <div className='flex-shrink-0'>
             <div className='relative'>
               <Image
-                src={image}
+                src={image ?? FALLBACK_IMAGE}
                 alt={title}
                 width={80}
                 height={80}
@@ -137,24 +129,28 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
           <div className='flex-1 min-w-0'>
             {/* Title and Rating */}
             <div className='flex items-start justify-between mb-2'>
-              <h4 className='font-semibold text-gray-900 text-sm leading-tight line-clamp-2'>
+              <h4 className='font-semibold text-ink text-sm leading-tight line-clamp-2'>
                 {title}
               </h4>
-              <div className='flex items-center text-xs ml-2'>
-                <Star className='w-3 h-3 text-yellow-400 fill-current mr-1' />
-                <span className='font-medium text-gray-700'>{rating}</span>
-                <span className='text-gray-500 ml-1'>({reviews})</span>
-              </div>
+              {hasRating && (
+                <div className='flex items-center text-xs ml-2'>
+                  <Star className='w-3 h-3 text-yellow-400 fill-current mr-1' />
+                  <span className='font-medium text-ink-soft'>{rating}</span>
+                  {reviews !== undefined && (
+                    <span className='text-ink-muted ml-1'>({reviews})</span>
+                  )}
+                </div>
+              )}
             </div>
 
             {/* Location */}
-            <div className='flex items-center text-xs text-gray-500 mb-3'>
+            <div className='flex items-center text-xs text-ink-muted mb-3'>
               <MapPin className='w-3 h-3 mr-1 flex-shrink-0' />
               <span className='truncate'>{location}</span>
             </div>
 
             {/* Details based on type */}
-            <div className='flex items-center gap-4 text-xs text-gray-600 mb-3'>
+            <div className='flex items-center gap-4 text-xs text-ink-soft mb-3'>
               {type === 'rent' && (
                 <>
                   <div className='flex items-center'>
@@ -212,13 +208,17 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
               )}
             </div>
 
-            {/* Price */}
+            {/* Price — omitted for hits from GET /search, which carries none */}
             <div className='flex items-center justify-between'>
               <div className='text-right'>
-                <div className='font-bold text-sm text-gray-900'>
-                  {formatPrice(price)}
-                </div>
-                <div className='text-xs text-gray-500'>{period}</div>
+                {price !== undefined && (
+                  <div className='font-bold text-sm text-ink'>
+                    {formatPrice(price)}
+                  </div>
+                )}
+                {period !== undefined && (
+                  <div className='text-xs text-ink-muted'>{period}</div>
+                )}
               </div>
 
               {/* Quick action button */}

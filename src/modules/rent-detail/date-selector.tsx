@@ -23,12 +23,12 @@ export const DateSelector: React.FC<{
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <button className='py-2 flex gap-2 w-full border border-transparent hover:border-gray-200 rounded-md'>
+        <button className='py-2 flex gap-2 w-full border border-transparent hover:border-bronze/25 rounded'>
           <FaCalendar size={24} className='text-primary' />
           <div className='flex flex-col w-full'>
             <span className='font-semibold text-left'>{label}</span>
             <div className='flex justify-between items-center'>
-              <span className='text-gray-500 text-sm'>
+              <span className='text-ink-muted text-sm'>
                 {date ? format(date, 'dd MMM yyyy') : t('selectDate')}
               </span>
               <ChevronDown size={18} className='text-primary' />

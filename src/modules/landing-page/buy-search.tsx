@@ -1,7 +1,5 @@
 'use client';
 
-import { ChevronDown } from 'lucide-react';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
@@ -21,6 +19,12 @@ import {
   formatPrice,
   PriceRangeSelector,
 } from '@/components/ui/price-range-selector';
+import {
+  PromoStrip,
+  SearchField,
+  SearchFieldRow,
+  SearchStepper,
+} from '@/components/ui/search-panel';
 
 interface BuySearchProps {
   onSearch: (searchParams: Record<string, string>) => void;
@@ -39,16 +43,13 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
   const locations = ['Bali', 'Jakarta', 'Surabaya', 'Yogyakarta', 'Bandung'];
   const ownershipTypes = ['Leasehold', 'Freehold', 'Both'];
 
-  // Format the price range for display
   const getDisplayPriceRange = (): string => {
     if (minPrice === 0 && maxPrice === null) {
       return t('priceRange.anyPrice');
     }
-
     if (maxPrice === null) {
       return `${formatPrice(minPrice)}+`;
     }
-
     return `${formatPrice(minPrice)} - ${formatPrice(maxPrice)}`;
   };
 
@@ -70,33 +71,26 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
 
   return (
     <>
-      {/* Search inputs */}
-      <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
+      <SearchFieldRow>
         {/* Location */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <FaLocationDot size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('location.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>{location}</span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={FaLocationDot}
+              label={t('location.label')}
+              value={location}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-56 p-2'>
             <div className='flex flex-col'>
               {locations.map((loc) => (
                 <button
                   key={loc}
-                  className={`py-2 px-3 text-left rounded-md ${
+                  type='button'
+                  className={`rounded px-3 py-2 text-left transition-colors ${
                     location === loc
-                      ? 'bg-primary/10 text-primary'
-                      : 'hover:bg-gray-100'
+                      ? 'bg-bronze/15 text-bronze-600'
+                      : 'hover:bg-bronze/10'
                   }`}
                   onClick={() => setLocation(loc)}
                 >
@@ -110,28 +104,22 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
         {/* Ownership */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <GrCertificate size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('ownership.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>{ownership}</span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={GrCertificate}
+              label={t('ownership.label')}
+              value={ownership}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-56 p-2'>
             <div className='flex flex-col'>
               {ownershipTypes.map((type) => (
                 <button
                   key={type}
-                  className={`py-2 px-3 text-left rounded-md ${
+                  type='button'
+                  className={`rounded px-3 py-2 text-left transition-colors ${
                     ownership === type
-                      ? 'bg-primary/10 text-primary'
-                      : 'hover:bg-gray-100'
+                      ? 'bg-bronze/15 text-bronze-600'
+                      : 'hover:bg-bronze/10'
                   }`}
                   onClick={() => setOwnership(type)}
                 >
@@ -145,123 +133,62 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
         {/* Bedrooms */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <IoBed size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('bedrooms.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {bedrooms.toString().padStart(2, '0')}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={IoBed}
+              label={t('bedrooms.label')}
+              value={bedrooms.toString().padStart(2, '0')}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-48 p-3'>
-            <div className='flex flex-col gap-3'>
-              <div className='flex justify-between items-center'>
-                <span>{t('bedrooms.description')}</span>
-              </div>
-              <div className='flex items-center justify-between'>
-                <button
-                  onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={bedrooms <= 1}
-                >
-                  -
-                </button>
-                <span className='font-semibold'>
-                  {bedrooms.toString().padStart(2, '0')}
-                </span>
-                <button
-                  onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={bedrooms >= 10}
-                >
-                  +
-                </button>
-              </div>
-            </div>
+            <SearchStepper
+              description={t('bedrooms.description')}
+              value={bedrooms}
+              min={1}
+              max={10}
+              onChange={setBedrooms}
+            />
           </PopoverContent>
         </Popover>
 
         {/* Bathrooms */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <LuBath size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('bathrooms.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {bathrooms.toString().padStart(2, '0')}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={LuBath}
+              label={t('bathrooms.label')}
+              value={bathrooms.toString().padStart(2, '0')}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-48 p-3'>
-            <div className='flex flex-col gap-3'>
-              <div className='flex justify-between items-center'>
-                <span>{t('bathrooms.description')}</span>
-              </div>
-              <div className='flex items-center justify-between'>
-                <button
-                  onClick={() => setBathrooms(Math.max(1, bathrooms - 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={bathrooms <= 1}
-                >
-                  -
-                </button>
-                <span className='font-semibold'>
-                  {bathrooms.toString().padStart(2, '0')}
-                </span>
-                <button
-                  onClick={() => setBathrooms(Math.min(10, bathrooms + 1))}
-                  className='w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full'
-                  disabled={bathrooms >= 10}
-                >
-                  +
-                </button>
-              </div>
-            </div>
+            <SearchStepper
+              description={t('bathrooms.description')}
+              value={bathrooms}
+              min={1}
+              max={10}
+              onChange={setBathrooms}
+            />
           </PopoverContent>
         </Popover>
 
         {/* Price Range */}
         <Popover>
           <PopoverTrigger asChild>
-            <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-gray-200 rounded-md'>
-              <TbCurrencyDollar size={24} className='text-primary' />
-              <div className='flex flex-col w-full'>
-                <span className='font-semibold text-left'>
-                  {t('priceRange.label')}
-                </span>
-                <div className='flex justify-between items-center'>
-                  <span className='text-gray-500'>
-                    {getDisplayPriceRange()}
-                  </span>
-                  <ChevronDown size={18} className='text-primary' />
-                </div>
-              </div>
-            </button>
+            <SearchField
+              icon={TbCurrencyDollar}
+              label={t('priceRange.label')}
+              value={getDisplayPriceRange()}
+            />
           </PopoverTrigger>
           <PopoverContent className='w-80 p-4'>
             <div className='flex flex-col gap-4'>
-              <span className='text-lg font-semibold'>
+              <span className='font-heading text-lg font-semibold'>
                 {t('priceRange.label')}
               </span>
               <PriceRangeSelector
                 initialMinPrice={minPrice}
                 initialMaxPrice={maxPrice}
                 absoluteMin={0}
-                absoluteMax={10000000} // 10M
+                absoluteMax={10000000}
                 step={10000}
                 onChange={handlePriceChange}
                 priceRanges={DEFAULT_PRICE_RANGES}
@@ -270,27 +197,23 @@ const BuySearch: React.FC<BuySearchProps> = ({ onSearch }) => {
           </PopoverContent>
         </Popover>
 
-        {/* Search Button */}
-        <Button
-          variant='primary'
-          size='lg'
-          className='w-full md:w-auto'
-          onClick={handleSearch}
-        >
-          {t('searchButton')}
-        </Button>
-      </div>
+        <div className='flex items-center pt-3 lg:pl-6 lg:pt-0'>
+          <Button
+            variant='cta'
+            className='h-14 w-full px-8 lg:w-auto lg:px-10'
+            onClick={handleSearch}
+          >
+            {t('searchButton')}
+          </Button>
+        </div>
+      </SearchFieldRow>
 
-      {/* Promotions */}
-      <div className='flex flex-col md:flex-row md:justify-between gap-2 md:gap-0 text-sm md:text-base bg-bg rounded-md px-5 py-3 border border-primary'>
-        <p className='font-semibold text-primary'>{t('promotions.buy')}</p>
-        <Link
-          href='/buy'
-          className='font-semibold text-primary underline whitespace-nowrap'
-        >
-          {t('promotions.buyLink')}
-        </Link>
-      </div>
+      <PromoStrip
+        className='mt-4'
+        message={t('promotions.buy')}
+        linkLabel={t('promotions.buyLink')}
+        href='/early-bird'
+      />
     </>
   );
 };
