@@ -1,14 +1,11 @@
-'use client';
-
 import { ChevronDown, Share, X } from 'lucide-react';
-import dynamic from 'next/dynamic';
-import { useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 import React, { useMemo, useState } from 'react';
 import { IoMapOutline } from 'react-icons/io5';
+import { useTranslations } from 'use-intl';
 
 import { AMENITY_FACILITY_KEYWORDS } from '@/lib/amenity-keywords';
 import { toVillaCard } from '@/lib/mappers/villa';
+import { useSearchParams } from '@/lib/navigation';
 import { useVillas } from '@/hooks/api/useVilla';
 import { useVillaMapPins } from '@/hooks/api/useVillaMapPins';
 
@@ -29,10 +26,8 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { StateMessage } from '@/components/ui/state-message';
 
-// Leaflet touches `window` at import time — must stay client-only.
-const MapView = dynamic(() => import('@/components/ui/map-view'), {
-  ssr: false,
-});
+// Leaflet is heavy, so it is only downloaded once a map is shown.
+const MapView = React.lazy(() => import('@/components/ui/map-view'));
 
 type SortOption = 'recommended' | 'price-low' | 'price-high' | 'newest';
 
@@ -98,9 +93,8 @@ const ResultRentContent = () => {
     // was reported against).
     const firstAmenity = Array.from(amenityIds)[0];
     if (firstAmenity && AMENITY_FACILITY_KEYWORDS[firstAmenity]) {
-      params[
-        'filter.villaFacilities.facility.name'
-      ] = `$ilike:${AMENITY_FACILITY_KEYWORDS[firstAmenity]}`;
+      params['filter.villaFacilities.facility.name'] =
+        `$ilike:${AMENITY_FACILITY_KEYWORDS[firstAmenity]}`;
     }
 
     return params;
@@ -200,7 +194,9 @@ const ResultRentContent = () => {
                     </DialogTitle>
                   </DialogHeader>
                   <div className='h-full overflow-hidden'>
-                    <MapView pins={pins} />
+                    <React.Suspense fallback={null}>
+                      <MapView pins={pins} />
+                    </React.Suspense>
                   </div>
                 </DialogContent>
               </Dialog>
@@ -301,7 +297,9 @@ const ResultRentContent = () => {
                 </div>
 
                 <div className='hidden lg:block lg:w-1/3 h-screen sticky top-0 p-4 pr-0'>
-                  <MapView pins={pins} />
+                  <React.Suspense fallback={null}>
+                    <MapView pins={pins} />
+                  </React.Suspense>
                 </div>
               </div>
             ) : (

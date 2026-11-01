@@ -1,13 +1,11 @@
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
 import { toTouristActivity } from '@/lib/mappers/activity';
 import { useActivities } from '@/hooks/api/useActivity';
 
+import Image from '@/components/image';
+import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 
 import { TouristActivity } from '@/modules/tourist-activity/constant';
@@ -32,8 +30,8 @@ const Sidebar: React.FC<SidebarProps> = ({ activity, onGetTicket }) => {
     .find((item) => item.id !== activity.id);
 
   return (
-    <aside className='w-full lg:w-80 flex-shrink-0'>
-      <div className='bg-cream-light rounded shadow-sm border border-bronze/25 p-4 mb-6'>
+    <aside className='w-full lg:w-80 shrink-0'>
+      <div className='bg-cream-light rounded shadow-xs border border-bronze/25 p-4 mb-6'>
         <div className='text-sm text-ink-muted mb-1'>{t('startFrom')}</div>
         <div className='text-2xl font-bold text-primary mb-1'>
           {activity.currency} {activity.price.toLocaleString()}
@@ -54,7 +52,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activity, onGetTicket }) => {
         </Button>
       </div>
       {moreActivity && (
-        <div className='bg-cream-light rounded shadow-sm border border-bronze/25 p-4'>
+        <div className='bg-cream-light rounded shadow-xs border border-bronze/25 p-4'>
           <div className='font-semibold mb-2'>{t('moreActivity')}</div>
           <div className='flex gap-3 items-center mb-2'>
             <Image

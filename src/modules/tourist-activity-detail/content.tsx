@@ -1,9 +1,7 @@
-'use client';
-
 import { addDays, format } from 'date-fns';
 import { Calendar, Clock, MapPin, Ticket } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
 import { Badge } from '@/components/ui/badge';
 import BreadcrumbLayout from '@/components/ui/breadcrumb-layout';

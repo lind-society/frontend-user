@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiCheckboxCircleFill } from 'react-icons/ri';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import TitleSection from '@/components/ui/title-section';
 

@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
 import BaseContainer from '@/components/layouts/container';
 import { ExperienceCard } from '@/components/ui/card/experience';

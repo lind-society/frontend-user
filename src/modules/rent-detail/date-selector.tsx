@@ -1,8 +1,8 @@
 import { format } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaCalendar } from 'react-icons/fa6';
+import { useTranslations } from 'use-intl';
 
 import { Calendar } from '@/components/ui/calendar';
 import {
@@ -41,7 +41,7 @@ export const DateSelector: React.FC<{
           mode='single'
           selected={date}
           onSelect={onSelect}
-          initialFocus
+          autoFocus
           disabled={minDate ? (date) => date < minDate : undefined}
         />
       </PopoverContent>

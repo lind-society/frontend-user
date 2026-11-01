@@ -1,8 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
+import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 
 /**

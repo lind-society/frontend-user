@@ -1,12 +1,10 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
 import { IoBed } from 'react-icons/io5';
 import { LuBath } from 'react-icons/lu';
 import { TbCurrencyDollar } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import {

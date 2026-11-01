@@ -1,6 +1,6 @@
 import { Clock, Handshake, Home, User } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
 import BaseContainer from '@/components/layouts/container';
 

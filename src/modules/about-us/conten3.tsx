@@ -1,11 +1,9 @@
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 
 // Service item component for cleaner code
 interface ServiceItemProps {
@@ -32,7 +30,7 @@ const ServiceItem: React.FC<ServiceItemProps> = ({
   >
     {/* Image container */}
     <div className='w-full lg:w-1/2'>
-      <div className='relative w-full aspect-[4/3] rounded overflow-hidden shadow-sm'>
+      <div className='relative w-full aspect-[4/3] rounded overflow-hidden shadow-xs'>
         <Image
           src={imageSrc}
           alt={title}

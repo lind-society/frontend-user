@@ -1,5 +1,3 @@
-'use client';
-
 import * as SelectPrimitive from '@radix-ui/react-select';
 import { Check, ChevronDown, ChevronUp } from 'lucide-react';
 import * as React from 'react';
@@ -19,7 +17,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      'flex h-10 w-full items-center justify-between rounded border border-bronze/30 bg-cream-light px-3 py-2 text-sm ring-offset-cream-light placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-bronze focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
+      'flex h-10 w-full items-center justify-between rounded border border-bronze/30 bg-cream-light px-3 py-2 text-sm ring-offset-cream-light placeholder:text-ink-muted focus:outline-hidden focus:ring-2 focus:ring-bronze focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1',
       className
     )}
     {...props}
@@ -118,7 +116,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-bronze/10 focus:text-ink data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
+      'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-hidden focus:bg-bronze/10 focus:text-ink data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
       className
     )}
     {...props}

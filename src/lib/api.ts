@@ -3,12 +3,9 @@ import axios, { AxiosRequestConfig } from 'axios';
 /**
  * Shared axios instance for the Lind Society backend.
  *
- * `NEXT_PUBLIC_API_BASE_URL` is the canonical variable (it is what
- * src/constant/config.ts reads); `NEXT_PUBLIC_API_URL` is kept as a fallback
- * because .env.local currently defines both.
+ * `VITE_API_BASE_URL` is inlined at build time, so changing it needs a rebuild.
  */
-export const API_URL =
-  process.env.NEXT_PUBLIC_API_BASE_URL ?? process.env.NEXT_PUBLIC_API_URL;
+export const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const apiConfig: AxiosRequestConfig = {
   baseURL: API_URL,

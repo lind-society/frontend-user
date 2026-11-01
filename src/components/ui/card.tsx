@@ -9,7 +9,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'rounded-lg border border-bronze/30 bg-cream-light text-ink shadow-sm',
+      'rounded-lg border border-bronze/30 bg-cream-light text-ink shadow-xs',
       className
     )}
     {...props}
@@ -77,11 +77,12 @@ const CardFooter = React.forwardRef<
 CardFooter.displayName = 'CardFooter';
 
 // components/ProductCard.tsx
-import Image from 'next/image';
-import Link from 'next/link';
 import { CiHeart } from 'react-icons/ci';
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { IoEyeOutline } from 'react-icons/io5';
+
+import Image from '@/components/image';
+import Link from '@/components/link';
 
 // Adjust the import path as necessary
 

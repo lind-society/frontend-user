@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import React from 'react';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 
 const HeaderManageProperty = () => {

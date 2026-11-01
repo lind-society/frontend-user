@@ -1,15 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
 
 import { format } from 'date-fns';
 import { Calendar } from 'lucide-react';
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaLocationDot, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';
+import { useTranslations } from 'use-intl';
 
+import { useRouter } from '@/lib/navigation';
+
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
 import { EnhancedDateRangePicker } from '@/components/ui/enhanced-date-range';

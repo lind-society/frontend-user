@@ -13,6 +13,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
+import { CONCIERGE_WHATSAPP_DISPLAY } from '@/constant/config';
+
 interface AdditionalServiceProps {
   onContinue: () => void;
   /**
@@ -39,7 +41,7 @@ const AdditionalService = ({
 
   return (
     <BaseContainer>
-      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm gap-6'>
+      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-xs gap-6'>
         {/* Left Column - Additional Services */}
         <div className='py-4 flex-1 flex flex-col gap-5'>
           <h3 className='text-xl md:text-2xl font-semibold text-primary'>
@@ -161,19 +163,19 @@ const AdditionalService = ({
             </h4>
             <ul className='text-text text-sm space-y-2'>
               <li className='flex gap-2'>
-                <span className='text-primary flex-shrink-0'>•</span>
+                <span className='text-primary shrink-0'>•</span>
                 <span>
                   You will receive a confirmation email within 24 hours.
                 </span>
               </li>
               <li className='flex gap-2'>
-                <span className='text-primary flex-shrink-0'>•</span>
+                <span className='text-primary shrink-0'>•</span>
                 <span>
                   A 50% deposit will be required to secure your booking.
                 </span>
               </li>
               <li className='flex gap-2'>
-                <span className='text-primary flex-shrink-0'>•</span>
+                <span className='text-primary shrink-0'>•</span>
                 <span>Free cancellation up to 7 days before arrival.</span>
               </li>
             </ul>
@@ -181,7 +183,7 @@ const AdditionalService = ({
         </div>
 
         {/* Right Column - Contact Box */}
-        <div className='w-full lg:w-[340px] border shadow-sm'>
+        <div className='w-full lg:w-[340px] border shadow-xs'>
           <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
             <span className='text-sm md:text-base'>Send Inquiry or</span>
             <span className='text-xl md:text-2xl font-semibold'>
@@ -191,7 +193,7 @@ const AdditionalService = ({
 
           <div className='p-4 md:p-6 flex flex-col gap-4'>
             <div className='flex gap-3 items-center'>
-              <div className='relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full'>
+              <div className='relative w-12 h-12 shrink-0 overflow-hidden rounded-full'>
                 <Avatar>
                   <AvatarImage src='https://github.com/shadcn.png' />
                   <AvatarFallback>CN</AvatarFallback>
@@ -213,7 +215,7 @@ const AdditionalService = ({
             >
               <FaWhatsapp className='text-primary' size={18} />
               <span className='text-primary font-semibold text-sm md:text-base'>
-                +62 361 123 4567
+                {CONCIERGE_WHATSAPP_DISPLAY}
               </span>
             </Button>
 
@@ -238,7 +240,9 @@ const AdditionalService = ({
                 support will only contact you from the following number:
               </span>
 
-              <span className='font-bold text-text'>+62 9 915 7438</span>
+              <span className='font-bold text-text'>
+                {CONCIERGE_WHATSAPP_DISPLAY}
+              </span>
 
               <span className='text-text font-medium text-sm'>
                 If you receive messages from any other number, please ignore

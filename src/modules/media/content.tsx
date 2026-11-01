@@ -1,9 +1,7 @@
-'use client';
-
-import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaExpand, FaTimes } from 'react-icons/fa';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import BreadcrumbLayout from '@/components/ui/breadcrumb-layout';
 
@@ -170,10 +168,10 @@ const ContentMedia = () => {
                         index === 0
                           ? 'h-[400px]'
                           : index === 1
-                          ? 'h-[280px]'
-                          : index === 2
-                          ? 'h-[350px]'
-                          : 'h-[320px]'
+                            ? 'h-[280px]'
+                            : index === 2
+                              ? 'h-[350px]'
+                              : 'h-[320px]'
                       } object-cover transition-transform duration-300 group-hover:scale-105`}
                     />
                     <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
@@ -206,10 +204,10 @@ const ContentMedia = () => {
                       index === 0
                         ? 'h-[280px]'
                         : index === 1
-                        ? 'h-[420px]'
-                        : index === 2
-                        ? 'h-[320px]'
-                        : 'h-[330px]'
+                          ? 'h-[420px]'
+                          : index === 2
+                            ? 'h-[320px]'
+                            : 'h-[330px]'
                     } object-cover transition-transform duration-300 group-hover:scale-105`}
                   />
                   <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>
@@ -252,8 +250,8 @@ const ContentMedia = () => {
                     index % 3 === 0
                       ? 'h-[380px]'
                       : index % 3 === 1
-                      ? 'h-[320px]'
-                      : 'h-[280px]'
+                        ? 'h-[320px]'
+                        : 'h-[280px]'
                   } object-cover transition-transform duration-300 group-hover:scale-105`}
                 />
                 <div className='absolute inset-0 bg-ink/0 group-hover:bg-ink/30 transition-opacity duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100'>

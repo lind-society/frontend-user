@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Image from '@/components/image';
+import Link from '@/components/link';
 
 // Define blog post type
 export interface BlogPost {
@@ -29,7 +29,7 @@ export const BlogCard = ({ post }: { post: BlogPost }) => (
 
     <p className='text-primary text-sm md:text-base'>{post.date}</p>
 
-    <Link href={`/blog/${post.slug}`} className='group'>
+    <Link href={`/blog/${post.id}`} className='group'>
       <h5 className='text-lg md:text-xl font-semibold line-clamp-1 text-primary group-hover:underline'>
         {post.title}
       </h5>

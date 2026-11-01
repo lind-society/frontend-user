@@ -1,6 +1,3 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import {
   FaEnvelope,
@@ -8,6 +5,11 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
 } from 'react-icons/fa';
+import { toast } from 'sonner';
+import { useTranslations } from 'use-intl';
+
+import { getApiErrorMessage } from '@/lib/api-error';
+import { useCreateInquiry } from '@/hooks/api/useInquiry';
 
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
@@ -27,7 +29,7 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 
-import { countryCodes } from '@/modules/rent-detail/constant';
+import { countryCodes } from '@/constant/country-codes';
 
 const ContentContactUs = () => {
   // Form state
@@ -39,20 +41,33 @@ const ContentContactUs = () => {
   const [message, setMessage] = useState('');
   const t = useTranslations('contactUs');
 
+  const { mutate: sendInquiry, isPending } = useCreateInquiry();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would handle form submission
-    // eslint-disable-next-line no-console
-    console.log({
-      fullName,
-      email,
-      phone: `${countryCode}${phoneNumber}`,
-      context,
-      message,
-    });
 
-    // Reset form or show success message
-    alert(t('form.successMessage'));
+    sendInquiry(
+      {
+        type: 'contact',
+        name: fullName.trim(),
+        email: email.trim(),
+        phone: `${countryCode}${phoneNumber}`,
+        message: message.trim(),
+        metadata: { topic: context },
+      },
+      {
+        onSuccess: () => {
+          toast.success(t('form.successMessage'));
+          setFullName('');
+          setEmail('');
+          setPhoneNumber('');
+          setContext('');
+          setMessage('');
+        },
+        onError: (error) =>
+          toast.error(getApiErrorMessage(error, t('form.errorMessage'))),
+      }
+    );
   };
 
   return (
@@ -77,7 +92,7 @@ const ContentContactUs = () => {
             <div className='grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8'>
               {/* Phone */}
               <div className='flex gap-3 items-center'>
-                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                <div className='flex h-11 w-11 shrink-0 items-center justify-center text-bronze-600'>
                   <FaPhoneAlt size={26} />
                 </div>
                 <div className='flex flex-col'>
@@ -92,7 +107,7 @@ const ContentContactUs = () => {
 
               {/* Email */}
               <div className='flex gap-3 items-center'>
-                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                <div className='flex h-11 w-11 shrink-0 items-center justify-center text-bronze-600'>
                   <FaEnvelope size={26} />
                 </div>
                 <div className='flex flex-col'>
@@ -107,7 +122,7 @@ const ContentContactUs = () => {
 
               {/* Address */}
               <div className='flex gap-3 items-start sm:col-span-2'>
-                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                <div className='flex h-11 w-11 shrink-0 items-center justify-center text-bronze-600'>
                   <FaMapMarkerAlt size={26} />
                 </div>
                 <div className='flex flex-col'>
@@ -122,7 +137,7 @@ const ContentContactUs = () => {
 
               {/* Instagram */}
               <div className='flex gap-3 items-center'>
-                <div className='flex h-11 w-11 flex-shrink-0 items-center justify-center text-bronze-600'>
+                <div className='flex h-11 w-11 shrink-0 items-center justify-center text-bronze-600'>
                   <FaInstagram size={26} />
                 </div>
                 <div className='flex flex-col'>
@@ -186,7 +201,7 @@ const ContentContactUs = () => {
                     <PopoverTrigger asChild>
                       <button
                         type='button'
-                        className='flex h-10 flex-shrink-0 items-center gap-2 rounded-l border border-bronze-600 bg-bronze-600 px-3 text-white'
+                        className='flex h-10 shrink-0 items-center gap-2 rounded-l border border-bronze-600 bg-bronze-600 px-3 text-white'
                       >
                         <span>{countryCode}</span>
                         <svg
@@ -225,7 +240,10 @@ const ContentContactUs = () => {
                     placeholder={t('form.placeholders.phone')}
                     type='tel'
                     value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    onChange={(e) =>
+                      setPhoneNumber(e.target.value.replace(/D/g, ''))
+                    }
+                    inputMode='numeric'
                     className='rounded-l-none border-l-0'
                     required
                   />
@@ -278,8 +296,13 @@ const ContentContactUs = () => {
               </div>
 
               {/* Submit Button */}
-              <Button variant='cta' className='mt-2 h-12 w-full' type='submit'>
-                {t('form.submit')}
+              <Button
+                variant='cta'
+                className='mt-2 h-12 w-full'
+                type='submit'
+                disabled={isPending}
+              >
+                {isPending ? t('form.sending') : t('form.submit')}
               </Button>
             </form>
           </div>

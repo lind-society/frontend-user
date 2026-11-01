@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios';
-import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaWhatsapp } from 'react-icons/fa6';
 import { MdEmail, MdSecurity } from 'react-icons/md';
@@ -9,9 +8,12 @@ import {
   useCreatePaymentRequest,
 } from '@/hooks/api/useBooking';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+
+import { CONCIERGE_WHATSAPP_DISPLAY } from '@/constant/config';
 
 import { ReservationBookingView } from './booking-view';
 
@@ -131,7 +133,7 @@ const PaymentMethods = ({
 
   return (
     <BaseContainer>
-      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm gap-6'>
+      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-xs gap-6'>
         {/* Left Column - Payment Methods */}
         <div className='py-4 flex-1 flex flex-col gap-5'>
           <h3 className='text-xl md:text-2xl font-semibold text-primary'>
@@ -358,14 +360,15 @@ const PaymentMethods = ({
             </div>
             <p className='text-text text-base'>
               Our official payment link is only sent via WhatsApp from{' '}
-              <strong>+62 9 915 7438</strong>. If you receive a payment request
-              from another source, please ignore it and contact us immediately.
+              <strong>{CONCIERGE_WHATSAPP_DISPLAY}</strong>. If you receive a
+              payment request from another source, please ignore it and contact
+              us immediately.
             </p>
           </div>
         </div>
 
         {/* Right Column - Help Box */}
-        <div className='w-full h-fit lg:w-[340px] border shadow-sm'>
+        <div className='w-full h-fit lg:w-[340px] border shadow-xs'>
           <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
             <span className='text-lg md:text-xl font-semibold'>
               Help & Payment Confirmation
@@ -377,7 +380,7 @@ const PaymentMethods = ({
               completion!
             </div>
             <div className='flex gap-3 items-center'>
-              <div className='relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full'>
+              <div className='relative w-12 h-12 shrink-0 overflow-hidden rounded-full'>
                 <Avatar>
                   <AvatarImage src='https://github.com/shadcn.png' />
                   <AvatarFallback>CN</AvatarFallback>
@@ -399,7 +402,7 @@ const PaymentMethods = ({
             >
               <FaWhatsapp className='text-primary' size={18} />
               <span className='text-primary font-semibold text-sm md:text-base'>
-                +62 361 123 4567
+                {CONCIERGE_WHATSAPP_DISPLAY}
               </span>
             </Button>
 

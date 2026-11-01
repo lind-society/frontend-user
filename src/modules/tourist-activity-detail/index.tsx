@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 
 import { toTouristActivity } from '@/lib/mappers/activity';

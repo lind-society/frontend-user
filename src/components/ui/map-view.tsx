@@ -1,5 +1,3 @@
-'use client';
-
 import L from 'leaflet';
 import React, { useMemo } from 'react';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
@@ -36,8 +34,8 @@ const pinIcon = (active?: boolean) =>
  * Real map (OpenStreetMap via Leaflet) for listing results and detail pages —
  * replaces the earlier static background-image placeholder with random pins.
  *
- * Leaflet touches `window` on import, so every caller must load this via
- * `next/dynamic(() => import('@/components/ui/map-view'), { ssr: false })`.
+ * Leaflet is heavy, so callers load this lazily via
+ * `React.lazy(() => import('@/components/ui/map-view'))`.
  */
 const MapView = ({ pins, className, onPinClick }: MapViewProps) => {
   const center = useMemo<[number, number]>(() => {

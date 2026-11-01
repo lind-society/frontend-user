@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaHandshake } from 'react-icons/fa';
 import {
@@ -8,6 +7,7 @@ import {
   MdVilla,
 } from 'react-icons/md';
 import { RiVerifiedBadgeFill } from 'react-icons/ri';
+import { useTranslations } from 'use-intl';
 
 import BaseContainer from '@/components/layouts/container';
 import TitleSection from '@/components/ui/title-section';

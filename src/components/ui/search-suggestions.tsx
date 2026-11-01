@@ -1,10 +1,8 @@
-'use client';
-
 import { Home, MapPin, Plane, SearchIcon, TrendingUp } from 'lucide-react';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
+import Link from '@/components/link';
 import { Badge } from '@/components/ui/badge';
 
 interface SearchSuggestion {

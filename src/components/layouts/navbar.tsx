@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Building2,
   ChevronDown,
@@ -9,15 +7,15 @@ import {
   Phone,
   X,
 } from 'lucide-react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useLocale, useTranslations } from 'next-intl';
 import React, { useEffect, useState, useTransition } from 'react';
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { useLocale, useTranslations } from 'use-intl';
 
+import { usePathname } from '@/lib/navigation';
 import { cn } from '@/lib/utils';
 
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,7 +25,7 @@ import {
 import Logo from '@/components/ui/logo';
 
 import { Locale } from '@/i18n/config';
-import { setUserLocale } from '@/i18n/service';
+import { useSetLocale } from '@/i18n/provider';
 
 /**
  * Routes whose hero artwork sits directly beneath the header, so the bar has
@@ -161,6 +159,7 @@ const Navbar = () => {
 /** Globe + locale code, matching the new header's right-hand cluster. */
 const LocaleGlobe = () => {
   const locale = useLocale();
+  const setUserLocale = useSetLocale();
   const t = useTranslations('LocaleSwitcher');
   const [isPending, startTransition] = useTransition();
 
@@ -173,7 +172,7 @@ const LocaleGlobe = () => {
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          'flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.08em] transition-opacity focus:outline-none',
+          'flex items-center gap-1.5 text-sm font-medium uppercase tracking-[0.08em] transition-opacity focus:outline-hidden',
           isPending && 'pointer-events-none opacity-60'
         )}
       >

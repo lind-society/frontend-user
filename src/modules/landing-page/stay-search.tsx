@@ -1,10 +1,8 @@
-'use client';
-
 import { Calendar } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { IoBed, IoPeopleOutline } from 'react-icons/io5';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import { EnhancedDateRangePicker } from '@/components/ui/enhanced-date-range';

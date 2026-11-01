@@ -1,8 +1,6 @@
-'use client';
-
 import { ChevronRight, SlidersHorizontal, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -155,7 +153,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
         <div className='flex flex-col md:flex-row h-full overflow-hidden'>
           {/* Country selection - Only shown on desktop or on mobile when not showing cities */}
           <div
-            className={`md:w-[240px] md:border-r md:flex-shrink-0 md:block ${
+            className={`md:w-[240px] md:border-r md:shrink-0 md:block ${
               showCities ? 'hidden' : 'block'
             }`}
           >
@@ -190,7 +188,7 @@ const FilterDialogTourist = ({ onApplyFilters }: FilterDialogTouristProps) => {
               showCities ? 'block' : 'hidden md:block'
             }`}
           >
-            <ScrollArea className='flex-grow max-h-[calc(90vh-180px)] md:max-h-[calc(60vh-60px)]'>
+            <ScrollArea className='grow max-h-[calc(90vh-180px)] md:max-h-[calc(60vh-60px)]'>
               <div className='p-5 border-b flex flex-col gap-2'>
                 <span className='font-semibold text-primary hidden md:block'>
                   {activeCountry}

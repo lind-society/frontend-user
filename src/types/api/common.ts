@@ -15,16 +15,10 @@ export type DiscountType = 'percentage' | 'fixed';
 export type FacilityType = 'main' | 'optional';
 
 export type AdditionalType =
-  | 'bedrooms'
-  | 'indoor_areas'
-  | 'outdoor_areas'
-  | 'more_pictures';
+  'bedrooms' | 'indoor_areas' | 'outdoor_areas' | 'more_pictures';
 
 export type VillaPriceRuleSeason =
-  | 'regular_season'
-  | 'low_season'
-  | 'high_season'
-  | 'peak_season';
+  'regular_season' | 'low_season' | 'high_season' | 'peak_season';
 
 // relations embedded in list/detail responses
 export interface RelatedCurrency {
@@ -64,7 +58,7 @@ export interface RelatedFeature {
   id: string;
   name: string;
   type: string;
-  icon: Icon;
+  icon: Icon | null;
   free: boolean;
   currencyId: string;
   price: number | null;
@@ -77,6 +71,8 @@ export interface RelatedAdditional {
   id: string;
   name: string;
   type: AdditionalType;
+  description?: string | null;
+  photos?: string[] | null;
 }
 
 export interface RelatedVillaPolicyType {
@@ -87,6 +83,7 @@ export interface RelatedVillaPolicyType {
 export interface RelatedVillaPolicy {
   id: string;
   name: string;
+  description?: string | null;
   icon: Icon | null;
   type: RelatedVillaPolicyType;
 }

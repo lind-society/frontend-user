@@ -1,9 +1,7 @@
-'use client';
-
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 
 const Content1AboutUs = () => {
@@ -26,7 +24,7 @@ const Content1AboutUs = () => {
 
           {/* Image container - optimized for all screens */}
           <div className='w-full lg:w-1/2 order-1 lg:order-2'>
-            <div className='relative w-full aspect-[4/3] rounded overflow-hidden shadow-sm'>
+            <div className='relative w-full aspect-[4/3] rounded overflow-hidden shadow-xs'>
               <Image
                 src='/images/content-about-1.jpeg'
                 alt={t('imageAlt')}

@@ -1,5 +1,3 @@
-'use client';
-
 import {
   Bath,
   Bed,
@@ -11,11 +9,11 @@ import {
   Users,
   Users2,
 } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
+import Link from '@/components/link';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card';
 
@@ -102,10 +100,10 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
 
   return (
     <Link href={`/${type}/${id}`} onClick={onClick}>
-      <Card className='p-4 hover:bg-bone transition-all duration-200 cursor-pointer border border-bronze/25 shadow-sm hover:shadow-md'>
+      <Card className='p-4 hover:bg-bone transition-all duration-200 cursor-pointer border border-bronze/25 shadow-xs hover:shadow-md'>
         <div className='flex gap-4'>
           {/* Image */}
-          <div className='flex-shrink-0'>
+          <div className='shrink-0'>
             <div className='relative'>
               <Image
                 src={image ?? FALLBACK_IMAGE}
@@ -145,7 +143,7 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
 
             {/* Location */}
             <div className='flex items-center text-xs text-ink-muted mb-3'>
-              <MapPin className='w-3 h-3 mr-1 flex-shrink-0' />
+              <MapPin className='w-3 h-3 mr-1 shrink-0' />
               <span className='truncate'>{location}</span>
             </div>
 

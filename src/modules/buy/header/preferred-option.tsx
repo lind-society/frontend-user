@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
 
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'nextjs-toploader/app';
 import React from 'react';
 import { FaHome, FaSearchDollar } from 'react-icons/fa';
 import { GiIsland, GiPalmTree } from 'react-icons/gi';
 import { IoWater } from 'react-icons/io5';
 import { MdOutlineVilla } from 'react-icons/md';
+import { useTranslations } from 'use-intl';
+
+import { useRouter } from '@/lib/navigation';
 
 import { Button } from '@/components/ui/button';
 

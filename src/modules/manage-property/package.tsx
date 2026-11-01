@@ -1,5 +1,3 @@
-'use client';
-
 import { Check, X } from 'lucide-react';
 import React from 'react';
 import { FaCrown, FaRegStar, FaStar } from 'react-icons/fa';
@@ -120,7 +118,7 @@ const PackageManageProperty = () => {
                   key={pkg.id}
                   className={`col-span-1 rounded flex flex-col relative ${
                     isHighlighted
-                      ? 'border-2 border-primary shadow-sm'
+                      ? 'border-2 border-primary shadow-xs'
                       : 'border border-primary'
                   }`}
                 >
@@ -132,7 +130,7 @@ const PackageManageProperty = () => {
                     </div>
                   )}
                   <div
-                    className={`p-6 flex flex-col gap-3 flex-grow ${
+                    className={`p-6 flex flex-col gap-3 grow ${
                       isHighlighted ? 'bg-primary text-cream' : ''
                     }`}
                   >
@@ -163,7 +161,7 @@ const PackageManageProperty = () => {
                       </>
                     )}
                     <p
-                      className={`text-sm mt-4 flex-grow ${
+                      className={`text-sm mt-4 grow ${
                         isHighlighted ? '' : 'text-text'
                       }`}
                     >
@@ -201,7 +199,7 @@ const PackageManageProperty = () => {
                   key={pkg.id}
                   className={`rounded relative ${
                     isHighlighted
-                      ? 'border-2 border-primary shadow-sm'
+                      ? 'border-2 border-primary shadow-xs'
                       : 'border border-primary overflow-hidden'
                   }`}
                 >

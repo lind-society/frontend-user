@@ -1,8 +1,6 @@
-'use client';
-
 import { Filter, SearchIcon, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import SearchResultItem from '@/components/ui/search-result-item';

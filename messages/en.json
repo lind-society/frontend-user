@@ -386,7 +386,9 @@
         "phone": "Enter your phone number",
         "inquiryType": "Select inquiry type",
         "message": "Enter your message"
-      }
+      },
+      "errorMessage": "We couldn't send your message. Please try again.",
+      "sending": "Sending..."
     },
     "info": {
       "address": "Address",
@@ -406,7 +408,9 @@
     "consent": "By providing your details, you agree to receive marketing communications from LIND Society",
     "submit": "Submit",
     "successTitle": "Thank you!",
-    "successMessage": "We've opened WhatsApp with your details ready to send — our team will get back to you shortly."
+    "successMessage": "We've opened WhatsApp with your details ready to send — our team will get back to you shortly.",
+    "errorMessage": "We couldn't save your details. Please try again.",
+    "sending": "Sending..."
   },
   "rent": {
     "pageTitle": "Rent Villas & Properties",
@@ -1008,7 +1012,12 @@
         "toBeach": "To the beach",
         "toAirport": "To the airport",
         "housekeeping": "Housekeeping",
-        "wifi": "WiFi"
+        "wifi": "WiFi",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "facilities": "Facilities",
+        "rating": "Guest rating",
+        "location": "Location"
       },
       "bookingInfo": {
         "checkIn": "Check-in",
@@ -1017,7 +1026,41 @@
         "total": "Total",
         "perNight": "per night",
         "nights": "nights"
-      }
+      },
+      "rentTypes": {
+        "daily": "Daily",
+        "monthly": "Monthly",
+        "yearly": "Yearly"
+      },
+      "rates": {
+        "title": "Rates",
+        "daily": "Standard night",
+        "lowSeason": "Low season",
+        "highSeason": "High season",
+        "peakSeason": "Peak season",
+        "monthly": "Monthly stay",
+        "yearly": "Yearly stay",
+        "perNight": "per night",
+        "perMonth": "per month",
+        "perYear": "per year",
+        "note": "Prices shown are the starting rate; the final amount is confirmed with your booking."
+      },
+      "noPolicies": "The owner hasn't added house rules yet.",
+      "noReviews": "No reviews yet. Be the first to stay and share your experience.",
+      "verifiedGuest": "Verified guest",
+      "facilitiesTitle": "Facilities",
+      "extraServices": "Extra services",
+      "free": "Free",
+      "noServices": "No extra services listed.",
+      "noFacilities": "No facilities listed.",
+      "aroundVillaEmpty": "No nearby places listed.",
+      "meters": "m",
+      "kilometers": "km",
+      "openMap": "Open in Google Maps",
+      "mapUnavailable": "The map preview isn't available for this villa.",
+      "videos": "Video tour",
+      "tour360": "360° tour",
+      "floorPlans": "Floor plans"
     },
     "inquiryForm": {
       "title": "Send Inquiry",
@@ -1052,7 +1095,43 @@
       "entertainment": "Entertainment",
       "meals": "Meals",
       "transport": "Transport",
-      "kids": "Kids"
+      "kids": "Kids",
+      "bookNow": "Book now",
+      "booking": "Booking...",
+      "total": "Estimated total",
+      "nightsLabel": "nights",
+      "nightLabel": "night",
+      "fromRate": "From",
+      "inquirySent": "Thank you! Your inquiry has been sent. We'll be in touch shortly.",
+      "inquiryError": "We couldn't send your inquiry. Please try again.",
+      "bookingError": "We couldn't create your booking. Please try again.",
+      "fillRequired": "Please fill in your name, email and phone number.",
+      "invalidEmail": "Please enter a valid email address.",
+      "invalidDates": "Check-out must be after check-in.",
+      "noPrice": "Contact us for pricing",
+      "rentTypeUnavailable": "This stay type is not available.",
+      "months": "months",
+      "month": "month",
+      "years": "years",
+      "year": "year",
+      "bookingNote": "Booking sends your request to the owner. You'll get a private link to track it and pay once it's confirmed."
+    },
+    "state": {
+      "loading": "Loading villa...",
+      "notFoundTitle": "We couldn't find this villa",
+      "notFoundDescription": "It may have been removed or the link is incorrect.",
+      "errorTitle": "Something went wrong",
+      "errorDescription": "We couldn't load this villa. Please try again.",
+      "backToVillas": "Browse all villas"
+    },
+    "gallery": {
+      "bedrooms": "Bedrooms",
+      "indoor_areas": "Indoor Areas",
+      "outdoor_areas": "Outdoor Areas",
+      "more_pictures": "More Pictures",
+      "pictures": "pictures",
+      "picture": "picture",
+      "nearbyVillas": "More villas you may like"
     }
   },
   "buyDetail": {
@@ -1110,7 +1189,27 @@
       "keyFeatures": "Key Features",
       "next": "Next",
       "previous": "Previous",
-      "serviceFeatures": "Services & Features"
+      "serviceFeatures": "Services & Features",
+      "breadcrumbBuy": "Buy",
+      "available": "Available",
+      "sold": "Sold",
+      "freehold": "Freehold",
+      "leasehold": "Leasehold",
+      "status": "Status",
+      "price": "Price",
+      "discount": "Discount",
+      "highlightsTitle": "Highlights",
+      "noFeatures": "No highlights listed.",
+      "noFacilities": "No facilities listed.",
+      "aroundEmpty": "No nearby places listed.",
+      "openMap": "Open in Google Maps",
+      "mapUnavailable": "The map preview isn't available for this property.",
+      "meters": "m",
+      "kilometers": "km",
+      "free": "Included",
+      "similar": "More properties you may like",
+      "bedroomsCount": "Bedrooms",
+      "facilitiesCount": "Facilities"
     },
     "inquiryForm": {
       "title": "Send Inquiry",
@@ -1138,7 +1237,22 @@
       "selectGuestCount": "Select guest count",
       "guestSingular": "Guest",
       "guestPlural": "Guests",
-      "fullName": "Full Name"
+      "fullName": "Full Name",
+      "needHelp": "Talk to our concierge",
+      "whatsapp": "Chat on WhatsApp",
+      "inquirySent": "Thank you! Your inquiry has been sent. Our team will contact you shortly.",
+      "inquiryError": "We couldn't send your inquiry. Please try again.",
+      "fillRequired": "Please fill in your name, email and phone number.",
+      "invalidEmail": "Please enter a valid email address.",
+      "soldNotice": "This property has been sold. You can still ask about similar listings.",
+      "askRoiMessage": "I'd like to know the expected return on investment for this property."
+    },
+    "state": {
+      "notFoundTitle": "We couldn't find this property",
+      "notFoundDescription": "It may have been sold or the link is incorrect.",
+      "errorTitle": "Something went wrong",
+      "errorDescription": "We couldn't load this property. Please try again.",
+      "backToProperties": "Browse all properties"
     }
   },
   "touristActivityDetail": {
@@ -1283,5 +1397,20 @@
       "properties": "No properties match your search",
       "propertiesDescription": "Try adjusting your price range or ownership filter to see more listings."
     }
+  },
+  "blogDetail": {
+    "notFoundTitle": "We couldn't find this article",
+    "notFoundDescription": "It may have been removed or the link is incorrect.",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "We couldn't load this article. Please try again.",
+    "backToBlog": "Back to the journal",
+    "home": "Home",
+    "blog": "Blog",
+    "share": "Share",
+    "shareOn": "Share on",
+    "linkCopied": "Link copied to clipboard",
+    "related": "Related Articles",
+    "viewAll": "View All",
+    "by": "By"
   }
 }

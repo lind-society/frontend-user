@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
 
 import { ChevronUp, SlidersHorizontal, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';

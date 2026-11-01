@@ -1,12 +1,10 @@
-'use client';
-
 import { AxiosError } from 'axios';
-import Link from 'next/link';
 import React from 'react';
 
 import { usePublicBooking } from '@/hooks/api/useBooking';
 
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 
 import AdditionalService from './additional-service';
@@ -40,7 +38,7 @@ const LinkProblem = ({
 }) => (
   <Shell>
     <BaseContainer>
-      <div className='flex flex-col items-start gap-4 bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm'>
+      <div className='flex flex-col items-start gap-4 bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-xs'>
         <h2 className='text-xl md:text-2xl font-semibold text-primary'>
           {title}
         </h2>
@@ -61,7 +59,7 @@ const BookingReservation = ({ token }: { token: string }) => {
     return (
       <Shell>
         <BaseContainer>
-          <div className='h-64 animate-pulse rounded bg-cream-light shadow-sm' />
+          <div className='h-64 animate-pulse rounded bg-cream-light shadow-xs' />
         </BaseContainer>
       </Shell>
     );

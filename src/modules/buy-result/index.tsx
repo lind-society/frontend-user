@@ -1,5 +1,5 @@
-import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
+import { useTranslations } from 'use-intl';
 
 import HeaderBuyResult from '@/modules/buy-result/header';
 import BuyResultDisplay from '@/modules/buy-result/result';

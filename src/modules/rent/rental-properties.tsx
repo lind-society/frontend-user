@@ -1,8 +1,6 @@
-'use client';
-
 import { Slash } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
 import { toVillaCard } from '@/lib/mappers/villa';
 import { useVillas } from '@/hooks/api/useVilla';

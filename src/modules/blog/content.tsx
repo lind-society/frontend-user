@@ -1,7 +1,5 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { useTranslations } from 'use-intl';
 
 import { toBlogPost } from '@/lib/mappers/blog';
 import { useBlogs } from '@/hooks/api/useBlog';

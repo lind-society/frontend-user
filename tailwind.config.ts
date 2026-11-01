@@ -5,7 +5,7 @@ import defaultTheme from 'tailwindcss/defaultTheme';
 import animate from 'tailwindcss-animate';
 
 export default {
-  darkMode: ['class'],
+  darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {
@@ -14,13 +14,13 @@ export default {
       },
       fontFamily: {
         /* Inter — body copy, buttons, forms, list items */
-        primary: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
-        sans: ['var(--font-body)', ...defaultTheme.fontFamily.sans],
+        primary: ['var(--ff-body)', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--ff-body)', ...defaultTheme.fontFamily.sans],
         /* Playfair Display — hero/section headings and product names */
-        display: ['var(--font-display)', ...defaultTheme.fontFamily.serif],
+        display: ['var(--ff-display)', ...defaultTheme.fontFamily.serif],
         /* Lora — card titles, breadcrumbs, price blocks */
-        heading: ['var(--font-heading)', ...defaultTheme.fontFamily.serif],
-        serif: ['var(--font-heading)', ...defaultTheme.fontFamily.serif],
+        heading: ['var(--ff-heading)', ...defaultTheme.fontFamily.serif],
+        serif: ['var(--ff-heading)', ...defaultTheme.fontFamily.serif],
       },
       colors: {
         /* ---- LIND Society brand palette ---- */
@@ -117,6 +117,11 @@ export default {
         },
       },
       keyframes: {
+        'route-progress': {
+          '0%': { transform: 'scaleX(0)', opacity: '1' },
+          '70%': { transform: 'scaleX(1)', opacity: '1' },
+          '100%': { transform: 'scaleX(1)', opacity: '0' },
+        },
         flicker: {
           '0%, 19.999%, 22%, 62.999%, 64%, 64.999%, 70%, 100%': {
             opacity: '0.99',
@@ -187,6 +192,7 @@ export default {
         'accordion-up': 'accordion-up 0.2s ease-out',
         marquee: 'marquee var(--duration) infinite linear',
         'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+        'route-progress': 'route-progress 450ms ease-out forwards',
       },
       borderRadius: {
         lg: 'var(--radius)',

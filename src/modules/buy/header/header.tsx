@@ -1,17 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
 
 import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
 import { IoBed } from 'react-icons/io5';
 import { LuBath } from 'react-icons/lu';
 import { TbCurrencyDollar } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
 
+import { useRouter } from '@/lib/navigation';
+
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
 import {
@@ -133,7 +133,7 @@ const HeaderBuyPage = () => {
           </div>
 
           {/* Search Box */}
-          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-sm'>
+          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-xs'>
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}
@@ -353,7 +353,7 @@ const HeaderBuyPage = () => {
       </BaseContainer>
 
       {/* Responsive CSS for hiding scrollbar */}
-      <style jsx global>{`
+      <style>{`
         .hideScrollbar::-webkit-scrollbar {
           display: none;
         }

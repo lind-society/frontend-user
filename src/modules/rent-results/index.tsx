@@ -1,5 +1,5 @@
-import { useTranslations } from 'next-intl';
 import React, { Suspense } from 'react';
+import { useTranslations } from 'use-intl';
 
 import HeaderRentResult from '@/modules/rent-results/header';
 import ResultRentContent from '@/modules/rent-results/result';

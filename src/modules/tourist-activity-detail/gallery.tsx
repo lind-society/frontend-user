@@ -1,7 +1,6 @@
-'use client';
-
-import Image from 'next/image';
 import React from 'react';
+
+import Image from '@/components/image';
 
 interface GalleryProps {
   images: string[];
@@ -39,7 +38,7 @@ const Gallery: React.FC<GalleryProps> = ({
           <button
             key={img}
             onClick={() => onSelectImage(img)}
-            className={`border rounded overflow-hidden focus:outline-none ${
+            className={`border rounded overflow-hidden focus:outline-hidden ${
               selectedImage === img ? 'border-primary' : 'border-bronze/25'
             }`}
           >

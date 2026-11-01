@@ -1,7 +1,9 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
+import { toast } from 'sonner';
+import { useTranslations } from 'use-intl';
+
+import { getApiErrorMessage } from '@/lib/api-error';
+import { useCreateInquiry } from '@/hooks/api/useInquiry';
 
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
@@ -14,10 +16,7 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 
-import { countryCodes } from '@/modules/rent-detail/constant';
-
-/** Same concierge line the rest of the site links WhatsApp to (footer, detail pages). */
-const CONCIERGE_WHATSAPP = '6281234567890';
+import { countryCodes } from '@/constant/country-codes';
 
 const ContentEarlyBird = () => {
   const t = useTranslations('earlyBird');
@@ -29,26 +28,26 @@ const ContentEarlyBird = () => {
   const [agreed, setAgreed] = useState(true);
   const [submitted, setSubmitted] = useState(false);
 
-  // There's no backend "leads" endpoint (yet) — same pattern already used for
-  // the Manage Property package inquiry: hand the details to WhatsApp instead
-  // of silently dropping them.
+  const { mutate: sendInquiry, isPending } = useCreateInquiry();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const message = [
-      `Hello, LIND Society! I'd like to join the Early Bird list.`,
-      `Name: ${fullName}`,
-      `Email: ${email}`,
-      `Phone: ${countryCode}${phoneNumber}`,
-    ].join('\n');
-
-    window.open(
-      `https://wa.me/${CONCIERGE_WHATSAPP}?text=${encodeURIComponent(message)}`,
-      '_blank',
-      'noopener,noreferrer'
+    sendInquiry(
+      {
+        type: 'early_bird',
+        name: fullName.trim(),
+        email: email.trim(),
+        phone: `${countryCode}${phoneNumber}`,
+        message: "I'd like to join the Early Bird list.",
+        metadata: { agreedToUpdates: agreed },
+      },
+      {
+        onSuccess: () => setSubmitted(true),
+        onError: (error) =>
+          toast.error(getApiErrorMessage(error, t('errorMessage'))),
+      }
     );
-
-    setSubmitted(true);
   };
 
   return (
@@ -101,7 +100,7 @@ const ContentEarlyBird = () => {
                       <PopoverTrigger asChild>
                         <button
                           type='button'
-                          className='flex h-10 flex-shrink-0 items-center gap-2 rounded-l border border-bronze-600 bg-bronze-600 px-3 text-white'
+                          className='flex h-10 shrink-0 items-center gap-2 rounded-l border border-bronze-600 bg-bronze-600 px-3 text-white'
                         >
                           <span>{countryCode}</span>
                           <svg
@@ -141,7 +140,9 @@ const ContentEarlyBird = () => {
                       type='tel'
                       placeholder={t('phoneNumberPlaceholder')}
                       value={phoneNumber}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      onChange={(e) =>
+                        setPhoneNumber(e.target.value.replace(/D/g, ''))
+                      }
                       className='rounded-l-none border-l-0'
                       required
                     />
@@ -161,9 +162,9 @@ const ContentEarlyBird = () => {
                   type='submit'
                   variant='cta'
                   className='h-12 w-full'
-                  disabled={!agreed}
+                  disabled={!agreed || isPending}
                 >
-                  {t('submit')}
+                  {isPending ? t('sending') : t('submit')}
                 </Button>
               </form>
             )}

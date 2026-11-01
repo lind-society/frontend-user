@@ -984,7 +984,12 @@
         "toBeach": "Ke Pantai",
         "toAirport": "Ke Bandara",
         "housekeeping": "Pembersihan",
-        "wifi": "WiFi"
+        "wifi": "WiFi",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "facilities": "Fasilitas",
+        "rating": "Rating tamu",
+        "location": "Lokasi"
       },
       "bookingInfo": {
         "checkIn": "Check-in",
@@ -993,7 +998,41 @@
         "total": "Total",
         "perNight": "per malam",
         "nights": "malam"
-      }
+      },
+      "rentTypes": {
+        "daily": "Harian",
+        "monthly": "Bulanan",
+        "yearly": "Tahunan"
+      },
+      "rates": {
+        "title": "Tarif",
+        "daily": "Malam biasa",
+        "lowSeason": "Musim sepi",
+        "highSeason": "Musim ramai",
+        "peakSeason": "Musim puncak",
+        "monthly": "Menginap bulanan",
+        "yearly": "Menginap tahunan",
+        "perNight": "per malam",
+        "perMonth": "per bulan",
+        "perYear": "per tahun",
+        "note": "Harga yang tertera adalah tarif awal; jumlah akhir dikonfirmasi saat pemesanan."
+      },
+      "noPolicies": "Pemilik belum menambahkan aturan rumah.",
+      "noReviews": "Belum ada ulasan. Jadilah yang pertama menginap dan berbagi pengalaman.",
+      "verifiedGuest": "Tamu terverifikasi",
+      "facilitiesTitle": "Fasilitas",
+      "extraServices": "Layanan tambahan",
+      "free": "Gratis",
+      "noServices": "Belum ada layanan tambahan.",
+      "noFacilities": "Belum ada fasilitas yang dicantumkan.",
+      "aroundVillaEmpty": "Belum ada tempat terdekat yang dicantumkan.",
+      "meters": "m",
+      "kilometers": "km",
+      "openMap": "Buka di Google Maps",
+      "mapUnavailable": "Pratinjau peta tidak tersedia untuk vila ini.",
+      "videos": "Video tur",
+      "tour360": "Tur 360°",
+      "floorPlans": "Denah"
     },
     "inquiryForm": {
       "title": "Kirim Pertanyaan",
@@ -1028,7 +1067,43 @@
       "kids": "Anak-anak",
       "makeItYours": "Jadikan Milik Anda",
       "meals": "Makanan",
-      "transport": "Transportasi"
+      "transport": "Transportasi",
+      "bookNow": "Pesan sekarang",
+      "booking": "Memesan...",
+      "total": "Perkiraan total",
+      "nightsLabel": "malam",
+      "nightLabel": "malam",
+      "fromRate": "Mulai dari",
+      "inquirySent": "Terima kasih! Pertanyaan Anda sudah terkirim. Kami akan segera menghubungi Anda.",
+      "inquiryError": "Pertanyaan Anda belum terkirim. Silakan coba lagi.",
+      "bookingError": "Pemesanan belum berhasil dibuat. Silakan coba lagi.",
+      "fillRequired": "Mohon isi nama, email, dan nomor telepon Anda.",
+      "invalidEmail": "Masukkan alamat email yang valid.",
+      "invalidDates": "Tanggal check-out harus setelah check-in.",
+      "noPrice": "Hubungi kami untuk harga",
+      "rentTypeUnavailable": "Jenis menginap ini tidak tersedia.",
+      "months": "bulan",
+      "month": "bulan",
+      "years": "tahun",
+      "year": "tahun",
+      "bookingNote": "Pemesanan mengirim permintaan Anda ke pemilik. Anda akan mendapat tautan pribadi untuk memantau dan membayar setelah dikonfirmasi."
+    },
+    "state": {
+      "loading": "Memuat vila...",
+      "notFoundTitle": "Vila ini tidak ditemukan",
+      "notFoundDescription": "Vila mungkin sudah dihapus atau tautannya salah.",
+      "errorTitle": "Terjadi kesalahan",
+      "errorDescription": "Kami tidak dapat memuat vila ini. Silakan coba lagi.",
+      "backToVillas": "Lihat semua vila"
+    },
+    "gallery": {
+      "bedrooms": "Kamar Tidur",
+      "indoor_areas": "Area Dalam",
+      "outdoor_areas": "Area Luar",
+      "more_pictures": "Foto Lainnya",
+      "pictures": "foto",
+      "picture": "foto",
+      "nearbyVillas": "Vila lain yang mungkin Anda suka"
     }
   },
   "buyDetail": {
@@ -1086,7 +1161,27 @@
         "transport": "Transportasi",
         "kids": "Anak-anak"
       },
-      "details": "Detail"
+      "details": "Detail",
+      "breadcrumbBuy": "Beli",
+      "available": "Tersedia",
+      "sold": "Terjual",
+      "freehold": "Hak Milik",
+      "leasehold": "Hak Sewa",
+      "status": "Status",
+      "price": "Harga",
+      "discount": "Diskon",
+      "highlightsTitle": "Keunggulan",
+      "noFeatures": "Belum ada keunggulan yang dicantumkan.",
+      "noFacilities": "Belum ada fasilitas yang dicantumkan.",
+      "aroundEmpty": "Belum ada tempat terdekat yang dicantumkan.",
+      "openMap": "Buka di Google Maps",
+      "mapUnavailable": "Pratinjau peta tidak tersedia untuk properti ini.",
+      "meters": "m",
+      "kilometers": "km",
+      "free": "Termasuk",
+      "similar": "Properti lain yang mungkin Anda suka",
+      "bedroomsCount": "Kamar Tidur",
+      "facilitiesCount": "Fasilitas"
     },
     "inquiryForm": {
       "title": "Kirim Pertanyaan",
@@ -1114,7 +1209,22 @@
       "guestSingular": "Tamu",
       "guestPlural": "Tamu",
       "selectDuration": "Pilih durasi",
-      "selectGuestCount": "Pilih jumlah tamu"
+      "selectGuestCount": "Pilih jumlah tamu",
+      "needHelp": "Bicara dengan concierge kami",
+      "whatsapp": "Chat via WhatsApp",
+      "inquirySent": "Terima kasih! Pertanyaan Anda sudah terkirim. Tim kami akan segera menghubungi Anda.",
+      "inquiryError": "Pertanyaan Anda belum terkirim. Silakan coba lagi.",
+      "fillRequired": "Mohon isi nama, email, dan nomor telepon Anda.",
+      "invalidEmail": "Masukkan alamat email yang valid.",
+      "soldNotice": "Properti ini sudah terjual. Anda tetap bisa menanyakan listing serupa.",
+      "askRoiMessage": "Saya ingin mengetahui estimasi imbal hasil investasi untuk properti ini."
+    },
+    "state": {
+      "notFoundTitle": "Properti ini tidak ditemukan",
+      "notFoundDescription": "Properti mungkin sudah terjual atau tautannya salah.",
+      "errorTitle": "Terjadi kesalahan",
+      "errorDescription": "Kami tidak dapat memuat properti ini. Silakan coba lagi.",
+      "backToProperties": "Lihat semua properti"
     }
   },
   "touristActivityDetail": {
@@ -1248,7 +1358,9 @@
         "phone": "Masukkan nomor telepon Anda",
         "inquiryType": "Pilih jenis pertanyaan",
         "message": "Masukkan pesan Anda"
-      }
+      },
+      "errorMessage": "Pesan Anda belum terkirim. Silakan coba lagi.",
+      "sending": "Mengirim..."
     },
     "info": {
       "address": "Alamat",
@@ -1268,7 +1380,9 @@
     "consent": "Dengan memberikan detail Anda, Anda setuju menerima komunikasi pemasaran dari LIND Society",
     "submit": "Kirim",
     "successTitle": "Terima kasih!",
-    "successMessage": "Kami telah membuka WhatsApp dengan detail Anda siap dikirim — tim kami akan segera menghubungi Anda."
+    "successMessage": "Kami telah membuka WhatsApp dengan detail Anda siap dikirim — tim kami akan segera menghubungi Anda.",
+    "errorMessage": "Data Anda belum tersimpan. Silakan coba lagi.",
+    "sending": "Mengirim..."
   },
   "states": {
     "error": {
@@ -1283,5 +1397,20 @@
       "properties": "Tidak ada properti yang cocok",
       "propertiesDescription": "Coba sesuaikan rentang harga atau filter kepemilikan untuk melihat lebih banyak listing."
     }
+  },
+  "blogDetail": {
+    "notFoundTitle": "Artikel ini tidak ditemukan",
+    "notFoundDescription": "Artikel mungkin sudah dihapus atau tautannya salah.",
+    "errorTitle": "Terjadi kesalahan",
+    "errorDescription": "Kami tidak dapat memuat artikel ini. Silakan coba lagi.",
+    "backToBlog": "Kembali ke jurnal",
+    "home": "Beranda",
+    "blog": "Blog",
+    "share": "Bagikan",
+    "shareOn": "Bagikan di",
+    "linkCopied": "Tautan disalin ke papan klip",
+    "related": "Artikel Terkait",
+    "viewAll": "Lihat Semua",
+    "by": "Oleh"
   }
 }

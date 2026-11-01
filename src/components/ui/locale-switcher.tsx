@@ -1,10 +1,8 @@
-'use client';
-
 import { ChevronDown } from 'lucide-react';
-import Image from 'next/image';
-import { useLocale, useTranslations } from 'next-intl';
 import { useTransition } from 'react';
+import { useLocale, useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,7 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { Locale } from '@/i18n/config';
-import { setUserLocale } from '@/i18n/service';
+import { useSetLocale } from '@/i18n/provider';
 
 type Props = {
   defaultValue: string;
@@ -45,6 +43,7 @@ export default function LocaleSwitcher({ theme }: { theme?: string }) {
 }
 
 function LocaleSwitcherSelect({ defaultValue, items, label, theme }: Props) {
+  const setUserLocale = useSetLocale();
   const [isPending, startTransition] = useTransition();
 
   function onChange(value: string) {
@@ -62,7 +61,7 @@ function LocaleSwitcherSelect({ defaultValue, items, label, theme }: Props) {
       <DropdownMenu>
         <DropdownMenuTrigger defaultValue={defaultValue} asChild>
           <button
-            className={` flex items-center gap-2 rounded text-sm font-medium focus:outline-none ${colorText} ${
+            className={` flex items-center gap-2 rounded text-sm font-medium focus:outline-hidden ${colorText} ${
               isPending && 'pointer-events-none opacity-60'
             }`}
           >

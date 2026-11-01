@@ -1,10 +1,8 @@
-'use client';
-
 import { addMonths, addYears, format, isAfter, startOfToday } from 'date-fns';
 import { ChevronDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
+import { useTranslations } from 'use-intl';
 
 import { cn } from '@/lib/utils';
 
@@ -317,10 +315,7 @@ export const EnhancedDateRangePicker: React.FC<
                 <span className='truncate pr-2 text-ink-soft'>
                   {getDisplayText()}
                 </span>
-                <ChevronDown
-                  size={18}
-                  className='flex-shrink-0 text-bronze-600'
-                />
+                <ChevronDown size={18} className='shrink-0 text-bronze-600' />
               </div>
             </div>
           </button>

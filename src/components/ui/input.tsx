@@ -59,7 +59,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           type={isPasswordType && isPasswordVisible ? 'text' : type}
           className={cn(
-            'flex h-10 w-full rounded border border-bronze/30 bg-cream-light pr-3 py-2 text-sm ring-offset-cream-light file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-ink placeholder:text-ink-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bronze focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50',
+            'flex h-10 w-full rounded border border-bronze/30 bg-cream-light pr-3 py-2 text-sm ring-offset-cream-light file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-ink placeholder:text-ink-muted focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-bronze focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50',
             currentSize.height,
             currentSize.paddingY,
             currentSize.text,
@@ -74,7 +74,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {isPasswordType && (
           <button
             type='button'
-            className='absolute right-3 text-ink-muted focus:outline-none'
+            className='absolute right-3 text-ink-muted focus:outline-hidden'
             onClick={togglePasswordVisibility}
             aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
           >

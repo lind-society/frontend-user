@@ -1,12 +1,10 @@
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import {
   Accordion,
   AccordionContent,

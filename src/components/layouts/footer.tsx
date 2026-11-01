@@ -1,13 +1,12 @@
 // components/Footer.tsx
-'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/ui/logo';
 
@@ -75,7 +74,7 @@ const Footer = () => {
                 id='newsletter-email'
                 type='email'
                 placeholder={t('newsletter.emailPlaceholder')}
-                className='h-11 w-full rounded-none border border-cream/25 bg-ink/70 px-4 text-sm text-cream placeholder:text-cream/55 focus:border-bronze focus:outline-none focus:ring-0'
+                className='h-11 w-full rounded-none border border-cream/25 bg-ink/70 px-4 text-sm text-cream placeholder:text-cream/55 focus:border-bronze focus:outline-hidden focus:ring-0'
               />
               <Button type='submit' variant='primary' className='h-11 px-7'>
                 {t('newsletter.subscribe')}

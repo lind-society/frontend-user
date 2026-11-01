@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import { Button } from '@/components/ui/button';
 
@@ -27,7 +27,7 @@ const Content1ManageProperty = () => {
               <RiArrowRightUpLine size={20} />
             </Button>
           </div>
-          <div className='w-full sm:w-[90%] md:w-[80%] lg:w-[50%] max-w-[600px] overflow-hidden rounded shadow-sm'>
+          <div className='w-full sm:w-[90%] md:w-[80%] lg:w-[50%] max-w-[600px] overflow-hidden rounded shadow-xs'>
             <Image
               src='/images/media-7.png'
               alt='Property Management Services'

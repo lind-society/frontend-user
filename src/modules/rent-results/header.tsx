@@ -1,10 +1,5 @@
-'use client';
-
 import { format } from 'date-fns';
 import { ChevronDown, Slash } from 'lucide-react';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'nextjs-toploader/app';
 import React, { useMemo, useState } from 'react';
 import { BiSwim } from 'react-icons/bi';
 import { FaParking, FaUmbrellaBeach } from 'react-icons/fa';
@@ -16,6 +11,10 @@ import { MdKitchen, MdOutlinePets, MdOutlineSecurity } from 'react-icons/md';
 import { PiMountainsDuotone } from 'react-icons/pi';
 import { RiRoadMapLine } from 'react-icons/ri';
 import { TbAirConditioning, TbGrill, TbMassage } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
+
+import { usePathname, useSearchParams } from '@/lib/navigation';
+import { useRouter } from '@/lib/navigation';
 
 import BaseContainer from '@/components/layouts/container';
 import {
@@ -265,7 +264,7 @@ const HeaderRentResult = () => {
       {/* Search form section */}
       <div className='border-b py-6'>
         <BaseContainer>
-          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-sm'>
+          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-xs'>
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}
@@ -328,7 +327,7 @@ const HeaderRentResult = () => {
                     mode='single'
                     selected={checkInDate}
                     onSelect={setCheckInDate}
-                    initialFocus
+                    autoFocus
                   />
                 </PopoverContent>
               </Popover>
@@ -358,7 +357,7 @@ const HeaderRentResult = () => {
                     mode='single'
                     selected={checkOutDate}
                     onSelect={setCheckOutDate}
-                    initialFocus
+                    autoFocus
                     disabled={(date) =>
                       checkInDate ? date < checkInDate : false
                     }

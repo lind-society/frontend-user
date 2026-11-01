@@ -60,3 +60,27 @@ export const toVillaCard = (villa: ApiVilla): VillaCardModel => {
     isFavorite: Boolean(villa.isFavorite),
   };
 };
+
+/** Number of rooms the backend models as `bedrooms` additionals. */
+export const countBedrooms = (villa: ApiVilla): number =>
+  villa.additionals?.filter((additional) => additional.type === 'bedrooms')
+    .length ?? 0;
+
+/**
+ * The nightly rate a guest would pay today: the season-aware price the backend
+ * resolves, then the discounted list price, then the plain list price.
+ * Monetary columns arrive as strings in JSON, so everything is coerced.
+ */
+export const getNightlyRate = (villa: ApiVilla): number | null => {
+  const raw =
+    villa.currentPrice?.currentDailyPriceAfterDiscount ??
+    villa.currentPrice?.currentDailyPrice ??
+    villa.dailyPriceAfterDiscount ??
+    villa.dailyPrice;
+
+  const amount = Number(raw);
+
+  return raw === null || raw === undefined || Number.isNaN(amount)
+    ? null
+    : amount;
+};

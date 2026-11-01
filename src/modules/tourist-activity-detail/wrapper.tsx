@@ -1,5 +1,3 @@
-'use client';
-
 import React, { useState } from 'react';
 
 import BaseContainer from '@/components/layouts/container';

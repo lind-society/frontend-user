@@ -1,11 +1,10 @@
-'use client';
-
 import { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { toast } from 'sonner';
+import { useTranslations } from 'use-intl';
 
+import { toUtcDateIso } from '@/lib/helper';
+import { useRouter } from '@/lib/navigation';
 import { useBookActivity } from '@/hooks/api/useBooking';
 
 import BaseContainer from '@/components/layouts/container';
@@ -76,7 +75,7 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({
         totalGuest: Number(ticketAmount),
         totalAmount: activity.price * Number(ticketAmount),
         currencyId: activity.currencyId,
-        bookingDate: selectedDate.toISOString(),
+        bookingDate: toUtcDateIso(selectedDate),
         customer: {
           name: fullName,
           email,

@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 import { FaCheck, FaWhatsapp } from 'react-icons/fa6';
 import {
@@ -8,9 +7,12 @@ import {
   MdSecurity,
 } from 'react-icons/md';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+
+import { CONCIERGE_WHATSAPP_DISPLAY } from '@/constant/config';
 
 import { ReservationBookingView } from './booking-view';
 
@@ -25,7 +27,7 @@ interface PaymentDetailsProps {
 const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
   return (
     <BaseContainer>
-      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-sm gap-6'>
+      <div className='flex flex-col lg:flex-row justify-between bg-cream-light py-8 md:py-12 px-5 md:px-10 lg:px-16 rounded shadow-xs gap-6'>
         {/* Left Column - Payment Details */}
         <div className='py-4 flex-1 flex flex-col gap-5'>
           <div className='flex items-center gap-3 mb-2'>
@@ -107,7 +109,8 @@ const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
                 <span className='text-primary text-xl'>📲</span>
                 <span className='text-text'>
                   <strong>WhatsApp Notification:</strong> You will receive
-                  check-in instructions via WhatsApp from +62 9 915 7438.
+                  check-in instructions via WhatsApp from{' '}
+                  {CONCIERGE_WHATSAPP_DISPLAY}.
                 </span>
               </li>
               <li className='flex gap-3'>
@@ -130,8 +133,9 @@ const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
             </div>
             <p className='text-text text-base'>
               Our official payment link is only sent via WhatsApp from{' '}
-              <strong>+62 9 915 7438</strong>. If you receive a payment request
-              from another source, please ignore it and contact us immediately.
+              <strong>{CONCIERGE_WHATSAPP_DISPLAY}</strong>. If you receive a
+              payment request from another source, please ignore it and contact
+              us immediately.
             </p>
           </div>
 
@@ -145,7 +149,7 @@ const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
         </div>
 
         {/* Right Column - Help Box */}
-        <div className='w-full h-fit lg:w-[340px] border shadow-sm'>
+        <div className='w-full h-fit lg:w-[340px] border shadow-xs'>
           <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
             <span className='text-lg md:text-xl font-semibold'>
               Need Assistance?
@@ -156,7 +160,7 @@ const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
               Your booking is confirmed!
             </div>
             <div className='flex gap-3 items-center'>
-              <div className='relative w-12 h-12 flex-shrink-0 overflow-hidden rounded-full'>
+              <div className='relative w-12 h-12 shrink-0 overflow-hidden rounded-full'>
                 <Avatar>
                   <AvatarImage src='https://github.com/shadcn.png' />
                   <AvatarFallback>CN</AvatarFallback>
@@ -178,7 +182,7 @@ const PaymentDetails = ({ booking }: PaymentDetailsProps = {}) => {
             >
               <FaWhatsapp className='text-primary' size={18} />
               <span className='text-primary font-semibold text-sm md:text-base'>
-                +62 361 123 4567
+                {CONCIERGE_WHATSAPP_DISPLAY}
               </span>
             </Button>
 

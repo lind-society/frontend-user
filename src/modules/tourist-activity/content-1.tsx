@@ -1,19 +1,18 @@
 /* eslint-disable no-console */
-'use client';
 
 import { format } from 'date-fns';
 import { ChevronDown, Heart, Search, Star } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useTranslations } from 'next-intl';
 import React, { useEffect, useState } from 'react';
 import { FaCalendar } from 'react-icons/fa6';
 import { TbCurrencyDollar } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
 
 import { toTouristActivity } from '@/lib/mappers/activity';
 import { useActivities } from '@/hooks/api/useActivity';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -200,7 +199,7 @@ const ContentTourist1 = () => {
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder={t('search.searchPlaceholder')}
-                className='border-none focus-visible:ring-0 focus-visible:outline-none focus-visible:border-none py-3 px-4 w-full md:w-[400px]'
+                className='border-none focus-visible:ring-0 focus-visible:outline-hidden focus-visible:border-none py-3 px-4 w-full md:w-[400px]'
               />
               <button
                 type='button'
@@ -242,7 +241,7 @@ const ContentTourist1 = () => {
                     mode='single'
                     selected={selectedDate}
                     onSelect={setSelectedDate}
-                    initialFocus
+                    autoFocus
                   />
                 </PopoverContent>
               </Popover>
@@ -358,7 +357,7 @@ const ContentTourist1 = () => {
             {activities.slice(0, displayLimit).map((activity) => (
               <div
                 key={activity.id}
-                className='flex flex-col rounded overflow-hidden border border-bronze/25 bg-cream-light hover:shadow-sm transition-shadow'
+                className='flex flex-col rounded overflow-hidden border border-bronze/25 bg-cream-light hover:shadow-xs transition-shadow'
               >
                 {/* Card image */}
                 <div className='relative h-[240px] w-full'>
@@ -447,14 +446,15 @@ const ContentTourist1 = () => {
                         {activity.groupSize === 'Individual'
                           ? t('cards.individualGroup')
                           : activity.groupSize.includes('Max')
-                          ? t('cards.maxPeople', {
-                              count: activity.groupSize.match(/\d+/)?.[0] || '',
-                            })
-                          : activity.groupSize === 'Small group'
-                          ? t('cards.smallGroup')
-                          : activity.groupSize === 'Full day'
-                          ? t('cards.fullDay')
-                          : activity.groupSize}
+                            ? t('cards.maxPeople', {
+                                count:
+                                  activity.groupSize.match(/\d+/)?.[0] || '',
+                              })
+                            : activity.groupSize === 'Small group'
+                              ? t('cards.smallGroup')
+                              : activity.groupSize === 'Full day'
+                                ? t('cards.fullDay')
+                                : activity.groupSize}
                       </span>
                     </div>
                     <span className='text-xs text-ink-muted'>
@@ -482,7 +482,7 @@ const ContentTourist1 = () => {
       </BaseContainer>
 
       {/* Responsive CSS for hiding scrollbar */}
-      <style jsx global>{`
+      <style>{`
         .hideScrollbar::-webkit-scrollbar {
           display: none;
         }

@@ -1,369 +1,281 @@
-'use client';
-
 import { Check } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { FaBed, FaTag } from 'react-icons/fa6';
 import { GrMapLocation } from 'react-icons/gr';
-import { PiStarFill } from 'react-icons/pi';
+import { IoKey } from 'react-icons/io5';
+import { MdOutlineLocationOn, MdOutlineWorkspaces } from 'react-icons/md';
+import { useTranslations } from 'use-intl';
+
+import { formatLocation, formatPrice } from '@/lib/mappers/format';
+import { useMapCoordinates } from '@/hooks/api/useRegion';
 
 import BaseContainer from '@/components/layouts/container';
 import { Badge } from '@/components/ui/badge';
 import BreadcrumbLayout from '@/components/ui/breadcrumb-layout';
 import { Button } from '@/components/ui/button';
 
-import { villaDataBuy } from '@/modules/buy-detail/constant';
 import SendInquiryFormBuy from '@/modules/buy-detail/inquiry-form';
-import {
-  villaData,
-  villaLocations,
-  villaServices,
-} from '@/modules/rent-detail/constant';
+import { FeatureCard } from '@/modules/rent-detail/feature-card';
 
-const ContentBuyDetail = () => {
+import { Property } from '@/types/api/property';
+
+// Leaflet is heavy, so it is only downloaded once a map is shown.
+const MapView = React.lazy(() => import('@/components/ui/map-view'));
+
+const Card = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <section className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border'>
+    <span className='text-xl text-primary font-semibold'>{title}</span>
+    {children}
+  </section>
+);
+
+const formatDistance = (metres: number, m: string, km: string) =>
+  metres >= 1000 ? `${(metres / 1000).toFixed(1)} ${km}` : `${metres} ${m}`;
+
+const ContentBuyDetail = ({ property }: { property: Property }) => {
   const t = useTranslations('buyDetail.content');
 
-  // Extract villa details for the inquiry form
-  const villaDetails = {
-    name: villaData.name,
-    availableRentTypes: villaData.availableRentTypes,
-    bedrooms: Number(
-      villaData.features.find((f) => f.id === 'bedrooms')?.value || 0
-    ),
-    bathrooms: Number(
-      villaData.features.find((f) => f.id === 'bathrooms')?.value || 0
-    ),
-    maxPersons: Number(
-      villaData.features.find((f) => f.id === 'maxPersons')?.value || 0
-    ),
-    bookingInfo: villaData.bookingInfo,
-  };
+  const symbol = property.currency?.symbol;
+  const price = Number(property.priceAfterDiscount || property.price);
+  const bedrooms =
+    property.additionals?.filter((additional) => additional.type === 'bedrooms')
+      .length ?? 0;
+  const facilities = property.facilities ?? [];
+  const highlights = property.features ?? [];
+  const nearby = property.placeNearby ?? [];
+  const location = formatLocation(property.city, property.state);
+
+  const { data: coordinates } = useMapCoordinates(property.mapLink);
+  const hasCoordinates =
+    coordinates?.latitude != null && coordinates?.longitude != null;
 
   return (
     <div className='pt-[32px]'>
       <BaseContainer>
         <div className='flex flex-col lg:flex-row gap-6 lg:gap-[32px]'>
-          {/* Main content column */}
-          <div className='flex-1 flex flex-col gap-4 order-2 lg:order-1'>
-            {/* Breadcrumb */}
+          <div className='flex-1 min-w-0 flex flex-col gap-4 order-2 lg:order-1'>
             <BreadcrumbLayout
               items={[
                 { label: t('breadcrumbHome'), href: '/' },
-                { label: 'Home & Villas', href: '/buy' },
-                { label: 'Buy', href: '/buy/search' },
-                { label: 'Indonesia', href: '/buy/search' },
-                { label: 'Bali', href: '/buy/search' },
-                { label: 'Canggu', href: '/buy/search' },
+                { label: t('breadcrumbBuy'), href: '/buy' },
+                ...(property.country
+                  ? [{ label: property.country, href: '/buy/result' }]
+                  : []),
+                ...(property.city
+                  ? [{ label: property.city, href: '/buy/result' }]
+                  : []),
                 {
-                  label: villaData.name,
-                  href: '/buy/bali',
+                  label: property.name,
+                  href: `/buy/${property.id}`,
                   isActive: true,
                 },
               ]}
             />
 
-            {/* Villa Header */}
+            {/* Header */}
             <div className='px-4 sm:px-6 py-4 flex flex-col sm:flex-row justify-between bg-cream-light rounded border gap-4 sm:gap-0'>
               <div className='flex flex-col gap-3'>
-                <h4 className='text-xl sm:text-2xl font-semibold text-primary'>
-                  {villaData.name}
-                </h4>
-                <div className='flex flex-col gap-2'>
-                  <span className='text-sm text-text'>
-                    {t('availableForSale')}
-                  </span>
-                  <div className='flex gap-3 items-center'>
-                    {villaData.availableRentTypes.map((type, index) => (
-                      <Badge
-                        key={type}
-                        className={`bg-primary/${80 + index * 10} text-cream`}
-                      >
-                        {type}
-                      </Badge>
-                    ))}
-                  </div>
+                <div>
+                  <h1 className='text-xl sm:text-2xl font-semibold text-primary'>
+                    {property.name}
+                  </h1>
+                  <p className='text-sm text-ink-soft'>
+                    {property.secondaryName}
+                  </p>
+                </div>
+                <div className='flex flex-wrap items-center gap-3'>
+                  <Badge className='bg-primary/90 text-cream'>
+                    {t(property.ownershipType)}
+                  </Badge>
+                  <Badge
+                    className={
+                      property.soldStatus
+                        ? 'bg-ink text-cream'
+                        : 'bg-primary/70 text-cream'
+                    }
+                  >
+                    {property.soldStatus ? t('sold') : t('available')}
+                  </Badge>
                 </div>
               </div>
               <div className='flex flex-col gap-4 items-start sm:items-end'>
-                <Button variant='primary' className='flex gap-2 items-center'>
-                  <GrMapLocation size={18} />
-                  <span>
-                    {villaData.location} ({t('viewOnMap')})
-                  </span>
-                </Button>
-                <div className='flex gap-3 items-center'>
-                  <h4 className='text-primary text-xl font-semibold'>
-                    {villaData.rating}
-                  </h4>
-                  <div className='flex flex-col'>
-                    <span className='text-text text-sm'>{t('overallOn')}</span>
-                    <span className='text-primary font-semibold'>
-                      {villaData.reviewCount} {t('reviews')}
+                <Button
+                  variant='primary'
+                  className='flex gap-2 items-center'
+                  asChild
+                >
+                  <a href={property.mapLink} target='_blank' rel='noreferrer'>
+                    <GrMapLocation size={18} />
+                    <span>
+                      {location} ({t('viewOnMap')})
                     </span>
-                  </div>
-                  <div className='flex gap-1'>
-                    {Array(5)
-                      .fill(null)
-                      .map((_, index) => (
-                        <PiStarFill
-                          key={index}
-                          size={16}
-                          className='text-primary'
-                        />
-                      ))}
-                  </div>
+                  </a>
+                </Button>
+                <div className='text-right'>
+                  <span className='block text-xs text-ink-muted'>
+                    {t('price')}
+                  </span>
+                  <span className='text-xl font-semibold text-primary'>
+                    {formatPrice(price, symbol)}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Key Features */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border'>
-              <span className='text-xl text-primary font-semibold'>
-                {t('features')}
-              </span>
-              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3'>
-                {villaDataBuy.features.map((feature) => (
-                  <div
-                    key={feature.id}
-                    className='p-2.5 flex gap-2 items-center col-span-1 border rounded'
-                  >
-                    <div className='bg-tertiary h-10 w-10 flex items-center justify-center rounded-full'>
-                      {feature.icon}
-                    </div>
-                    <div className='flex flex-col'>
-                      <span className='text-sm text-primary font-semibold'>
-                        {feature.value}
-                      </span>
-                      <span className='text-text text-xs'>
-                        {t(`propertyInfo.${feature.labelKey}`)}
-                      </span>
-                    </div>
-                  </div>
-                ))}
+            {/* Key features */}
+            <Card title={t('keyFeatures')}>
+              <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3'>
+                <FeatureCard
+                  icon={<IoKey size={20} />}
+                  value={t(property.ownershipType)}
+                  label={t('propertyInfo.ownership')}
+                />
+                <FeatureCard
+                  icon={<FaTag size={18} />}
+                  value={property.soldStatus ? t('sold') : t('available')}
+                  label={t('status')}
+                />
+                <FeatureCard
+                  icon={<FaBed size={18} />}
+                  value={bedrooms}
+                  label={t('bedroomsCount')}
+                />
+                <FeatureCard
+                  icon={<MdOutlineWorkspaces size={20} />}
+                  value={facilities.length}
+                  label={t('facilitiesCount')}
+                />
+                <FeatureCard
+                  icon={<MdOutlineLocationOn size={22} />}
+                  value={property.city}
+                  label={t('location')}
+                />
               </div>
-            </div>
+            </Card>
+
+            {/* Overview */}
+            {property.highlight && (
+              <Card title={t('overview')}>
+                <p className='text-sm text-text whitespace-pre-line'>
+                  {property.highlight}
+                </p>
+              </Card>
+            )}
 
             {/* Highlights */}
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-4 bg-cream-light rounded border text-sm'>
-              <span className='text-xl text-primary font-semibold'>
-                {t('overview')}
-              </span>
-              {villaData.highlights.map((paragraph, index) => (
-                <span key={index} className='text-text'>
-                  {paragraph}
-                </span>
-              ))}
-              <ul className='list-disc pl-5 space-y-1 text-ink-soft'>
-                {villaData.highlightBullets.map((bullet, index) => (
-                  <li key={index}>{bullet}</li>
-                ))}
-              </ul>
-            </div>
-
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
-              <span className='text-xl text-primary font-semibold'>
-                {t('location')} & Map
-              </span>
-              <span className='text-primary text-lg font-semibold'>
-                {t('location')}
-              </span>
-              <span className='text-text text-sm'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets
-                containing Lorem Ipsum passages, and more recently with desktop
-                publishing software like Aldus PageMaker including versions of
-                Lorem Ipsum.
-              </span>
-              <div className='w-full h-[300px] md:h-[400px] bg-sand/40 rounded overflow-hidden mb-4 border'>
-                <div className="w-full h-full bg-[url('/images/map.png')] bg-cover bg-center opacity-80 relative">
-                  <div className='absolute inset-0 flex items-center justify-center'>
-                    <Button variant='primary'>{t('viewFullMap')}</Button>
-                  </div>
+            <Card title={t('highlightsTitle')}>
+              {highlights.length === 0 ? (
+                <p className='text-sm text-ink-soft'>{t('noFeatures')}</p>
+              ) : (
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-3'>
+                  {highlights.map((feature) => (
+                    <div key={feature.id} className='flex items-center gap-2'>
+                      <Check size={16} className='text-primary' />
+                      <span className='text-sm text-text'>{feature.name}</span>
+                    </div>
+                  ))}
                 </div>
+              )}
+            </Card>
+
+            {/* Location & map */}
+            <Card title={`${t('location')} & Map`}>
+              <span className='text-text text-sm'>
+                {[
+                  property.address,
+                  property.city,
+                  property.state,
+                  property.country,
+                  property.postalCode,
+                ]
+                  .filter(Boolean)
+                  .join(', ')}
+              </span>
+              <div className='w-full h-[300px] md:h-[400px] bg-sand/40 rounded overflow-hidden border relative z-0'>
+                {hasCoordinates ? (
+                  <React.Suspense fallback={null}>
+                    <MapView
+                      pins={[
+                        {
+                          id: property.id,
+                          latitude: coordinates.latitude as number,
+                          longitude: coordinates.longitude as number,
+                          label: property.name,
+                          active: true,
+                        },
+                      ]}
+                    />
+                  </React.Suspense>
+                ) : (
+                  <div className='flex h-full items-center justify-center p-6 text-center'>
+                    <p className='text-sm text-ink-soft'>
+                      {t('mapUnavailable')}
+                    </p>
+                  </div>
+                )}
               </div>
-              <div className='flex flex-col gap-4'>
+              <Button variant='outline' className='self-start' asChild>
+                <a href={property.mapLink} target='_blank' rel='noreferrer'>
+                  {t('openMap')}
+                </a>
+              </Button>
+
+              <div className='flex flex-col gap-3'>
                 <span className='text-text font-semibold text-lg'>
                   {t('aroundVilla')}
                 </span>
-                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6'>
-                  {/* First column - Nearby places */}
-                  <div className='flex flex-col gap-3'>
-                    <span className='text-sm font-semibold text-ink-soft'>
-                      {t('nearbyPlaces')}
-                    </span>
-                    {villaLocations.nearby.map((location, index) => (
+                {nearby.length === 0 ? (
+                  <p className='text-sm text-ink-soft'>{t('aroundEmpty')}</p>
+                ) : (
+                  <div className='grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3'>
+                    {nearby.map((place) => (
                       <div
-                        key={`nearby-${index}`}
-                        className='flex justify-between'
+                        key={place.name}
+                        className='flex justify-between gap-3'
                       >
-                        <span className='text-sm text-text'>
-                          {location.name}
-                        </span>
-                        <span className='text-sm text-text font-medium'>
-                          {location.distance}
+                        <span className='text-sm text-text'>{place.name}</span>
+                        <span className='text-sm text-text font-medium whitespace-nowrap'>
+                          {formatDistance(
+                            Number(place.distance),
+                            t('meters'),
+                            t('kilometers')
+                          )}
                         </span>
                       </div>
                     ))}
                   </div>
-
-                  {/* Second column - Further attractions */}
-                  <div className='flex flex-col gap-3'>
-                    <span className='text-sm font-semibold text-ink-soft'>
-                      {t('furtherAway')}
-                    </span>
-                    {villaLocations.furtherAway.map((location, index) => (
-                      <div
-                        key={`far-${index}`}
-                        className='flex justify-between'
-                      >
-                        <span className='text-sm text-text'>
-                          {location.name}
-                        </span>
-                        <span className='text-sm text-text font-medium'>
-                          {location.distance}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                )}
               </div>
-            </div>
-            <div className='px-4 sm:px-6 py-4 flex flex-col gap-5 bg-cream-light rounded border'>
-              <span className='text-xl text-primary font-semibold'>
-                {t('serviceFacilities')}
-              </span>
-              {/* Replace the entire Service & Features grid */}
-              <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8'>
-                {/* Facilities */}
-                <div className='flex flex-col gap-5'>
-                  <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>
-                      {t('facilities')}
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-4'>
-                    {villaServices.facilities.map((item, index) => (
-                      <div
-                        key={`facility-${index}`}
-                        className='flex gap-2 items-center'
-                      >
-                        <Check size={16} className='text-primary' />
-                        <span className='text-text text-sm'>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+            </Card>
 
-                {/* Services */}
-                <div className='flex flex-col gap-5'>
-                  <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>
-                      {t('services')}
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-4'>
-                    {villaServices.services.map((item, index) => (
-                      <div
-                        key={`service-${index}`}
-                        className='flex gap-2 items-center'
-                      >
-                        <Check size={16} className='text-primary' />
-                        <span className='text-text text-sm'>{item}</span>
-                      </div>
-                    ))}
-                  </div>
+            {/* Facilities */}
+            <Card title={t('serviceFacilities')}>
+              {facilities.length === 0 ? (
+                <p className='text-sm text-ink-soft'>{t('noFacilities')}</p>
+              ) : (
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
+                  {facilities.map((facility) => (
+                    <div key={facility.id} className='flex gap-2 items-center'>
+                      <Check size={16} className='text-primary' />
+                      <span className='text-text text-sm'>{facility.name}</span>
+                    </div>
+                  ))}
                 </div>
-
-                {/* Entertainment */}
-                <div className='flex flex-col gap-5'>
-                  <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>
-                      {t('entertainment')}
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-4'>
-                    {villaServices.entertainment.map((item, index) => (
-                      <div
-                        key={`entertainment-${index}`}
-                        className='flex gap-2 items-center'
-                      >
-                        <Check size={16} className='text-primary' />
-                        <span className='text-text text-sm'>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Meals */}
-                <div className='flex flex-col gap-5'>
-                  <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>
-                      {t('meals')}
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-4'>
-                    {villaServices.meals.map((item, index) => (
-                      <div
-                        key={`meal-${index}`}
-                        className='flex gap-2 items-center'
-                      >
-                        <Check size={16} className='text-primary' />
-                        <span className='text-text text-sm'>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Transport */}
-                <div className='flex flex-col gap-5'>
-                  <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>
-                      {t('transport')}
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-4'>
-                    {villaServices.transport.map((item, index) => (
-                      <div
-                        key={`transport-${index}`}
-                        className='flex gap-2 items-center'
-                      >
-                        <Check size={16} className='text-primary' />
-                        <span className='text-text text-sm'>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Kids */}
-                <div className='flex flex-col gap-5'>
-                  <div className='flex gap-2 items-center'>
-                    <span className='text-text text font-semibold'>
-                      {t('kids')}
-                    </span>
-                  </div>
-                  <div className='flex flex-col gap-4'>
-                    {villaServices.kids.map((item, index) => (
-                      <div
-                        key={`kid-${index}`}
-                        className='flex gap-2 items-center'
-                      >
-                        <Check size={16} className='text-primary' />
-                        <span className='text-text text-sm'>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+              )}
+            </Card>
           </div>
 
-          {/* Sticky inquiry form */}
-          <div className='w-full lg:w-[350px] order-1 lg:order-2'>
-            <SendInquiryFormBuy villaDetails={villaDetails} />
+          <div className='w-full lg:w-[350px] shrink-0 order-1 lg:order-2'>
+            <SendInquiryFormBuy
+              property={property}
+              priceLabel={formatPrice(price, symbol)}
+            />
           </div>
         </div>
       </BaseContainer>

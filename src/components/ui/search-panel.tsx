@@ -1,10 +1,9 @@
-'use client';
-
 import { ChevronDown } from 'lucide-react';
-import Link from 'next/link';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
+
+import Link from '@/components/link';
 
 /**
  * The dark booking bar shared by the landing hero, the Rent/Buy hero and the

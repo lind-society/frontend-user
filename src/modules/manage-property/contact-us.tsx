@@ -1,8 +1,8 @@
-import Link from 'next/link';
 import React from 'react';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 
 const ContactUsManageProperty = () => {

@@ -1,12 +1,10 @@
-'use client';
-
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { MdHomeWork, MdOutlineSupport } from 'react-icons/md';
 import { RiHome4Fill } from 'react-icons/ri';
 import { TbUserStar } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 
 interface FeatureCardProps {

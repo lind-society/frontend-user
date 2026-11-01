@@ -1,10 +1,9 @@
-'use client';
-
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'nextjs-toploader/app';
 import React, { useState } from 'react';
+import { useTranslations } from 'use-intl';
 
+import { useRouter } from '@/lib/navigation';
+
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import {
   SearchPanel,

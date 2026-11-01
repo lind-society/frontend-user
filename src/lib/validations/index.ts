@@ -4,7 +4,7 @@ export const ValidationSchemaChangePassword = z
   .object({
     old_password: z
       .string({
-        required_error: 'Title should be filled',
+        error: 'Title should be filled',
       })
       .min(8, 'Title should be filled with minimum 10 character'),
     password: z
@@ -36,7 +36,7 @@ export const ValidationSchemaChangePassword = z
 export const ValidationSchemaEditProfile = z.object({
   fullname: z
     .string({
-      required_error: 'Full name is required.',
+      error: 'Full name is required.',
     })
     .min(2, 'Full name must be at least 2 characters long.')
     .max(50, 'Full name must not exceed 50 characters.')
@@ -44,7 +44,7 @@ export const ValidationSchemaEditProfile = z.object({
 
   username: z
     .string({
-      required_error: 'Username is required.',
+      error: 'Username is required.',
     })
     .min(3, 'Username must be at least 3 characters long.')
     .max(30, 'Username must not exceed 30 characters.')
@@ -55,7 +55,7 @@ export const ValidationSchemaEditProfile = z.object({
 
   email: z
     .string({
-      required_error: 'Email is required.',
+      error: 'Email is required.',
     })
     .email('Invalid email address.'),
 
@@ -75,28 +75,28 @@ export const ValidationSchemaEditProfile = z.object({
     ),
   street_address: z
     .string({
-      required_error: 'Street address is required.',
+      error: 'Street address is required.',
     })
     .min(5, 'Street address must be at least 5 characters long.')
     .max(100, 'Street address must not exceed 100 characters.'),
 
   province: z
     .string({
-      required_error: 'Province is required.',
+      error: 'Province is required.',
     })
     .min(2, 'Province must be at least 2 characters long.')
     .max(50, 'Province must not exceed 50 characters.'),
 
   city: z
     .string({
-      required_error: 'City is required.',
+      error: 'City is required.',
     })
     .min(2, 'City must be at least 2 characters long.')
     .max(50, 'City must not exceed 50 characters.'),
 
   zip_code: z
     .string({
-      required_error: 'ZIP code is required.',
+      error: 'ZIP code is required.',
     })
     .min(4, 'ZIP code must be at least 4 characters long.')
     .max(10, 'ZIP code must not exceed 10 characters.')

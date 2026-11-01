@@ -1,8 +1,6 @@
-'use client';
-
 import { SearchIcon, X } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'use-intl';
 
 import { toSearchResult } from '@/lib/mappers/search';
 import { useSearch } from '@/hooks/api/useSearch';
@@ -126,7 +124,7 @@ const SearchBar = () => {
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
             placeholder={t('search.placeholder')}
-            className='h-full w-full px-4 pr-10 border border-r-0 border-bronze/30 rounded-l focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm'
+            className='h-full w-full px-4 pr-10 border border-r-0 border-bronze/30 rounded-l focus:outline-hidden focus:ring-2 focus:ring-primary focus:border-transparent text-sm'
             onFocus={handleInputFocus}
           />
           {searchQuery && (

@@ -1,8 +1,6 @@
-'use client';
-
 import { Slash } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
 import { toPropertyCard } from '@/lib/mappers/property';
 import { useProperties } from '@/hooks/api/useProperty';

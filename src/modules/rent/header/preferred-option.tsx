@@ -1,8 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-'use client';
 
-import { useTranslations } from 'next-intl';
-import { useRouter } from 'nextjs-toploader/app'; // Import router
 import React from 'react';
 import { BiSwim } from 'react-icons/bi';
 import { FaParking, FaUmbrellaBeach } from 'react-icons/fa';
@@ -12,6 +9,9 @@ import { MdKitchen, MdOutlinePets, MdOutlineSecurity } from 'react-icons/md';
 import { PiMountainsDuotone } from 'react-icons/pi';
 import { RiRoadMapLine } from 'react-icons/ri';
 import { TbAirConditioning, TbGrill, TbMassage } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
+
+import { useRouter } from '@/lib/navigation';
 
 import { AmenityChip } from '@/components/ui/amenity-chip';
 

@@ -1,14 +1,12 @@
-'use client';
-
 import { Star } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaBath, FaHeart, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';
 
 import { VillaCardModel } from '@/lib/mappers/villa';
 
+import Image from '@/components/image';
+import Link from '@/components/link';
 import {
   Carousel,
   CarouselApi,
@@ -52,11 +50,9 @@ export const VillaCard: React.FC<VillaCardProps> = ({
   const [api, setApi] = useState<CarouselApi>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Create a URL-friendly slug from the villa name
-  const slug = villa.name.toLowerCase().replace(/\s+/g, '-');
-
-  // Determine the correct link path based on rentType
-  const linkPath = rentType === 'rent' ? `/rent/${slug}` : `/buy/${slug}`;
+  // Detail pages are addressed by id: names are not unique and can change.
+  const linkPath =
+    rentType === 'rent' ? `/rent/${villa.id}` : `/buy/${villa.id}`;
 
   // Use effect to track carousel state changes
   useEffect(() => {

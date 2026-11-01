@@ -1,9 +1,7 @@
-'use client';
-
-import Image from 'next/image';
-import { useTranslations } from 'next-intl';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import BreadcrumbLayout from '@/components/ui/breadcrumb-layout';
 

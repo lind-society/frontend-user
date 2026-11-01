@@ -1,11 +1,9 @@
-'use client';
-
 import { format } from 'date-fns';
 import { Search } from 'lucide-react';
-import { useTranslations } from 'next-intl';
 import React, { useState } from 'react';
 import { FaCalendar, FaLocationDot } from 'react-icons/fa6';
 import { TbCurrencyDollar } from 'react-icons/tb';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -88,7 +86,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={t('whatToDo')}
-            className='w-full border-none bg-transparent p-0 text-base text-cream placeholder:text-cream/45 focus:outline-none focus:ring-0'
+            className='w-full border-none bg-transparent p-0 text-base text-cream placeholder:text-cream/45 focus:outline-hidden focus:ring-0'
           />
         </div>
 
@@ -106,7 +104,7 @@ const TouristSearch: React.FC<TouristSearchProps> = ({ onSearch }) => {
               mode='single'
               selected={selectedDate}
               onSelect={setSelectedDate}
-              initialFocus
+              autoFocus
             />
           </PopoverContent>
         </Popover>

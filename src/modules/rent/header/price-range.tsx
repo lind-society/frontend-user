@@ -1,8 +1,6 @@
-'use client';
-
 import * as SliderPrimitive from '@radix-ui/react-slider';
-import { useTranslations } from 'next-intl';
 import * as React from 'react';
+import { useTranslations } from 'use-intl';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -210,8 +208,8 @@ const PriceRangeSlider = ({
           <SliderPrimitive.Track className='relative h-2 w-full grow overflow-hidden rounded-full bg-sand'>
             <SliderPrimitive.Range className='absolute h-full bg-primary' />
           </SliderPrimitive.Track>
-          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
-          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-sm focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
+          <SliderPrimitive.Thumb className='block h-5 w-5 rounded-full border-2 border-white bg-primary shadow-xs focus:outline-hidden focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:pointer-events-none disabled:opacity-50' />
         </SliderPrimitive.Root>
       </div>
 

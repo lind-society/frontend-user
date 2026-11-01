@@ -44,9 +44,7 @@ export interface ReservationBookingView {
 }
 
 export type ReservationStepName =
-  | 'additional-services'
-  | 'payment-method'
-  | 'payment-details';
+  'additional-services' | 'payment-method' | 'payment-details';
 
 /**
  * Maps booking status onto the three-step reservation UI:

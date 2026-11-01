@@ -1,8 +1,6 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import React from 'react';
 import { FaChartLine, FaHeadset, FaShieldAlt, FaUserTie } from 'react-icons/fa';
+import { useTranslations } from 'use-intl';
 
 import BaseContainer from '@/components/layouts/container';
 
@@ -17,7 +15,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
 }) => (
-  <div className='bg-primary px-5 py-6 rounded shadow-sm transition-transform hover:scale-[1.02]'>
+  <div className='bg-primary px-5 py-6 rounded shadow-xs transition-transform hover:scale-[1.02]'>
     <div className='h-14 w-14 md:h-16 md:w-16 bg-tertiary flex items-center justify-center rounded-full mb-4'>
       {icon}
     </div>

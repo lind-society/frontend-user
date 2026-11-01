@@ -16,7 +16,7 @@ export type TTextFieldProps<T extends FieldValues> = UseControllerProps<T> & {
   status?: 'success' | 'error' | 'warning' | 'none';
   message?: string;
   variant: 'lg' | 'md' | 'sm';
-  icon?: ReactNode | StaticImageData;
+  icon?: ReactNode;
   prepend?: ReactNode;
   append?: ReactNode;
   prependColor?: string;

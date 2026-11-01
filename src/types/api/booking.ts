@@ -62,10 +62,7 @@ export type VillaBookingStatus =
   | 'canceled';
 
 export type ActivityBookingStatus =
-  | 'pending'
-  | 'confirmed'
-  | 'completed'
-  | 'canceled';
+  'pending' | 'confirmed' | 'completed' | 'canceled';
 
 export type BookingStatus = VillaBookingStatus | ActivityBookingStatus;
 

@@ -1,5 +1,3 @@
-'use client';
-
 import clsx from 'clsx';
 import { FC, ReactElement, useState } from 'react';
 import { FieldValues, useController } from 'react-hook-form';
@@ -80,7 +78,7 @@ export const TextField = <T extends FieldValues>({
       status === 'success',
     'focus:ring-1 focus:ring-warning-base bg-warning-100 text-sm':
       status === 'warning',
-    'border-[0.5px]  shadow-sm': status === 'none' || status === undefined,
+    'border-[0.5px]  shadow-xs': status === 'none' || status === undefined,
   });
 
   const inputVariant = clsx({
@@ -90,7 +88,7 @@ export const TextField = <T extends FieldValues>({
   });
 
   const inputDefaultStyle =
-    'outline-none focus:outline-none w-full text-[#000] text-sm';
+    'outline-hidden focus:outline-hidden w-full text-[#000] text-sm';
 
   const inputExtras = clsx({
     'pl-[40px]': props.prepend,
@@ -138,7 +136,7 @@ export const TextField = <T extends FieldValues>({
           <textarea
             rows={textAreaRow}
             {...{ ...props, ...field }}
-            className={`w-full ${inputStatus}  ${props.className} flex min-h-[75px] w-full rounded border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50`}
+            className={`w-full ${inputStatus}  ${props.className} flex min-h-[75px] w-full rounded border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50`}
           ></textarea>
         )}
 

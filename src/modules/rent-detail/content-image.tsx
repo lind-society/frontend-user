@@ -1,172 +1,241 @@
-'use client';
+import React from 'react';
+import { useTranslations } from 'use-intl';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState } from 'react';
+import { toVillaCard } from '@/lib/mappers/villa';
+import { useVillas } from '@/hooks/api/useVilla';
 
+import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import { VillaCard } from '@/components/ui/card/villa';
 import {
   Carousel,
-  CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
 
-import { nearbyVillas } from '@/modules/rent-detail/constant';
-import { villaImages } from '@/modules/rent-detail/constant';
+import { Villa } from '@/types/api/villa';
 
-// Define proper type interfaces
-interface ImageData {
+type AdditionalType = NonNullable<Villa['additionals']>[number]['type'];
+
+/** Order the room/area galleries appear in. */
+const GALLERY_ORDER: AdditionalType[] = [
+  'bedrooms',
+  'indoor_areas',
+  'outdoor_areas',
+  'more_pictures',
+];
+
+export const Section = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <section className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-cream-light rounded border'>
+    <span className='text-xl text-primary font-semibold'>{title}</span>
+    {children}
+  </section>
+);
+
+interface Slide {
   id: string;
   src: string;
-  alt: string;
-  count: number;
   title: string;
-  description: string;
-  viewMoreLink: string;
+  description?: string | null;
+  count: number;
 }
 
-interface ImageCardProps {
-  image: ImageData;
-}
+const ImageGallerySection = ({
+  title,
+  slides,
+}: {
+  title: string;
+  slides: Slide[];
+}) => {
+  const t = useTranslations('rentDetail.gallery');
 
-// Image card component with proper typing
-const ImageCard = ({ image }: ImageCardProps) => (
-  <div className='flex flex-col gap-3 px-2'>
-    <div className='h-[220px] w-full relative'>
-      <Image
-        src={image.src}
-        alt={image.alt}
-        width={0}
-        height={0}
-        sizes='100vw'
-        className='h-[220px] w-full object-cover rounded'
-      />
-      <div className='absolute bottom-0 left-0 bg-primary rounded-tr py-2 px-4 text-cream'>
-        {image.count} pictures
-      </div>
-    </div>
-    <span className='text-text text-lg font-semibold'>{image.title}</span>
-    <span className='text-text'>{image.description}</span>
-    <Link
-      href={image.viewMoreLink}
-      className='underline text-text text-sm font-medium'
-    >
-      View More
-    </Link>
+  return (
+    <Section title={title}>
+      <Carousel
+        opts={{ align: 'start', loop: slides.length > 3 }}
+        className='w-full'
+      >
+        <CarouselContent>
+          {slides.map((slide) => (
+            <CarouselItem key={slide.id} className='sm:basis-1/2 md:basis-1/3'>
+              <div className='flex flex-col gap-3 px-2'>
+                <div className='h-[220px] w-full relative'>
+                  <Image
+                    src={slide.src}
+                    alt={slide.title}
+                    width={0}
+                    height={0}
+                    sizes='100vw'
+                    className='h-[220px] w-full object-cover rounded'
+                  />
+                  <div className='absolute bottom-0 left-0 bg-primary rounded-tr py-2 px-4 text-cream'>
+                    {slide.count}{' '}
+                    {slide.count === 1 ? t('picture') : t('pictures')}
+                  </div>
+                </div>
+                <span className='text-text text-lg font-semibold'>
+                  {slide.title}
+                </span>
+                {slide.description && (
+                  <span className='text-text'>{slide.description}</span>
+                )}
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        {slides.length > 1 && (
+          <>
+            <CarouselPrevious className='left-0 bg-cream-light/80 hover:bg-cream-light border-primary text-primary' />
+            <CarouselNext className='right-0 bg-cream-light/80 hover:bg-cream-light border-primary text-primary' />
+          </>
+        )}
+      </Carousel>
+    </Section>
+  );
+};
+
+type ListingMediaSource = Pick<
+  Villa,
+  'additionals' | 'videos' | 'video360s' | 'floorPlans'
+>;
+
+/** Videos, 360° tours, room galleries and floor plans of one listing. */
+export const ListingMedia = ({ listing }: { listing: ListingMediaSource }) => {
+  const t = useTranslations('rentDetail.gallery');
+  const tContent = useTranslations('rentDetail.content');
+
+  // A room is shown by its first photo; rooms without photos are skipped.
+  const galleries = GALLERY_ORDER.map((type) => ({
+    type,
+    slides: (listing.additionals ?? [])
+      .filter(
+        (additional) => additional.type === type && additional.photos?.length
+      )
+      .map<Slide>((additional) => ({
+        id: additional.id,
+        src: additional.photos![0],
+        title: additional.name,
+        description: additional.description,
+        count: additional.photos!.length,
+      })),
+  })).filter((gallery) => gallery.slides.length > 0);
+
+  const videos = listing.videos ?? [];
+  const tours = listing.video360s ?? [];
+  const floorPlans = listing.floorPlans ?? [];
+
+  return (
+    <>
+      {videos.length > 0 && (
+        <Section title={tContent('videos')}>
+          <div className='grid gap-4 md:grid-cols-2'>
+            {videos.map((src) => (
+              <video
+                key={src}
+                src={src}
+                controls
+                preload='metadata'
+                className='w-full rounded bg-ink'
+              />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {tours.length > 0 && (
+        <Section title={tContent('tour360')}>
+          <div className='grid gap-4 md:grid-cols-2'>
+            {tours.map((src) => (
+              <video
+                key={src}
+                src={src}
+                controls
+                preload='metadata'
+                className='w-full rounded bg-ink'
+              />
+            ))}
+          </div>
+        </Section>
+      )}
+
+      {galleries.map((gallery) => (
+        <ImageGallerySection
+          key={gallery.type}
+          title={t(gallery.type)}
+          slides={gallery.slides}
+        />
+      ))}
+
+      {floorPlans.length > 0 && (
+        <Section title={tContent('floorPlans')}>
+          <div className='grid gap-4 md:grid-cols-2'>
+            {floorPlans.map((src) => (
+              <Image
+                key={src}
+                src={src}
+                alt={tContent('floorPlans')}
+                width={0}
+                height={0}
+                sizes='100vw'
+                className='h-auto w-full rounded border bg-cream object-contain'
+              />
+            ))}
+          </div>
+        </Section>
+      )}
+    </>
+  );
+};
+
+/** Page background and spacing shared by every detail page's lower half. */
+export const MediaShell = ({ children }: { children: React.ReactNode }) => (
+  <div className='py-8 bg-bone'>
+    <BaseContainer>
+      <div className='flex flex-col gap-8 pb-8'>{children}</div>
+    </BaseContainer>
   </div>
 );
 
-interface ImageGallerySectionProps {
-  title: string;
-  images: ImageData[];
-}
+const NearbyVillas = ({ currentId }: { currentId: string }) => {
+  const t = useTranslations('rentDetail.gallery');
 
-// Image gallery section component with proper typing
-const ImageGallerySection = ({ title, images }: ImageGallerySectionProps) => {
-  const [, setApi] = useState<CarouselApi | null>(null);
+  const { data } = useVillas({ page: 1, limit: 4 });
+  const others = (data?.data.data ?? [])
+    .filter((other) => other.id !== currentId)
+    .slice(0, 3)
+    .map(toVillaCard);
+
+  if (others.length === 0) return null;
 
   return (
-    <div className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-cream-light rounded border'>
-      <span className='text-xl text-primary font-semibold'>{title}</span>
-
-      <div className='relative'>
-        <Carousel
-          setApi={setApi}
-          opts={{
-            align: 'start',
-            loop: true,
-          }}
-          className='w-full'
-        >
-          <CarouselContent>
-            {images.map((image) => (
-              <CarouselItem
-                key={image.id}
-                className='sm:basis-1/2 md:basis-1/3 lg:basis-1/3'
-              >
-                <ImageCard image={image} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className='left-0 bg-cream-light/80 hover:bg-cream-light border-primary text-primary' />
-          <CarouselNext className='right-0 bg-cream-light/80 hover:bg-cream-light border-primary text-primary' />
-        </Carousel>
+    <Section title={t('nearbyVillas')}>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+        {others.map((other) => (
+          <VillaCard
+            key={other.id}
+            villa={other}
+            onFavoriteToggle={() => undefined}
+            rentType='rent'
+          />
+        ))}
       </div>
-    </div>
+    </Section>
   );
 };
 
-const ContentImage = () => {
-  // Handler for favorite toggle in nearby villas
-  const handleFavoriteToggle = (id: string | number) => {
-    // eslint-disable-next-line no-console
-    console.log(`Toggled favorite for villa ${id}`);
-    // In a real application, you would use a state management solution or context
-    // to track and update the favorites
-  };
-
-  return (
-    <div className='py-8 bg-bone'>
-      <BaseContainer>
-        <div className='flex flex-col gap-8 pb-8'>
-          {/* 360 Video Tour Section */}
-          <div className='px-4 sm:px-6 py-4 flex flex-col gap-2 bg-cream-light rounded border'>
-            <span className='text-xl text-primary font-semibold'>
-              360 Video Tour
-            </span>
-            <Image
-              className='h-full w-full object-contain rounded object-top'
-              width={0}
-              height={0}
-              sizes='100vw'
-              alt='360 Video Tour'
-              src='/images/360-image.png'
-            />
-          </div>
-
-          {/* Outdoor Areas Section */}
-          <ImageGallerySection
-            title='Outdoor Areas'
-            images={villaImages.outdoorAreas}
-          />
-
-          {/* Indoor Areas Section */}
-          <ImageGallerySection
-            title='Indoor Areas'
-            images={villaImages.indoorAreas}
-          />
-
-          {/* More Pictures Section */}
-          <ImageGallerySection
-            title='More Pictures'
-            images={villaImages.morePictures}
-          />
-
-          {/* Nearby Villas Section */}
-          <div className='px-4 sm:px-6 py-4 flex flex-col gap-6 bg-cream-light rounded border'>
-            <span className='text-xl text-primary font-semibold'>
-              Nearby Villas
-            </span>
-
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-              {nearbyVillas.map((villa) => (
-                <VillaCard
-                  key={villa.id}
-                  villa={villa}
-                  onFavoriteToggle={handleFavoriteToggle}
-                  rentType='rent'
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </BaseContainer>
-    </div>
-  );
-};
+const ContentImage = ({ villa }: { villa: Villa }) => (
+  <MediaShell>
+    <ListingMedia listing={villa} />
+    <NearbyVillas currentId={villa.id} />
+  </MediaShell>
+);
 
 export default ContentImage;
