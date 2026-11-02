@@ -1,6 +1,5 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import axios from 'axios';
-import { RecoilRoot } from 'recoil';
 
 import { LocaleProvider } from '@/i18n/provider';
 
@@ -26,9 +25,7 @@ const queryClient = new QueryClient({
 function Provider({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
-      <LocaleProvider>
-        <RecoilRoot>{children}</RecoilRoot>
-      </LocaleProvider>
+      <LocaleProvider>{children}</LocaleProvider>
     </QueryClientProvider>
   );
 }
