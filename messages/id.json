@@ -1103,7 +1103,8 @@
       "more_pictures": "Foto Lainnya",
       "pictures": "foto",
       "picture": "foto",
-      "nearbyVillas": "Vila lain yang mungkin Anda suka"
+      "viewMore": "Lihat Semua",
+      "allPhotosOf": "Semua foto"
     }
   },
   "buyDetail": {
@@ -1412,5 +1413,14 @@
     "related": "Artikel Terkait",
     "viewAll": "Lihat Semua",
     "by": "Oleh"
+  },
+  "wishlist": {
+    "title": "Wishlist saya",
+    "emptyTitle": "Wishlist Anda masih kosong",
+    "emptyDescription": "Ketuk ikon hati pada villa atau properti untuk menyimpannya di sini.",
+    "browseRent": "Lihat villa",
+    "browseBuy": "Lihat properti",
+    "unavailableTitle": "Listing ini sudah tidak tersedia",
+    "unavailableDescription": "Villa dan properti yang Anda simpan sudah dihapus."
   }
 }

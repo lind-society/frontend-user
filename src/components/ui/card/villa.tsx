@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FaBath, FaHeart, FaUser } from 'react-icons/fa6';
 import { IoBed } from 'react-icons/io5';
 
+import { useWishlist } from '@/hooks/useWishlist';
 import { VillaCardModel } from '@/lib/mappers/villa';
 
 import Image from '@/components/image';
@@ -25,7 +26,8 @@ type VillaCardData = Omit<VillaCardModel, 'id'> & { id: string | number };
 
 interface VillaCardProps {
   villa: VillaCardData;
-  onFavoriteToggle: (id: string | number) => void;
+  /** Optional: the card saves to the wishlist itself; this only lets a page react. */
+  onFavoriteToggle?: (id: string | number) => void;
   rentType: 'rent' | 'sale';
 }
 
@@ -47,6 +49,8 @@ export const VillaCard: React.FC<VillaCardProps> = ({
   onFavoriteToggle,
   rentType,
 }) => {
+  const { has, toggle } = useWishlist();
+  const isFavorite = has(rentType, villa.id);
   const [api, setApi] = useState<CarouselApi>();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -115,16 +119,19 @@ export const VillaCard: React.FC<VillaCardProps> = ({
           {/* Favorite button */}
           <button
             type='button'
-            aria-label='Toggle favourite'
+            aria-label={isFavorite ? 'Remove from wishlist' : 'Add to wishlist'}
+            aria-pressed={isFavorite}
             className='absolute right-4 top-4 z-10'
             onClick={(e) => {
               e.preventDefault();
-              onFavoriteToggle(villa.id);
+              e.stopPropagation();
+              toggle(rentType, villa.id);
+              onFavoriteToggle?.(villa.id);
             }}
           >
             <FaHeart
               className={
-                villa.isFavorite
+                isFavorite
                   ? 'text-bronze-600 drop-shadow'
                   : 'text-white/90 drop-shadow'
               }

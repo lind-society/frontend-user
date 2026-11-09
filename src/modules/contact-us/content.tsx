@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { useTranslations } from 'use-intl';
 
 import { getApiErrorMessage } from '@/lib/api-error';
+import { useSearchParams } from '@/lib/navigation';
 import { useCreateInquiry } from '@/hooks/api/useInquiry';
 
 import BaseContainer from '@/components/layouts/container';
@@ -37,8 +38,16 @@ const ContentContactUs = () => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
   const [countryCode, setCountryCode] = useState('+62');
-  const [context, setContext] = useState('');
-  const [message, setMessage] = useState('');
+  // "Choose Package" on Property Management links here with ?topic=&package=.
+  const searchParams = useSearchParams();
+  const topicParam = searchParams.get('topic') ?? '';
+  const packageParam = searchParams.get('package');
+  const [context, setContext] = useState(topicParam);
+  const [message, setMessage] = useState(
+    packageParam
+      ? `I am interested in the ${packageParam} management package.`
+      : ''
+  );
   const t = useTranslations('contactUs');
 
   const { mutate: sendInquiry, isPending } = useCreateInquiry();
@@ -161,7 +170,7 @@ const ContentContactUs = () => {
 
             <form
               onSubmit={handleSubmit}
-              className='p-4 md:p-6 flex flex-col gap-3 md:gap-4 bg-white'
+              className='p-4 md:p-6 flex flex-col gap-3 md:gap-4 bg-white [&_input]:bg-slate-50 [&_textarea]:bg-slate-50 [&_button[role=combobox]]:bg-slate-50'
             >
               {/* Full Name */}
               <div className='flex flex-col gap-2'>

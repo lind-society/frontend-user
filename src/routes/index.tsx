@@ -11,6 +11,7 @@ import BuyDetailModules from '@/modules/buy-detail';
 import BuyResultModules from '@/modules/buy-result';
 import ContactUsModules from '@/modules/contact-us';
 import EarlyBirdModules from '@/modules/early-bird';
+import WishlistModules from '@/modules/wishlist';
 import LandingPageModules from '@/modules/landing-page';
 import ManagePropertyModules from '@/modules/manage-property';
 import MediaModules from '@/modules/media';
@@ -117,6 +118,10 @@ export const router = createBrowserRouter([
                 element: <RentDetailModules />,
               },
               { path: 'search', element: page(undefined, <SearchPage />) },
+              {
+                path: 'wishlist',
+                element: page('Wishlist', <WishlistModules />),
+              },
               {
                 path: 'tourist-activity',
                 element: page('Tourist Activity', <TouristActivityModules />),

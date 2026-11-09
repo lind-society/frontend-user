@@ -5,6 +5,7 @@ name: lind-web
 
 services:
   web:
+    container_name: lind-web
     build: .
     image: lind-web:latest
     restart: unless-stopped

@@ -5,6 +5,7 @@ import { FaCrown, FaRegStar, FaStar } from 'react-icons/fa';
 import { usePackages } from '@/hooks/api/usePackage';
 
 import BaseContainer from '@/components/layouts/container';
+import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 
@@ -76,6 +77,7 @@ const PackageManageProperty = () => {
   };
   const tableHeaderStyle = {
     gridTemplateColumns: `repeat(${packages.length + 1}, minmax(0, 1fr))`,
+    minWidth: (packages.length + 1) * 160,
   };
 
   return (
@@ -95,97 +97,104 @@ const PackageManageProperty = () => {
           </div>
 
           {/* Package cards - Desktop & Tablet */}
-          <div
-            className='hidden sm:grid gap-4 md:gap-6 lg:gap-8 mb-12 md:mb-16'
-            style={gridStyle}
-          >
-            {/* Package info column */}
-            <div className='col-span-1 flex justify-end flex-col gap-8 pt-[100px]'>
-              <div className='text-text font-medium'>
-                <span className='text-lg md:text-xl'>Select your</span>
-                <h3 className='text-2xl md:text-3xl font-bold text-primary mt-1'>
-                  Management Package
-                </h3>
+          <div className='hidden overflow-x-auto pb-2 sm:block mb-12 md:mb-16'>
+            <div
+              className='grid gap-4 md:gap-6 lg:gap-8'
+              style={{ ...gridStyle, minWidth: (packages.length + 1) * 220 }}
+            >
+              {/* Package info column */}
+              <div className='col-span-1 flex justify-end flex-col gap-8 pt-[100px]'>
+                <div className='text-text font-medium'>
+                  <span className='text-lg md:text-xl'>Select your</span>
+                  <h3 className='text-2xl md:text-3xl font-bold text-primary mt-1'>
+                    Management Package
+                  </h3>
+                </div>
               </div>
-            </div>
 
-            {packages.map((pkg, index) => {
-              const Icon = TIER_ICONS[index % TIER_ICONS.length];
-              const isHighlighted = index === highlightIndex;
+              {packages.map((pkg, index) => {
+                const Icon = TIER_ICONS[index % TIER_ICONS.length];
+                const isHighlighted = index === highlightIndex;
 
-              return (
-                <div
-                  key={pkg.id}
-                  className={`col-span-1 rounded flex flex-col relative ${
-                    isHighlighted
-                      ? 'border-2 border-primary shadow-xs'
-                      : 'border border-primary'
-                  }`}
-                >
-                  {isHighlighted && (
-                    <div className='absolute -top-3 left-0 right-0 flex justify-center'>
-                      <span className='bg-primary text-cream text-xs font-bold px-4 py-1 rounded-full'>
-                        Most Popular
-                      </span>
-                    </div>
-                  )}
+                return (
                   <div
-                    className={`p-6 flex flex-col gap-3 grow ${
-                      isHighlighted ? 'bg-primary text-cream' : ''
+                    key={pkg.id}
+                    className={`col-span-1 rounded flex flex-col relative ${
+                      isHighlighted
+                        ? 'border-2 border-primary shadow-xs'
+                        : 'border border-primary'
                     }`}
                   >
-                    <div className='mb-2 flex min-w-0 items-center gap-2'>
-                      <Icon
-                        className={`shrink-0 text-2xl ${
-                          isHighlighted ? 'text-cream' : 'text-bronze-600'
-                        }`}
-                      />
-                      <span
-                        className={`min-w-0 break-words text-xl font-bold md:text-2xl ${
-                          isHighlighted ? '' : 'text-ink'
-                        }`}
-                      >
-                        {pkg.name}
-                      </span>
-                    </div>
-                    {pkg.commissionPercentage !== null && (
-                      <>
+                    {isHighlighted && (
+                      <div className='absolute -top-3 left-0 right-0 flex justify-center'>
+                        <span className='bg-primary text-cream text-xs font-bold px-4 py-1 rounded-full'>
+                          Most Popular
+                        </span>
+                      </div>
+                    )}
+                    <div
+                      className={`p-6 flex flex-col gap-3 grow ${
+                        isHighlighted ? 'bg-primary text-cream' : ''
+                      }`}
+                    >
+                      <div className='mb-2 flex min-w-0 items-center gap-2'>
+                        <Icon
+                          className={`shrink-0 text-2xl ${
+                            isHighlighted ? 'text-cream' : 'text-bronze-600'
+                          }`}
+                        />
                         <span
-                          className={`font-bold text-xl md:text-2xl mb-1 ${
-                            isHighlighted ? '' : 'text-primary'
+                          className={`min-w-0 break-words text-xl font-bold md:text-2xl ${
+                            isHighlighted ? '' : 'text-ink'
                           }`}
                         >
-                          {pkg.commissionPercentage}%
+                          {pkg.name}
                         </span>
-                        <span className='text-sm'>of rental revenue</span>
-                      </>
-                    )}
-                    <p
-                      className={`text-sm mt-4 grow ${
-                        isHighlighted ? '' : 'text-text'
-                      }`}
-                    >
-                      {pkg.description}
-                    </p>
+                      </div>
+                      {pkg.commissionPercentage !== null && (
+                        <>
+                          <span
+                            className={`font-bold text-xl md:text-2xl mb-1 ${
+                              isHighlighted ? '' : 'text-primary'
+                            }`}
+                          >
+                            {pkg.commissionPercentage}%
+                          </span>
+                          <span className='text-sm'>of rental revenue</span>
+                        </>
+                      )}
+                      <p
+                        className={`text-sm mt-4 grow ${
+                          isHighlighted ? '' : 'text-text'
+                        }`}
+                      >
+                        {pkg.description}
+                      </p>
+                    </div>
+                    <Separator
+                      className={isHighlighted ? 'bg-cream-light/20' : ''}
+                    />
+                    <div className={`p-6 ${isHighlighted ? 'bg-primary' : ''}`}>
+                      <Button
+                        asChild
+                        variant={isHighlighted ? 'outline' : 'primary'}
+                        className={`w-full ${
+                          isHighlighted
+                            ? 'bg-cream-light text-primary hover:bg-cream-light/90'
+                            : ''
+                        }`}
+                      >
+                        <Link
+                          href={`/contact-us?topic=property-management&package=${encodeURIComponent(pkg.name)}`}
+                        >
+                          Choose Package
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
-                  <Separator
-                    className={isHighlighted ? 'bg-cream-light/20' : ''}
-                  />
-                  <div className={`p-6 ${isHighlighted ? 'bg-primary' : ''}`}>
-                    <Button
-                      variant={isHighlighted ? 'outline' : 'primary'}
-                      className={`w-full ${
-                        isHighlighted
-                          ? 'bg-cream-light text-primary hover:bg-cream-light/90'
-                          : ''
-                      }`}
-                    >
-                      Choose Package
-                    </Button>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
 
           {/* Package cards - Mobile only */}
@@ -243,6 +252,7 @@ const PackageManageProperty = () => {
                         )}
                       </div>
                       <Button
+                        asChild
                         variant={isHighlighted ? 'outline' : 'primary'}
                         size='sm'
                         className={
@@ -251,7 +261,11 @@ const PackageManageProperty = () => {
                             : ''
                         }
                       >
-                        Choose
+                        <Link
+                          href={`/contact-us?topic=property-management&package=${encodeURIComponent(pkg.name)}`}
+                        >
+                          Choose
+                        </Link>
                       </Button>
                     </div>
                     <Separator
@@ -279,7 +293,7 @@ const PackageManageProperty = () => {
               </div>
 
               {/* Comparison table - Desktop & Tablet */}
-              <div className='hidden sm:block overflow-hidden rounded border border-bronze/25 mb-8'>
+              <div className='hidden overflow-x-auto rounded border border-bronze/25 mb-8 sm:block'>
                 {/* Table header */}
                 <div className='grid bg-bone border-b' style={tableHeaderStyle}>
                   <div className='col-span-1 p-4 md:p-5 font-semibold text-text'>

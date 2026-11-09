@@ -1,12 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslations } from 'use-intl';
-
-import { toVillaCard } from '@/lib/mappers/villa';
-import { useVillas } from '@/hooks/api/useVilla';
 
 import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
-import { VillaCard } from '@/components/ui/card/villa';
+import { Button } from '@/components/ui/button';
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +11,13 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 import { Villa } from '@/types/api/villa';
 
@@ -45,6 +49,7 @@ interface Slide {
   src: string;
   title: string;
   description?: string | null;
+  photos: string[];
   count: number;
 }
 
@@ -56,6 +61,7 @@ const ImageGallerySection = ({
   slides: Slide[];
 }) => {
   const t = useTranslations('rentDetail.gallery');
+  const [opened, setOpened] = useState<Slide | null>(null);
 
   return (
     <Section title={title}>
@@ -87,6 +93,16 @@ const ImageGallerySection = ({
                 {slide.description && (
                   <span className='text-text'>{slide.description}</span>
                 )}
+                {slide.count > 1 && (
+                  <Button
+                    type='button'
+                    variant='outline'
+                    className='self-start'
+                    onClick={() => setOpened(slide)}
+                  >
+                    {t('viewMore')}
+                  </Button>
+                )}
               </div>
             </CarouselItem>
           ))}
@@ -98,6 +114,108 @@ const ImageGallerySection = ({
           </>
         )}
       </Carousel>
+
+      {/* Every photo of the room in a popup, instead of leaving the page. */}
+      <Dialog
+        open={opened !== null}
+        onOpenChange={(open) => !open && setOpened(null)}
+      >
+        <DialogContent className='max-h-[90vh] max-w-4xl overflow-y-auto'>
+          <DialogHeader>
+            <DialogTitle>
+              {t('allPhotosOf')} {opened?.title}
+            </DialogTitle>
+            <DialogDescription className='sr-only'>
+              {opened?.title}
+            </DialogDescription>
+          </DialogHeader>
+          <div className='grid grid-cols-1 gap-3 sm:grid-cols-2'>
+            {opened?.photos.map((src, index) => (
+              <img
+                key={src}
+                src={src}
+                alt={`${opened.title} ${index + 1}`}
+                loading='lazy'
+                className='h-auto w-full rounded object-cover'
+              />
+            ))}
+          </div>
+        </DialogContent>
+      </Dialog>
+    </Section>
+  );
+};
+
+/** 360° tours and floor plans share one block with a switch; a missing kind is not offered. */
+const TourAndFloorPlan = ({
+  tours,
+  floorPlans,
+}: {
+  tours: string[];
+  floorPlans: string[];
+}) => {
+  const tContent = useTranslations('rentDetail.content');
+  const [view, setView] = useState<'tour' | 'floor'>(
+    tours.length > 0 ? 'tour' : 'floor'
+  );
+
+  if (tours.length === 0 && floorPlans.length === 0) return null;
+
+  const showTours =
+    tours.length > 0 && (view === 'tour' || floorPlans.length === 0);
+
+  return (
+    <Section title={showTours ? tContent('tour360') : tContent('floorPlans')}>
+      {tours.length > 0 && floorPlans.length > 0 && (
+        <div className='flex gap-2' role='tablist'>
+          <Button
+            type='button'
+            role='tab'
+            aria-selected={showTours}
+            variant={showTours ? 'default' : 'outline'}
+            onClick={() => setView('tour')}
+          >
+            {tContent('tour360')}
+          </Button>
+          <Button
+            type='button'
+            role='tab'
+            aria-selected={!showTours}
+            variant={!showTours ? 'default' : 'outline'}
+            onClick={() => setView('floor')}
+          >
+            {tContent('floorPlans')}
+          </Button>
+        </div>
+      )}
+
+      {showTours ? (
+        <div className='grid gap-4 md:grid-cols-2'>
+          {tours.map((src) => (
+            <video
+              key={src}
+              src={src}
+              controls
+              preload='metadata'
+              className='w-full rounded bg-ink'
+            />
+          ))}
+        </div>
+      ) : (
+        <div className='grid gap-4 md:grid-cols-2'>
+          {floorPlans.map((src) => (
+            <Image
+              key={src}
+              src={src}
+              alt={tContent('floorPlans')}
+              width={0}
+              height={0}
+              sizes='100vw'
+              className='h-auto w-full rounded border bg-cream object-contain'
+            />
+          ))}
+        </div>
+      )}
     </Section>
   );
 };
@@ -124,6 +242,7 @@ export const ListingMedia = ({ listing }: { listing: ListingMediaSource }) => {
         src: additional.photos![0],
         title: additional.name,
         description: additional.description,
+        photos: additional.photos!,
         count: additional.photos!.length,
       })),
   })).filter((gallery) => gallery.slides.length > 0);
@@ -150,21 +269,7 @@ export const ListingMedia = ({ listing }: { listing: ListingMediaSource }) => {
         </Section>
       )}
 
-      {tours.length > 0 && (
-        <Section title={tContent('tour360')}>
-          <div className='grid gap-4 md:grid-cols-2'>
-            {tours.map((src) => (
-              <video
-                key={src}
-                src={src}
-                controls
-                preload='metadata'
-                className='w-full rounded bg-ink'
-              />
-            ))}
-          </div>
-        </Section>
-      )}
+      <TourAndFloorPlan tours={tours} floorPlans={floorPlans} />
 
       {galleries.map((gallery) => (
         <ImageGallerySection
@@ -173,24 +278,6 @@ export const ListingMedia = ({ listing }: { listing: ListingMediaSource }) => {
           slides={gallery.slides}
         />
       ))}
-
-      {floorPlans.length > 0 && (
-        <Section title={tContent('floorPlans')}>
-          <div className='grid gap-4 md:grid-cols-2'>
-            {floorPlans.map((src) => (
-              <Image
-                key={src}
-                src={src}
-                alt={tContent('floorPlans')}
-                width={0}
-                height={0}
-                sizes='100vw'
-                className='h-auto w-full rounded border bg-cream object-contain'
-              />
-            ))}
-          </div>
-        </Section>
-      )}
     </>
   );
 };
@@ -204,37 +291,9 @@ export const MediaShell = ({ children }: { children: React.ReactNode }) => (
   </div>
 );
 
-const NearbyVillas = ({ currentId }: { currentId: string }) => {
-  const t = useTranslations('rentDetail.gallery');
-
-  const { data } = useVillas({ page: 1, limit: 4 });
-  const others = (data?.data.data ?? [])
-    .filter((other) => other.id !== currentId)
-    .slice(0, 3)
-    .map(toVillaCard);
-
-  if (others.length === 0) return null;
-
-  return (
-    <Section title={t('nearbyVillas')}>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-        {others.map((other) => (
-          <VillaCard
-            key={other.id}
-            villa={other}
-            onFavoriteToggle={() => undefined}
-            rentType='rent'
-          />
-        ))}
-      </div>
-    </Section>
-  );
-};
-
 const ContentImage = ({ villa }: { villa: Villa }) => (
   <MediaShell>
     <ListingMedia listing={villa} />
-    <NearbyVillas currentId={villa.id} />
   </MediaShell>
 );
 

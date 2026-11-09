@@ -53,8 +53,8 @@ const ContentEarlyBird = () => {
   return (
     <section className='py-14 md:py-20'>
       <BaseContainer>
-        <div className='mx-auto flex max-w-2xl flex-col items-center gap-10 text-center'>
-          <h1 className='font-heading text-2xl font-semibold text-ink md:text-3xl'>
+        <div className='mx-auto flex max-w-xl flex-col items-center gap-8 text-center'>
+          <h1 className='font-heading text-lg font-semibold leading-snug text-ink md:text-xl'>
             {t('heading')}
           </h1>
 

@@ -217,7 +217,7 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({
   };
 
   return (
-    <div className='sticky 2xl:top-4 top-[-84px] border shadow-xs bg-cream-light rounded overflow-hidden'>
+    <div className='2xl:sticky 2xl:top-4 border shadow-xs bg-cream-light rounded overflow-hidden'>
       <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
         <span>{t('sendInquiry')} or</span>
         <span className='text-2xl font-semibold'>{tContent('bookNow')}</span>

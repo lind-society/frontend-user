@@ -21,7 +21,7 @@ export const formatCurrency = (
 ) => {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: 'IDR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
     ...options,
@@ -46,7 +46,7 @@ const PriceRangeSlider = ({
   step = 1000,
   formatOptions = {
     style: 'currency',
-    currency: 'USD',
+    currency: 'IDR',
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   },

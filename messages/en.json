@@ -15,7 +15,7 @@
     "menu": {
       "open": "Open menu",
       "close": "Close menu",
-      "browse": "Browse",
+      "browse": "Media",
       "more": "More"
     },
     "contact": "Contact Us",
@@ -1131,7 +1131,8 @@
       "more_pictures": "More Pictures",
       "pictures": "pictures",
       "picture": "picture",
-      "nearbyVillas": "More villas you may like"
+      "viewMore": "View More",
+      "allPhotosOf": "All photos of"
     }
   },
   "buyDetail": {
@@ -1412,5 +1413,14 @@
     "related": "Related Articles",
     "viewAll": "View All",
     "by": "By"
+  },
+  "wishlist": {
+    "title": "My wishlist",
+    "emptyTitle": "Your wishlist is empty",
+    "emptyDescription": "Tap the heart on a villa or property to save it here.",
+    "browseRent": "Browse villas",
+    "browseBuy": "Browse properties",
+    "unavailableTitle": "These listings are no longer available",
+    "unavailableDescription": "The villas and properties you saved have been removed."
   }
 }
