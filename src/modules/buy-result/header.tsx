@@ -110,7 +110,7 @@ const HeaderBuyResult = () => {
       {/* Search form section */}
       <div className='border-b py-6'>
         <BaseContainer>
-          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-xs'>
+          <div className='bg-ink text-cream rounded border border-bronze/60 px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 [&_.text-ink-muted]:text-cream/70 [&_.text-primary]:text-bronze-300 [&_button:hover]:border-bronze/40'>
             {/* Search inputs */}
             <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
               {/* Location */}

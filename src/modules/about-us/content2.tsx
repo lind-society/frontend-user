@@ -15,15 +15,15 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
 }) => (
-  <div className='bg-primary px-5 py-6 rounded shadow-xs transition-transform hover:scale-[1.02]'>
-    <div className='h-14 w-14 md:h-16 md:w-16 bg-tertiary flex items-center justify-center rounded-full mb-4'>
+  <div className='bg-ink px-5 py-6 rounded shadow-xs'>
+    <div className='mb-4 flex h-10 w-10 items-center justify-center text-bronze-300'>
       {icon}
     </div>
     <div className='text-cream'>
-      <h3 className='text-lg md:text-xl font-bold mb-2'>{title}</h3>
-      <p className='text-sm md:text-base text-cream/90 line-clamp-4'>
-        {description}
-      </p>
+      <h3 className='mb-2 font-heading text-lg font-semibold md:text-xl'>
+        {title}
+      </h3>
+      <p className='text-sm text-cream/70 line-clamp-4'>{description}</p>
     </div>
   </div>
 );
@@ -34,22 +34,22 @@ const Content2AboutUs = () => {
   // Features with contextual icons
   const features = [
     {
-      icon: <FaUserTie className='text-primary w-6 h-6 md:w-7 md:h-7' />,
+      icon: <FaUserTie className='h-6 w-6' />,
       title: t('features.professionalExperience.title'),
       description: t('features.professionalExperience.description'),
     },
     {
-      icon: <FaChartLine className='text-primary w-6 h-6 md:w-7 md:h-7' />,
+      icon: <FaChartLine className='h-6 w-6' />,
       title: t('features.marketAnalysis.title'),
       description: t('features.marketAnalysis.description'),
     },
     {
-      icon: <FaHeadset className='text-primary w-6 h-6 md:w-7 md:h-7' />,
+      icon: <FaHeadset className='h-6 w-6' />,
       title: t('features.customerService.title'),
       description: t('features.customerService.description'),
     },
     {
-      icon: <FaShieldAlt className='text-primary w-6 h-6 md:w-7 md:h-7' />,
+      icon: <FaShieldAlt className='h-6 w-6' />,
       title: t('features.transparency.title'),
       description: t('features.transparency.description'),
     },

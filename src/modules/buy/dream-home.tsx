@@ -18,14 +18,16 @@ const FeatureCard: React.FC<FeatureCardProps> = ({
   title,
   description,
 }) => (
-  <div className='bg-primary p-5 sm:p-6 md:p-8 flex flex-col gap-5 h-full'>
-    <div className='flex gap-4 md:gap-5 items-center'>
-      <div className='w-[48px] h-[48px] md:w-[64px] md:h-[64px] bg-tertiary flex items-center justify-center rounded-full'>
+  <div className='flex h-full flex-col gap-4 bg-ink p-5 sm:p-6 md:p-7'>
+    <div className='flex items-center gap-4'>
+      <div className='flex h-10 w-10 shrink-0 items-center justify-center text-bronze-300'>
         {icon}
       </div>
-      <span className='font-bold text-lg sm:text-xl md:text-2xl'>{title}</span>
+      <span className='font-heading text-lg font-semibold text-cream sm:text-xl'>
+        {title}
+      </span>
     </div>
-    <p className='font-medium md:font-semibold text-base'>{description}</p>
+    <p className='text-sm text-cream/70'>{description}</p>
   </div>
 );
 
@@ -34,22 +36,22 @@ const DreamHomeBuyPage = () => {
 
   const features = [
     {
-      icon: <RiHome4Fill className='text-primary w-6 h-6 md:w-8 md:h-8' />,
+      icon: <RiHome4Fill className='h-7 w-7' />,
       title: t('features.hundredsProperties.title'),
       description: t('features.hundredsProperties.description'),
     },
     {
-      icon: <MdOutlineSupport className='text-primary w-6 h-6 md:w-8 md:h-8' />,
+      icon: <MdOutlineSupport className='h-7 w-7' />,
       title: t('features.knowWhatWorks.title'),
       description: t('features.knowWhatWorks.description'),
     },
     {
-      icon: <TbUserStar className='text-primary w-6 h-6 md:w-8 md:h-8' />,
+      icon: <TbUserStar className='h-7 w-7' />,
       title: t('features.notJustAgents.title'),
       description: t('features.notJustAgents.description'),
     },
     {
-      icon: <MdHomeWork className='text-primary w-6 h-6 md:w-8 md:h-8' />,
+      icon: <MdHomeWork className='h-7 w-7' />,
       title: t('features.allPropertyServices.title'),
       description: t('features.allPropertyServices.description'),
     },
@@ -70,11 +72,11 @@ const DreamHomeBuyPage = () => {
                 className='object-cover'
               />
             </div>
-            <div className='bg-primary p-6 md:p-8 flex flex-col gap-4 md:gap-5'>
-              <h2 className='text-cream text-xl md:text-2xl lg:text-3xl font-bold'>
+            <div className='flex flex-col gap-4 bg-ink p-6 md:gap-5 md:p-8'>
+              <h2 className='font-heading text-xl text-cream md:text-2xl lg:text-3xl'>
                 {t('title')}
               </h2>
-              <p className='text-cream text-base md:text-lg lg:text-xl font-medium md:font-semibold'>
+              <p className='text-sm text-cream/80 md:text-base'>
                 {t('subtitle')}
               </p>
             </div>

@@ -163,7 +163,9 @@
       },
       "dates": {
         "label": "Tanggal Menginap",
-        "placeholder": "Pilih tanggal"
+        "placeholder": "Pilih tanggal",
+        "checkIn": "Check in",
+        "checkOut": "Check out"
       }
     },
     "exploreIconic": {
@@ -286,7 +288,8 @@
         "experiences": {
           "title": "Pengalaman & Perayaan Terkurasi"
         }
-      }
+      },
+      "viewAllMedia": "Lihat Semua Media"
     }
   },
   "aboutUs": {
@@ -333,17 +336,23 @@
           "linkText": "Pesan Penginapan Impian Anda"
         },
         "buying": {
-          "title": "Beli Properti",
-          "description": "Temukan properti impian Anda dengan dukungan penuh dari kami. Kami tidak hanya membantu Anda menemukan properti yang sesuai dengan kebutuhan Anda, tetapi juga mendampingi dalam proses negosiasi dan transaksi hingga selesai.",
-          "linkText": "Temukan Properti Sempurna Anda"
+          "title": "Beli Rumah & Villa",
+          "description": "Kami percaya setiap villa menyimpan kisah unik yang menunggu babak berikutnya. LIND Society hadir untuk mempertemukan hunian istimewa dengan mereka yang mencarinya, dengan perjalanan yang mulus dari pemilik ke pemilik berikutnya.",
+          "linkText": "Temukan Rumah Impian Anda"
         },
         "management": {
           "title": "Manajemen Properti",
-          "description": "Maksimalkan potensi properti Anda dengan layanan manajemen profesional kami. Mulai dari pemasaran hingga pemeliharaan, kami menangani semuanya agar Anda bisa menikmati pendapatan pasif tanpa repot.",
-          "linkText": "Pelajari Lebih Lanjut Tentang Layanan Kami"
+          "description": "Kami menawarkan pengelolaan penuh properti Anda, dari pengelolaan harian hingga pemasaran dan optimasi harga sewa, untuk pendapatan maksimal dan perawatan properti yang optimal.",
+          "linkText": "Mulai Kelola Properti Anda"
         }
       },
       "imageAlt": "Layanan Kami"
+    },
+    "journal": {
+      "eyebrow": "Temukan lebih banyak",
+      "title": "Inspirasi untuk Setiap Perjalanan",
+      "button": "Kunjungi Jurnal",
+      "description": "Jelajahi jurnal kami untuk panduan perjalanan, cerita, dan tips orang dalam."
     }
   },
   "SearchSuggestions": {
@@ -554,8 +563,8 @@
   "buy": {
     "pageTitle": "Beli Properti",
     "header": {
-      "title": "Miliki Villa Impian Anda dengan LIND Society",
-      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, numquam?",
+      "title": "Miliki Villa Impian Anda bersama LIND Society.",
+      "subtitle": "Villa pilihan, pengalaman unik, dan momen abadi di Bali dan sekitarnya.",
       "search": {
         "location": "Lokasi",
         "ownership": "Kepemilikan",
@@ -718,6 +727,22 @@
         "name": "Pijat Tradisional Bali",
         "description": "Rasakan penyembuhan autentik Bali melalui pijat seluruh tubuh menggunakan teknik tradisional yang diwariskan turun-temurun, dengan minyak aromatik alami."
       }
+    },
+    "list": {
+      "title": "Pengalaman Unik",
+      "subtitle": "Momen pilihan yang menghubungkan Anda dengan keindahan, budaya, dan jiwa Bali.",
+      "all": "Semua Pengalaman",
+      "sortBy": "Urutkan",
+      "recommended": "Rekomendasi",
+      "priceLow": "Harga: terendah",
+      "priceHigh": "Harga: tertinggi",
+      "rating": "Rating tertinggi",
+      "from": "Mulai dari",
+      "perDay": "per hari",
+      "emptyTitle": "Belum ada pengalaman",
+      "emptyDescription": "Segera kembali, pengalaman baru ditambahkan secara berkala.",
+      "errorTitle": "Pengalaman tidak dapat dimuat",
+      "errorDescription": "Silakan coba lagi sebentar lagi."
     }
   },
   "manageProperty": {
@@ -781,12 +806,11 @@
     "clearAll": "Hapus Semua",
     "showMore": "Tampilkan Lebih Banyak",
     "collectionsOptions": {
-      "beachfront": "Tepi Pantai",
-      "mountainView": "Pemandangan Gunung",
-      "historic": "Bersejarah",
-      "modern": "Modern",
-      "luxury": "Mewah",
-      "budgetFriendly": "Ramah Anggaran"
+      "beachfront": "Tepi pantai",
+      "ecoConscious": "Ramah lingkungan",
+      "honeymoon": "Bulan madu",
+      "seaView": "Pemandangan laut",
+      "weddingEvents": "Pernikahan & acara"
     },
     "freebiesOptions": {
       "freeBreakfast": "Sarapan Gratis",
@@ -931,7 +955,8 @@
   "rentDetail": {
     "header": {
       "imageAlt": "Pemandangan villa",
-      "slideIndicator": "dari"
+      "slideIndicator": "dari",
+      "viewAllPhotos": "Lihat Semua Foto"
     },
     "content": {
       "breadcrumbHome": "Beranda",
@@ -1032,7 +1057,8 @@
       "mapUnavailable": "Pratinjau peta tidak tersedia untuk vila ini.",
       "videos": "Video tur",
       "tour360": "Tur 360°",
-      "floorPlans": "Denah"
+      "floorPlans": "Denah",
+      "bedroomsLabel": "Kamar Tidur"
     },
     "inquiryForm": {
       "title": "Kirim Pertanyaan",
@@ -1105,6 +1131,31 @@
       "picture": "foto",
       "viewMore": "Lihat Semua",
       "allPhotosOf": "Semua foto"
+    },
+    "tabs": {
+      "highlights": "Sorotan",
+      "amenities": "Fasilitas",
+      "rooms": "Kamar",
+      "location": "Lokasi",
+      "reviews": "Ulasan",
+      "houseRules": "Aturan Rumah",
+      "policies": "Kebijakan",
+      "aboutVilla": "Tentang Villa",
+      "noHighlights": "Pemilik belum menambahkan deskripsi.",
+      "whatsIncluded": "Yang Termasuk",
+      "goodToKnow": "Perlu Diketahui",
+      "amenitiesTitle": "Fasilitas dari LIND Society",
+      "checkInAfter": "Check in setelah",
+      "checkOutUntil": "Check out sebelum"
+    },
+    "bookingCard": {
+      "startFrom": "Mulai dari",
+      "night": "malam",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "guests": "Tamu",
+      "checkAvailability": "Cek ketersediaan",
+      "bestRate": "Jaminan Harga Terbaik"
     }
   },
   "buyDetail": {
@@ -1317,6 +1368,32 @@
       "title": "Pemesanan Berhasil!",
       "totalPrice": "Total Harga",
       "viewMyBookings": "Lihat Pemesanan Saya"
+    },
+    "view": {
+      "home": "Beranda",
+      "experiences": "Pengalaman",
+      "ticketsLeft": "Tiket Tersisa",
+      "tabs": {
+        "highlights": "Sorotan",
+        "ticket": "Tiket",
+        "schedule": "Jadwal Buka",
+        "location": "Lokasi"
+      },
+      "descriptions": "Deskripsi",
+      "noDescription": "Belum ada deskripsi.",
+      "price": "Harga",
+      "dailyQuota": "Kuota harian",
+      "perDay": "tiket per hari",
+      "opening": "Buka pukul",
+      "closing": "Tutup pukul",
+      "availability": "Ketersediaan",
+      "open": "Buka setiap hari",
+      "limited": "Tanggal terbatas",
+      "mapUnavailable": "Peta tidak tersedia untuk aktivitas ini.",
+      "openMap": "Buka di Google Maps",
+      "startFrom": "Mulai dari",
+      "date": "Tanggal",
+      "checkAvailability": "Cek ketersediaan"
     }
   },
   "contactUs": {
@@ -1342,7 +1419,7 @@
       "fullName": "Nama Lengkap",
       "email": "Email",
       "phone": "Nomor Telepon",
-      "inquiryType": "Jenis Pertanyaan",
+      "inquiryType": "Konteks",
       "message": "Pesan",
       "submit": "Kirim Pesan Anda",
       "successMessage": "Pesan berhasil dikirim! Kami akan segera menghubungi Anda.",
@@ -1422,5 +1499,52 @@
     "browseBuy": "Lihat properti",
     "unavailableTitle": "Listing ini sudah tidak tersedia",
     "unavailableDescription": "Villa dan properti yang Anda simpan sudah dihapus."
+  },
+  "managePropertyFlow": {
+    "concierge": {
+      "title": "Ada Pertanyaan?",
+      "subtitle": "Hubungi tim concierge kami 24/7:",
+      "team": "Tim concierge",
+      "service": "Layanan Pelanggan untuk Bali",
+      "noticeTitle": "Pemberitahuan Keamanan",
+      "notice": "Demi keamanan Anda, dukungan WhatsApp resmi kami hanya akan menghubungi Anda dari nomor di atas. Jika Anda menerima pesan dari nomor lain, abaikan dan laporkan kepada kami segera. Waspada penipuan!"
+    },
+    "inquiry": {
+      "fillOut": "Isi formulir",
+      "tellUs": "Ceritakan bagaimana kami dapat membantu Anda?",
+      "defaultMessage": "Halo, LIND Society! Saya tertarik dengan {name} ini dan ingin berbicara",
+      "whatsapp": "Kirim ke WhatsApp",
+      "email": "Kirim ke Email",
+      "emailSubject": "Manajemen Properti: {name}",
+      "choose": "Pilih Paket",
+      "chooseShort": "Pilih"
+    },
+    "confirmed": {
+      "thankYou": "Terima Kasih!",
+      "title": "Paket Anda Telah Dikonfirmasi.",
+      "received": "Kami telah menerima data Anda. Tim kami akan segera menghubungi Anda untuk langkah selanjutnya.",
+      "whatYoullGet": "Yang Anda dapatkan",
+      "fallback": "Tim kami telah menerima permintaan Anda dan akan menghubungi Anda terkait paket ini.",
+      "nextStep": "Langkah Selanjutnya",
+      "nextStepText": "Concierge kami akan segera menghubungi Anda untuk menyelesaikan pemesanan. Untuk bantuan mendesak, hubungi kami langsung.",
+      "back": "Kembali ke Manajemen Properti"
+    }
+  },
+  "review": {
+    "title": "Ceritakan Pengalaman Menginap Anda",
+    "quote": "“Terima kasih telah menginap bersama kami! Kami ingin mendengar pengalaman Anda. Mohon luangkan waktu untuk menilai dan mengulas masa menginap Anda. Masukan Anda membantu kami meningkatkan layanan bagi tamu berikutnya. Kami menghargai waktu dan masukan Anda!”",
+    "ratings": "Berikan penilaian Anda",
+    "fullName": "Nama lengkap",
+    "fullNamePlaceholder": "Masukkan nama lengkap Anda",
+    "email": "Email",
+    "emailPlaceholder": "Masukkan email Anda",
+    "message": "Pesan",
+    "messagePlaceholder": "Bagikan cerita Anda selama menginap bersama kami",
+    "submit": "Kirim",
+    "sending": "Mengirim…",
+    "thanks": "Terima kasih!",
+    "sent": "Ulasan Anda telah dikirim ke tim kami.",
+    "chooseRating": "Silakan pilih penilaian.",
+    "error": "Ulasan tidak dapat dikirim. Silakan coba lagi."
   }
 }

@@ -20,7 +20,7 @@ const TrustBar = () => {
   return (
     <section className='bg-sand'>
       <BaseContainer>
-        <div className='grid grid-cols-1 gap-6 py-7 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4'>
+        <div className='grid grid-cols-1 gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-4'>
           {items.map(({ icon: Icon, key }) => (
             <div key={key} className='flex items-center gap-4'>
               <Icon

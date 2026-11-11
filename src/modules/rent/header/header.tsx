@@ -109,7 +109,7 @@ const HeaderRentPage = () => {
   };
 
   return (
-    <section className='relative isolate flex min-h-[720px] flex-col justify-end overflow-hidden pb-10 pt-[72px] lg:min-h-[780px] lg:pt-[92px]'>
+    <section className='relative isolate flex min-h-[560px] flex-col justify-end overflow-hidden pb-10 pt-[72px] lg:min-h-[600px] lg:pt-[92px]'>
       <Image
         src='/images/header-buy.jpeg'
         alt=''
@@ -125,8 +125,8 @@ const HeaderRentPage = () => {
       />
 
       <BaseContainer>
-        <div className='flex flex-col gap-10'>
-          <div className='flex max-w-3xl flex-col gap-6 pt-16'>
+        <div className='flex flex-col gap-6'>
+          <div className='flex max-w-3xl flex-col gap-5 pt-6'>
             <h1 className='text-cream'>{t('title')}</h1>
             <p className='border-l-2 border-cream pl-5 text-base leading-relaxed text-cream/90 md:text-lg'>
               {t('subtitle')}

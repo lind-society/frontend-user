@@ -1,13 +1,17 @@
 import { Check, X } from 'lucide-react';
 import React from 'react';
+import { useTranslations } from 'use-intl';
 import { FaCrown, FaRegStar, FaStar } from 'react-icons/fa';
 
 import { usePackages } from '@/hooks/api/usePackage';
 
 import BaseContainer from '@/components/layouts/container';
-import Link from '@/components/link';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
+
+import PackageInquiry from '@/modules/manage-property/package-inquiry';
+
+import { Package } from '@/types/api/package';
 
 // Cycled by tier position (lowest commission first) so a 3-tier lineup gets
 // the same star / star-filled / crown progression the page always had.
@@ -20,6 +24,8 @@ interface FeatureRow {
 
 const PackageManageProperty = () => {
   const { data, isLoading } = usePackages({ limit: 20 });
+  const t = useTranslations('managePropertyFlow.inquiry');
+  const [chosen, setChosen] = React.useState<Package | null>(null);
 
   // Managed from the admin dashboard (Property Management > Package) —
   // ordered cheapest-to-most-complete so the visual tiering below still
@@ -114,7 +120,8 @@ const PackageManageProperty = () => {
 
               {packages.map((pkg, index) => {
                 const Icon = TIER_ICONS[index % TIER_ICONS.length];
-                const isHighlighted = index === highlightIndex;
+                const isHighlighted = index % 3 !== 0;
+                const darkBg = index % 3 === 1 ? 'bg-ink' : 'bg-primary';
 
                 return (
                   <div
@@ -134,7 +141,7 @@ const PackageManageProperty = () => {
                     )}
                     <div
                       className={`p-6 flex flex-col gap-3 grow ${
-                        isHighlighted ? 'bg-primary text-cream' : ''
+                        isHighlighted ? `${darkBg} text-cream` : ''
                       }`}
                     >
                       <div className='mb-2 flex min-w-0 items-center gap-2'>
@@ -174,9 +181,9 @@ const PackageManageProperty = () => {
                     <Separator
                       className={isHighlighted ? 'bg-cream-light/20' : ''}
                     />
-                    <div className={`p-6 ${isHighlighted ? 'bg-primary' : ''}`}>
+                    <div className={`p-6 ${isHighlighted ? darkBg : ''}`}>
                       <Button
-                        asChild
+                        onClick={() => setChosen(pkg)}
                         variant={isHighlighted ? 'outline' : 'primary'}
                         className={`w-full ${
                           isHighlighted
@@ -184,11 +191,7 @@ const PackageManageProperty = () => {
                             : ''
                         }`}
                       >
-                        <Link
-                          href={`/contact-us?topic=property-management&package=${encodeURIComponent(pkg.name)}`}
-                        >
-                          Choose Package
-                        </Link>
+                        {t('choose')}
                       </Button>
                     </div>
                   </div>
@@ -201,7 +204,8 @@ const PackageManageProperty = () => {
           <div className='sm:hidden space-y-6 mb-12'>
             {packages.map((pkg, index) => {
               const Icon = TIER_ICONS[index % TIER_ICONS.length];
-              const isHighlighted = index === highlightIndex;
+              const isHighlighted = index % 3 !== 0;
+              const darkBg = index % 3 === 1 ? 'bg-ink' : 'bg-primary';
 
               return (
                 <div
@@ -212,7 +216,7 @@ const PackageManageProperty = () => {
                       : 'border border-primary overflow-hidden'
                   }`}
                 >
-                  {isHighlighted && (
+                  {index === highlightIndex && (
                     <div className='absolute -top-3 left-0 right-0 flex justify-center'>
                       <span className='bg-primary text-cream text-xs font-bold px-4 py-1 rounded-full'>
                         Most Popular
@@ -221,7 +225,7 @@ const PackageManageProperty = () => {
                   )}
                   <div
                     className={`p-5 flex flex-col gap-3 ${
-                      isHighlighted ? 'bg-primary text-cream' : ''
+                      isHighlighted ? `${darkBg} text-cream` : ''
                     }`}
                   >
                     <div className='flex items-center gap-2 mb-1'>
@@ -252,7 +256,7 @@ const PackageManageProperty = () => {
                         )}
                       </div>
                       <Button
-                        asChild
+                        onClick={() => setChosen(pkg)}
                         variant={isHighlighted ? 'outline' : 'primary'}
                         size='sm'
                         className={
@@ -261,11 +265,7 @@ const PackageManageProperty = () => {
                             : ''
                         }
                       >
-                        <Link
-                          href={`/contact-us?topic=property-management&package=${encodeURIComponent(pkg.name)}`}
-                        >
-                          Choose
-                        </Link>
+                        {t('chooseShort')}
                       </Button>
                     </div>
                     <Separator
@@ -372,6 +372,8 @@ const PackageManageProperty = () => {
           )}
         </>
       </BaseContainer>
+
+      <PackageInquiry pkg={chosen} onClose={() => setChosen(null)} />
     </div>
   );
 };

@@ -26,8 +26,8 @@ type AdditionalType = NonNullable<Villa['additionals']>[number]['type'];
 /** Order the room/area galleries appear in. */
 const GALLERY_ORDER: AdditionalType[] = [
   'bedrooms',
-  'indoor_areas',
   'outdoor_areas',
+  'indoor_areas',
   'more_pictures',
 ];
 
@@ -192,13 +192,7 @@ const TourAndFloorPlan = ({
       {showTours ? (
         <div className='grid gap-4 md:grid-cols-2'>
           {tours.map((src) => (
-            <video
-              key={src}
-              src={src}
-              controls
-              preload='metadata'
-              className='w-full rounded bg-ink'
-            />
+            <TourPlayer key={src} src={src} title={tContent('tour360')} />
           ))}
         </div>
       ) : (
@@ -220,13 +214,43 @@ const TourAndFloorPlan = ({
   );
 };
 
+/** Video files play natively; anything else is a hosted 360° tour page and goes in a frame. */
+const isVideoFile = (url: string) =>
+  /\.(mp4|webm|mov|m4v|ogg)(\?|#|$)/i.test(url);
+
+const TourPlayer = ({ src, title }: { src: string; title: string }) =>
+  isVideoFile(src) ? (
+    <video
+      src={src}
+      controls
+      preload='metadata'
+      className='aspect-video w-full rounded bg-ink'
+    />
+  ) : (
+    <iframe
+      src={src}
+      title={title}
+      loading='lazy'
+      allow='fullscreen; xr-spatial-tracking; gyroscope; accelerometer'
+      allowFullScreen
+      className='aspect-video w-full rounded border-0 bg-ink'
+    />
+  );
+
 type ListingMediaSource = Pick<
   Villa,
   'additionals' | 'videos' | 'video360s' | 'floorPlans'
 >;
 
 /** Videos, 360° tours, room galleries and floor plans of one listing. */
-export const ListingMedia = ({ listing }: { listing: ListingMediaSource }) => {
+export const ListingMedia = ({
+  listing,
+  hideVideos = false,
+}: {
+  listing: ListingMediaSource;
+  /** The detail page shows the video in its top gallery already. */
+  hideVideos?: boolean;
+}) => {
   const t = useTranslations('rentDetail.gallery');
   const tContent = useTranslations('rentDetail.content');
 
@@ -253,7 +277,7 @@ export const ListingMedia = ({ listing }: { listing: ListingMediaSource }) => {
 
   return (
     <>
-      {videos.length > 0 && (
+      {!hideVideos && videos.length > 0 && (
         <Section title={tContent('videos')}>
           <div className='grid gap-4 md:grid-cols-2'>
             {videos.map((src) => (

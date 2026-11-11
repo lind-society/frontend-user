@@ -80,8 +80,8 @@ const ContentBlogDetail = ({ post }: { post: Blog }) => {
           <BreadcrumbLayout
             items={[
               { label: t('home'), href: '/' },
-              { label: t('blog'), href: '/blog' },
-              { label: post.title, href: `/blog/${post.id}`, isActive: true },
+              { label: 'Blog & Media', href: '/blog' },
+              { label: t('blog'), href: `/blog/${post.id}`, isActive: true },
             ]}
           />
 

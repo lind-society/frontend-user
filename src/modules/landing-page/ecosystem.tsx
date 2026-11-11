@@ -2,78 +2,96 @@ import { ArrowUpRight } from 'lucide-react';
 import React from 'react';
 import { useTranslations } from 'use-intl';
 
-import Image from '@/components/image';
 import BaseContainer from '@/components/layouts/container';
 import Link from '@/components/link';
-import Logo from '@/components/ui/logo';
 
+// Photos and script logos are the artwork from the "New Design" landing page.
 const BRANDS = [
-  { key: 'architecture', image: '/images/discover-1.png' },
-  // was discover-2.png (a bare temple shot with no people/event feel) — this
-  // ceremonial-procession photo actually reads as "event"
-  { key: 'wedding', image: '/images/discover-6.jpeg' },
-  // TODO: discover-3.jpeg is a food close-up, not fashion — swap once a real
-  // fashion/editorial photo is supplied, nothing in public/images fits yet
-  { key: 'fashion', image: '/images/discover-3.jpeg' },
-  { key: 'experiences', image: '/images/discover-4.jpeg' },
+  {
+    key: 'architecture',
+    href: '/about-us',
+    photo: '/images/ecosystem-architecture.jpg',
+    logo: '/images/ecosystem-logo-lind-way.jpg',
+    logoWidth: 'w-[88px]',
+    cta: 'viewMore',
+  },
+  {
+    key: 'wedding',
+    href: '/about-us',
+    photo: '/images/ecosystem-wedding.jpg',
+    logo: '/images/ecosystem-logo-linda-wiryani.jpg',
+    logoWidth: 'w-[124px]',
+    cta: 'viewMore',
+  },
+  {
+    key: 'fashion',
+    href: '/media',
+    photo: '/images/ecosystem-fashion.jpg',
+    logo: '/images/ecosystem-logo-lind-way.jpg',
+    logoWidth: 'w-[88px]',
+    cta: 'viewAllMedia',
+  },
 ] as const;
 
 /**
  * "A World of Beautiful Living" — the sand-toned band introducing the sister
- * brands in the LIND ecosystem.
+ * brands in the LIND ecosystem. Three cards sit flush to the right edge of the
+ * page, each with its own photo bleeding off the card's right side.
  */
 const Ecosystem = () => {
   const t = useTranslations('landingPage.ecosystem');
 
   return (
-    <section className='bg-sand py-14 md:py-16'>
-      <BaseContainer>
-        <div className='grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-10'>
-          <div className='flex flex-col gap-3 lg:col-span-4 lg:pr-8'>
-            <span className='eyebrow text-bronze-700'>{t('subtitle')}</span>
-            <h2 className='text-ink'>{t('title')}</h2>
-            <p className='text-sm leading-relaxed text-ink-soft'>
-              {t('description')}
-            </p>
-          </div>
-
-          <div className='grid grid-cols-2 gap-4 lg:col-span-8 lg:grid-cols-4'>
-            {BRANDS.map(({ key, image }) => (
-              <Link
-                key={key}
-                href='/about-us'
-                className='group relative aspect-[3/4] overflow-hidden'
-              >
-                <Image
-                  src={image}
-                  alt=''
-                  fill
-                  aria-hidden
-                  sizes='(max-width: 1024px) 45vw, 20vw'
-                  className='object-cover transition-transform duration-500 group-hover:scale-105'
-                />
-                <div
-                  aria-hidden
-                  className='absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-ink/10'
-                />
-
-                <div className='absolute inset-0 flex flex-col justify-between p-4 text-cream'>
-                  <Logo className='h-8 w-auto' />
-                  <div className='flex flex-col gap-1'>
-                    <span className='font-heading text-sm font-semibold leading-snug'>
-                      {t(`items.${key}.title`)}
-                    </span>
-                    <span className='inline-flex items-center gap-1 text-xs text-cream/80 transition-colors group-hover:text-cream'>
-                      {t('viewMore')}
-                      <ArrowUpRight size={13} />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
+    <section className='overflow-hidden bg-gradient-to-r from-[#EADCCB] to-[#E5D5C4]'>
+      <div className='flex flex-col lg:flex-row lg:items-stretch'>
+        <div className='flex flex-col justify-center gap-3 px-4 py-10 sm:px-6 lg:w-[40%] lg:py-0 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:pr-8'>
+          <span className='font-heading text-base text-[#6B5F54]'>
+            {t('subtitle')}
+          </span>
+          <h2 className='font-heading text-3xl font-medium leading-tight text-[#5C534B] md:text-[40px]'>
+            {t('title')}
+          </h2>
+          <p className='max-w-md text-sm leading-relaxed text-[#6B5F54] md:text-base'>
+            {t('description')}
+          </p>
         </div>
-      </BaseContainer>
+
+        <div className='grid grid-cols-1 sm:grid-cols-3 lg:w-[60%]'>
+          {BRANDS.map(({ key, href, photo, logo, logoWidth, cta }) => (
+            <Link
+              key={key}
+              href={href}
+              className='group relative flex h-[200px] overflow-hidden sm:h-[224px]'
+            >
+              <div className='relative z-10 flex w-[58%] flex-col justify-between py-6 pl-5 pr-2'>
+                <img
+                  src={logo}
+                  alt=''
+                  aria-hidden
+                  className={`${logoWidth} h-auto mix-blend-darken`}
+                />
+                <div className='flex flex-col gap-3'>
+                  <span className='font-heading text-[15px] leading-snug text-[#5C534B]'>
+                    {t(`items.${key}.title`)}
+                  </span>
+                  <span className='inline-flex items-center gap-1.5 text-xs text-bronze-600 transition-colors group-hover:text-bronze-700'>
+                    {t(cta)}
+                    <ArrowUpRight size={12} />
+                  </span>
+                </div>
+              </div>
+
+              <img
+                src={photo}
+                alt=''
+                aria-hidden
+                loading='lazy'
+                className='absolute inset-y-0 right-0 h-full w-[48%] object-cover transition-transform duration-500 group-hover:scale-105'
+              />
+            </Link>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

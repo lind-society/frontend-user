@@ -19,9 +19,15 @@ import { PriceRangeSlider } from '@/modules/rent/header/price-range';
 interface FiltersProps {
   onApply?: (filterData: any) => void;
   onClear?: () => void;
+  /** `solid` is the bronze button used in the results toolbar; the default sits on the dark search panel. */
+  triggerStyle?: 'light' | 'solid';
 }
 
-export function FiltersDialog({ onApply, onClear }: FiltersProps) {
+export function FiltersDialog({
+  onApply,
+  onClear,
+  triggerStyle = 'light',
+}: FiltersProps) {
   const t = useTranslations('filters');
   const [open, setOpen] = useState(false);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1500000]);
@@ -34,11 +40,10 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
   // Collections data with translations
   const collectionsData = [
     { key: 'beachfront', label: t('collectionsOptions.beachfront') },
-    { key: 'mountainView', label: t('collectionsOptions.mountainView') },
-    { key: 'historic', label: t('collectionsOptions.historic') },
-    { key: 'modern', label: t('collectionsOptions.modern') },
-    { key: 'luxury', label: t('collectionsOptions.luxury') },
-    { key: 'budgetFriendly', label: t('collectionsOptions.budgetFriendly') },
+    { key: 'ecoConscious', label: t('collectionsOptions.ecoConscious') },
+    { key: 'honeymoon', label: t('collectionsOptions.honeymoon') },
+    { key: 'seaView', label: t('collectionsOptions.seaView') },
+    { key: 'weddingEvents', label: t('collectionsOptions.weddingEvents') },
   ];
 
   // Freebies data with translations
@@ -130,13 +135,17 @@ export function FiltersDialog({ onApply, onClear }: FiltersProps) {
       <DialogTrigger asChild>
         <Button
           variant='ghost'
-          className='flex items-center gap-2 text-cream hover:text-bronze-200'
+          className={
+            triggerStyle === 'solid'
+              ? 'flex items-center gap-2 bg-bronze-600 text-cream hover:bg-bronze-700'
+              : 'flex items-center gap-2 text-cream hover:text-bronze-200'
+          }
         >
           <SlidersHorizontal size={18} />
           <span>{t('title')}</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className='max-w-[90vw]  p-0 h-[80vh] flex flex-col max-h-[80vh]'>
+      <DialogContent className='w-[92vw] max-w-[660px] p-0 h-[85vh] flex flex-col max-h-[85vh]'>
         <div className='flex px-4 md:px-8 py-4 md:py-5 justify-between border-b sticky top-0 bg-cream-light z-10'>
           <DialogTitle>
             <div className='flex gap-2 items-center'>

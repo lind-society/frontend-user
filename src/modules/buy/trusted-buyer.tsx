@@ -35,15 +35,15 @@ const TrustedBuyerSection = () => {
   ];
 
   return (
-    <div className='bg-cream-light py-10 md:py-12 lg:py-[64px]'>
+    <div className='bg-sand py-10 md:py-12 lg:py-[56px]'>
       <BaseContainer>
         <div className='flex flex-col md:flex-row md:justify-between gap-8 md:gap-10 md:items-center'>
           {/* Left section with title and description */}
           <div className='w-full md:max-w-[400px] flex flex-col gap-2 md:gap-4'>
-            <h2 className='text-xl md:text-2xl lg:text-3xl font-bold text-primary'>
+            <h2 className='font-heading text-xl font-semibold text-ink md:text-2xl lg:text-3xl'>
               {t('title')}
             </h2>
-            <p className='text-text text-base md:text-lg lg:text-[22px]'>
+            <p className='text-base text-ink-soft md:text-lg'>
               {t('subtitle')}
             </p>
           </div>

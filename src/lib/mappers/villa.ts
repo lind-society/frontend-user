@@ -21,6 +21,8 @@ export interface VillaCardModel {
   /** Absent for properties — the backend exposes no rating on that entity. */
   rating?: number;
   images: string[];
+  /** Property cards only: "Leasehold" / "Freehold". */
+  ownership?: string;
   isFavorite: boolean;
 }
 

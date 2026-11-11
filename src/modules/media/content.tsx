@@ -105,8 +105,9 @@ const ContentMedia = () => {
           <BreadcrumbLayout
             items={[
               { label: 'Home', href: '/' },
+              { label: 'Blog & Media', href: '/blog' },
               {
-                label: 'Media',
+                label: 'Media Gallery',
                 href: '/media',
                 isActive: true,
               },

@@ -194,6 +194,12 @@ export const VillaCard: React.FC<VillaCardProps> = ({
             )}
           </div>
 
+          {villa.ownership && (
+            <span className='rounded bg-bronze-600 px-4 py-1 text-xs font-medium text-cream'>
+              {villa.ownership}
+            </span>
+          )}
+
           {villa.rating !== undefined && (
             <div className='flex items-center gap-1.5'>
               <Star className='fill-bronze-600 text-bronze-600' size={16} />

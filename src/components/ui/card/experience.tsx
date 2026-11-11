@@ -19,7 +19,7 @@ export const ExperienceCard: React.FC<ExperienceCardProps> = ({
   href = '/tourist-activity',
 }) => (
   <Link href={href} className='group flex flex-col gap-3'>
-    <div className='relative aspect-[4/5] w-full overflow-hidden'>
+    <div className='relative aspect-square w-full overflow-hidden'>
       <Image
         src={image}
         alt={title}

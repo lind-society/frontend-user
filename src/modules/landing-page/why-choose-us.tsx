@@ -19,7 +19,7 @@ const WhyChooseUs = () => {
   ] as const;
 
   return (
-    <section className='bg-ink py-14 md:py-16'>
+    <section className='bg-ink py-10'>
       <BaseContainer>
         <div className='flex flex-col items-center gap-10 md:gap-12'>
           <h2 className='text-center uppercase tracking-[0.14em] text-cream'>

@@ -1,76 +1,36 @@
 import React from 'react';
 
 import BaseContainer from '@/components/layouts/container';
-import { Separator } from '@/components/ui/separator';
 
-// Create a feature item component for reusability
-interface FeatureProps {
-  title: string;
-  description: string;
-}
+const STATS = [
+  { value: '90+', label: 'Properties Managed' },
+  { value: '10k+', label: 'Properties Sold' },
+  { value: '250+', label: 'Distribution Partners Worldwide' },
+];
 
-const FeatureItem = ({ title, description }: FeatureProps) => (
-  <div className='flex flex-col items-center gap-3 px-4 md:px-6 text-center'>
-    <h4 className=' text-bg font-bold'>{title}</h4>
-    <p className='text-sm md:text-base text-bg text-center max-w-[250px] line-clamp-1'>
-      {description}
-    </p>
-  </div>
-);
-
+/** "Join Us at LIND Society" — dark band with three figures split by hairlines. */
 const JoinUsManageProperty = () => {
-  const features = [
-    {
-      title: '90+',
-      description: 'Properties Managed',
-    },
-    {
-      title: '10k+',
-      description: 'Properties Sold',
-    },
-    {
-      title: '250+',
-      description: 'Distribution Partners Worldwide',
-    },
-  ];
-
   return (
-    <div className='bg-primary py-8 md:py-12 lg:py-[48px]'>
+    <div className='bg-ink py-12 md:py-14'>
       <BaseContainer>
-        <div className='flex flex-col items-center gap-6 md:gap-8'>
-          <h3 className='text-tertiary text-2xl md:text-3xl font-semibold text-center'>
+        <div className='flex flex-col items-center gap-10'>
+          <h3 className='text-center font-heading text-2xl uppercase tracking-[0.12em] text-bronze-300 md:text-3xl'>
             Join Us at LIND Society
           </h3>
 
-          {/* Mobile view: stacked items */}
-          <div className='flex flex-col gap-8 md:hidden w-full'>
-            {features.map((feature, index) => (
-              <React.Fragment key={index}>
-                <FeatureItem
-                  title={feature.title}
-                  description={feature.description}
-                />
-              </React.Fragment>
-            ))}
-          </div>
-
-          {/* Tablet and desktop view: horizontal with separators */}
-          <div className='hidden md:flex w-full justify-between items-stretch'>
-            {features.map((feature, index) => (
-              <React.Fragment key={index}>
-                <FeatureItem
-                  title={feature.title}
-                  description={feature.description}
-                />
-                {index < features.length - 1 && (
-                  <div className='flex items-center'>
-                    <Separator
-                      orientation='vertical'
-                      className='h-full  w-[2px]'
-                    />
-                  </div>
-                )}
-              </React.Fragment>
+          <div className='grid w-full grid-cols-1 divide-y divide-cream/15 md:grid-cols-3 md:divide-x md:divide-y-0'>
+            {STATS.map(({ value, label }) => (
+              <div
+                key={label}
+                className='flex flex-col items-center gap-3 px-4 py-6 text-center md:py-2'
+              >
+                <span className='font-heading text-4xl text-bronze-200 md:text-5xl'>
+                  {value}
+                </span>
+                <span className='text-sm text-cream/80 md:text-base'>
+                  {label}
+                </span>
+              </div>
             ))}
           </div>
         </div>

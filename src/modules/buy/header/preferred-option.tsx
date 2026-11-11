@@ -9,7 +9,7 @@ import { useTranslations } from 'use-intl';
 
 import { useRouter } from '@/lib/navigation';
 
-import { Button } from '@/components/ui/button';
+import { AmenityChip } from '@/components/ui/amenity-chip';
 
 import { FiltersDialog } from '@/modules/rent/header/filter-dialog';
 import { OptionCarousel } from '@/modules/rent/header/option-carousel';
@@ -35,32 +35,32 @@ export function PreferredOptionsBuyPage({
     {
       id: 'instant-income',
       label: t('options.instantIncome'),
-      icon: <FaSearchDollar size={20} className='text-primary' />,
+      icon: <FaSearchDollar size={20} />,
     },
     {
       id: 'rental-ready',
       label: t('options.rentalReady'),
-      icon: <FaHome size={20} className='text-primary' />,
+      icon: <FaHome size={20} />,
     },
     {
       id: 'ocean-view',
       label: t('options.oceanView'),
-      icon: <IoWater size={20} className='text-primary' />,
+      icon: <IoWater size={20} />,
     },
     {
       id: 'high-end-luxury',
       label: t('options.highEndLuxury'),
-      icon: <MdOutlineVilla size={20} className='text-primary' />,
+      icon: <MdOutlineVilla size={20} />,
     },
     {
       id: 'jungle-view',
       label: t('options.jungleView'),
-      icon: <GiPalmTree size={20} className='text-primary' />,
+      icon: <GiPalmTree size={20} />,
     },
     {
       id: 'land-plots',
       label: t('options.landPlots'),
-      icon: <GiIsland size={20} className='text-primary' />,
+      icon: <GiIsland size={20} />,
     },
   ];
 
@@ -90,9 +90,9 @@ export function PreferredOptionsBuyPage({
   };
 
   return (
-    <div className='flex flex-col gap-4'>
-      <div className='flex justify-between items-center'>
-        <span className='text-lg md:text-[22px] text-primary font-semibold'>
+    <div className='flex flex-col gap-3'>
+      <div className='flex items-center justify-between gap-4'>
+        <span className='font-heading text-xl font-semibold text-bronze'>
           {t('title')}
         </span>
         <FiltersDialog onApply={handleFilterApply} />
@@ -100,17 +100,13 @@ export function PreferredOptionsBuyPage({
 
       <OptionCarousel>
         {preferredOptions.map((option) => (
-          <Button
+          <AmenityChip
             key={option.id}
-            variant='outline'
-            className='flex items-center gap-2 min-w-max'
+            icon={option.icon}
             onClick={() => handleOptionClick(option.id)}
           >
-            <span className='text-primary'>{option.icon}</span>
-            <span className='text-xs sm:text-sm font-medium text-ink-muted'>
-              {option.label}
-            </span>
-          </Button>
+            {option.label}
+          </AmenityChip>
         ))}
       </OptionCarousel>
     </div>

@@ -35,7 +35,7 @@ const HeaderContactUs = () => {
   }, [api]);
 
   return (
-    <section className='relative isolate flex min-h-[620px] items-center overflow-hidden pt-[72px] lg:min-h-[680px] lg:pt-[92px]'>
+    <section className='relative isolate flex min-h-[520px] items-center overflow-hidden pt-[72px] lg:min-h-[585px] lg:pt-[92px]'>
       <Carousel
         setApi={setApi}
         className='absolute inset-0 -z-10 h-full w-full'
@@ -43,7 +43,7 @@ const HeaderContactUs = () => {
       >
         <CarouselContent className='h-full'>
           {CAROUSEL_IMAGES.map((image, index) => (
-            <CarouselItem key={index} className='relative h-[680px]'>
+            <CarouselItem key={index} className='relative h-[585px]'>
               <Image
                 src={image}
                 alt=''

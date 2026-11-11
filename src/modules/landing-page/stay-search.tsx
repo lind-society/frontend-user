@@ -38,15 +38,6 @@ const formatDate = (date: Date | undefined) =>
       })
     : '—';
 
-/** "19 Aug 2026 — 24 Aug 2026", or the placeholder while nothing is picked. */
-const formatRange = (range: DateRange, placeholder: string) => {
-  if (!range.from) return placeholder;
-
-  return `${formatDate(range.from)} — ${
-    range.to ? formatDate(range.to) : placeholder
-  }`;
-};
-
 const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
   const [location, setLocation] = useState('Bali');
   const [dateRange, setDateRange] = useState<{
@@ -111,18 +102,26 @@ const StaySearch: React.FC<StaySearchProps> = ({ onSearch }) => {
           </PopoverContent>
         </Popover>
 
-        {/* Stay dates — one field for the whole range, edited in one panel */}
+        {/* Check in / Check out: two fields (as designed) that edit one range in one panel */}
         <EnhancedDateRangePicker
           onRangeChange={handleDateRangeChange}
           initialRange={dateRange}
           initialDurationType={durationType}
           renderTrigger={({ open }) => (
-            <SearchField
-              icon={Calendar}
-              label={t('dates.label')}
-              value={formatRange(dateRange, t('dates.placeholder'))}
-              onClick={open}
-            />
+            <>
+              <SearchField
+                icon={Calendar}
+                label={t('dates.checkIn')}
+                value={formatDate(dateRange.from)}
+                onClick={open}
+              />
+              <SearchField
+                icon={Calendar}
+                label={t('dates.checkOut')}
+                value={formatDate(dateRange.to)}
+                onClick={open}
+              />
+            </>
           )}
         />
 

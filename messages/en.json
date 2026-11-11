@@ -163,7 +163,9 @@
       },
       "dates": {
         "label": "Stay dates",
-        "placeholder": "Select date"
+        "placeholder": "Select date",
+        "checkIn": "Check in",
+        "checkOut": "Check out"
       }
     },
     "exploreIconic": {
@@ -286,7 +288,8 @@
         "experiences": {
           "title": "Curated Experiences & Celebrations"
         }
-      }
+      },
+      "viewAllMedia": "View All Media"
     }
   },
   "aboutUs": {
@@ -325,7 +328,7 @@
       }
     },
     "content3": {
-      "title": "Our Services",
+      "title": "Our Service",
       "services": {
         "booking": {
           "title": "Booking Home & Villas",
@@ -333,17 +336,23 @@
           "linkText": "Book Your Dream Stay"
         },
         "buying": {
-          "title": "Buying Property",
-          "description": "Find your dream property with our full support. We not only help you find a property that suits your needs, but also assist in the negotiation and transaction process to completion.",
-          "linkText": "Find Your Perfect Property"
+          "title": "Buy Home & Villas",
+          "description": "We believe every villa holds a unique story, waiting for its next chapter. LIND Society is designed to connect extraordinary homes with those who seek them, ensuring a seamless journey from owner to the next.",
+          "linkText": "Find Your Perfect Home"
         },
         "management": {
           "title": "Property Management",
-          "description": "Maximize the potential of your property with our professional management services. From marketing to maintenance, we handle everything so you can enjoy passive income without the hassle.",
-          "linkText": "Learn More About Our Services"
+          "description": "We offer full management of your property, from daily management to marketing and rental price optimization, ensuring maximum income and optimal property maintenance.",
+          "linkText": "Start Managing Your Property"
         }
       },
       "imageAlt": "Our Service"
+    },
+    "journal": {
+      "eyebrow": "Discover more",
+      "title": "Inspiration for Every Journey",
+      "button": "Visit Journal",
+      "description": "Explore our journal for travel guides, stories, and insider tips."
     }
   },
   "contactUs": {
@@ -369,7 +378,7 @@
       "fullName": "Full Name",
       "email": "Email",
       "phone": "Phone Number",
-      "inquiryType": "Inquiry Type",
+      "inquiryType": "Context",
       "message": "Message",
       "submit": "Send Your Message",
       "successMessage": "Message sent successfully! We will contact you soon.",
@@ -582,8 +591,8 @@
   "buy": {
     "pageTitle": "Buy Properties",
     "header": {
-      "title": "Own Your Dream Villa with LIND Society",
-      "subtitle": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, numquam?",
+      "title": "Own Your Dream Villa with LIND Society.",
+      "subtitle": "Handpicked villas, unique experiences, and timeless moments in Bali and beyond.",
       "search": {
         "location": "Location",
         "ownership": "Ownership",
@@ -746,6 +755,22 @@
         "name": "Traditional Balinese Massage",
         "description": "Experience authentic Balinese healing through a full-body massage using traditional techniques passed down through generations, with natural aromatic oils."
       }
+    },
+    "list": {
+      "title": "Unique Experiences",
+      "subtitle": "Curated moments that connect you to the beauty, culture, and soul of Bali.",
+      "all": "All Experiences",
+      "sortBy": "Sort by",
+      "recommended": "Recommended",
+      "priceLow": "Price: low to high",
+      "priceHigh": "Price: high to low",
+      "rating": "Top rated",
+      "from": "From",
+      "perDay": "per day",
+      "emptyTitle": "No experiences yet",
+      "emptyDescription": "Check back soon, new experiences are added regularly.",
+      "errorTitle": "We could not load the experiences",
+      "errorDescription": "Please try again in a moment."
     }
   },
   "manageProperty": {
@@ -810,11 +835,10 @@
     "showMore": "Show more",
     "collectionsOptions": {
       "beachfront": "Beachfront",
-      "mountainView": "Mountain View",
-      "historic": "Historic",
-      "modern": "Modern",
-      "luxury": "Luxury",
-      "budgetFriendly": "Budget-friendly"
+      "ecoConscious": "Eco-conscious",
+      "honeymoon": "Honeymoon",
+      "seaView": "Sea-view",
+      "weddingEvents": "Wedding & events"
     },
     "freebiesOptions": {
       "freeBreakfast": "Free breakfast",
@@ -959,7 +983,8 @@
   "rentDetail": {
     "header": {
       "imageAlt": "Villa view",
-      "slideIndicator": "of"
+      "slideIndicator": "of",
+      "viewAllPhotos": "View All Photos"
     },
     "content": {
       "breadcrumbHome": "Home",
@@ -1060,7 +1085,8 @@
       "mapUnavailable": "The map preview isn't available for this villa.",
       "videos": "Video tour",
       "tour360": "360° tour",
-      "floorPlans": "Floor plans"
+      "floorPlans": "Floor plans",
+      "bedroomsLabel": "Bedrooms"
     },
     "inquiryForm": {
       "title": "Send Inquiry",
@@ -1133,6 +1159,31 @@
       "picture": "picture",
       "viewMore": "View More",
       "allPhotosOf": "All photos of"
+    },
+    "tabs": {
+      "highlights": "Highlights",
+      "amenities": "Amenities",
+      "rooms": "Rooms",
+      "location": "Location",
+      "reviews": "Reviews",
+      "houseRules": "House Rules",
+      "policies": "Policies",
+      "aboutVilla": "About the Villa",
+      "noHighlights": "The owner has not added a description yet.",
+      "whatsIncluded": "What's Included",
+      "goodToKnow": "Good to Know",
+      "amenitiesTitle": "Amenities provided by LIND Society",
+      "checkInAfter": "Check in after",
+      "checkOutUntil": "Check out until"
+    },
+    "bookingCard": {
+      "startFrom": "Start from",
+      "night": "night",
+      "checkIn": "Check In",
+      "checkOut": "Check Out",
+      "guests": "Guests",
+      "checkAvailability": "Check availability",
+      "bestRate": "Best Rate Guarantee"
     }
   },
   "buyDetail": {
@@ -1345,7 +1396,33 @@
       "backToHome": "Back to Home",
       "viewMyBookings": "View My Bookings"
     },
-    "return": "Return to Activities"
+    "return": "Return to Activities",
+    "view": {
+      "home": "Home",
+      "experiences": "Experiences",
+      "ticketsLeft": "Tickets Left",
+      "tabs": {
+        "highlights": "Highlights",
+        "ticket": "Ticket",
+        "schedule": "Open Schedule",
+        "location": "Location"
+      },
+      "descriptions": "Descriptions",
+      "noDescription": "No description yet.",
+      "price": "Price",
+      "dailyQuota": "Daily quota",
+      "perDay": "tickets per day",
+      "opening": "Opens at",
+      "closing": "Closes at",
+      "availability": "Availability",
+      "open": "Open every day",
+      "limited": "Limited dates",
+      "mapUnavailable": "The map is not available for this activity.",
+      "openMap": "Open in Google Maps",
+      "startFrom": "Start from",
+      "date": "Date",
+      "checkAvailability": "Check availability"
+    }
   },
   "SearchSuggestions": {
     "popularSearches": "Popular Searches",
@@ -1422,5 +1499,52 @@
     "browseBuy": "Browse properties",
     "unavailableTitle": "These listings are no longer available",
     "unavailableDescription": "The villas and properties you saved have been removed."
+  },
+  "managePropertyFlow": {
+    "concierge": {
+      "title": "Have a Question?",
+      "subtitle": "Contact our 24/7 concierge team:",
+      "team": "Concierge team",
+      "service": "Customer Service for Bali",
+      "noticeTitle": "Security Notice",
+      "notice": "For your security, our official WhatsApp support will only contact you from the number above. If you receive messages from any other number, please ignore them and report to us immediately. Beware of scams!"
+    },
+    "inquiry": {
+      "fillOut": "Fill out the form",
+      "tellUs": "Tell us what you would like us to help you?",
+      "defaultMessage": "Hello, LIND Society! I'm interested with this {name} and let's talk",
+      "whatsapp": "Send to WhatsApp",
+      "email": "Send to Email",
+      "emailSubject": "Property Management: {name}",
+      "choose": "Choose Package",
+      "chooseShort": "Choose"
+    },
+    "confirmed": {
+      "thankYou": "Thank You!",
+      "title": "Your Package Has Been Confirmed.",
+      "received": "We have received your details. Our team will contact you immediately for next steps.",
+      "whatYoullGet": "What you'll get",
+      "fallback": "Our team has your request and will be in touch about your package.",
+      "nextStep": "Next Step",
+      "nextStepText": "Our concierge will be in touch shortly to finalize your booking. For urgent assistance, contact us directly.",
+      "back": "Back to Property Management"
+    }
+  },
+  "review": {
+    "title": "Tell Us About Your Stay",
+    "quote": "“Thank you for staying with us! We would love to hear about your experience. Please take a moment to rate and review your stay. Your feedback helps us improve and ensures we provide the best service possible for future guests. We appreciate your time and input!”",
+    "ratings": "Give us your ratings",
+    "fullName": "Full name",
+    "fullNamePlaceholder": "Enter your full name",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "message": "Message",
+    "messagePlaceholder": "Share your stories while staying with us",
+    "submit": "Submit",
+    "sending": "Sending…",
+    "thanks": "Thank you!",
+    "sent": "Your review has been sent to our team.",
+    "chooseRating": "Please choose a rating.",
+    "error": "Could not send your review. Please try again."
   }
 }

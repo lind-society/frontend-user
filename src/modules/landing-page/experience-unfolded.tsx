@@ -25,7 +25,7 @@ const ExperienceUnfolded = () => {
       {/* Darkened on small screens so the panel text stays readable */}
       <div aria-hidden className='absolute inset-0 -z-10 bg-ink/55 lg:hidden' />
 
-      <div className='mx-auto flex min-h-[420px] w-full max-w-[1440px] justify-end px-4 py-16 sm:px-6 lg:px-0 lg:py-0'>
+      <div className='mx-auto flex min-h-[416px] w-full max-w-[1440px] justify-end px-4 py-16 sm:px-6 lg:px-0 lg:py-0'>
         <div className='flex w-full flex-col justify-center gap-5 bg-ink/85 p-8 lg:max-w-[40%] lg:p-14'>
           <span className='eyebrow text-bronze-200'>{t('eyebrow')}</span>
           <h2 className='whitespace-pre-line text-cream'>{t('title')}</h2>

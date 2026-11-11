@@ -1,6 +1,5 @@
 import React from 'react';
 
-import ContactUsManageProperty from '@/modules/manage-property/contact-us';
 import Content1ManageProperty from '@/modules/manage-property/content1';
 import Content2ManageProperty from '@/modules/manage-property/content2';
 import HeaderManageProperty from '@/modules/manage-property/header';
@@ -17,7 +16,6 @@ const ManagePropertyModules = () => {
       <Content2ManageProperty />
       <PackageManageProperty />
       <FaQRentPage />
-      <ContactUsManageProperty />
     </div>
   );
 };

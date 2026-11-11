@@ -51,6 +51,24 @@ const LinkProblem = ({
   </Shell>
 );
 
+/** Paid activity ticket: the short confirmation from the design. */
+const ActivityPaid = ({ name }: { name: string }) => (
+  <Shell>
+    <BaseContainer>
+      <div className='mx-auto flex max-w-xl flex-col items-center gap-5 rounded bg-cream-light px-6 py-10 text-center shadow-xs'>
+        <p className='text-sm text-ink'>{name} Ticket Registration</p>
+        <h2 className='font-heading text-xl text-ink md:text-2xl'>
+          Payment successful! Your ticket has been sent to your email. Please
+          check your inbox.
+        </h2>
+        <Button variant='primary' className='w-full' asChild>
+          <Link href='/tourist-activity'>Return to Activities</Link>
+        </Button>
+      </div>
+    </BaseContainer>
+  </Shell>
+);
+
 const BookingReservation = ({ token }: { token: string }) => {
   const { data, error, isLoading } = usePublicBooking(token);
   const booking = data?.data ?? null;
@@ -95,6 +113,10 @@ const BookingReservation = ({ token }: { token: string }) => {
   }
 
   const view = toReservationBookingView(booking);
+
+  if (view.isActivity && view.step === 'payment-details') {
+    return <ActivityPaid name={view.propertyName} />;
+  }
 
   return (
     <Shell>

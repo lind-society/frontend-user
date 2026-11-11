@@ -66,6 +66,8 @@ export interface Villa {
 
   // location
   highlight: string;
+  whatsIncluded?: string[] | null;
+  goodToKnow?: string[] | null;
   address: string;
   country: string;
   state: string;

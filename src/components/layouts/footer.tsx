@@ -58,8 +58,8 @@ const Footer = () => {
         <div aria-hidden className='absolute inset-0 bg-ink/80' />
 
         <BaseContainer>
-          <div className='relative flex flex-col items-start gap-8 py-14 lg:flex-row lg:items-center lg:justify-between lg:py-20'>
-            <h2 className='max-w-xl whitespace-pre-line text-cream'>
+          <div className='relative flex flex-col items-start gap-8 py-10 lg:flex-row lg:items-center lg:justify-between lg:py-[77px]'>
+            <h2 className='max-w-xl whitespace-pre-line text-2xl text-cream md:text-[28px] md:leading-snug'>
               {t('newsletter.title')}
             </h2>
 
@@ -88,9 +88,9 @@ const Footer = () => {
       <div className='bg-cream-warm text-ink'>
         <BaseContainer>
           <>
-            <div className='grid gap-10 py-14 lg:grid-cols-12 lg:gap-8 lg:py-16'>
+            <div className='grid gap-10 py-10 lg:grid-cols-12 lg:gap-8 lg:py-8'>
               {/* Brand */}
-              <div className='flex flex-col gap-6 lg:col-span-4 lg:pr-10'>
+              <div className='flex flex-col gap-5 lg:col-span-3 lg:pr-6'>
                 <Link
                   href='/'
                   aria-label='LIND Society'
@@ -124,7 +124,7 @@ const Footer = () => {
               </div>
 
               {/* Link groups */}
-              <div className='grid gap-8 sm:grid-cols-3 lg:col-span-5 lg:border-x lg:border-bronze/25 lg:px-8'>
+              <div className='grid gap-8 sm:grid-cols-3 lg:col-span-6 lg:border-x lg:border-bronze/25 lg:px-8'>
                 <FooterColumn title={t('explore.title')}>
                   <FooterLink href='/rent'>{t('explore.stays')}</FooterLink>
                   <FooterLink href='/buy'>{t('explore.properties')}</FooterLink>
@@ -171,7 +171,7 @@ const Footer = () => {
               </div>
 
               {/* Contact */}
-              <div className='flex flex-col gap-3.5 lg:col-span-3 lg:pl-4'>
+              <div className='flex flex-col gap-3 lg:col-span-3 lg:pl-4'>
                 <span className='font-heading text-lg font-semibold uppercase tracking-[0.06em] text-bronze-600'>
                   {t('getInTouch.title')}
                 </span>
@@ -205,7 +205,7 @@ const Footer = () => {
               </div>
             </div>
 
-            <p className='whitespace-pre-line border-t border-bronze/20 py-6 text-xs text-ink-muted'>
+            <p className='whitespace-pre-line border-t border-bronze/20 py-4 text-xs text-ink-muted'>
               {t('copyright')}
             </p>
           </>

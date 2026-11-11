@@ -17,7 +17,7 @@ const DiscoverUnforgottableLandingPage = () => {
   const t = useTranslations('landingPage.discover');
 
   return (
-    <section className='py-14 md:py-20'>
+    <section className='py-12 md:py-14'>
       <BaseContainer>
         <div className='flex flex-col gap-10'>
           <TitleSection

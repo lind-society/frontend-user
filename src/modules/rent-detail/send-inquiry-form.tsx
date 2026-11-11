@@ -42,12 +42,22 @@ interface SendInquiryFormProps {
   villa: Villa;
   bedrooms: number;
   nightlyRate: number | null;
+  /** Values chosen in the booking card, so the guest does not pick them twice. */
+  initialCheckIn?: Date;
+  initialCheckOut?: Date;
+  initialGuests?: string;
+  /** Rendered inside a dialog: no sticky positioning. */
+  embedded?: boolean;
 }
 
 const SendInquiryForm: React.FC<SendInquiryFormProps> = ({
   villa,
   bedrooms,
   nightlyRate,
+  initialCheckIn,
+  initialCheckOut,
+  initialGuests,
+  embedded = false,
 }) => {
   const t = useTranslations('rentDetail.inquiryForm');
   const tContent = useTranslations('rentDetail.content');
@@ -66,15 +76,17 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({
   );
 
   const [stayType, setStayType] = useState<StayType>(stayTypes[0] ?? 'daily');
-  const [checkInDate, setCheckInDate] = useState<Date | undefined>(today);
+  const [checkInDate, setCheckInDate] = useState<Date | undefined>(
+    initialCheckIn ?? today
+  );
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(
-    new Date(today.getTime() + 4 * 24 * 3600 * 1000)
+    initialCheckOut ?? new Date(today.getTime() + 4 * 24 * 3600 * 1000)
   );
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [countryCode, setCountryCode] = useState(countryCodes[0].code);
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [guestCount, setGuestCount] = useState('2');
+  const [guestCount, setGuestCount] = useState(initialGuests ?? '2');
   const [message, setMessage] = useState('');
 
   const { mutate: bookVilla, isPending: isBooking } = useBookVilla(villa.id);
@@ -217,7 +229,11 @@ const SendInquiryForm: React.FC<SendInquiryFormProps> = ({
   };
 
   return (
-    <div className='2xl:sticky 2xl:top-4 border shadow-xs bg-cream-light rounded overflow-hidden'>
+    <div
+      className={`border shadow-xs bg-cream-light rounded overflow-hidden ${
+        embedded ? '' : '2xl:sticky 2xl:top-4'
+      }`}
+    >
       <div className='bg-primary text-cream flex flex-col gap-1 px-6 py-3'>
         <span>{t('sendInquiry')} or</span>
         <span className='text-2xl font-semibold'>{tContent('bookNow')}</span>

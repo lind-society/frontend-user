@@ -14,6 +14,8 @@ import EarlyBirdModules from '@/modules/early-bird';
 import WishlistModules from '@/modules/wishlist';
 import LandingPageModules from '@/modules/landing-page';
 import ManagePropertyModules from '@/modules/manage-property';
+import PackageConfirmed from '@/modules/manage-property/confirmed';
+import ReviewModules from '@/modules/review';
 import MediaModules from '@/modules/media';
 import RentModules from '@/modules/rent';
 import RentDetailModules from '@/modules/rent-detail';
@@ -106,6 +108,14 @@ export const router = createBrowserRouter([
               {
                 path: 'manage-property',
                 element: page('Manage Property', <ManagePropertyModules />),
+              },
+              {
+                path: 'manage-property/confirmed',
+                element: page('Package confirmed', <PackageConfirmed />),
+              },
+              {
+                path: 'review',
+                element: page('Your review', <ReviewModules />),
               },
               { path: 'media', element: page('Media', <MediaModules />) },
               { path: 'rent', element: page('Rent', <RentModules />) },

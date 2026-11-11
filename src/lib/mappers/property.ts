@@ -29,6 +29,10 @@ export const toPropertyCard = (property: ApiProperty): VillaCardModel => {
     description: property.highlight,
     bedrooms,
     images: property.photos ?? [],
+    ownership: property.ownershipType
+      ? property.ownershipType.charAt(0).toUpperCase() +
+        property.ownershipType.slice(1)
+      : undefined,
     isFavorite: Boolean(property.isFavorite),
   };
 };

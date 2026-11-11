@@ -35,7 +35,7 @@ const MomentsLandingPage = () => {
             linkLabel={t('viewAllMedia')}
           />
 
-          <div className='grid auto-rows-[150px] grid-cols-2 gap-4 sm:grid-cols-3 md:auto-rows-[190px] lg:grid-cols-5 lg:gap-5'>
+          <div className='grid auto-rows-[150px] grid-cols-2 gap-4 sm:grid-cols-3 md:auto-rows-[205px] lg:grid-cols-5 lg:gap-5'>
             {MEDIA_ITEMS.map((item) => (
               <div
                 key={item.id}

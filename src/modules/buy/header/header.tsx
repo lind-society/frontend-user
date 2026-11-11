@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { GrCertificate } from 'react-icons/gr';
@@ -24,7 +23,12 @@ import {
   formatPrice,
   PriceRangeSelector,
 } from '@/components/ui/price-range-selector';
-import { Separator } from '@/components/ui/separator';
+import {
+  SearchField,
+  SearchFieldRow,
+  SearchPanel,
+  SearchStepper,
+} from '@/components/ui/search-panel';
 
 import { PreferredOptionsBuyPage } from '@/modules/buy/header/preferred-option';
 
@@ -111,56 +115,51 @@ const HeaderBuyPage = () => {
   };
 
   return (
-    <div className='py-6 md:pb-10 md:pt-[68px] relative'>
+    <section className='relative isolate flex min-h-[560px] flex-col justify-end overflow-hidden pb-10 pt-[72px] lg:min-h-[600px] lg:pt-[92px]'>
       <Image
         src='/images/header-buy.jpeg'
-        width={0}
-        height={0}
+        alt=''
+        fill
+        priority
+        aria-hidden
         sizes='100vw'
-        className='w-full h-full object-cover absolute top-0 left-0 max-h-[450px] bg-[#0000004D]'
-        alt='header landing page'
+        className='-z-10 object-cover'
       />
+      <div
+        aria-hidden
+        className='absolute inset-0 -z-10 bg-gradient-to-b from-ink/70 via-ink/30 to-ink/60'
+      />
+
       <BaseContainer>
-        <div className='flex flex-col gap-6 md:gap-[64px] justify-center relative'>
-          {/* Responsive header content */}
-          <div className='flex flex-col lg:flex-row lg:justify-between lg:items-center'>
-            <div className='flex flex-col gap-4 md:gap-6 max-w-full lg:max-w-[867px] mb-8 lg:mb-0'>
-              <h1 className='text-cream h0 font-bold'>{t('title')}</h1>
-              <div className='px-3 md:px-5 border-white border-solid border-l-2 text-cream text-lg md:text-[22px]'>
-                {t('subtitle')}
-              </div>
-            </div>
+        <div className='flex flex-col gap-6'>
+          <div className='flex max-w-3xl flex-col gap-5 pt-6'>
+            <h1 className='text-cream'>{t('title')}</h1>
+            <p className='border-l-2 border-cream pl-5 text-base leading-relaxed text-cream/90 md:text-lg'>
+              {t('subtitle')}
+            </p>
           </div>
 
-          {/* Search Box */}
-          <div className='bg-cream-light rounded px-4 md:px-8 py-4 md:py-6 flex flex-col gap-3 md:gap-5 shadow-xs'>
-            {/* Search inputs */}
-            <div className='flex flex-col md:flex-row md:flex-wrap md:justify-between gap-4 md:gap-6'>
+          <SearchPanel>
+            <SearchFieldRow>
               {/* Location */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
-                    <FaLocationDot size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.location')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-ink-muted'>{location}</span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={FaLocationDot}
+                    label={t('search.location')}
+                    value={location}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-56 p-2'>
                   <div className='flex flex-col'>
                     {locations.map((loc) => (
                       <button
                         key={loc}
-                        className={`py-2 px-3 text-left rounded ${
+                        type='button'
+                        className={`rounded px-3 py-2 text-left transition-colors ${
                           location === loc
-                            ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-sand/40'
+                            ? 'bg-bronze/15 text-bronze-600'
+                            : 'hover:bg-bronze/10'
                         }`}
                         onClick={() => setLocation(loc)}
                       >
@@ -174,32 +173,25 @@ const HeaderBuyPage = () => {
               {/* Ownership */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
-                    <GrCertificate size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.ownership')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-ink-muted'>
-                          {ownershipTypes.find(
-                            (type) => type.value === ownership
-                          )?.label || ownership}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={GrCertificate}
+                    label={t('search.ownership')}
+                    value={
+                      ownershipTypes.find((type) => type.value === ownership)
+                        ?.label ?? ownership
+                    }
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-56 p-2'>
                   <div className='flex flex-col'>
                     {ownershipTypes.map((type) => (
                       <button
                         key={type.value}
-                        className={`py-2 px-3 text-left rounded ${
+                        type='button'
+                        className={`rounded px-3 py-2 text-left transition-colors ${
                           ownership === type.value
-                            ? 'bg-primary/10 text-primary'
-                            : 'hover:bg-sand/40'
+                            ? 'bg-bronze/15 text-bronze-600'
+                            : 'hover:bg-bronze/10'
                         }`}
                         onClick={() => setOwnership(type.value)}
                       >
@@ -213,114 +205,51 @@ const HeaderBuyPage = () => {
               {/* Bedrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
-                    <IoBed size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.bedrooms')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-ink-muted'>
-                          {bedrooms.toString().padStart(2, '0')}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={IoBed}
+                    label={t('search.bedrooms')}
+                    value={bedrooms.toString().padStart(2, '0')}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-48 p-3'>
-                  <div className='flex flex-col gap-3'>
-                    <div className='flex justify-between items-center'>
-                      <span>{t('search.numberOfBedrooms')}</span>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <button
-                        onClick={() => setBedrooms(Math.max(1, bedrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
-                        disabled={bedrooms <= 1}
-                      >
-                        -
-                      </button>
-                      <span className='font-semibold'>
-                        {bedrooms.toString().padStart(2, '0')}
-                      </span>
-                      <button
-                        onClick={() => setBedrooms(Math.min(10, bedrooms + 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
-                        disabled={bedrooms >= 10}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  <SearchStepper
+                    description={t('search.numberOfBedrooms')}
+                    value={bedrooms}
+                    min={1}
+                    max={10}
+                    onChange={setBedrooms}
+                  />
                 </PopoverContent>
               </Popover>
 
               {/* Bathrooms */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
-                    <LuBath size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.bathrooms')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-ink-muted'>
-                          {bathrooms.toString().padStart(2, '0')}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={LuBath}
+                    label={t('search.bathrooms')}
+                    value={bathrooms.toString().padStart(2, '0')}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-48 p-3'>
-                  <div className='flex flex-col gap-3'>
-                    <div className='flex justify-between items-center'>
-                      <span>{t('search.numberOfBathrooms')}</span>
-                    </div>
-                    <div className='flex items-center justify-between'>
-                      <button
-                        onClick={() => setBathrooms(Math.max(1, bathrooms - 1))}
-                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
-                        disabled={bathrooms <= 1}
-                      >
-                        -
-                      </button>
-                      <span className='font-semibold'>
-                        {bathrooms.toString().padStart(2, '0')}
-                      </span>
-                      <button
-                        onClick={() =>
-                          setBathrooms(Math.min(10, bathrooms + 1))
-                        }
-                        className='w-8 h-8 flex items-center justify-center bg-sand/40 rounded-full'
-                        disabled={bathrooms >= 10}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  <SearchStepper
+                    description={t('search.numberOfBathrooms')}
+                    value={bathrooms}
+                    min={1}
+                    max={10}
+                    onChange={setBathrooms}
+                  />
                 </PopoverContent>
               </Popover>
 
-              {/* Price Range */}
+              {/* Price range */}
               <Popover>
                 <PopoverTrigger asChild>
-                  <button className='py-2 px-3 flex gap-2 w-full md:w-auto border border-transparent hover:border-bronze/25 rounded'>
-                    <TbCurrencyDollar size={24} className='text-primary' />
-                    <div className='flex flex-col w-full'>
-                      <span className='font-semibold text-left'>
-                        {t('search.priceRange')}
-                      </span>
-                      <div className='flex justify-between items-center'>
-                        <span className='text-ink-muted truncate max-w-[150px]'>
-                          {getDisplayPriceRange()}
-                        </span>
-                        <ChevronDown size={18} className='text-primary' />
-                      </div>
-                    </div>
-                  </button>
+                  <SearchField
+                    icon={TbCurrencyDollar}
+                    label={t('search.priceRange')}
+                    value={getDisplayPriceRange()}
+                  />
                 </PopoverTrigger>
                 <PopoverContent className='w-auto max-w-[350px] p-0'>
                   <PriceRangeSelector
@@ -333,36 +262,24 @@ const HeaderBuyPage = () => {
                 </PopoverContent>
               </Popover>
 
-              {/* Search Button */}
-              <Button
-                variant='primary'
-                size='lg'
-                className='w-full md:w-auto'
-                onClick={handleSearch}
-              >
-                {t('search.searchButton')}
-              </Button>
+              <div className='flex items-center pt-3 lg:pl-6 lg:pt-0'>
+                <Button
+                  variant='cta'
+                  className='h-14 w-full px-8 lg:w-auto lg:px-10'
+                  onClick={handleSearch}
+                >
+                  {t('search.searchButton')}
+                </Button>
+              </div>
+            </SearchFieldRow>
+
+            <div className='mt-5 border-t border-bronze/30 pt-5'>
+              <PreferredOptionsBuyPage onFilterApply={handleFilterApply} />
             </div>
-
-            <Separator />
-
-            {/* Preferred Options */}
-            <PreferredOptionsBuyPage onFilterApply={handleFilterApply} />
-          </div>
+          </SearchPanel>
         </div>
       </BaseContainer>
-
-      {/* Responsive CSS for hiding scrollbar */}
-      <style>{`
-        .hideScrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hideScrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-    </div>
+    </section>
   );
 };
 

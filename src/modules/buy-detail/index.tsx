@@ -1,25 +1,22 @@
+import { BedDouble, MapPin } from 'lucide-react';
 import React from 'react';
 import { useTranslations } from 'use-intl';
 
-import { toPropertyCard } from '@/lib/mappers/property';
+import { formatLocation, formatPrice } from '@/lib/mappers/format';
 import { useParams } from '@/lib/navigation';
-import { useProperties, useProperty } from '@/hooks/api/useProperty';
+import { useProperty } from '@/hooks/api/useProperty';
 
 import BaseContainer from '@/components/layouts/container';
+import BreadcrumbLayout from '@/components/ui/breadcrumb-layout';
 import Link from '@/components/link';
 import PageMeta from '@/components/page-meta';
 import Skeleton from '@/components/Skeleton';
 import { Button } from '@/components/ui/button';
-import { VillaCard } from '@/components/ui/card/villa';
 import { StateMessage } from '@/components/ui/state-message';
 
-import ContentBuyDetail from '@/modules/buy-detail/content';
-import {
-  ListingMedia,
-  MediaShell,
-  Section,
-} from '@/modules/rent-detail/content-image';
-import HeaderRentDetail from '@/modules/rent-detail/header';
+import SendInquiryFormBuy from '@/modules/buy-detail/inquiry-form';
+import DetailTabs from '@/modules/rent-detail/detail-tabs';
+import Gallery from '@/modules/rent-detail/gallery';
 
 const DetailSkeleton = () => (
   <div className='pt-[64px] pb-[32px]' aria-busy='true'>
@@ -39,35 +36,9 @@ const DetailSkeleton = () => (
   </div>
 );
 
-const SimilarProperties = ({ currentId }: { currentId: string }) => {
-  const t = useTranslations('buyDetail.content');
-  const { data } = useProperties({ page: 1, limit: 4 });
-
-  const others = (data?.data.data ?? [])
-    .filter((other) => other.id !== currentId)
-    .slice(0, 3)
-    .map(toPropertyCard);
-
-  if (others.length === 0) return null;
-
-  return (
-    <Section title={t('similar')}>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-        {others.map((other) => (
-          <VillaCard
-            key={other.id}
-            villa={other}
-            onFavoriteToggle={() => undefined}
-            rentType='sale'
-          />
-        ))}
-      </div>
-    </Section>
-  );
-};
-
 const BuyDetailModules = () => {
   const t = useTranslations('buyDetail.state');
+  const tContent = useTranslations('rentDetail.content');
   const { name: id } = useParams();
   const { data, isLoading, isError, error } = useProperty(id);
 
@@ -100,15 +71,88 @@ const BuyDetailModules = () => {
     );
   }
 
+  const symbol = property.currency?.symbol;
+  const price = Number(property.priceAfterDiscount || property.price);
+  const bedrooms =
+    property.additionals?.filter((additional) => additional.type === 'bedrooms')
+      .length ?? 0;
+  const location = formatLocation(property.city, property.state);
+
   return (
-    <div className='bg-bg'>
+    <div className='bg-bg pb-16 pt-[96px]'>
       <PageMeta title={property.name} />
-      <HeaderRentDetail photos={property.photos ?? []} name={property.name} />
-      <ContentBuyDetail property={property} />
-      <MediaShell>
-        <ListingMedia listing={property} />
-        <SimilarProperties currentId={property.id} />
-      </MediaShell>
+
+      <BaseContainer>
+        <div className='mb-4'>
+          <BreadcrumbLayout
+            items={[
+              { label: tContent('breadcrumbHome'), href: '/' },
+              { label: tContent('breadcrumbVillas'), href: '/buy' },
+              ...(property.country
+                ? [{ label: property.country, href: '/buy/result' }]
+                : []),
+              ...(property.state
+                ? [{ label: property.state, href: '/buy/result' }]
+                : []),
+              ...(property.city
+                ? [{ label: property.city, href: '/buy/result' }]
+                : []),
+              {
+                label: property.name,
+                href: `/buy/${property.id}`,
+                isActive: true,
+              },
+            ]}
+          />
+        </div>
+      </BaseContainer>
+
+      <Gallery
+        name={property.name}
+        photos={property.photos ?? []}
+        videos={property.videos}
+      />
+
+      <BaseContainer>
+        <div className='mt-8 grid gap-8 lg:grid-cols-[1fr_350px]'>
+          <div className='flex min-w-0 flex-col gap-8'>
+            <div className='flex flex-col gap-2 px-1'>
+              {location && (
+                <span className='flex items-center gap-2 text-sm text-ink-soft'>
+                  <MapPin size={16} className='text-bronze-600' />
+                  {location}
+                </span>
+              )}
+              <h1 className='font-heading text-3xl text-ink'>
+                {property.name}
+              </h1>
+              {property.secondaryName && (
+                <p className='max-w-xl text-sm text-ink-soft'>
+                  {property.secondaryName}
+                </p>
+              )}
+              {bedrooms > 0 && (
+                <span className='mt-1 flex items-center gap-2 text-sm text-ink'>
+                  <BedDouble size={16} className='text-bronze-600' />
+                  {bedrooms} {tContent('bedroomsLabel')}
+                </span>
+              )}
+            </div>
+
+            <DetailTabs
+              villa={property}
+              tabs={['highlights', 'amenities', 'rooms', 'location']}
+            />
+          </div>
+
+          <aside className='lg:sticky lg:top-24 lg:self-start'>
+            <SendInquiryFormBuy
+              property={property}
+              priceLabel={formatPrice(price, symbol)}
+            />
+          </aside>
+        </div>
+      </BaseContainer>
     </div>
   );
 };

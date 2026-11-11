@@ -4,7 +4,7 @@ import { IoMapOutline } from 'react-icons/io5';
 import { useTranslations } from 'use-intl';
 
 import { toPropertyCard } from '@/lib/mappers/property';
-import { useSearchParams } from '@/lib/navigation';
+import { usePathname, useRouter, useSearchParams } from '@/lib/navigation';
 import { useProperties } from '@/hooks/api/useProperty';
 import { useVillaMapPins } from '@/hooks/api/useVillaMapPins';
 
@@ -24,6 +24,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { StateMessage } from '@/components/ui/state-message';
+
+import { FiltersDialog } from '@/modules/rent/header/filter-dialog';
 
 const MapView = React.lazy(() => import('@/components/ui/map-view'));
 
@@ -53,6 +55,25 @@ const PAGE_SIZE = 6;
 const BuyResultDisplay = () => {
   const states = useTranslations('states');
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // The Filters popup writes its choices into the URL, like the search bar does.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const applyFilters = (filterData: any) => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (filterData?.minPrice)
+      params.set('minPrice', String(filterData.minPrice));
+    if (filterData?.maxPrice)
+      params.set('maxPrice', String(filterData.maxPrice));
+    if (filterData?.collections?.length)
+      params.set('collections', filterData.collections.join(','));
+    if (filterData?.freebies?.length)
+      params.set('freebies', filterData.freebies.join(','));
+    if (filterData?.amenities?.length)
+      params.set('amenities', filterData.amenities.join(','));
+    router.push(`${pathname}?${params.toString()}`);
+  };
 
   const [selectedSort, setSelectedSort] = useState<SortOption>('recommended');
   const [limit, setLimit] = useState(PAGE_SIZE);
@@ -145,8 +166,9 @@ const BuyResultDisplay = () => {
               Available properties: <strong>{totalItems}</strong>
             </span>
             <div className='flex gap-3 md:gap-6 items-center order-1 sm:order-2'>
+              <FiltersDialog onApply={applyFilters} triggerStyle='solid' />
               <Button
-                variant={showMap ? 'default' : 'outline'}
+                variant={showMap ? 'primary' : 'outline'}
                 className={`flex gap-2 items-center ${
                   showMap ? 'bg-primary text-cream' : 'text-primary'
                 }`}
@@ -187,7 +209,7 @@ const BuyResultDisplay = () => {
 
           <div className='flex flex-col sm:flex-row justify-between gap-3 sm:gap-0'>
             <Button
-              variant='primary'
+              variant='outline'
               className='flex items-center justify-center gap-2 w-fit'
               onClick={handleShare}
             >

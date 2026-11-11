@@ -44,6 +44,7 @@ const ContentBlog = () => {
           <BreadcrumbLayout
             items={[
               { label: 'Home', href: '/' },
+              { label: 'Blog & Media', href: '/blog' },
               {
                 label: 'Blog',
                 href: '/blog',
